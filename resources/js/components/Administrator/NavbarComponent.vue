@@ -2,7 +2,7 @@
     <div>
         <div class="mynav">
             <div class="mynav-brand">ADMINISTRATOR</div>
-            <div class="burger-button" @click="open = true">
+            <div class="burger-button">
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
@@ -14,15 +14,17 @@
                 :fullheight="fullheight"
                 :fullwidth="fullwidth"
                 :overlay="overlay"
+                :expand-on-hover="expandOnHover"
+                :reduce="reduce"
                 :right="right"
                 v-model="open">
                 <div class="p-4">
-                    <h3 class="title is-4">ADMINISTRATOR</h3>
+                    <h3 class="title is-4"></h3>
                     <b-menu>
 
                         <b-menu-list label="Menu">
 
-                            <b-menu-item icon="information-outline" label="Dashboard" tag="a" href="/dashboard-admin"></b-menu-item>
+                            <b-menu-item icon="home" label="Home" tag="a" href="/admin-home"></b-menu-item>
 <!--                            <b-menu-item icon="settings">-->
 <!--                                <template #label="props">-->
 <!--                                    Administrator-->
@@ -88,11 +90,13 @@
 export default {
     data(){
         return{
-            open: false,
-            overlay: true,
+            open: true,
+            overlay: false,
             fullheight: true,
             fullwidth: false,
-            right: true
+            right: true,
+            expandOnHover: true,
+            reduce :true,
         }
     },
     methods: {

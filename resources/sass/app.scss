@@ -34,7 +34,7 @@ html{
 @import "~bulma/sass/utilities/_all";
 //
 ////Set your colors
-$primary: hsl(136, 55%, 28%);
+$primary: hsl(224, 60%, 37%);
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);
@@ -134,7 +134,6 @@ $navbar-item-img-max-height: 4rem;
 //.navbar-start > .navbar-item > .navbar-link:hover{
 //    border-bottom: 3px solid blue;
 //}
-
 
 
 // Import Bulma and Buefy styles

@@ -21,7 +21,7 @@
                                 <a class="button is-primary" href="/sign-up">
                                     <strong>Sign up</strong>
                                 </a>
-                                <a class="button is-light" @click="isModalActive = true">
+                                <a class="button is-light" href="/login">
                                     Log in
                                 </a>
                             </div>

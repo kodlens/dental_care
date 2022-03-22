@@ -31,6 +31,7 @@ Auth::routes([
 
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
 Route::get('/sample',[App\Http\Controllers\SampleController::class,'index']);
@@ -60,7 +61,7 @@ Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'l
 
 
 /*     ADMINSITRATOR          */
-Route::resource('/dashboard-admin', App\Http\Controllers\Administrator\AdminDashboardController::class);
+Route::resource('/admin-home', App\Http\Controllers\Administrator\AdminHomeController::class);
 
 Route::resource('/users', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);

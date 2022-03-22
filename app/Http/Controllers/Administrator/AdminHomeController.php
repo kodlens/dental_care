@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\AppointmentType;
 
-
-class AdminDashboardController extends Controller
+class AdminHomeController extends Controller
 {
     //
     public function __construct(){
@@ -16,7 +14,7 @@ class AdminDashboardController extends Controller
     }
 
     public function index(){
-        return view('administrator.admin-dashboard');
+        return view('administrator.admin-home');
     }
 
 

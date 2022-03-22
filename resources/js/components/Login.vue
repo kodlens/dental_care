@@ -1,15 +1,19 @@
 <template>
     <div class="login-wrapper">
         <div class="login">
+
             <form @submit.prevent="submit">
-                <div class="panel">
-                    <div class="panel-heading">
+                <div class="box">
+                    <div class="title is-4">
                         SECURITY CHECK
                     </div>
+                    <hr>
 
                     <div class="panel-body">
-                        <b-field label="Email" label-position="on-border">
-                            <b-input type="text" v-model="fields.username" placeholder="Email" />
+                        <b-field label="Username" label-position="on-border"
+                            :type="this.errors.username ? 'is-danger':''"
+                            :message="this.errors.username ? this.errors.username[0] : ''">
+                            <b-input type="text" v-model="fields.username" placeholder="Username" />
                         </b-field>
 
                         <b-field label="Password" label-position="on-border">
@@ -17,7 +21,7 @@
                         </b-field>
 
                         <div class="buttons">
-                            <b-button type="is-success">LOGIN</b-button>
+                            <button class="button is-primary">LOGIN</button>
                         </div>
                     </div>
                 </div>
@@ -33,18 +37,27 @@ export default {
     data(){
         return {
             fields: {
-                username: '',
-                password: '',
+                username: null,
+                password: null,
             },
+
+            errors: {},
         }
     },
 
     methods: {
         submit: function(){
-            axios.post('/login').then(res=>{
+            axios.post('/login', this.fields).then(res=>{
                 console.log(res.data)
-               // window.location = '/dashboard';
-            })
+                if(res.data.role === 'ADMINISTRATOR'){
+                    window.location = '/admin-home';
+                }
+               //window.location = '/dashboard';
+            }).catch(err=>{
+                if(err.response.status === 422){
+                    this.errors = err.response.data.errors;
+                }
+            });
         }
     }
 }
