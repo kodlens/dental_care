@@ -2,10 +2,10 @@
     <div>
         <div class="section">
             <div class="columns is-centered">
-                <div class="column is-8">
+                <div class="column is-10">
                     <div class="box">
 
-                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF USER</div>
+                        <div class="is-flex mb-2" style="font-size: 20px; font-weight: bold;">LIST OF USER</div>
 
                         <div class="level">
                             <div class="level-left">
@@ -40,12 +40,17 @@
                             </div>
                         </div>
 
+                        <div class="buttons mt-3">
+                            <b-button @click="openModal" icon-left="plus" class="is-success">NEW</b-button>
+                        </div>
+
                         <b-table
                             :data="data"
                             :loading="loading"
                             paginated
                             backend-pagination
                             :total="total"
+                            :pagination-rounded="true"
                             :per-page="perPage"
                             @page-change="onPageChange"
                             aria-next-label="Next page"
@@ -83,18 +88,16 @@
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
-                                        <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" @click="getData(props.row.user_id)"></b-button>
+                                        <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.user_id)"></b-button>
                                     </b-tooltip>
                                     <b-tooltip label="Delete" type="is-danger">
-                                        <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.user_id)"></b-button>
+                                        <b-button class="button is-small mr-1" icon-right="delete" @click="confirmDelete(props.row.user_id)"></b-button>
                                     </b-tooltip>
                                 </div>
                             </b-table-column>
                         </b-table>
 
-                        <div class="buttons mt-3">
-                            <b-button @click="openModal" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
-                        </div>
+                        
 
                     </div>
                 </div><!--col -->
@@ -203,7 +206,7 @@
                                     <b-field label="Confirm Password" label-position="on-border"
                                              :type="this.errors.password_confirmation ? 'is-danger':''"
                                              :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
-                                        <b-input type="password" v-model="fields.password_confirmation"
+                                        <b-input type="password" password-reveal v-model="fields.password_confirmation"
                                                  placeholder="Confirm Password" required>
                                         </b-input>
                                     </b-field>
@@ -230,8 +233,7 @@
                                              :message="this.errors.role ? this.errors.role[0] : ''">
                                         <b-select v-model="fields.role" expanded>
                                             <option value="ADMIN">ADMINISTRATOR</option>
-                                            <option value="OFFICE">OFFICE</option>
-                                            <option value="USER">USER</option>
+                                            <option value="STAFF">STAFF</option>
                                         </b-select>
                                     </b-field>
                                 </div>
@@ -246,14 +248,6 @@
                                         <b-select v-model="fields.office" expanded>
                                             <option v-for="(item, index) in offices" :key="index" :value="item.office_id">{{ item.office_name }}</option>
                                         </b-select>
-                                    </b-field>
-                                </div>
-
-                                <div class="column">
-                                    <b-field label="Remark" label-position="on-border" expanded
-                                             :type="this.errors.remark ? 'is-danger':''"
-                                             :message="this.errors.remark ? this.errors.remark[0] : ''">
-                                        <b-input type="text" v-model="fields.remark" expanded></b-input>
                                     </b-field>
                                 </div>
 
@@ -294,7 +288,7 @@
                                 <div class="column">
                                     <b-field label="Street" label-position="on-border">
                                         <b-input v-model="fields.street"
-                                                 placeholder="Street" required>
+                                                 placeholder="Street">
                                         </b-input>
                                     </b-field>
                                 </div>
@@ -346,7 +340,7 @@ export default{
                 username: '',
                 lname: '', fname: '', mname: '',
                 password: '', password_confirmation : '',
-                sex : '', role: '', office: '', remark: '',  email : '', contact_no : '',
+                sex : '', role: '',  email : '', contact_no : '',
                 province: '', city: '', barangay: '', street: ''
             },
             errors: {},
@@ -570,5 +564,14 @@ export default{
 
 <style>
 
+    .table > tbody > tr {
+        /* background-color: blue; */
+        transition: background-color 0.5s ease;
+    }
+
+    .table > tbody > tr:hover {
+        background-color: rgb(233, 233, 233);
+       
+    }
 
 </style>

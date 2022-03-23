@@ -26631,10 +26631,6 @@
   }
 }
 @charset "UTF-8";
-html {
-  background-color: #f8f8f8 !important;
-}
-
 /* Bulma Utilities */
 .pagination-previous,
 .pagination-next,

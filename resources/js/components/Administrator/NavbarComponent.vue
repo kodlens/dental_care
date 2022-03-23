@@ -51,20 +51,14 @@
 <!--                                <b-menu-item label="My Account"></b-menu-item>-->
 <!--                            </b-menu-item>-->
                         </b-menu-list>
-                        <b-menu-list>
-                            <b-menu-item label="Offices" icon="microsoft-office" tag="a" href="/offices"></b-menu-item>
-                        </b-menu-list>
+                        
                         <b-menu-list>
                             <b-menu-item label="User" icon="account" tag="a" href="/users"></b-menu-item>
                         </b-menu-list>
                         <b-menu-list>
                             <b-menu-item label="Appointment Type" icon="calendar-blank" tag="a" href="/appointment-type"></b-menu-item>
                         </b-menu-list>
-
-                        <b-menu-list>
-                            <b-menu-item label="Ordinance" icon="clipboard-list" tag="a" href="/ordinance"></b-menu-item>
-                        </b-menu-list>
-
+                        
                         <b-menu-list>
                             <b-menu-item label="Report Track" icon="chart-timeline" tag="a" href="/report-track"></b-menu-item>
                         </b-menu-list>
@@ -132,7 +126,7 @@ export default {
 
     .mynav{
         padding: 25px;
-        border-bottom: 2px solid rgba(22, 69, 28, 0.53);
+        border-bottom: 2px solid rgba(196, 196, 196, 0.53);
         display: flex;
     }
 
