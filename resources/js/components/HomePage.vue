@@ -5,7 +5,7 @@
             <div class="hero-head">
                 <b-navbar>
                     <template #brand>
-                        DENTAL CARE
+                        <h1 class="title is-4">DENTAL CARE</h1>
                     </template>
 
                     <template #start>

@@ -38001,9 +38001,9 @@ var render = function () {
                 key: "brand",
                 fn: function () {
                   return [
-                    _vm._v(
-                      "\n                        DENTAL CARE\n                    "
-                    ),
+                    _c("h1", { staticClass: "title is-4" }, [
+                      _vm._v("DENTAL CARE"),
+                    ]),
                   ]
                 },
                 proxy: true,
