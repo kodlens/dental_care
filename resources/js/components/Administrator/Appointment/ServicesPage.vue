@@ -5,7 +5,7 @@
             <div class="columns">
                 <div class="column is-8 is-offset-2">
                     <div class="box">
-                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF APPOINTMENT TYPE</div>
+                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF SERVICES</div>
 
                         <div class="level">
                             <div class="level-left">
@@ -28,7 +28,7 @@
                                 <div class="level-item">
                                     <b-field label="Search">
                                         <b-input type="text"
-                                                 v-model="search.appointment_type" placeholder="Search Appointment Type"
+                                                 v-model="search.service" placeholder="Search Appointment Type"
                                                  @keyup.native.enter="loadAsyncData"/>
                                         <p class="control">
                                              <b-tooltip label="Search" type="is-success">
@@ -58,37 +58,25 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="appointment_type_id" label="ID" v-slot="props">
-                                {{ props.row.appointment_type_id }}
+                            <b-table-column field="service_id" label="ID" v-slot="props">
+                                {{ props.row.service_id }}
                             </b-table-column>
 
-                            <b-table-column field="office_name" label="Office Name" v-slot="props">
-                                {{ props.row.office_name }}
+                            <b-table-column field="service" label="Office Name" v-slot="props">
+                                {{ props.row.service }}
                             </b-table-column>
 
-                            <b-table-column field="appointment_type" label="Appointment" v-slot="props">
-                                {{ props.row.appointment_type }}
-                            </b-table-column>
-
-                            <b-table-column field="cc_time" label="Time Allocated" v-slot="props">
-                                {{ props.row.cc_time }}
-                            </b-table-column>
-
-                            <b-table-column field="max_multiple" label="Max Multiple" v-slot="props">
-                                {{ props.row.max_multiple }}
-                            </b-table-column>
-
-                            <b-table-column field="is_active" label="Active" v-slot="props">
-                                {{ props.row.is_active }}
+                            <b-table-column field="price" label="Appointment" v-slot="props">
+                                {{ props.row.price }}
                             </b-table-column>
 
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
-                                        <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" @click="getData(props.row.appointment_type_id)"></b-button>
+                                        <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" @click="getData(props.row.service_id)"></b-button>
                                     </b-tooltip>
                                     <b-tooltip label="Delete" type="is-danger">
-                                        <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.appointment_type_id)"></b-button>
+                                        <b-button class="button is-small is-danger mr-1" icon-right="delete" @click="confirmDelete(props.row.service_id)"></b-button>
                                     </b-tooltip>
                                 </div>
                             </b-table-column>
@@ -120,7 +108,7 @@
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">Appointment Type</p>
+                        <p class="modal-card-title">New/Update Service</p>
                         <button
                             type="button"
                             class="delete"
@@ -132,44 +120,21 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Office"
-                                             :type="this.errors.office_id ? 'is-danger':''"
-                                             :message="this.errors.office_id ? this.errors.office_id[0] : ''">
-                                        <b-select v-model="fields.office_id" placeholder="Office" required>
-                                            <option v-for="(item, index) in offices" :key="index" :value="item.office_id">{{ item.office_name }}</option>
-                                        </b-select>
+                                    <b-field label="Service"
+                                             :type="this.errors.service ? 'is-danger':''"
+                                             :message="this.errors.service ? this.errors.service[0] : ''">
+                                       <b-input type="text" v-model="fields.service" placeholder="Service" required />
                                     </b-field>
                                 </div>
                             </div>
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Appointment Type"
-                                             :type="this.errors.appointment_type ? 'is-danger':''"
-                                             :message="this.errors.appointment_type ? this.errors.appointment_type[0] : ''">
-                                        <b-input v-model="fields.appointment_type"
-                                                 placeholder="Appointment Type" required>
-                                        </b-input>
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Allocated Time(Minute(s))"
-                                             :type="this.errors.cc_time ? 'is-danger':''"
-                                             :message="this.errors.cc_time ? this.errors.cc_time[0] : ''">
-                                        <b-numberinput v-model="fields.cc_time" :controls="false"
-                                                           placeholder="" required>
-                                        </b-numberinput>
-                                    </b-field>
-                                </div>
-
-                                <div class="column">
-                                    <b-field label="No of multiple"
-                                             :type="this.errors.max_multiple ? 'is-danger':''"
-                                             :message="this.errors.max_multiple ? this.errors.max_multiple[0] : ''">
-                                        <b-numberinput v-model="fields.max_multiple" max="100" :controls="false" placeholder="No of multiple" required>
+                                    <b-field label="Service Price"
+                                             :type="this.errors.price ? 'is-danger':''"
+                                             :message="this.errors.price ? this.errors.price[0] : ''">
+                                        <b-numberinput v-model="fields.price" :controls="false"
+                                                           placeholder="Price" required>
                                         </b-numberinput>
                                     </b-field>
                                 </div>
@@ -202,7 +167,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: 'appointment_type_id',
+            sortField: 'service_id',
             sortOrder: 'desc',
             page: 1,
             perPage: 5,
@@ -212,19 +177,18 @@ export default {
             global_id : 0,
 
             search: {
-                appointment_type: '',
+                service: '',
             },
 
             isModalCreate: false,
 
             fields: {
-                office_id: 0,
-                appointment_type: '',
+                service_id: 0,
+                service: '',
+                price: 0
 
             },
             errors: {},
-
-            offices: [],
 
             btnClass: {
                 'is-success': true,
@@ -242,13 +206,13 @@ export default {
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
-                `type=${this.search.appointment_type}`,
+                `service=${this.search.service}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-appointment-types?${params}`)
+            axios.get(`/get-services?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total
@@ -296,11 +260,6 @@ export default {
 
         },
 
-        loadOffices(){
-            axios.get('/load-offices').then(res=>{
-                this.offices = res.data;
-            })
-        },
 
 
         //alert box ask for deletion
@@ -316,7 +275,7 @@ export default {
         },
         //execute delete after confirming
         deleteSubmit(delete_id) {
-            axios.delete('/appointment-type/' + delete_id).then(res => {
+            axios.delete('/services/' + delete_id).then(res => {
                 this.loadAsyncData();
             }).catch(err => {
                 if (err.response.status === 422) {
@@ -333,14 +292,15 @@ export default {
 
 
             //nested axios for getting the address 1 by 1 or request by request
-            axios.get('/appointment-type/'+data_id).then(res=>{
-                this.fields = res.data[0];
+            axios.get('/services/' +data_id).then(res=>{
+                this.fields = res.data;
             });
         },
 
         clearFields(){
             this.fields = {
-                appointment_type: '',
+                service: null,
+                price: null,
             };
         },
 
@@ -348,7 +308,7 @@ export default {
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.put('/appointment-type/'+this.global_id, this.fields).then(res=>{
+                axios.put('/services/'+this.global_id, this.fields).then(res=>{
                     if(res.data.status === 'updated'){
                         this.$buefy.dialog.alert({
                             title: 'UPDATED!',
@@ -369,7 +329,7 @@ export default {
                 })
             }else{
                 //INSERT HERE
-                axios.post('/appointment-type', this.fields).then(res=>{
+                axios.post('/services', this.fields).then(res=>{
                     if(res.data.status === 'saved'){
                         this.$buefy.dialog.alert({
                             title: 'SAVED!',
@@ -395,7 +355,6 @@ export default {
     },
 
     mounted() {
-        this.loadOffices();
         this.loadAsyncData();
     }
 

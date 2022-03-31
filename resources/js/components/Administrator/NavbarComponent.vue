@@ -8,7 +8,7 @@
                 <div class="burger-div"></div>
             </div>
         </div>
-         
+
             <b-sidebar
                 type="is-light"
                 :fullheight="fullheight"
@@ -51,14 +51,14 @@
 <!--                                <b-menu-item label="My Account"></b-menu-item>-->
 <!--                            </b-menu-item>-->
                         </b-menu-list>
-                        
+
                         <b-menu-list>
                             <b-menu-item label="User" icon="account" tag="a" href="/users"></b-menu-item>
                         </b-menu-list>
                         <b-menu-list>
-                            <b-menu-item label="Appointment Type" icon="calendar-blank" tag="a" href="/appointment-type"></b-menu-item>
+                            <b-menu-item label="Services" icon="calendar-blank" tag="a" href="/services"></b-menu-item>
                         </b-menu-list>
-                        
+
                         <b-menu-list>
                             <b-menu-item label="Report Track" icon="chart-timeline" tag="a" href="/report-track"></b-menu-item>
                         </b-menu-list>
@@ -76,7 +76,7 @@
             </b-sidebar>
 
     </div>
-    
+
 
 </template>
 

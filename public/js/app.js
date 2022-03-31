@@ -7614,10 +7614,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -7786,41 +7786,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -7828,22 +7793,22 @@ __webpack_require__.r(__webpack_exports__);
       data: [],
       total: 0,
       loading: false,
-      sortField: 'appointment_type_id',
+      sortField: 'service_id',
       sortOrder: 'desc',
       page: 1,
       perPage: 5,
       defaultSortDirection: 'asc',
       global_id: 0,
       search: {
-        appointment_type: ''
+        service: ''
       },
       isModalCreate: false,
       fields: {
-        office_id: 0,
-        appointment_type: ''
+        service_id: 0,
+        service: '',
+        price: 0
       },
       errors: {},
-      offices: [],
       btnClass: {
         'is-success': true,
         'button': true,
@@ -7858,9 +7823,9 @@ __webpack_require__.r(__webpack_exports__);
     loadAsyncData: function loadAsyncData() {
       var _this = this;
 
-      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "type=".concat(this.search.appointment_type), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "service=".concat(this.search.service), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
       this.loading = true;
-      axios.get("/get-appointment-types?".concat(params)).then(function (_ref) {
+      axios.get("/get-services?".concat(params)).then(function (_ref) {
         var data = _ref.data;
         _this.data = [];
         var currentTotal = data.total;
@@ -7903,16 +7868,9 @@ __webpack_require__.r(__webpack_exports__);
       this.fields = {};
       this.errors = {};
     },
-    loadOffices: function loadOffices() {
-      var _this2 = this;
-
-      axios.get('/load-offices').then(function (res) {
-        _this2.offices = res.data;
-      });
-    },
     //alert box ask for deletion
     confirmDelete: function confirmDelete(delete_id) {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$buefy.dialog.confirm({
         title: 'DELETE!',
@@ -7921,95 +7879,95 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Cancel',
         confirmText: 'Delete',
         onConfirm: function onConfirm() {
-          return _this3.deleteSubmit(delete_id);
+          return _this2.deleteSubmit(delete_id);
         }
       });
     },
     //execute delete after confirming
     deleteSubmit: function deleteSubmit(delete_id) {
-      var _this4 = this;
+      var _this3 = this;
 
-      axios["delete"]('/appointment-type/' + delete_id).then(function (res) {
-        _this4.loadAsyncData();
+      axios["delete"]('/services/' + delete_id).then(function (res) {
+        _this3.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this4.errors = err.response.data.errors;
+          _this3.errors = err.response.data.errors;
         }
       });
     },
     //update code here
     getData: function getData(data_id) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.clearFields();
       this.global_id = data_id;
       this.isModalCreate = true; //nested axios for getting the address 1 by 1 or request by request
 
-      axios.get('/appointment-type/' + data_id).then(function (res) {
-        _this5.fields = res.data[0];
+      axios.get('/services/' + data_id).then(function (res) {
+        _this4.fields = res.data;
       });
     },
     clearFields: function clearFields() {
       this.fields = {
-        appointment_type: ''
+        service: null,
+        price: null
       };
     },
     submit: function submit() {
-      var _this6 = this;
+      var _this5 = this;
 
       if (this.global_id > 0) {
         //update
-        axios.put('/appointment-type/' + this.global_id, this.fields).then(function (res) {
+        axios.put('/services/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
-            _this6.$buefy.dialog.alert({
+            _this5.$buefy.dialog.alert({
               title: 'UPDATED!',
               message: 'Successfully updated.',
               type: 'is-success',
               onConfirm: function onConfirm() {
-                _this6.loadAsyncData();
+                _this5.loadAsyncData();
 
-                _this6.clearFields();
+                _this5.clearFields();
 
-                _this6.global_id = 0;
-                _this6.isModalCreate = false;
+                _this5.global_id = 0;
+                _this5.isModalCreate = false;
               }
             });
           }
         })["catch"](function (err) {
           if (err.response.status === 422) {
-            _this6.errors = err.response.data.errors;
+            _this5.errors = err.response.data.errors;
           }
         });
       } else {
         //INSERT HERE
-        axios.post('/appointment-type', this.fields).then(function (res) {
+        axios.post('/services', this.fields).then(function (res) {
           if (res.data.status === 'saved') {
-            _this6.$buefy.dialog.alert({
+            _this5.$buefy.dialog.alert({
               title: 'SAVED!',
               message: 'Successfully saved.',
               type: 'is-success',
               confirmText: 'OK',
               onConfirm: function onConfirm() {
-                _this6.isModalCreate = false;
+                _this5.isModalCreate = false;
 
-                _this6.loadAsyncData();
+                _this5.loadAsyncData();
 
-                _this6.clearFields();
+                _this5.clearFields();
 
-                _this6.global_id = 0;
+                _this5.global_id = 0;
               }
             });
           }
         })["catch"](function (err) {
           if (err.response.status === 422) {
-            _this6.errors = err.response.data.errors;
+            _this5.errors = err.response.data.errors;
           }
         });
       }
     }
   },
   mounted: function mounted() {
-    this.loadOffices();
     this.loadAsyncData();
   }
 });
@@ -32681,10 +32639,10 @@ component.options.__file = "resources/js/components/Administrator/AdminHome.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Appointment/AppointmentType.vue":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Appointment/AppointmentType.vue ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/Administrator/Appointment/ServicesPage.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Appointment/ServicesPage.vue ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -32692,8 +32650,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true& */ "./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true&");
-/* harmony import */ var _AppointmentType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppointmentType.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true& */ "./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true&");
+/* harmony import */ var _ServicesPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServicesPage.vue?vue&type=script&lang=js& */ "./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -32703,19 +32661,19 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AppointmentType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ServicesPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "5a3079a8",
+  "21a9cc6a",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Administrator/Appointment/AppointmentType.vue"
+component.options.__file = "resources/js/components/Administrator/Appointment/ServicesPage.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -33572,10 +33530,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -33583,8 +33541,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppointmentType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppointmentType.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppointmentType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -34065,19 +34023,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true&":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true& ***!
-  \**************************************************************************************************************************/
+/***/ "./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true& ***!
+  \***********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppointmentType_vue_vue_type_template_id_5a3079a8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesPage_vue_vue_type_template_id_21a9cc6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true&");
 
 
 /***/ }),
@@ -34458,10 +34416,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/AppointmentType.vue?vue&type=template&id=5a3079a8&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/Appointment/ServicesPage.vue?vue&type=template&id=21a9cc6a&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -34490,7 +34448,7 @@ var render = function () {
                     staticClass: "is-flex is-justify-content-center mb-2",
                     staticStyle: { "font-size": "20px", "font-weight": "bold" },
                   },
-                  [_vm._v("LIST OF APPOINTMENT TYPE")]
+                  [_vm._v("LIST OF SERVICES")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "level" }, [
@@ -34597,11 +34555,11 @@ var render = function () {
                                 },
                               },
                               model: {
-                                value: _vm.search.appointment_type,
+                                value: _vm.search.service,
                                 callback: function ($$v) {
-                                  _vm.$set(_vm.search, "appointment_type", $$v)
+                                  _vm.$set(_vm.search, "service", $$v)
                                 },
-                                expression: "search.appointment_type",
+                                expression: "search.service",
                               },
                             }),
                             _vm._v(" "),
@@ -34661,7 +34619,7 @@ var render = function () {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "appointment_type_id", label: "ID" },
+                      attrs: { field: "service_id", label: "ID" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -34669,7 +34627,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.appointment_type_id) +
+                                  _vm._s(props.row.service_id) +
                                   "\n                        "
                               ),
                             ]
@@ -34679,7 +34637,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "office_name", label: "Office Name" },
+                      attrs: { field: "service", label: "Office Name" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -34687,7 +34645,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.office_name) +
+                                  _vm._s(props.row.service) +
                                   "\n                        "
                               ),
                             ]
@@ -34697,10 +34655,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: {
-                        field: "appointment_type",
-                        label: "Appointment",
-                      },
+                      attrs: { field: "price", label: "Appointment" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -34708,61 +34663,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.appointment_type) +
-                                  "\n                        "
-                              ),
-                            ]
-                          },
-                        },
-                      ]),
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: { field: "cc_time", label: "Time Allocated" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function (props) {
-                            return [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(props.row.cc_time) +
-                                  "\n                        "
-                              ),
-                            ]
-                          },
-                        },
-                      ]),
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: { field: "max_multiple", label: "Max Multiple" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function (props) {
-                            return [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(props.row.max_multiple) +
-                                  "\n                        "
-                              ),
-                            ]
-                          },
-                        },
-                      ]),
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
-                      attrs: { field: "is_active", label: "Active" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function (props) {
-                            return [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(props.row.is_active) +
+                                  _vm._s(props.row.price) +
                                   "\n                        "
                               ),
                             ]
@@ -34801,7 +34702,7 @@ var render = function () {
                                         on: {
                                           click: function ($event) {
                                             return _vm.getData(
-                                              props.row.appointment_type_id
+                                              props.row.service_id
                                             )
                                           },
                                         },
@@ -34826,7 +34727,7 @@ var render = function () {
                                         on: {
                                           click: function ($event) {
                                             return _vm.confirmDelete(
-                                              props.row.appointment_type_id
+                                              props.row.service_id
                                             )
                                           },
                                         },
@@ -34904,7 +34805,7 @@ var render = function () {
               _c("div", { staticClass: "modal-card" }, [
                 _c("header", { staticClass: "modal-card-head" }, [
                   _c("p", { staticClass: "modal-card-title" }, [
-                    _vm._v("Appointment Type"),
+                    _vm._v("New/Update Service"),
                   ]),
                   _vm._v(" "),
                   _c("button", {
@@ -34929,83 +34830,26 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Office",
-                                type: this.errors.office_id ? "is-danger" : "",
-                                message: this.errors.office_id
-                                  ? this.errors.office_id[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c(
-                                "b-select",
-                                {
-                                  attrs: {
-                                    placeholder: "Office",
-                                    required: "",
-                                  },
-                                  model: {
-                                    value: _vm.fields.office_id,
-                                    callback: function ($$v) {
-                                      _vm.$set(_vm.fields, "office_id", $$v)
-                                    },
-                                    expression: "fields.office_id",
-                                  },
-                                },
-                                _vm._l(_vm.offices, function (item, index) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: index,
-                                      domProps: { value: item.office_id },
-                                    },
-                                    [_vm._v(_vm._s(item.office_name))]
-                                  )
-                                }),
-                                0
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Appointment Type",
-                                type: this.errors.appointment_type
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.appointment_type
-                                  ? this.errors.appointment_type[0]
+                                label: "Service",
+                                type: this.errors.service ? "is-danger" : "",
+                                message: this.errors.service
+                                  ? this.errors.service[0]
                                   : "",
                               },
                             },
                             [
                               _c("b-input", {
                                 attrs: {
-                                  placeholder: "Appointment Type",
+                                  type: "text",
+                                  placeholder: "Service",
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.appointment_type,
+                                  value: _vm.fields.service,
                                   callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "appointment_type",
-                                      $$v
-                                    )
+                                    _vm.$set(_vm.fields, "service", $$v)
                                   },
-                                  expression: "fields.appointment_type",
+                                  expression: "fields.service",
                                 },
                               }),
                             ],
@@ -35025,10 +34869,10 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Allocated Time(Minute(s))",
-                                type: this.errors.cc_time ? "is-danger" : "",
-                                message: this.errors.cc_time
-                                  ? this.errors.cc_time[0]
+                                label: "Service Price",
+                                type: this.errors.price ? "is-danger" : "",
+                                message: this.errors.price
+                                  ? this.errors.price[0]
                                   : "",
                               },
                             },
@@ -35036,55 +34880,15 @@ var render = function () {
                               _c("b-numberinput", {
                                 attrs: {
                                   controls: false,
-                                  placeholder: "",
+                                  placeholder: "Price",
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.cc_time,
+                                  value: _vm.fields.price,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "cc_time", $$v)
+                                    _vm.$set(_vm.fields, "price", $$v)
                                   },
-                                  expression: "fields.cc_time",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "No of multiple",
-                                type: this.errors.max_multiple
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.max_multiple
-                                  ? this.errors.max_multiple[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-numberinput", {
-                                attrs: {
-                                  max: "100",
-                                  controls: false,
-                                  placeholder: "No of multiple",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.max_multiple,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "max_multiple", $$v)
-                                  },
-                                  expression: "fields.max_multiple",
+                                  expression: "fields.price",
                                 },
                               }),
                             ],
@@ -35224,10 +35028,10 @@ var render = function () {
                     [
                       _c("b-menu-item", {
                         attrs: {
-                          label: "Appointment Type",
+                          label: "Services",
                           icon: "calendar-blank",
                           tag: "a",
-                          href: "/appointment-type",
+                          href: "/services",
                         },
                       }),
                     ],
@@ -65655,7 +65459,7 @@ Vue.compile = compileToFunctions;
 var map = {
 	"./components/AboutPage.vue": "./resources/js/components/AboutPage.vue",
 	"./components/Administrator/AdminHome.vue": "./resources/js/components/Administrator/AdminHome.vue",
-	"./components/Administrator/Appointment/AppointmentType.vue": "./resources/js/components/Administrator/Appointment/AppointmentType.vue",
+	"./components/Administrator/Appointment/ServicesPage.vue": "./resources/js/components/Administrator/Appointment/ServicesPage.vue",
 	"./components/Administrator/NavbarComponent.vue": "./resources/js/components/Administrator/NavbarComponent.vue",
 	"./components/Administrator/Office/OfficePage.vue": "./resources/js/components/Administrator/Office/OfficePage.vue",
 	"./components/Administrator/Ordinance/Ordinance.vue": "./resources/js/components/Administrator/Ordinance/Ordinance.vue",

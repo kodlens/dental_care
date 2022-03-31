@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Http\Controllers\Administrator;
+
+use App\Models\AppointmentType;
+use App\Models\Service;
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class ServicesController extends Controller
+{
+    //
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+
+    public function index(){
+        return view('administrator.services-page');
+    }
+
+    public function getServices(Request $req){
+        $sort = explode('.', $req->sort_by);
+
+        $data = \DB::table('services as a')
+            ->where('a.service', 'like', $req->service . '%')
+            ->orderBy($sort[0], $sort[1])
+            ->paginate($req->perpage);
+
+        return $data;
+    }
+
+    public function show($id){
+        return Service::find($id);
+    }
+
+
+
+    public function store(Request $req){
+        $req->validate([
+            'service' => ['required'],
+            'price' => ['required'],
+        ]);
+
+        Service::create([
+            'service' => strtoupper($req->service),
+            'price' => $req->price,
+        ]);
+
+        return response()->json([
+            'status' => 'saved'
+        ],200);
+    }
+
+    public function update(Request $req, $id){
+
+        $validate = $req->validate([
+            'service' => ['required', 'string', 'unique:services,service,' .$id .',service_id'],
+            'price' => ['required'],
+        ]);
+
+
+        $data = Service::find($id);
+        $data->service = strtoupper($req->service);
+        $data->price = $req->price;
+        $data->save();
+
+        return response()->json([
+            'status' => 'updated'
+        ],200);
+    }
+
+    public function destroy($id){
+        Service::destroy($id);
+    }
+
+}

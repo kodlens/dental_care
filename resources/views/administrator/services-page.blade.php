@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <appointment-type></appointment-type>
+    <services-page></services-page>
 @endsection
 
