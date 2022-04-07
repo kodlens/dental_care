@@ -5,7 +5,7 @@
             <div class="columns is-centered">
                 <div class="column is-6">
                     <div class="box">
-                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF SERVICES</div>
+                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF DENTIST</div>
 
                         <div class="level">
                             <div class="level-left">
@@ -28,7 +28,7 @@
                                 <div class="level-item">
                                     <b-field label="Search">
                                         <b-input type="text"
-                                                 v-model="search.service" placeholder="Search Service"
+                                                 v-model="search.lname" placeholder="Search Lastname"
                                                  @keyup.native.enter="loadAsyncData"/>
                                         <p class="control">
                                              <b-tooltip label="Search" type="is-success">
@@ -206,13 +206,13 @@ export default {
         loadAsyncData() {
             const params = [
                 `sort_by=${this.sortField}.${this.sortOrder}`,
-                `service=${this.search.service}`,
+                `lname=${this.search.lname}`,
                 `perpage=${this.perPage}`,
                 `page=${this.page}`
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-services?${params}`)
+            axios.get(`/get-dentist?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total

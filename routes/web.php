@@ -73,10 +73,8 @@ Route::get('/get-services', [App\Http\Controllers\Administrator\ServicesControll
 //Route::get('/get-open-appointment-types', [App\Http\Controllers\ServicesController::class, 'getOpenSer']);
 
 
-Route::resource('/ordinance', App\Http\Controllers\Administrator\OrdinanceController::class);
-Route::get('/get-ordinances', [App\Http\Controllers\Administrator\OrdinanceController::class, 'getOrdinances']);
-
-Route::get('/get-open-ordinances', [App\Http\Controllers\CovidUpdatesController::class, 'getOrdinances']);
+Route::resource('/request-appointment', App\Http\Controllers\Administrator\RequestAppointment::class);
+Route::get('/get-request-appointments', [App\Http\Controllers\Administrator\RequestAppointment::class, 'getRequestAppointments']);
 
 
 Route::get('/report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'index']);
@@ -87,9 +85,9 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackC
 /*     ADMINSITRATOR          */
 
 
-Route::resource('/offices', App\Http\Controllers\Administrator\OfficeController::class);
-Route::get('/get-offices', [App\Http\Controllers\Administrator\OfficeController::class, 'getOffices']);
-Route::get('/load-offices', [App\Http\Controllers\Administrator\OfficeController::class, 'loadOffices']);
+Route::resource('/dentist', App\Http\Controllers\Administrator\DentistController::class);
+Route::get('/get-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getDentists']);
+
 
 
 

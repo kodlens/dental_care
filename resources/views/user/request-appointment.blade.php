@@ -1,5 +1,5 @@
 @extends('layouts.user-layout')
 
 @section('content')
-    <my-appointment></my-appointment>
+    <request-appointment></request-appointment>
 @endsection

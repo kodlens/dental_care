@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ordinance;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class OrdinanceController extends Controller
+class RequestAppointment extends Controller
 {
     //
 
@@ -17,10 +17,10 @@ class OrdinanceController extends Controller
 
 
     public function index(){
-        return view('administrator.ordinance');
+        return view('administrator.user.request-appointment');
     }
 
-    public function getOrdinances(Request $req){
+    public function getAppointments(Request $req){
         $sort = explode('.', $req->sort_by);
 
         return Ordinance::where('ordinance_name', 'like', $req->ordinance . '%')

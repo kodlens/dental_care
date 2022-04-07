@@ -1,7 +1,7 @@
 <template>
     <section class="section">
-        <div class="columns">
-            <div class="column is-8 is-offset-2">
+        <div class="columns is-centered">
+            <div class="column is-6">
                 <form @submit.prevent="submit">
 
                     <div class="panel">
@@ -207,10 +207,7 @@ export default {
 <style scoped>
 
 
-    .panel > .panel-heading{
-        background-color: #4a5568;
-        color:white;
-    }
+
 
 /*    dere lang kubia ang panel color*/
 </style>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Models\Office;
+use App\Models\Dentist;
 use Illuminate\Http\Request;
 
-class OfficeController extends Controller
+class DentistController extends Controller
 {
     //
 
@@ -15,13 +15,13 @@ class OfficeController extends Controller
     }
 
     public function index(){
-        return view('administrator.office');
+        return view('administrator.dentist');
     }
 
-    public function getOffices(Request $req){
+    public function getDentists(Request $req){
         //this is for select box in appointment
         $sort = explode('.',$req->sort_by);
-        $data = Office::where('office_name', 'like', $req->office . '%')
+        $data = Dentist::where('lname', 'like', $req->lname . '%')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
         return $data;
