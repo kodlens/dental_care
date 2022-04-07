@@ -15,11 +15,11 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id('appointment_id');
-            $table->string('qr_ref')->nullable();
+            $table->string('qr_code')->nullable();
             $table->date('appoint_date')->nullable();
             $table->time('appoint_time')->nullable();
-            $table->unsignedBigInteger('dentist_id')->nullable();
-            $table->foreign('dentist_id')->reference('dentist_id')->on('dentists');
+            $table->unsignedBigInteger('dentist_id');
+            $table->foreign('dentist_id')->references('dentist_id')->on('dentists');
 
             $table->timestamps();
         });

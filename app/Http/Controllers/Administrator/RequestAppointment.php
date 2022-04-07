@@ -23,7 +23,7 @@ class RequestAppointment extends Controller
     public function getAppointments(Request $req){
         $sort = explode('.', $req->sort_by);
 
-        return Ordinance::where('ordinance_name', 'like', $req->ordinance . '%')
+        return Appointment::where('ordinance_name', 'like', $req->ordinance . '%')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
     }
