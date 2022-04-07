@@ -1,10 +1,11 @@
 // Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
-
+//@import url('https://fonts.googleapis.com/css?family=Tangerine');
 // Variables
 @import 'variables';
 
-@import '~@mdi/font/css/materialdesignicons.css';
+
+
+
 //ref website -> https://materialdesignicons.com/
 //npm i @mdi/font
 
@@ -19,12 +20,16 @@
 
 
 
-// html{
-//     background-color: rgb(248, 248, 248) !important;
-// }
+html body{
+    font-family:'Amaranth', sans-serif;
+}
 
 
+.box{
+    border: 1px solid rgb(228, 228, 228);
+}
 
+@import '~@mdi/font/css/materialdesignicons.css';
 
 
 //@import '~animate.css/animate';

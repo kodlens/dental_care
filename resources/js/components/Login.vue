@@ -76,8 +76,9 @@ export default {
         width: 500px;
     }
 
-
-
+    .box{
+        border: 1px solid rgb(223, 223, 223);
+    }
 
 
 </style>

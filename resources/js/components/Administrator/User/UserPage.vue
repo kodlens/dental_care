@@ -2,7 +2,7 @@
     <div>
         <div class="section">
             <div class="columns is-centered">
-                <div class="column is-10">
+                <div class="column is-8">
                     <div class="box">
 
                         <div class="is-flex mb-2" style="font-size: 20px; font-weight: bold;">LIST OF USER</div>

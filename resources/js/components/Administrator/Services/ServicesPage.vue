@@ -2,8 +2,8 @@
     <div>
         <div class="section">
 
-            <div class="columns">
-                <div class="column is-8 is-offset-2">
+            <div class="columns is-centered">
+                <div class="column is-6">
                     <div class="box">
                         <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">LIST OF SERVICES</div>
 
@@ -62,11 +62,11 @@
                                 {{ props.row.service_id }}
                             </b-table-column>
 
-                            <b-table-column field="service" label="Office Name" v-slot="props">
+                            <b-table-column field="service" label="Service Name" v-slot="props">
                                 {{ props.row.service }}
                             </b-table-column>
 
-                            <b-table-column field="price" label="Appointment" v-slot="props">
+                            <b-table-column field="price" label="Price" v-slot="props">
                                 {{ props.row.price }}
                             </b-table-column>
 
@@ -362,5 +362,5 @@ export default {
 </script>
 
 <style scoped>
-
+ 
 </style>

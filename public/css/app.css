@@ -26631,6 +26631,14 @@
   }
 }
 @charset "UTF-8";
+html body {
+  font-family: "Amaranth", sans-serif;
+}
+
+.box {
+  border: 1px solid #e4e4e4;
+}
+
 /* Bulma Utilities */
 .pagination-previous,
 .pagination-next,

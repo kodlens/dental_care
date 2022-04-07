@@ -1,11 +1,5 @@
-@extends('layouts.no-navbar')
+@extends('layouts.guest')
+
 @section('content')
-    @auth
-        <home-page prop-user='@json($user)'></home-page>
-    @else
-        <home-page prop-user=''></home-page>
-    @endauth
-
-
-
+    <welcome-page></welcome-page>
 @endsection
