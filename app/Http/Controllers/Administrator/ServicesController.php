@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Models\AppointmentType;
 use App\Models\Service;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,6 +28,13 @@ class ServicesController extends Controller
             ->paginate($req->perpage);
 
         return $data;
+    }
+
+    //getDentalServices cater the welcome page
+    public function getDentalServices(){
+        return \DB::table('services')
+            ->orderBy('service_id', 'asc')
+            ->get();
     }
 
     public function show($id){

@@ -29,23 +29,34 @@ class DentistController extends Controller
 
 
 
-    public function loadOffices(){
-        return Office::all();
+    public function loadDentist(){
+        return Dentist::all();
     }
 
 
     public function show($id){
-        return Office::find($id);
+        return Dentist::find($id);
     }
 
     public function store(Request $req){
-        $req->validate([
-            'office_name' => ['required', 'unique:offices'],
 
+        $req->validate([
+            'lname' => ['required'],
+            'fname' => ['required'],
+            'sex' => ['required'],
+            'email' => ['required', 'unique:dentists'],
         ]);
 
-        Office::create([
-            'office_name' => strtoupper($req->office_name),
+        Dentist::create([
+            'lname' => strtoupper($req->lname),
+            'fname' => strtoupper($req->fname),
+            'mname' => strtoupper($req->mname),
+            'suffix' => strtoupper($req->suffix),
+            'sex' => strtoupper($req->sex),
+            'contact_no' => $req->contact_no,
+            'email' => $req->email,
+            'address' => strtoupper($req->address),
+
         ]);
 
         return response()->json([
@@ -56,11 +67,21 @@ class DentistController extends Controller
 
     public function update(Request $req, $id){
         $req->validate([
-            'office_name' => ['required', 'unique:offices,office_name,' .$id. ',office_id'],
+            'lname' => ['required'],
+            'fname' => ['required'],
+            'sex' => ['required'],
+            'email' => ['required', 'unique:dentists,email,' . $id . ',dentist_id'],
         ]);
 
-        $data = Office::find($id);
-        $data->office_name = strtoupper($req->office_name);
+        $data = Dentist::find($id);
+        $data->lname = strtoupper($req->lname);
+        $data->fname = strtoupper($req->fname);
+        $data->mname = strtoupper($req->mname);
+        $data->suffix = strtoupper($req->suffix);
+        $data->sex = strtoupper($req->sex);
+        $data->contact_no = $req->contact_no;
+        $data->email = $req->email;
+        $data->address = strtoupper($req->address);
         $data->save();
 
         return response()->json([
@@ -69,7 +90,11 @@ class DentistController extends Controller
     }
 
     public function destroy($id){
-        Office::destroy($id);
+        Dentist::destroy($id);
+
+        return response()->json([
+            'status' => 'deleted'
+        ],200);
     }
 
 

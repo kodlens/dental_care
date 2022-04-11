@@ -134,7 +134,7 @@
                             </div>
 
                             <div class="buttons is-right">
-                                <button class="button is-success">Register</button>
+                                <button class="button is-primary">Register</button>
                             </div>
 
                         </div> <!--panel -body-->

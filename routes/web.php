@@ -24,6 +24,8 @@ Route::get('/', function () {
     // }
     return view('welcome');
 });
+Route::get('/get-dental-services', [App\Http\Controllers\Administrator\ServicesController::class, 'getDentalServices']);
+
 
 Auth::routes([
     'login' => 'false'

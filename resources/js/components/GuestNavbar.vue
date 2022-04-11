@@ -2,13 +2,13 @@
     <b-navbar>
         <template #brand>
             <b-navbar-item>
-                <h1 class="title is-4">DENTAL CARE</h1>
+                <h1 class="title is-4">DENTAL CLINIC</h1>
             </b-navbar-item>
         </template>
 
         <template #start>
-           
-            
+
+
         </template>
 
         <template #end>
@@ -30,7 +30,7 @@
             </b-navbar-item>
         </template>
     </b-navbar>
-    
+
 </template>
 
 <script>
