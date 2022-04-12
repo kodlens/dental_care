@@ -30,4 +30,4 @@
     </div>
 </body>
 </html>
-<?php /**PATH C:\Users\wayne\Desktop\GitHub\dental_care\resources\views/layouts/guest.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\Users\wayne\Desktop\GitHub\dental_care\resources\views/layouts/user.blade.php ENDPATH**/ ?>

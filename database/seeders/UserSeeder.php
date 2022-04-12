@@ -31,6 +31,22 @@ class UserSeeder extends Seeder
                 'role' => 'ADMINISTRATOR',
                 'password' => Hash::make('a')
             ],
+
+            [
+                'username' => 'a',
+                'lname' => 'NERI',
+                'fname' => 'MAIRAMAE',
+                'mname' => 'P',
+                'sex' => 'MALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'neri@dev.com',
+                'contact_no' => '09167789585',
+                'role' => 'USER',
+                'password' => Hash::make('a')
+            ],
         ];
 
         \App\Models\User::insertOrIgnore($data);

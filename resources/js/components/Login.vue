@@ -52,6 +52,9 @@ export default {
                 if(res.data.role === 'ADMINISTRATOR'){
                     window.location = '/admin-home';
                 }
+                if(res.data.role === 'USER'){
+                    window.location = '/';
+                }
                //window.location = '/dashboard';
             }).catch(err=>{
                 if(err.response.status === 422){
