@@ -73,6 +73,7 @@ export default {
 
     .my-video{
         z-index: -1;
+        width: 100%;
         /*display: none;*/
     }
 
