@@ -60,6 +60,9 @@
                             <b-menu-list>
                                 <b-menu-item label="Dentist" icon="account" tag="a" href="/dentist"></b-menu-item>
                             </b-menu-list>
+                            <b-menu-list>
+                                <b-menu-item label="Appointment" icon="calendar-blank" tag="a" href="/appointments"></b-menu-item>
+                            </b-menu-list>
 
                             <b-menu-list>
                                 <b-menu-item label="Report Track" icon="chart-timeline" tag="a" href="/report-track"></b-menu-item>

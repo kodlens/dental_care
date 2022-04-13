@@ -2,8 +2,8 @@
     <div>
         <div class="section">
 
-            <div class="columns">
-                <div class="column is-8 is-offset-2">
+            <div class="columns is-centered">
+                <div class="column is-10">
                     <div class="box">
                         <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">MY APPOINTMENT</div>
 

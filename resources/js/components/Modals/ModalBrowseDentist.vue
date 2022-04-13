@@ -96,7 +96,7 @@
 <script>
 export default {
     props: {
-        propDentistFullname: {
+        propDentist: {
             type: String,
             default: '',
         },
@@ -190,7 +190,7 @@ export default {
 
     computed: {
         valueFullname(){
-            return this.propDentistFullname;
+            return this.propDentist;
         }
     },
 

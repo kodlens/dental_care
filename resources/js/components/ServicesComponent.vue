@@ -129,15 +129,34 @@ export default {
         },
 
 
-        browseDentist: function(data){
+        emitBrowseDentist: function(data){
             this.fields.dentist_id = data.dentist_id;
             this.fields.lname = data.lname;
             this.fields.fname = data.fname;
             this.fields.mname = data.mname;
             this.fields.suffix = data.suffix;
-            this.resident_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+            this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
             this.fields.sex = data.sex;
         },
+
+
+        submit: function(){
+            this.btnClass['is-loading'] = true;
+            axios.post('/book-now', this.fields).then(res => {
+                if(res.data.status === 'saved'){
+                    this.$buefy.toast.open({
+                        message: 'Appointment saved.!',
+                        type: 'is-success'
+                    });
+
+                    this.fields = {};
+                    this.errors = {};
+                    this.dentist_fullname = '';
+                    this.modalBookNow = false;
+                }
+                this.btnClass['is-loading'] = false;
+            });
+        }
 
     },
 
@@ -161,7 +180,7 @@ export default {
     }
 
     .service-card{
-        width: 600px;
+        width: 520px;
         margin: 15px;
 
         box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);
