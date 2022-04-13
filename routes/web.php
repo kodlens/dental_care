@@ -89,6 +89,7 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackC
 
 Route::resource('/dentist', App\Http\Controllers\Administrator\DentistController::class);
 Route::get('/get-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getDentists']);
+Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getBrowseDentist']);
 
 
 

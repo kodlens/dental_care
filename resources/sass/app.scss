@@ -39,7 +39,7 @@ html body{
 @import "~bulma/sass/utilities/_all";
 //
 ////Set your colors
-$primary: hsl(224, 60%, 37%);
+$primary: #3490dc;
 $primary-light: findLightColor($primary);
 $primary-dark: findDarkColor($primary);
 $primary-invert: findColorInvert($primary);

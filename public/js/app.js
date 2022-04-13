@@ -9122,6 +9122,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -10021,6 +10035,197 @@ __webpack_require__.r(__webpack_exports__);
           _this.errors = err.response.data.errors;
         }
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propDentistFullname: {
+      type: String,
+      "default": ''
+    }
+  },
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortfield: 'dentist_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 5,
+      defaultSortDirection: '',
+      isModalActive: false,
+      errors: {},
+      dentist: {
+        fullname: ''
+      },
+      search: {
+        lname: '',
+        fname: ''
+      }
+    };
+  },
+  methods: {
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortfield, ".").concat(this.sortOrder), "perpage=".concat(this.perPage), "page=".concat(this.page), "lname=".concat(this.search.lname), "fname=".concat(this.search.fname)].join('&');
+      this.loading = true;
+      axios.get("/get-browse-dentist?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (err) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw err;
+      });
+    },
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortfield = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    openModal: function openModal() {
+      this.loadAsyncData();
+      this.isModalActive = true;
+    },
+    selectData: function selectData(dataRow) {
+      this.isModalActive = false;
+      this.$emit('browseDentist', dataRow);
+    }
+  },
+  computed: {
+    valueFullname: function valueFullname() {
+      return this.propDentistFullname;
     }
   }
 });
@@ -11594,10 +11799,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      services: []
+      errors: {},
+      fields: {},
+      dentist_fullname: '',
+      services: [],
+      btnClass: {
+        'button': true,
+        'is-primary': true,
+        'is-is-loading': false
+      },
+      modalBookNow: false
     };
   },
   methods: {
@@ -11608,10 +11875,29 @@ __webpack_require__.r(__webpack_exports__);
         _this.services = res.data;
         console.log(_this.services);
       });
+    },
+    bookNow: function bookNow() {
+      this.modalBookNow = true;
+    },
+    browseDentist: function browseDentist(data) {
+      this.fields.dentist_id = data.dentist_id;
+      this.fields.lname = data.lname;
+      this.fields.fname = data.fname;
+      this.fields.mname = data.mname;
+      this.fields.suffix = data.suffix;
+      this.resident_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+      this.fields.sex = data.sex;
     }
   },
   mounted: function mounted() {
     this.getServices();
+  },
+  computed: {
+    priceRounded: function priceRounded() {
+      return function (p) {
+        return Math.round((parseFloat(p) + Number.EPSILON) * 100) / 100;
+      };
+    }
   }
 });
 
@@ -30989,6 +31275,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.login-wrapper[data-v-6bdc8b8e]{\n  
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.card-width[data-v-117f6c9a]{\n    width: 640px;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Office/NavbarOffice.vue?vue&type=style&index=0&id=a9fccc38&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Office/NavbarOffice.vue?vue&type=style&index=0&id=a9fccc38&scoped=true&lang=css& ***!
@@ -31102,7 +31412,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.card[data-v-1e616838]{\n    width: 320px;\n    margin: 15px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.service-card[data-v-1e616838]{\n    width: 600px;\n    margin: 15px;\n\n    box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -webkit-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -moz-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n\n    border: 1px solid rgb(226, 226, 226);\n    border-top: 4px solid blue;\n    border-radius: 10px;\n}\n.service-card-header[data-v-1e616838]{\n    padding: 25px;\n   \n    border-bottom: 1px solid blue;\n}\n.service-card-header-title[data-v-1e616838]{\n     font-weight: bold;\n    font-size: 2em;\n}\n.service-card-content[data-v-1e616838]{\n    padding: 20px;\n    font-size: 1.3em;\n}\n.service-price[data-v-1e616838]{\n    display: flex;\n    padding: 20px;\n}\n.peso-sign[data-v-1e616838]{\n    margin-left: auto;\n    color: red;\n    font-weight: bold;\n    font-size: 2em;\n}\n.price[data-v-1e616838]{\n    color: orange;\n    font-size: 3.5em;\n    font-weight: bold;\n}\n.line[data-v-1e616838]{\n    height: 10px;\n    background-color: #3490dc;\n}\n.modal .animation-content .modal-card[data-v-1e616838] {\n    overflow: visible !important;\n}\n.modal-card-body[data-v-1e616838] {\n    overflow: visible !important;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31222,7 +31532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.my-hero-container[data-v-a4d20914]{\n    display: flex;\n    flex-direction: column;\n}\n.main-text-container[data-v-a4d20914]{\n    position: absolute;\n    top: 300px;\n    margin: 0 25px 0 25px;\n    z-index: 0;\n    background: black;\n    padding: 30px;\n    opacity: .6;\n}\n.main-title[data-v-a4d20914]{\n    color: white;\n    font-size: 2em;\n    font-weight: bold;\n    opacity: 1;\n}\n.main-subtitle[data-v-a4d20914]{\n    color: white;\n    font-size: 1.4em;\n    font-weight: bold;\n}\n.my-video[data-v-a4d20914]{\n    z-index: -1;\n    width: 100%;\n    /*display: none;*/\n}\n@media only screen and (max-width: 1024px) {\n}\n@media only screen and (max-width: 768px) {\n.main-text-container[data-v-a4d20914]{\n        top: 230px;\n        width: 100%;\n        margin: 0;\n}\n}\n@media only screen and (max-width: 480px) {\n.main-text-container[data-v-a4d20914]{\n        padding: 15px;\n}\n.main-title[data-v-a4d20914]{\n        font-size: 1.2em;\n}\n.main-subtitle[data-v-a4d20914]{\n        font-size: .8em;\n}\n}\n\n\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.my-hero-container[data-v-a4d20914]{\n    display: flex;\n    flex-direction: column;\n}\n.main-text-container[data-v-a4d20914]{\n    position: absolute;\n    top: 50%;\n    transform: translateY(-50%);\n    margin: 0 25px 0 100px;\n    z-index: 0;\n    background: black;\n    padding: 30px;\n    opacity: .6;\n}\n.main-title[data-v-a4d20914]{\n    color: white;\n    font-size: 3em;\n    font-weight: bold;\n    opacity: 1;\n}\n.main-subtitle[data-v-a4d20914]{\n    color: white;\n    font-size: 2em;\n    font-weight: bold;\n}\n.my-video[data-v-a4d20914]{\n    z-index: -1;\n    width: 100%;\n    /*display: none;*/\n}\n@media only screen and (max-width: 1024px) {\n}\n@media only screen and (max-width: 768px) {\n.main-text-container[data-v-a4d20914]{\n        top: 230px;\n        width: 100%;\n        margin: 0;\n}\n}\n@media only screen and (max-width: 480px) {\n.main-text-container[data-v-a4d20914]{\n        padding: 15px;\n}\n.main-title[data-v-a4d20914]{\n        font-size: 1.2em;\n}\n.main-subtitle[data-v-a4d20914]{\n        font-size: .8em;\n}\n}\n\n\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32396,6 +32706,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_style_index_0_id_117f6c9a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_style_index_0_id_117f6c9a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_style_index_0_id_117f6c9a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Office/NavbarOffice.vue?vue&type=style&index=0&id=a9fccc38&scoped=true&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Office/NavbarOffice.vue?vue&type=style&index=0&id=a9fccc38&scoped=true&lang=css& ***!
@@ -33410,6 +33750,47 @@ component.options.__file = "resources/js/components/Login.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Modals/ModalBrowseDentist.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/Modals/ModalBrowseDentist.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true& */ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true&");
+/* harmony import */ var _ModalBrowseDentist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalBrowseDentist.vue?vue&type=script&lang=js& */ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ModalBrowseDentist_vue_vue_type_style_index_0_id_117f6c9a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& */ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ModalBrowseDentist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "117f6c9a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Modals/ModalBrowseDentist.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Office/MyAppointmentType.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/Office/MyAppointmentType.vue ***!
@@ -33624,7 +34005,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequestAppointment.vue?vue&type=template&id=11b0d33b& */ "./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&");
+/* harmony import */ var _RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true& */ "./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true&");
 /* harmony import */ var _RequestAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RequestAppointment.vue?vue&type=script&lang=js& */ "./resources/js/components/RequestAppointment.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -33636,11 +34017,11 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _RequestAppointment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__.render,
-  _RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "11b0d33b",
   null
   
 )
@@ -34136,6 +34517,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ModalBrowseDentist.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Office/MyAppointmentType.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/Office/MyAppointmentType.vue?vue&type=script&lang=js& ***!
@@ -34408,6 +34805,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Login_vue_vue_type_style_index_0_id_6bdc8b8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Login.vue?vue&type=style&index=0&id=6bdc8b8e&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Login.vue?vue&type=style&index=0&id=6bdc8b8e&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_style_index_0_id_117f6c9a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=style&index=0&id=117f6c9a&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -34729,6 +35139,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalBrowseDentist_vue_vue_type_template_id_117f6c9a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Office/MyAppointmentType.vue?vue&type=template&id=5805a1e5&scoped=true&":
 /*!*********************************************************************************************************!*\
   !*** ./resources/js/components/Office/MyAppointmentType.vue?vue&type=template&id=5805a1e5&scoped=true& ***!
@@ -34814,19 +35241,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true& ***!
+  \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequestAppointment.vue?vue&type=template&id=11b0d33b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequestAppointment_vue_vue_type_template_id_11b0d33b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true&");
 
 
 /***/ }),
@@ -37254,6 +37681,24 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
+                      attrs: { field: "description", label: "Service Name" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.description) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
                       attrs: { field: "price", label: "Price" },
                       scopedSlots: _vm._u([
                         {
@@ -37449,6 +37894,47 @@ var render = function () {
                                     _vm.$set(_vm.fields, "service", $$v)
                                   },
                                   expression: "fields.service",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Description",
+                                type: this.errors.description
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.description
+                                  ? this.errors.description[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "textarea",
+                                  placeholder: "Description",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.description,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "description", $$v)
+                                  },
+                                  expression: "fields.description",
                                 },
                               }),
                             ],
@@ -38963,6 +39449,336 @@ var staticRenderFns = [
     ])
   },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Modals/ModalBrowseDentist.vue?vue&type=template&id=117f6c9a&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-field",
+        {
+          attrs: {
+            label: "Dentist",
+            type: this.errors.dentist_id ? "is-danger" : "",
+            message: this.errors.dentist_id ? this.errors.dentist_id[0] : "",
+          },
+        },
+        [
+          _c("b-input", {
+            attrs: {
+              value: _vm.valueFullname,
+              expanded: "",
+              "icon-pack": "fa",
+              icon: "user",
+              placeholder: "SELECT DENTIST",
+              required: "",
+              readonly: "",
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticClass: "control" },
+            [
+              _c(
+                "b-button",
+                {
+                  staticClass: "button is-primary",
+                  on: { click: _vm.openModal },
+                },
+                [_vm._v("...")]
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            scroll: "keep",
+            "aria-role": "dialog",
+            "aria-modal": "",
+          },
+          model: {
+            value: this.isModalActive,
+            callback: function ($$v) {
+              _vm.$set(this, "isModalActive", $$v)
+            },
+            expression: "this.isModalActive",
+          },
+        },
+        [
+          _c("div", { staticClass: "modal-card card-width" }, [
+            _c("header", { staticClass: "modal-card-head" }, [
+              _c("p", { staticClass: "modal-card-title" }, [
+                _vm._v("SELECT DENTIST"),
+              ]),
+              _vm._v(" "),
+              _c("button", {
+                staticClass: "delete",
+                attrs: { type: "button" },
+                on: {
+                  click: function ($event) {
+                    _vm.isModalActive = false
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("section", { staticClass: "modal-card-body" }, [
+              _c(
+                "div",
+                [
+                  _c(
+                    "b-field",
+                    {
+                      attrs: { label: "Search", "label-position": "on-border" },
+                    },
+                    [
+                      _c("b-input", {
+                        attrs: {
+                          type: "text",
+                          placeholder: "Search Lastname...",
+                          expanded: "",
+                          "auto-focus": "",
+                        },
+                        model: {
+                          value: _vm.search.lname,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.search, "lname", $$v)
+                          },
+                          expression: "search.lname",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("b-input", {
+                        attrs: {
+                          type: "text",
+                          placeholder: "Search Firstname...",
+                          expanded: "",
+                          "auto-focus": "",
+                        },
+                        model: {
+                          value: _vm.search.fname,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.search, "fname", $$v)
+                          },
+                          expression: "search.fname",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "control" },
+                        [
+                          _c("b-button", {
+                            staticClass: "is-primary",
+                            attrs: { "icon-pack": "fa", "icon-left": "search" },
+                            on: { click: _vm.loadAsyncData },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "table-container" },
+                    [
+                      _c(
+                        "b-table",
+                        {
+                          attrs: {
+                            data: _vm.data,
+                            loading: _vm.loading,
+                            paginated: "",
+                            "backend-pagination": "",
+                            total: _vm.total,
+                            "per-page": _vm.perPage,
+                            "detail-transition": "",
+                            "aria-next-label": "Next page",
+                            "aria-previous-label": "Previouse page",
+                            "aria-page-label": "Page",
+                            "show-detail-icon": true,
+                            "aria-current-label": "Current page",
+                            "default-sort-direction": "defualtSortDirection",
+                          },
+                          on: {
+                            "page-change": _vm.onPageChange,
+                            sort: _vm.onSort,
+                          },
+                        },
+                        [
+                          _c("b-table-column", {
+                            attrs: { field: "dentist_id", label: "ID" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.dentist_id) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "lname", label: "Lastname" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.lname) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "lname", label: "Firstname" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.fname) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "lname", label: "Middlename" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.mname) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "", label: "Action" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _c(
+                                      "div",
+                                      { staticClass: "buttons" },
+                                      [
+                                        _c(
+                                          "b-button",
+                                          {
+                                            staticClass: "is-small is-warning",
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.selectData(props.row)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-pencil",
+                                            }),
+                                            _vm._v("  SELECT"),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "footer",
+              { staticClass: "modal-card-foot" },
+              [
+                _c("b-button", {
+                  attrs: { label: "Close" },
+                  on: {
+                    click: function ($event) {
+                      _vm.isModalActive = false
+                    },
+                  },
+                }),
+              ],
+              1
+            ),
+          ]),
+        ]
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41015,10 +41831,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RequestAppointment.vue?vue&type=template&id=11b0d33b&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41067,44 +41883,203 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "section" }, [
-      _c(
-        "div",
-        { staticClass: "services" },
-        _vm._l(_vm.services, function (item, index) {
-          return _c("div", { key: index, staticClass: "card" }, [
-            _c("header", { staticClass: "card-header" }, [
-              _c("p", { staticClass: "card-header-title" }, [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(item.service) +
-                    "\n                    "
-                ),
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "div",
+          { staticClass: "services" },
+          _vm._l(_vm.services, function (item, index) {
+            return _c("div", { key: index, staticClass: "service-card" }, [
+              _c("header", { staticClass: "service-card-header" }, [
+                _c("p", { staticClass: "service-card-header-title" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(item.service) +
+                      "\n                    "
+                  ),
+                ]),
               ]),
               _vm._v(" "),
-              _vm._m(1, true),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-content" }, [
-              _c("div", { staticClass: "content" }, [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(item.description) +
-                    "\n                    "
+              _c("div", { staticClass: "service-card-content" }, [
+                _c("div", { staticClass: "service-content" }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(item.description) +
+                      "\n                    "
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "service-price" }, [
+                _c("div", { staticClass: "peso-sign" }, [_vm._v("₱")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "price" }, [
+                  _vm._v(_vm._s(_vm.priceRounded(item.price))),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("footer", { staticClass: "card-footer" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "card-footer-item",
+                    on: {
+                      click: function ($event) {
+                        return _vm.bookNow(item)
+                      },
+                    },
+                  },
+                  [_vm._v("BOOK NOW")]
                 ),
               ]),
-            ]),
-            _vm._v(" "),
-            _vm._m(2, true),
-          ])
-        }),
-        0
+            ])
+          }),
+          0
+        ),
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            width: 640,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+            type: "is-link",
+          },
+          model: {
+            value: _vm.modalBookNow,
+            callback: function ($$v) {
+              _vm.modalBookNow = $$v
+            },
+            expression: "modalBookNow",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Book Information"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.modalBookNow = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Appointment Date",
+                                type: this.errors.appointment_date
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.appointment_date
+                                  ? this.errors.appointment_date[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-datetimepicker", {
+                                attrs: {
+                                  placeholder: "Appointment Date",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.appointment_date,
+                                  callback: function ($$v) {
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "appointment_date",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "fields.appointment_date",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("modal-browse-dentist", {
+                            attrs: { "prop-dentist": _vm.dentist_fullname },
+                            on: {
+                              browseDentist: function ($event) {
+                                return _vm.emitBrowseDentist($event)
+                              },
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.modalBookNow = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
       ),
-    ]),
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function () {
@@ -41114,49 +42089,13 @@ var staticRenderFns = [
     return _c("div", { staticClass: "section debug" }, [
       _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column" }, [
-          _c("p", { staticClass: "title is-5 has-text-centered" }, [
+          _c("p", { staticClass: "title has-text-centered" }, [
             _vm._v("\n                    SERVICES HERE\n                "),
           ]),
         ]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "card-header-icon",
-        attrs: { "aria-label": "more options" },
-      },
-      [
-        _c("span", { staticClass: "icon" }, [
-          _c("i", {
-            staticClass: "fas fa-angle-down",
-            attrs: { "aria-hidden": "true" },
-          }),
-        ]),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "card-footer" }, [
-      _c("a", { staticClass: "card-footer-item", attrs: { href: "#" } }, [
-        _vm._v("Save"),
-      ]),
       _vm._v(" "),
-      _c("a", { staticClass: "card-footer-item", attrs: { href: "#" } }, [
-        _vm._v("Edit"),
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "card-footer-item", attrs: { href: "#" } }, [
-        _vm._v("Delete"),
-      ]),
+      _c("div", { staticClass: "line" }),
     ])
   },
 ]
@@ -66545,6 +67484,7 @@ var map = {
 	"./components/DentalChart.vue": "./resources/js/components/DentalChart.vue",
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
 	"./components/Login.vue": "./resources/js/components/Login.vue",
+	"./components/Modals/ModalBrowseDentist.vue": "./resources/js/components/Modals/ModalBrowseDentist.vue",
 	"./components/Office/MyAppointmentType.vue": "./resources/js/components/Office/MyAppointmentType.vue",
 	"./components/Office/NavbarOffice.vue": "./resources/js/components/Office/NavbarOffice.vue",
 	"./components/Office/OfficeAppointment.vue": "./resources/js/components/Office/OfficeAppointment.vue",

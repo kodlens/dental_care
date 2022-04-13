@@ -50,8 +50,9 @@ export default {
     }
     .main-text-container{
         position: absolute;
-        top: 300px;
-        margin: 0 25px 0 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 25px 0 100px;
         z-index: 0;
         background: black;
         padding: 30px;
@@ -59,14 +60,14 @@ export default {
     }
     .main-title{
         color: white;
-        font-size: 2em;
+        font-size: 3em;
         font-weight: bold;
         opacity: 1;
     }
 
     .main-subtitle{
         color: white;
-        font-size: 1.4em;
+        font-size: 2em;
         font-weight: bold;
 
     }

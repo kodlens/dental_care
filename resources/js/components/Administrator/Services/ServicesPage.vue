@@ -66,6 +66,10 @@
                                 {{ props.row.service }}
                             </b-table-column>
 
+                            <b-table-column field="description" label="Service Name" v-slot="props">
+                                {{ props.row.description }}
+                            </b-table-column>
+
                             <b-table-column field="price" label="Price" v-slot="props">
                                 {{ props.row.price }}
                             </b-table-column>
@@ -124,6 +128,16 @@
                                              :type="this.errors.service ? 'is-danger':''"
                                              :message="this.errors.service ? this.errors.service[0] : ''">
                                        <b-input type="text" v-model="fields.service" placeholder="Service" required />
+                                    </b-field>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Description"
+                                             :type="this.errors.description ? 'is-danger':''"
+                                             :message="this.errors.description ? this.errors.description[0] : ''">
+                                       <b-input type="textarea" v-model="fields.description" placeholder="Description" required />
                                     </b-field>
                                 </div>
                             </div>

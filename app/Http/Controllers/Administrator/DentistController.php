@@ -27,6 +27,13 @@ class DentistController extends Controller
         return $data;
     }
 
+    public function getBrowseDentist(Request $req){
+        $data = Dentist::where('lname', 'like', $req->lname . '%')
+            ->where('fname', 'like', $req->fname . '%')
+            ->paginate($req->perpage);
+        return $data;
+    }
+
 
 
     public function loadDentist(){

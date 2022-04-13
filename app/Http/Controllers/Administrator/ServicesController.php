@@ -46,11 +46,13 @@ class ServicesController extends Controller
     public function store(Request $req){
         $req->validate([
             'service' => ['required'],
+            'description' => ['required'],
             'price' => ['required'],
         ]);
 
         Service::create([
-            'service' => strtoupper($req->service),
+            'service' => $req->service,
+            'description' => $req->description,
             'price' => $req->price,
         ]);
 
@@ -68,7 +70,8 @@ class ServicesController extends Controller
 
 
         $data = Service::find($id);
-        $data->service = strtoupper($req->service);
+        $data->service = $req->service;
+        $data->description = $req->description;
         $data->price = $req->price;
         $data->save();
 
