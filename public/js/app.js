@@ -10687,6 +10687,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -10797,7 +10801,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.clearFields();
       this.global_id = data_id;
-      this.isModalCreate = true; //nested axios for getting the address 1 by 1 or request by request
+      this.isModalCreate = true;
+      console.log(data_id); //nested axios for getting the address 1 by 1 or request by request
 
       axios.get('/dentist/' + data_id).then(function (res) {
         _this4.fields = res.data;
@@ -41304,11 +41309,11 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.lname) +
+                                  _vm._s(props.row.dentist_lname) +
                                   ", " +
-                                  _vm._s(props.row.fname) +
+                                  _vm._s(props.row.dentist_fname) +
                                   " " +
-                                  _vm._s(props.row.mname) +
+                                  _vm._s(props.row.dentist_mname) +
                                   "\n                        "
                               ),
                             ]
@@ -41352,6 +41357,24 @@ var render = function () {
                                   _vm._s(
                                     props.row.appoint_time || _vm.formatTime
                                   ) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: { field: "contact_no", label: "Contact No." },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.user_contact_no) +
                                   "\n                        "
                               ),
                             ]

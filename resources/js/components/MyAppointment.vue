@@ -63,7 +63,7 @@
                             </b-table-column>
 
                             <b-table-column field="name" label="Dentist Name" v-slot="props">
-                                {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                                {{ props.row.dentist_lname }}, {{ props.row.dentist_fname }} {{ props.row.dentist_mname }}
                             </b-table-column>
 
                             <b-table-column field="sex" label="Sex" v-slot="props">
@@ -72,6 +72,10 @@
 
                             <b-table-column field="dateTime" label="Appointment DateTime" v-slot="props">
                                 {{ props.row.appoint_date }} {{ props.row.appoint_time || formatTime }}
+                            </b-table-column>
+
+                            <b-table-column field="contact_no" label="Contact No." v-slot="props">
+                                {{ props.row.user_contact_no }}
                             </b-table-column>
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
@@ -342,6 +346,7 @@ export default {
             this.clearFields();
             this.global_id = data_id;
             this.isModalCreate = true;
+            console.log(data_id);
 
 
             //nested axios for getting the address 1 by 1 or request by request
