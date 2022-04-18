@@ -20,6 +20,22 @@ class MyAppointmentController extends Controller
         return view('my-appointment');
     }
 
+
+    public function show($id){
+
+        $data = DB::table('appointments as a')
+            ->join('dentists as b', 'a.dentist_id', 'b.dentist_id')
+            ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',
+                'b.lname as dentist_lname', 'b.fname as dentist_fname', 'b.mname as dentist_mname', 'b.contact_no as dentist_contact_no',
+                'c.lname as user_lname', 'c.fname as user_fname', 'c.mname as user_mname', 'c.sex as user_sex', 'c.contact_no as user_contact_no')
+            ->join('users as c', 'a.user_id', 'c.user_id')
+            ->where('a.appointment_id', $id)
+            ->first();
+
+
+        return $data;
+    }
+
     public function getMyAppointments(Request $req){
         $sort = explode('.', $req->sort_by);
         $user = Auth::user();
@@ -28,7 +44,7 @@ class MyAppointmentController extends Controller
         $data = DB::table('appointments as a')
             ->join('dentists as b', 'a.dentist_id', 'b.dentist_id')
             ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',
-                'b.lname as dentist_lname', 'b.fname as dentist_fname', 'b.mname as dentinst_mname',
+                'b.lname as dentist_lname', 'b.fname as dentist_fname', 'b.mname as dentist_mname', 'b.contact_no as dentist_contact_no',
                 'c.lname as user_lname', 'c.fname as user_fname', 'c.mname as user_mname', 'c.sex as user_sex', 'c.contact_no as user_contact_no')
             ->join('users as c', 'a.user_id', 'c.user_id')
             ->where('a.user_id', $user->user_id)

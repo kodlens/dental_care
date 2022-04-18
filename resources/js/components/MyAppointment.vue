@@ -75,7 +75,7 @@
                             </b-table-column>
 
                             <b-table-column field="contact_no" label="Contact No." v-slot="props">
-                                {{ props.row.user_contact_no }}
+                                {{ props.row.dentist_contact_no }}
                             </b-table-column>
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
@@ -87,11 +87,11 @@
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
-                                        <b-button class="button is-small is-warning mr-1" tag="a" icon-right="pencil" @click="getData(props.row.appointment_id)"></b-button>
+                                        <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.appointment_id)"></b-button>
                                     </b-tooltip>
 
                                     <b-tooltip label="Cancel appointment" type="is-danger" v-if="props.row.appoint_status <= 1">
-                                        <b-button class="button is-small is-danger mr-1" icon-right="minus-circle" @click="cancelAppointment(props.row)"></b-button>
+                                        <b-button class="button is-small mr-1" icon-right="minus-circle" @click="cancelAppointment(props.row)"></b-button>
                                     </b-tooltip>
                                 </div>
                             </b-table-column>
@@ -99,7 +99,7 @@
                         </b-table>
 
                         <div class="buttons mt-3">
-                            <b-button @click="openModal" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
+                            <b-button @click="bookNow" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
                         </div>
 
                     </div>
@@ -111,96 +111,39 @@
 
 
 
-        <!--modal create-->
-        <b-modal v-model="isModalCreate" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal
-                type = "is-link">
-
+        <b-modal v-model="modalBookNow" :width="640"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-label="Modal"
+            aria-modal
+            type = "is-link">
+            
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
-                        <p class="modal-card-title">New/Update Dentist</p>
+                        <p class="modal-card-title">Book Information</p>
                         <button
                             type="button"
                             class="delete"
-                            @click="isModalCreate = false"/>
+                            @click="modalBookNow = false"/>
                     </header>
 
                     <section class="modal-card-body">
                         <div class="">
-
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label="Lastname"
-                                         :type="this.errors.lname ? 'is-danger':''"
-                                         :message="this.errors.lname ? this.errors.lname[0] : ''">
-                                        <b-input type="text" v-model="fields.lname" placeholder="Lastname" required />
+                                    <b-field label="Appointment Date"
+                                             :type="this.errors.appointment_date ? 'is-danger':''"
+                                             :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
+                                        <b-datetimepicker v-model="fields.appointment_date"
+                                                 placeholder="Appointment Date" required>
+                                        </b-datetimepicker>
                                     </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Firstname"
-                                             :type="this.errors.fname ? 'is-danger':''"
-                                             :message="this.errors.fname ? this.errors.fname[0] : ''">
-                                        <b-input type="text" v-model="fields.fname" placeholder="Firstname" required />
-                                    </b-field>
-                                </div>
-                            </div>
 
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Middlename"
-                                             :type="this.errors.mname ? 'is-danger':''"
-                                             :message="this.errors.mname ? this.errors.mname[0] : ''">
-                                        <b-input type="text" v-model="fields.mname" placeholder="Middlename" />
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Suffix"
-                                             :type="this.errors.suffix ? 'is-danger':''"
-                                             :message="this.errors.suffix ? this.errors.suffix[0] : ''">
-                                        <b-input type="text" v-model="fields.suffix" placeholder="Suffix" />
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Sex"
-                                             :type="this.errors.sex ? 'is-danger':''"
-                                             :message="this.errors.sex ? this.errors.sex[0] : ''">
-                                        <b-select v-model="fields.sex" placeholder="Sex" required>
-                                            <option value="MALE">MALE</option>
-                                            <option value="FEMALE">FEMALE</option>
-                                        </b-select>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Contact No"
-                                             :type="this.errors.contact_no ? 'is-danger':''"
-                                             :message="this.errors.contact_no ? this.errors.contact_no[0] : ''">
-                                        <b-input type="text" v-model="fields.contact_no" placeholder="Contact No." />
-                                    </b-field>
-                                </div>
-                            </div>
-
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Email"
-                                             :type="this.errors.email ? 'is-danger':''"
-                                             :message="this.errors.email ? this.errors.email[0] : ''">
-                                        <b-input type="text" v-model="fields.email" placeholder="Email" required/>
-                                    </b-field>
-                                </div>
-                                <div class="column">
-                                    <b-field label="Address"
-                                             :type="this.errors.address ? 'is-danger':''"
-                                             :message="this.errors.address ? this.errors.address[0] : ''">
-                                        <b-input type="text" v-model="fields.address" placeholder="Address" />
-                                    </b-field>
+                                    <modal-browse-dentist
+                                        :prop-dentist="dentist_fullname"
+                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
                                 </div>
                             </div>
 
@@ -209,7 +152,7 @@
                     <footer class="modal-card-foot">
                         <b-button
                             label="Close"
-                            @click="isModalCreate=false"/>
+                            @click="modalBookNow=false"/>
                         <button
                             :class="btnClass"
                             label="Save"
@@ -218,7 +161,6 @@
                 </div>
             </form><!--close form-->
         </b-modal>
-        <!--close modal-->
 
 
     </div>
@@ -245,7 +187,8 @@ export default {
                 lname: '',
             },
 
-            isModalCreate: false,
+            modalBookNow: false,
+            dentist_fullname: '',
 
             fields: {},
             errors: {},
@@ -311,14 +254,6 @@ export default {
             this.loadAsyncData()
         },
 
-        openModal(){
-            this.isModalCreate=true;
-            this.fields = {};
-            this.errors = {};
-        },
-
-
-
         //alert box ask for deletion
         confirmDelete(delete_id) {
             this.$buefy.dialog.confirm({
@@ -345,13 +280,16 @@ export default {
         getData: function(data_id){
             this.clearFields();
             this.global_id = data_id;
-            this.isModalCreate = true;
-            console.log(data_id);
-
+            this.modalBookNow = true;
 
             //nested axios for getting the address 1 by 1 or request by request
-            axios.get('/dentist/' + data_id).then(res=>{
+            axios.get('/my-appointment/' + data_id).then(res=>{
                 this.fields = res.data;
+                let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
+                ndateTime = new Date(ndateTime);
+
+                this.fields.appointment_date = ndateTime;
+                this.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
             });
         },
 
@@ -363,43 +301,43 @@ export default {
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.put('/dentist/'+this.global_id, this.fields).then(res=>{
-                    if(res.data.status === 'updated'){
-                        this.$buefy.dialog.alert({
-                            title: 'UPDATED!',
-                            message: 'Successfully updated.',
-                            type: 'is-success',
-                            onConfirm: () => {
-                                this.loadAsyncData();
-                                this.clearFields();
-                                this.global_id = 0;
-                                this.isModalCreate = false;
-                            }
-                        })
+                axios.post('/book-now/' + this.global_id, this.fields).then(res => {
+                    if(res.data.status === 'saved'){
+                        this.$buefy.toast.open({
+                            message: 'Appointment saved.!',
+                            type: 'is-success'
+                        });
+
+                        this.fields = {};
+                        this.errors = {};
+                        this.dentist_fullname = '';
+                        this.modalBookNow = false;
                     }
+                    this.btnClass['is-loading'] = false;
                 }).catch(err=>{
+                    this.btnClass['is-loading'] = false;
                     if(err.response.status === 422){
                         this.errors = err.response.data.errors;
                     }
-                })
+                });
             }else{
                 //INSERT HERE
-                axios.post('/dentist', this.fields).then(res=>{
+                this.btnClass['is-loading'] = true;
+                axios.post('/book-now', this.fields).then(res => {
                     if(res.data.status === 'saved'){
-                        this.$buefy.dialog.alert({
-                            title: 'SAVED!',
-                            message: 'Successfully saved.',
-                            type: 'is-success',
-                            confirmText: 'OK',
-                            onConfirm: () => {
-                                this.isModalCreate = false;
-                                this.loadAsyncData();
-                                this.clearFields();
-                                this.global_id = 0;
-                            }
-                        })
+                        this.$buefy.toast.open({
+                            message: 'Appointment saved.!',
+                            type: 'is-success'
+                        });
+
+                        this.fields = {};
+                        this.errors = {};
+                        this.dentist_fullname = '';
+                        this.modalBookNow = false;
                     }
+                    this.btnClass['is-loading'] = false;
                 }).catch(err=>{
+                    this.btnClass['is-loading'] = false;
                     if(err.response.status === 422){
                         this.errors = err.response.data.errors;
                     }
@@ -432,6 +370,24 @@ export default {
         },
 
 
+        bookNow(){
+            this.modalBookNow = true;
+            this.fields = {};
+            this.errors = {};
+        },
+
+
+        emitBrowseDentist: function(data){
+            this.fields.dentist_id = data.dentist_id;
+            this.fields.lname = data.lname;
+            this.fields.fname = data.fname;
+            this.fields.mname = data.mname;
+            this.fields.suffix = data.suffix;
+            this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+            this.fields.sex = data.sex;
+        },
+
+
 
     },
 
@@ -457,5 +413,13 @@ export default {
         font-weight: bold;
         color: rgb(15, 66, 193);
         font-size: .8em;
+    }
+
+    .modal .animation-content .modal-card {
+        overflow: visible !important;
+    }
+
+    .modal-card-body {
+        overflow: visible !important;
     }
 </style>

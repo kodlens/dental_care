@@ -10633,64 +10633,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -10707,7 +10649,8 @@ __webpack_require__.r(__webpack_exports__);
       search: {
         lname: ''
       },
-      isModalCreate: false,
+      modalBookNow: false,
+      dentist_fullname: '',
       fields: {},
       errors: {},
       btnClass: {
@@ -10763,11 +10706,6 @@ __webpack_require__.r(__webpack_exports__);
     setPerPage: function setPerPage() {
       this.loadAsyncData();
     },
-    openModal: function openModal() {
-      this.isModalCreate = true;
-      this.fields = {};
-      this.errors = {};
-    },
     //alert box ask for deletion
     confirmDelete: function confirmDelete(delete_id) {
       var _this2 = this;
@@ -10801,11 +10739,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.clearFields();
       this.global_id = data_id;
-      this.isModalCreate = true;
-      console.log(data_id); //nested axios for getting the address 1 by 1 or request by request
+      this.modalBookNow = true; //nested axios for getting the address 1 by 1 or request by request
 
-      axios.get('/dentist/' + data_id).then(function (res) {
+      axios.get('/my-appointment/' + data_id).then(function (res) {
         _this4.fields = res.data;
+        var ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
+        ndateTime = new Date(ndateTime);
+        _this4.fields.appointment_date = ndateTime;
+        _this4.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
       });
     },
     clearFields: function clearFields() {
@@ -10816,48 +10757,47 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.global_id > 0) {
         //update
-        axios.put('/dentist/' + this.global_id, this.fields).then(function (res) {
-          if (res.data.status === 'updated') {
-            _this5.$buefy.dialog.alert({
-              title: 'UPDATED!',
-              message: 'Successfully updated.',
-              type: 'is-success',
-              onConfirm: function onConfirm() {
-                _this5.loadAsyncData();
-
-                _this5.clearFields();
-
-                _this5.global_id = 0;
-                _this5.isModalCreate = false;
-              }
+        axios.post('/book-now/' + this.global_id, this.fields).then(function (res) {
+          if (res.data.status === 'saved') {
+            _this5.$buefy.toast.open({
+              message: 'Appointment saved.!',
+              type: 'is-success'
             });
+
+            _this5.fields = {};
+            _this5.errors = {};
+            _this5.dentist_fullname = '';
+            _this5.modalBookNow = false;
           }
+
+          _this5.btnClass['is-loading'] = false;
         })["catch"](function (err) {
+          _this5.btnClass['is-loading'] = false;
+
           if (err.response.status === 422) {
             _this5.errors = err.response.data.errors;
           }
         });
       } else {
         //INSERT HERE
-        axios.post('/dentist', this.fields).then(function (res) {
+        this.btnClass['is-loading'] = true;
+        axios.post('/book-now', this.fields).then(function (res) {
           if (res.data.status === 'saved') {
-            _this5.$buefy.dialog.alert({
-              title: 'SAVED!',
-              message: 'Successfully saved.',
-              type: 'is-success',
-              confirmText: 'OK',
-              onConfirm: function onConfirm() {
-                _this5.isModalCreate = false;
-
-                _this5.loadAsyncData();
-
-                _this5.clearFields();
-
-                _this5.global_id = 0;
-              }
+            _this5.$buefy.toast.open({
+              message: 'Appointment saved.!',
+              type: 'is-success'
             });
+
+            _this5.fields = {};
+            _this5.errors = {};
+            _this5.dentist_fullname = '';
+            _this5.modalBookNow = false;
           }
+
+          _this5.btnClass['is-loading'] = false;
         })["catch"](function (err) {
+          _this5.btnClass['is-loading'] = false;
+
           if (err.response.status === 422) {
             _this5.errors = err.response.data.errors;
           }
@@ -10890,6 +10830,20 @@ __webpack_require__.r(__webpack_exports__);
           _this7.errors = err.response.data.errors;
         }
       });
+    },
+    bookNow: function bookNow() {
+      this.modalBookNow = true;
+      this.fields = {};
+      this.errors = {};
+    },
+    emitBrowseDentist: function emitBrowseDentist(data) {
+      this.fields.dentist_id = data.dentist_id;
+      this.fields.lname = data.lname;
+      this.fields.fname = data.fname;
+      this.fields.mname = data.mname;
+      this.fields.suffix = data.suffix;
+      this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+      this.fields.sex = data.sex;
     }
   },
   mounted: function mounted() {
@@ -32006,7 +31960,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-4c5aac78]{\n    font-weight: bold;\n    color: green;\n    font-size: .6em;\n}\n.cancel[data-v-4c5aac78]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-4c5aac78]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-4c5aac78]{\n    font-weight: bold;\n    color: green;\n    font-size: .6em;\n}\n.cancel[data-v-4c5aac78]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-4c5aac78]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n.modal .animation-content .modal-card[data-v-4c5aac78] {\n    overflow: visible !important;\n}\n.modal-card-body[data-v-4c5aac78] {\n    overflow: visible !important;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41374,7 +41328,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.user_contact_no) +
+                                  _vm._s(props.row.dentist_contact_no) +
                                   "\n                        "
                               ),
                             ]
@@ -41432,8 +41386,7 @@ var render = function () {
                                     },
                                     [
                                       _c("b-button", {
-                                        staticClass:
-                                          "button is-small is-warning mr-1",
+                                        staticClass: "button is-small mr-1",
                                         attrs: {
                                           tag: "a",
                                           "icon-right": "pencil",
@@ -41461,8 +41414,7 @@ var render = function () {
                                         },
                                         [
                                           _c("b-button", {
-                                            staticClass:
-                                              "button is-small is-danger mr-1",
+                                            staticClass: "button is-small mr-1",
                                             attrs: {
                                               "icon-right": "minus-circle",
                                             },
@@ -41499,7 +41451,7 @@ var render = function () {
                       {
                         staticClass: "is-success",
                         attrs: { "icon-right": "account-arrow-up-outline" },
-                        on: { click: _vm.openModal },
+                        on: { click: _vm.bookNow },
                       },
                       [_vm._v("NEW")]
                     ),
@@ -41517,20 +41469,20 @@ var render = function () {
         "b-modal",
         {
           attrs: {
+            width: 640,
             "has-modal-card": "",
             "trap-focus": "",
-            width: 640,
             "aria-role": "dialog",
             "aria-label": "Modal",
             "aria-modal": "",
             type: "is-link",
           },
           model: {
-            value: _vm.isModalCreate,
+            value: _vm.modalBookNow,
             callback: function ($$v) {
-              _vm.isModalCreate = $$v
+              _vm.modalBookNow = $$v
             },
-            expression: "isModalCreate",
+            expression: "modalBookNow",
           },
         },
         [
@@ -41548,7 +41500,7 @@ var render = function () {
               _c("div", { staticClass: "modal-card" }, [
                 _c("header", { staticClass: "modal-card-head" }, [
                   _c("p", { staticClass: "modal-card-title" }, [
-                    _vm._v("New/Update Dentist"),
+                    _vm._v("Book Information"),
                   ]),
                   _vm._v(" "),
                   _c("button", {
@@ -41556,7 +41508,7 @@ var render = function () {
                     attrs: { type: "button" },
                     on: {
                       click: function ($event) {
-                        _vm.isModalCreate = false
+                        _vm.modalBookNow = false
                       },
                     },
                   }),
@@ -41573,294 +41525,45 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Lastname",
-                                type: this.errors.lname ? "is-danger" : "",
-                                message: this.errors.lname
-                                  ? this.errors.lname[0]
+                                label: "Appointment Date",
+                                type: this.errors.appointment_date
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.appointment_date
+                                  ? this.errors.appointment_date[0]
                                   : "",
                               },
                             },
                             [
-                              _c("b-input", {
+                              _c("b-datetimepicker", {
                                 attrs: {
-                                  type: "text",
-                                  placeholder: "Lastname",
+                                  placeholder: "Appointment Date",
                                   required: "",
                                 },
                                 model: {
-                                  value: _vm.fields.lname,
+                                  value: _vm.fields.appointment_date,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "lname", $$v)
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "appointment_date",
+                                      $$v
+                                    )
                                   },
-                                  expression: "fields.lname",
+                                  expression: "fields.appointment_date",
                                 },
                               }),
                             ],
                             1
                           ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Firstname",
-                                type: this.errors.fname ? "is-danger" : "",
-                                message: this.errors.fname
-                                  ? this.errors.fname[0]
-                                  : "",
+                          _vm._v(" "),
+                          _c("modal-browse-dentist", {
+                            attrs: { "prop-dentist": _vm.dentist_fullname },
+                            on: {
+                              browseDentist: function ($event) {
+                                return _vm.emitBrowseDentist($event)
                               },
                             },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "Firstname",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.fname,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "fname", $$v)
-                                  },
-                                  expression: "fields.fname",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Middlename",
-                                type: this.errors.mname ? "is-danger" : "",
-                                message: this.errors.mname
-                                  ? this.errors.mname[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "Middlename",
-                                },
-                                model: {
-                                  value: _vm.fields.mname,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "mname", $$v)
-                                  },
-                                  expression: "fields.mname",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Suffix",
-                                type: this.errors.suffix ? "is-danger" : "",
-                                message: this.errors.suffix
-                                  ? this.errors.suffix[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: { type: "text", placeholder: "Suffix" },
-                                model: {
-                                  value: _vm.fields.suffix,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "suffix", $$v)
-                                  },
-                                  expression: "fields.suffix",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Sex",
-                                type: this.errors.sex ? "is-danger" : "",
-                                message: this.errors.sex
-                                  ? this.errors.sex[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c(
-                                "b-select",
-                                {
-                                  attrs: { placeholder: "Sex", required: "" },
-                                  model: {
-                                    value: _vm.fields.sex,
-                                    callback: function ($$v) {
-                                      _vm.$set(_vm.fields, "sex", $$v)
-                                    },
-                                    expression: "fields.sex",
-                                  },
-                                },
-                                [
-                                  _c("option", { attrs: { value: "MALE" } }, [
-                                    _vm._v("MALE"),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "FEMALE" } }, [
-                                    _vm._v("FEMALE"),
-                                  ]),
-                                ]
-                              ),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Contact No",
-                                type: this.errors.contact_no ? "is-danger" : "",
-                                message: this.errors.contact_no
-                                  ? this.errors.contact_no[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "Contact No.",
-                                },
-                                model: {
-                                  value: _vm.fields.contact_no,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "contact_no", $$v)
-                                  },
-                                  expression: "fields.contact_no",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Email",
-                                type: this.errors.email ? "is-danger" : "",
-                                message: this.errors.email
-                                  ? this.errors.email[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "Email",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.email,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "email", $$v)
-                                  },
-                                  expression: "fields.email",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Address",
-                                type: this.errors.address ? "is-danger" : "",
-                                message: this.errors.address
-                                  ? this.errors.address[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: { type: "text", placeholder: "Address" },
-                                model: {
-                                  value: _vm.fields.address,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "address", $$v)
-                                  },
-                                  expression: "fields.address",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          }),
                         ],
                         1
                       ),
@@ -41876,7 +41579,7 @@ var render = function () {
                       attrs: { label: "Close" },
                       on: {
                         click: function ($event) {
-                          _vm.isModalCreate = false
+                          _vm.modalBookNow = false
                         },
                       },
                     }),
