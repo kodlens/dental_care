@@ -1,7 +1,7 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <appointment></appointment>
+    <appointment prop-services='<?php echo json_encode($services, 15, 512) ?>'></appointment>
 <?php $__env->stopSection(); ?>
 
 

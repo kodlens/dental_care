@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
     
     <?php if(auth()->guard()->check()): ?>
-        <my-appointment></my-appointment>
+        <my-appointment prop-services='<?php echo json_encode($services, 15, 512) ?>'></my-appointment>
     <?php endif; ?>
 
 <?php $__env->stopSection(); ?>

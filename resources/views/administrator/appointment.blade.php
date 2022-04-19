@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <appointment></appointment>
+    <appointment prop-services='@json($services)'></appointment>
 @endsection
 

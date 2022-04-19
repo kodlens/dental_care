@@ -15,7 +15,7 @@ class BookNowController extends Controller
     }
 
     public function store(Request $req){
-
+        
         $user = Auth::user();
         
          $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
@@ -26,6 +26,7 @@ class BookNowController extends Controller
 
         Appointment::create([
             'user_id' => $user->user_id,
+            'service_id' => $req->service['service_id'],
             'qr_code' => $qr_code,
             'appoint_date' => $ndate,
             'appoint_time' => $ntime,

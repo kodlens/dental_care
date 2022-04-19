@@ -113,6 +113,7 @@ export default {
             },
 
             modalBookNow: false,
+           
         }
     },
     methods: {
@@ -124,7 +125,8 @@ export default {
             });
         },
 
-        bookNow(){
+        bookNow(item){
+            this.fields.service = item;
             this.modalBookNow = true;
         },
 

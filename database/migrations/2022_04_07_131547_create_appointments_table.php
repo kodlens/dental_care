@@ -18,6 +18,9 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('user_id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('service_id')->on('services')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->string('qr_code')->nullable();
             $table->date('appoint_date')->nullable();
             $table->time('appoint_time')->nullable();

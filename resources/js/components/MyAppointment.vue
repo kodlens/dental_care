@@ -66,6 +66,10 @@
                                 {{ props.row.dentist_lname }}, {{ props.row.dentist_fname }} {{ props.row.dentist_mname }}
                             </b-table-column>
 
+                            <b-table-column field="service" label="Service" v-slot="props">
+                                {{ props.row.service }} (&#8369;{{ props.row.price}})
+                            </b-table-column>
+
                             <b-table-column field="sex" label="Sex" v-slot="props">
                                 {{ props.row.sex }}
                             </b-table-column>
@@ -133,10 +137,15 @@
                         <div class="">
                             <div class="columns">
                                 <div class="column">
+                                    <b-field label="Service">
+                                        <b-select required v-model="fields.service_id">
+                                            <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
+                                        </b-select>
+                                    </b-field>
                                     <b-field label="Appointment Date"
                                              :type="this.errors.appointment_date ? 'is-danger':''"
                                              :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
-                                        <b-datetimepicker v-model="fields.appointment_date"
+                                        <b-datetimepicker editable v-model="fields.appointment_date"
                                                  placeholder="Appointment Date" required>
                                         </b-datetimepicker>
                                     </b-field>
@@ -168,6 +177,8 @@
 
 <script>
 export default {
+    props: ['propServices'],
+
     name: "AppointmentType",
     data(){
         return{
@@ -198,6 +209,8 @@ export default {
                 'button': true,
                 'is-loading':false,
             },
+
+            services: [],
 
         }
     },
@@ -301,8 +314,8 @@ export default {
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.post('/book-now/' + this.global_id, this.fields).then(res => {
-                    if(res.data.status === 'saved'){
+                axios.put('/my-appointment/' + this.global_id, this.fields).then(res => {
+                    if(res.data.status === 'updated'){
                         this.$buefy.toast.open({
                             message: 'Appointment saved.!',
                             type: 'is-success'
@@ -312,8 +325,11 @@ export default {
                         this.errors = {};
                         this.dentist_fullname = '';
                         this.modalBookNow = false;
+                        this.global_id = 0;
+                        this.loadAsyncData();
                     }
                     this.btnClass['is-loading'] = false;
+
                 }).catch(err=>{
                     this.btnClass['is-loading'] = false;
                     if(err.response.status === 422){
@@ -323,7 +339,7 @@ export default {
             }else{
                 //INSERT HERE
                 this.btnClass['is-loading'] = true;
-                axios.post('/book-now', this.fields).then(res => {
+                axios.post('/my-appointment', this.fields).then(res => {
                     if(res.data.status === 'saved'){
                         this.$buefy.toast.open({
                             message: 'Appointment saved.!',
@@ -332,8 +348,11 @@ export default {
 
                         this.fields = {};
                         this.errors = {};
+                        this.global_id = 0;
                         this.dentist_fullname = '';
                         this.modalBookNow = false;
+
+                        this.loadAsyncData();
                     }
                     this.btnClass['is-loading'] = false;
                 }).catch(err=>{
@@ -387,11 +406,15 @@ export default {
             this.fields.sex = data.sex;
         },
 
+        initData(){
+            this.services = JSON.parse(this.propServices);
+        }
 
 
     },
 
     mounted() {
+        this.initData();
         this.loadAsyncData();
     }
 

@@ -3,7 +3,7 @@
 @section('content')
     
     @auth
-        <my-appointment></my-appointment>
+        <my-appointment prop-services='@json($services)'></my-appointment>
     @endauth
 
 @endsection

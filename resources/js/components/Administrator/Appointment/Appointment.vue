@@ -56,36 +56,43 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="appointment_type_id" label="ID" v-slot="props">
+                            <b-table-column field="appointment_id" label="ID" v-slot="props">
                                 {{ props.row.appointment_id }}
                             </b-table-column>
 
-                            <b-table-column field="appointment_type" label="Appointment" v-slot="props">
-                                {{ props.row.appointment_type }}
+                            <b-table-column field="dentist_name" label="Dentist" v-slot="props">
+                                {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                             </b-table-column>
 
-                            <b-table-column field="app_date" label="Appointment Date" v-slot="props">
-                                {{ props.row.app_date }}
+                            <b-table-column field="appoint_datetime" label="Appointment" v-slot="props">
+                                {{ props.row.appoint_date }} {{ props.row.appoint_time | formatTime }}
                             </b-table-column>
 
-                            <b-table-column field="from_to" label="From/To" v-slot="props">
-                                {{ props.row.app_time_from }} -   {{ props.row.app_time_to }}
+                            <b-table-column field="patient" label="Patient" v-slot="props">
+                                {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
                             </b-table-column>
 
                             <b-table-column field="is_approved" label="Is Approved" v-slot="props">
-                                <span style="font-weight: bold; color: green;" v-if="props.row.is_approved === 1">APPROVED</span>
-                                <span style="font-weight: bold; color: red;" v-else-if="props.row.is_approved === 2">CANCELLED</span>
-                                <span style="font-weight: bold; color: blue;" v-else>PENDING</span>
+                                <span class="pending" v-if="props.row.appoint_status == 0">PENDING</span>
+                                <span class="approve" v-else-if="props.row.appoint_status == 1">APPORVED</span>
+                                <span class="cancel" v-else>CANCELLED</span>
                             </b-table-column>
 
                             <b-table-column label="Action" v-slot="props">
-                                <div class="is-flex">
-        
+                                <b-dropdown aria-role="list">
+                                    <template #trigger="{ active }">
+                                        <b-button
+                                            label="Options"
+                                            type="is-primary"
+                                            class="is-small"
+                                            :icon-right="active ? 'menu-up' : 'menu-down'" />
+                                    </template>
 
-                                    <b-tooltip label="Cancel appointment" type="is-danger">
-                                        <b-button class="button is-small is-danger mr-1" icon-right="minus-circle" @click="cancelAppointment(props.row)"></b-button>
-                                    </b-tooltip>
-                                </div>
+
+                                    <b-dropdown-item aria-role="listitem" @click="openModalUpdate(props.row)">Update</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="cancelConfirm(props.row)">Cancel</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem">View More</b-dropdown-item>
+                                </b-dropdown>
                             </b-table-column>
 
                         </b-table>
@@ -96,11 +103,72 @@
 
         </div><!--section div-->
 
+
+        <b-modal v-model="modalBookNow" :width="640"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-label="Modal"
+            aria-modal
+            type = "is-link">
+            
+            <form @submit.prevent="submit">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Book Information</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalBookNow = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Service">
+                                        <b-select required v-model="fields.service_id">
+                                            <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
+                                        </b-select>
+                                    </b-field>
+
+                                    <b-field label="Appointment Date"
+                                             :type="this.errors.appointment_date ? 'is-danger':''"
+                                             :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
+                                        <b-datetimepicker v-model="fields.appointment_date"
+                                                 placeholder="Appointment Date" required>
+                                        </b-datetimepicker>
+                                    </b-field>
+
+                                    <modal-browse-dentist
+                                        :prop-dentist="dentist_fullname"
+                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button
+                            label="Close"
+                            @click="modalBookNow=false"/>
+                        <button
+                            :class="btnClass"
+                            label="Save"
+                            type="is-success">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+
+
+
     </div>
 </template>
 
 <script>
 export default {
+    props: ['propServices'],
     name: "AppointmentType",
     data(){
         return{
@@ -124,8 +192,14 @@ export default {
                 'button': true,
                 'is-loading':false,
             },
-
+            
+            errors: {},
+            fields: {},
+            dentist_fullname: '',
+            services: [],
+            modalBookNow: false,
         }
+
     },
 
     methods: {
@@ -184,6 +258,27 @@ export default {
         },
 
 
+        openModalUpdate(row){
+            this.fields.service = row;
+            this.modalBookNow = true;
+
+            this.fields = row;
+            this.fields.appointment_date = new Date(row.appoint_date + " " + row.appoint_time);
+            this.dentist_fullname = row.lname + ", " + row.fname + " " + row.mname;
+            console.log(this.fields);
+        },
+
+        emitBrowseDentist: function(data){
+            this.fields.dentist_id = data.dentist_id;
+            this.fields.lname = data.lname;
+            this.fields.fname = data.fname;
+            this.fields.mname = data.mname;
+            this.fields.suffix = data.suffix;
+            this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
+            this.fields.sex = data.sex;
+        },
+
+
         //alert box ask for deletion
         cancelAppointment(row) {
             this.$buefy.dialog.confirm({
@@ -206,17 +301,36 @@ export default {
             });
         },
 
+        initData: function(){
+            this.services = JSON.parse(this.propServices);
+        }
+
 
     },
 
     mounted() {
         this.search.appointment_date = null;
         this.loadAsyncData();
+        this.initData();
     }
 
 }
 </script>
 
 <style scoped>
-
+    .approve{
+        font-weight: bold;
+        color: green;
+        font-size: .6em;
+    }
+    .cancel{
+        font-weight: bold;
+        color: red;
+        font-size: .8em;
+    }
+    .pending{
+        font-weight: bold;
+        color: rgb(15, 66, 193);
+        font-size: .8em;
+    }
 </style>
