@@ -438,11 +438,12 @@ export default {
         font-size: .8em;
     }
 
+    
     .modal .animation-content .modal-card {
-        overflow: visible !important;
+        /* overflow: visible !important; */
     }
 
     .modal-card-body {
-        overflow: visible !important;
+        /* overflow: visible !important; */
     }
 </style>
