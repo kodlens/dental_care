@@ -25,7 +25,7 @@ class CreateAppointmentsTable extends Migration
             $table->date('appoint_date')->nullable();
             $table->time('appoint_time')->nullable();
             $table->unsignedBigInteger('dentist_id');
-            $table->foreign('dentist_id')->references('dentist_id')->on('dentists');
+            $table->foreign('dentist_id')->references('user_id')->on('users');
             $table->tinyInteger('appoint_status')->default(0);
             $table->timestamps();
         });

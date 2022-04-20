@@ -28,7 +28,7 @@ class MyAppointmentController extends Controller
     public function show($id){
 
         $data = DB::table('appointments as a')
-            ->join('dentists as b', 'a.dentist_id', 'b.dentist_id')
+            ->join('users as b', 'a.dentist_id', 'b.user_id')
             ->join('services as d', 'a.service_id', 'd.service_id')
             ->join('users as c', 'a.user_id', 'c.user_id')
             ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',
@@ -48,7 +48,7 @@ class MyAppointmentController extends Controller
 
 
         $data = DB::table('appointments as a')
-            ->join('dentists as b', 'a.dentist_id', 'b.dentist_id')
+            ->join('users as b', 'a.dentist_id', 'b.user_id')
             ->join('services as d', 'a.service_id', 'd.service_id')
             ->join('users as c', 'a.user_id', 'c.user_id')
             ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',

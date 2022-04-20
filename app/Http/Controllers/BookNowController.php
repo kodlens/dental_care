@@ -15,10 +15,10 @@ class BookNowController extends Controller
     }
 
     public function store(Request $req){
-        
+                
         $user = Auth::user();
         
-         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
+        $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
 
         $date =  $req->appointment_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX

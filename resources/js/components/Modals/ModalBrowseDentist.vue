@@ -53,19 +53,19 @@
                                 default-sort-direction="defualtSortDirection"
                                 @sort="onSort">
 
-                                <b-table-column field="dentist_id" label="ID" v-slot="props">
-                                    {{props.row.dentist_id}}
+                                <b-table-column field="user_id" label="ID" v-slot="props">
+                                    {{props.row.user_id}}
                                 </b-table-column>
 
                                 <b-table-column field="lname" label="Lastname" v-slot="props">
                                     {{props.row.lname}}
                                 </b-table-column>
 
-                                <b-table-column field="lname" label="Firstname" v-slot="props">
+                                <b-table-column field="fname" label="Firstname" v-slot="props">
                                     {{props.row.fname}}
                                 </b-table-column>
 
-                                <b-table-column field="lname" label="Middlename" v-slot="props">
+                                <b-table-column field="mname" label="Middlename" v-slot="props">
                                     {{props.row.mname}}
                                 </b-table-column>
 
@@ -107,7 +107,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortfield: 'dentist_id',
+            sortfield: 'user_id',
             sortOrder:'desc',
             page: 1,
             perPage: 5,

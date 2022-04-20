@@ -64,6 +64,10 @@
                                 {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                             </b-table-column>
 
+                            <b-table-column field="service" label="Service" v-slot="props">
+                                {{ props.row.service }} (&#8369;{{ props.row.price }})
+                            </b-table-column>
+
                             <b-table-column field="appoint_datetime" label="Appointment" v-slot="props">
                                 {{ props.row.appoint_date }} {{ props.row.appoint_time | formatTime }}
                             </b-table-column>
@@ -72,7 +76,7 @@
                                 {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
                             </b-table-column>
 
-                            <b-table-column field="is_approved" label="Is Approved" v-slot="props">
+                            <b-table-column field="status" label="Status" v-slot="props">
                                 <span class="pending" v-if="props.row.appoint_status == 0">PENDING</span>
                                 <span class="approve" v-else-if="props.row.appoint_status == 1">APPORVED</span>
                                 <span class="cancel" v-else>CANCELLED</span>
@@ -90,7 +94,8 @@
 
 
                                     <b-dropdown-item aria-role="listitem" @click="openModalUpdate(props.row)">Update</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="cancelConfirm(props.row)">Cancel</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem">View More</b-dropdown-item>
                                 </b-dropdown>
                             </b-table-column>
@@ -265,7 +270,7 @@ export default {
             this.fields = row;
             this.fields.appointment_date = new Date(row.appoint_date + " " + row.appoint_time);
             this.dentist_fullname = row.lname + ", " + row.fname + " " + row.mname;
-            console.log(this.fields);
+            
         },
 
         emitBrowseDentist: function(data){
@@ -278,22 +283,80 @@ export default {
             this.fields.sex = data.sex;
         },
 
+        submit: function(){
+            
+            if(this.fields.appointment_id){
+                axios.put('/appointments/' + this.fields.appointment_id, this.fields).then(res=>{
+                    if(res.data.status === 'updated'){
+                        this.$buefy.dialog.alert({
+                            title: 'UPDATED!',
+                            type: 'is-success',
+                            message: 'Successfully updated.',
+                            confirmText: 'OK',
+                            onConfirm: () => {
+                                this.fields = {};
+                                this.errors = {};
+                                this.loadAsyncData();
+                                this.modalBookNow = false;
+                            }
+                        });
+                    }
+                });
+            }
+        },
 
+        //approve schedule
+        approveAppointment: function(row){
+            this.$buefy.dialog.confirm({
+                title: 'APPROVE?',
+                type: 'is-info',
+                message: 'Are you sure you want to approve this appointment?',
+                cancelText: 'Close',
+                confirmText: 'Approve',
+                onConfirm: () => this.approveSubmit(row)
+            });
+        },
+        approveSubmit(row) {
+            axios.post('/appointment-approve/' + row.appointment_id).then(res => {
+                this.loadAsyncData();
+                if(res.data.status === 'approved'){
+                    this.$buefy.toast.open({
+                        message: 'Approved successfully.',
+                        type: 'is-success'
+                    })
+                }
+                
+            }).catch(err => {
+                if (err.response.status === 422) {
+                    this.errors = err.response.data.errors;
+                }
+            });
+        },
+
+
+
+        
         //alert box ask for deletion
         cancelAppointment(row) {
             this.$buefy.dialog.confirm({
                 title: 'CANCEL?',
-                type: 'is-danger',
+                type: 'is-warning',
                 message: 'Are you sure you want to cancel this data?',
                 cancelText: 'Close',
                 confirmText: 'Cancel',
-                onConfirm: () => this.cancelSubmit(row.appointment_id)
+                onConfirm: () => this.cancelSubmit(row)
             });
         },
         //execute delete after confirming
-        cancelSubmit(dataId) {
-            axios.post('/cancel-my-appointment/' + dataId).then(res => {
+        cancelSubmit(row) {
+            axios.post('/appointment-cancel/' + row.appointment_id).then(res => {
                 this.loadAsyncData();
+                if(res.data.status === 'cancelled'){
+                    this.$buefy.toast.open({
+                        message: 'Cancel successfully.',
+                        type: 'is-success'
+                    })
+                }
             }).catch(err => {
                 if (err.response.status === 422) {
                     this.errors = err.response.data.errors;
@@ -321,7 +384,7 @@ export default {
     .approve{
         font-weight: bold;
         color: green;
-        font-size: .6em;
+        font-size: .8em;
     }
     .cancel{
         font-weight: bold;

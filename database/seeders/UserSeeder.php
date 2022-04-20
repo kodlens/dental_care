@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'city' => 'TANGUB CITY',
                 'barangay' => 'CANIANGAN',
                 'street' => 'P-6',
-                'email' => 'angel@dev.com',
+                'email' => 'admin@dev.com',
                 'contact_no' => '09167789585',
                 'role' => 'ADMINISTRATOR',
                 'password' => Hash::make('a')
@@ -45,6 +45,53 @@ class UserSeeder extends Seeder
                 'email' => 'neri@dev.com',
                 'contact_no' => '09167789585',
                 'role' => 'USER',
+                'password' => Hash::make('a')
+            ],
+
+                //DENTIST
+            [
+                'username' => 'algadipe',
+                'lname' => 'ALGADIPE',
+                'fname' => 'HEZZEL',
+                'mname' => 'P',
+                'sex' => 'FEMALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'algadipz@dev.com',
+                'contact_no' => '09167789522',
+                'role' => 'DENTIST',
+                'password' => Hash::make('a')
+            ],
+            [
+                'username' => 'nimchie',
+                'lname' => 'HIBAYA',
+                'fname' => 'NIMCHIE',
+                'mname' => '',
+                'sex' => 'FEMALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'OZAMIZ CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'nimchie@dev.com',
+                'contact_no' => '09167789544',
+                'role' => 'DENTIST',
+                'password' => Hash::make('a')
+            ],
+            [
+                'username' => 'angel',
+                'lname' => 'LOPEZ',
+                'fname' => 'ANGEL',
+                'mname' => '',
+                'sex' => 'FEMALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'angel@dev.com',
+                'contact_no' => '09167789546',
+                'role' => 'DENTIST',
                 'password' => Hash::make('a')
             ],
         ];

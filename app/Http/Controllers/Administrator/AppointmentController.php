@@ -39,14 +39,45 @@ class AppointmentController extends Controller
         return $data;
     }
 
-    public function cancelMyAppointment($id){
+    public function update(Request $req, $id){
+
+        $date =  $req->appointment_date; //date and time
+        $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
+        $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
+
+        $data = Appointment::find($id);
+        $data->service_id = $req->service_id;
+        $data->appoint_date = $ndate;
+        $data->appoint_time = $ntime;
+        $data->dentist_id = $req->dentist_id;
+        $data->save();
+
+        return response()->json([
+            'status' => 'updated'
+        ], 200);
+    }
+
+
+    public function appointmentApprove($id){
+        
+        $data = Appointment::find($id);
+        $data->appoint_status = 1;
+        $data->save();
+
+        return response()->json([
+            'status' => 'approved'
+        ], 200);
+    }
+
+
+    public function appointmentCancel($id){
        
         $data = Appointment::find($id);
         $data->appoint_status = 2;
         $data->save();
 
         return response()->json([
-            'status' => 'canceled'
+            'status' => 'cancelled'
         ], 200);
 
     }

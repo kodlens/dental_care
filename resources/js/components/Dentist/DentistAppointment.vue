@@ -5,7 +5,7 @@
             <div class="columns is-centered">
                 <div class="column is-10">
                     <div class="box">
-                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">MY APPOINTMENTS</div>
+                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">DENTIST APPOINTMENTS</div>
 
                         <div class="level">
                             <div class="level-left">
@@ -62,8 +62,8 @@
                                 {{ props.row.appointment_id }}
                             </b-table-column>
 
-                            <b-table-column field="name" label="Dentist Name" v-slot="props">
-                                {{ props.row.dentist_lname }}, {{ props.row.dentist_fname }} {{ props.row.dentist_mname }}
+                            <b-table-column field="name" label="Patient Name" v-slot="props">
+                                {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
                             </b-table-column>
 
                             <b-table-column field="service" label="Service" v-slot="props">
@@ -75,7 +75,7 @@
                             </b-table-column>
 
                             <b-table-column field="contact_no" label="Contact No." v-slot="props">
-                                {{ props.row.dentist_contact_no }}
+                                {{ props.row.user_contact_no }}
                             </b-table-column>
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
@@ -105,8 +105,6 @@
                     </div>
                 </div><!--close column-->
             </div>
-
-
         </div><!--section div-->
 
 
@@ -224,7 +222,7 @@ export default {
             ].join('&')
 
             this.loading = true
-            axios.get(`/get-my-appointments?${params}`)
+            axios.get(`/dentist/get-appointments?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total

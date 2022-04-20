@@ -132,7 +132,7 @@ export default {
 
 
         emitBrowseDentist: function(data){
-            this.fields.dentist_id = data.dentist_id;
+            this.fields.dentist_id = data.user_id;
             this.fields.lname = data.lname;
             this.fields.fname = data.fname;
             this.fields.mname = data.mname;

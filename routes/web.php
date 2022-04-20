@@ -85,7 +85,8 @@ Route::get('/get-request-appointments', [App\Http\Controllers\Administrator\Requ
 
 Route::resource('/appointments', App\Http\Controllers\Administrator\AppointmentController::class);
 Route::get('/get-appointments', [App\Http\Controllers\Administrator\AppointmentController::class, 'getAppointments']);
-
+Route::post('appointment-approve/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentApprove']);
+Route::post('appointment-cancel/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentCancel']);
 
 Route::get('/report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'index']);
 Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'getReportTrack']);
@@ -95,14 +96,14 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackC
 /*     ADMINSITRATOR          */
 
 
-Route::resource('/dentist', App\Http\Controllers\Administrator\DentistController::class);
-Route::get('/get-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getDentists']);
-Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getBrowseDentist']);
-
-
-
-
 //USER
+//dentist
+Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\UserController::class, 'getBrowseDentist']);
+
+
+
+
+//APPOINTMENT
 Route::resource('/my-appointment', App\Http\Controllers\MyAppointmentController::class);
 Route::get('/get-my-appointments', [App\Http\Controllers\MyAppointmentController::class, 'getMyAppointments']);
 Route::post('/cancel-my-appointment/{id}', [App\Http\Controllers\MyAppointmentController::class, 'cancelMyAppointment']);
@@ -120,8 +121,11 @@ Route::get('/my-upcoming-appointment', [App\Http\Controllers\User\MyAppointmentC
 
 
 
+//DENTIST MODULE
+Route::resource('/dentist/dashboard', App\Http\Controllers\Dentist\DashboardController::class);
 
-
+Route::resource('/dentist/appointments', App\Http\Controllers\Dentist\DentistAppointmentController::class);
+Route::get('/dentist/get-appointments', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
 
 
 Route::get('/session', function(){

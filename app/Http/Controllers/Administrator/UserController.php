@@ -108,6 +108,17 @@ class UserController extends Controller
     }
 
 
+    public function getBrowseDentist(Request $req){
+
+        $data = User::where('lname', 'like', $req->lname . '%')
+            ->where('fname', 'like', $req->fname . '%')
+            ->where('role', 'DENTIST')
+            ->paginate($req->perpage);
+        return $data;
+
+
+    }
+
 
     public function destroy($id){
         User::destroy($id);
