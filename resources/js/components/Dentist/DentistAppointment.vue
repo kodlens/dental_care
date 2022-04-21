@@ -85,15 +85,22 @@
                             </b-table-column>
 
                             <b-table-column label="Action" v-slot="props">
-                                <div class="is-flex">
-                                    <b-tooltip label="Edit" type="is-warning" v-if="props.row.appoint_status == 0">
-                                        <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.appointment_id)"></b-button>
-                                    </b-tooltip>
 
-                                    <b-tooltip label="Cancel appointment" type="is-danger" v-if="props.row.appoint_status == 0">
-                                        <b-button class="button is-small mr-1" icon-right="minus-circle" @click="cancelAppointment(props.row)"></b-button>
-                                    </b-tooltip>
-                                </div>
+                                <b-dropdown aria-role="list">
+                                    <template #trigger="{ active }">
+                                        <b-button
+                                            label="Option"
+                                            type="is-primary is-small"
+                                            :icon-right="active ? 'menu-up' : 'menu-down'" />
+                                    </template>
+
+                                    <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item>
+                                    
+                                </b-dropdown>
+
                             </b-table-column>
 
                         </b-table>
@@ -358,6 +365,49 @@ export default {
         },
 
 
+        approveAppointment(row){
+            this.$buefy.dialog.confirm({
+                title: 'APPROVE?',
+                type: 'is-info',
+                message: 'Are you sure you want to approve this appointment?',
+                cancelText: 'Close',
+                confirmText: 'Approve',
+                onConfirm: () => this.approveSubmit(row.appointment_id)
+            });
+        },
+        approveSubmit(dataId){
+            axios.post('/dentist/approve-appointment/' + dataId).then(res => {
+                this.loadAsyncData();
+            }).catch(err => {
+                if (err.response.status === 422) {
+                    this.errors = err.response.data.errors;
+                }
+            });
+        },
+
+
+        pendingAppointment(row){
+            this.$buefy.dialog.confirm({
+                title: 'PENDING?',
+                type: 'is-info',
+                message: 'Are you sure you want to mark as pending this appointment?',
+                cancelText: 'Close',
+                confirmText: 'OK',
+                onConfirm: () => this.pendingSubmit(row.appointment_id)
+            });
+        },
+
+        pendingSubmit(dataId){
+            axios.post('/dentist/pending-appointment/' + dataId).then(res => {
+                this.loadAsyncData();
+            }).catch(err => {
+                if (err.response.status === 422) {
+                    this.errors = err.response.data.errors;
+                }
+            });
+        },
+
+
 
         //alert box ask for deletion
         cancelAppointment(row) {
@@ -372,7 +422,7 @@ export default {
         },
         //execute delete after confirming
         cancelSubmit(dataId) {
-            axios.post('/cancel-my-appointment/' + dataId).then(res => {
+            axios.post('/dentist/cancel-appointment/' + dataId).then(res => {
                 this.loadAsyncData();
             }).catch(err => {
                 if (err.response.status === 422) {

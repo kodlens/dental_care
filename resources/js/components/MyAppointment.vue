@@ -2,8 +2,29 @@
     <div>
         <div class="section">
 
-            <div class="columns is-centered">
-                <div class="column is-10">
+            <div class="columns">
+                <div class="column">
+                    <div class="box">
+                        <div class="img-avatar-container">
+                            <img src="/img/avatar/avatar.png">
+                        </div>
+
+                        <b-field label="Lastname" label-position="on-border">
+                            <b-input readonly v-model="user.lname"></b-input>
+                        </b-field>
+                        <b-field label="Firstname" label-position="on-border">
+                            <b-input readonly v-model="user.fname"></b-input>
+                        </b-field>
+                        <b-field label="Middlename" label-position="on-border">
+                            <b-input readonly v-model="user.mname"></b-input>
+                        </b-field>
+                        <b-field label="Sex" label-position="on-border">
+                            <b-input readonly v-model="user.sex"></b-input>
+                        </b-field>
+                    </div>
+                </div>
+
+                <div class="column is-8">
                     <div class="box">
                         <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">MY APPOINTMENTS</div>
 
@@ -173,7 +194,7 @@
 
 <script>
 export default {
-    props: ['propServices'],
+    props: ['propServices', 'propUser'],
 
     name: "AppointmentType",
     data(){
@@ -186,6 +207,8 @@ export default {
             page: 1,
             perPage: 5,
             defaultSortDirection: 'asc',
+
+            user: {},
 
 
             global_id : 0,
@@ -403,6 +426,7 @@ export default {
 
         initData(){
             this.services = JSON.parse(this.propServices);
+            this.user = JSON.parse(this.propUser);
         }
 
 
@@ -431,6 +455,17 @@ export default {
         font-weight: bold;
         color: rgb(15, 66, 193);
         font-size: .8em;
+    }
+
+    .img-avatar-container{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .img-avatar-container img{
+        height: 200px;
+        margin: auto;
     }
 
     

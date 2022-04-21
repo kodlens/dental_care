@@ -126,6 +126,9 @@ Route::resource('/dentist/dashboard', App\Http\Controllers\Dentist\DashboardCont
 
 Route::resource('/dentist/appointments', App\Http\Controllers\Dentist\DentistAppointmentController::class);
 Route::get('/dentist/get-appointments', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
+Route::post('/dentist/approve-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
+Route::post('/dentist/cancel-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
+Route::post('/dentist/pending-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
 
 
 Route::get('/session', function(){

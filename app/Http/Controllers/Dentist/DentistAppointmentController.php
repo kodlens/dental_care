@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Service;
+use App\Models\Appointment;
+
 use Auth;
 
 
@@ -42,6 +44,36 @@ class DentistAppointmentController extends Controller
             ->paginate($req->perpage);
 
         return $data;
+    }
+
+    public function approveAppointment($id){
+        $data = Appointment::find($id);
+        $data->appoint_status = 1;
+        $data->save();
+
+        return response()->json([
+            'status' => 'approved'
+        ],200);
+    }
+
+    public function cancelAppointment($id){
+        $data = Appointment::find($id);
+        $data->appoint_status = 2;
+        $data->save();
+
+        return response()->json([
+            'status' => 'cancelled'
+        ],200);
+    }
+
+    public function pendingAppointment($id){
+        $data = Appointment::find($id);
+        $data->appoint_status = 0;
+        $data->save();
+
+        return response()->json([
+            'status' => 'pending'
+        ],200);
     }
 
 

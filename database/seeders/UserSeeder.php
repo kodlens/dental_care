@@ -31,9 +31,10 @@ class UserSeeder extends Seeder
                 'role' => 'ADMINISTRATOR',
                 'password' => Hash::make('a')
             ],
-
+            
+            //client
             [
-                'username' => 'a',
+                'username' => 'neri',
                 'lname' => 'NERI',
                 'fname' => 'MAIRAMAE',
                 'mname' => 'P',
@@ -47,6 +48,38 @@ class UserSeeder extends Seeder
                 'role' => 'USER',
                 'password' => Hash::make('a')
             ],
+            [
+                'username' => 'jhunard',
+                'lname' => 'DOMINGUEZ',
+                'fname' => 'JHUNARD',
+                'mname' => '',
+                'sex' => 'MALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'jhunard@dev.com',
+                'contact_no' => '09702654456',
+                'role' => 'USER',
+                'password' => Hash::make('a')
+            ],
+            [
+                'username' => 'ann',
+                'lname' => 'ROSARIO',
+                'fname' => 'MARIA ANN',
+                'mname' => '',
+                'sex' => 'FEMALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'TITURON',
+                'street' => 'P-6',
+                'email' => 'marieann@dev.com',
+                'contact_no' => '09702654466',
+                'role' => 'USER',
+                'password' => Hash::make('a')
+            ],
+
+
 
                 //DENTIST
             [

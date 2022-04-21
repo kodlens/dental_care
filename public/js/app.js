@@ -10527,6 +10527,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices'],
   name: "AppointmentType",
@@ -10705,9 +10712,59 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    approveAppointment: function approveAppointment(row) {
+      var _this6 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'APPROVE?',
+        type: 'is-info',
+        message: 'Are you sure you want to approve this appointment?',
+        cancelText: 'Close',
+        confirmText: 'Approve',
+        onConfirm: function onConfirm() {
+          return _this6.approveSubmit(row.appointment_id);
+        }
+      });
+    },
+    approveSubmit: function approveSubmit(dataId) {
+      var _this7 = this;
+
+      axios.post('/dentist/approve-appointment/' + dataId).then(function (res) {
+        _this7.loadAsyncData();
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this7.errors = err.response.data.errors;
+        }
+      });
+    },
+    pendingAppointment: function pendingAppointment(row) {
+      var _this8 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'PENDING?',
+        type: 'is-info',
+        message: 'Are you sure you want to mark as pending this appointment?',
+        cancelText: 'Close',
+        confirmText: 'OK',
+        onConfirm: function onConfirm() {
+          return _this8.pendingSubmit(row.appointment_id);
+        }
+      });
+    },
+    pendingSubmit: function pendingSubmit(dataId) {
+      var _this9 = this;
+
+      axios.post('/dentist/pending-appointment/' + dataId).then(function (res) {
+        _this9.loadAsyncData();
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this9.errors = err.response.data.errors;
+        }
+      });
+    },
     //alert box ask for deletion
     cancelAppointment: function cancelAppointment(row) {
-      var _this6 = this;
+      var _this10 = this;
 
       this.$buefy.dialog.confirm({
         title: 'CANCEL?',
@@ -10716,19 +10773,19 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Close',
         confirmText: 'Cancel',
         onConfirm: function onConfirm() {
-          return _this6.cancelSubmit(row.appointment_id);
+          return _this10.cancelSubmit(row.appointment_id);
         }
       });
     },
     //execute delete after confirming
     cancelSubmit: function cancelSubmit(dataId) {
-      var _this7 = this;
+      var _this11 = this;
 
-      axios.post('/cancel-my-appointment/' + dataId).then(function (res) {
-        _this7.loadAsyncData();
+      axios.post('/dentist/cancel-appointment/' + dataId).then(function (res) {
+        _this11.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this7.errors = err.response.data.errors;
+          _this11.errors = err.response.data.errors;
         }
       });
     },
@@ -11365,8 +11422,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['propServices'],
+  props: ['propServices', 'propUser'],
   name: "AppointmentType",
   data: function data() {
     return {
@@ -11378,6 +11456,7 @@ __webpack_require__.r(__webpack_exports__);
       page: 1,
       perPage: 5,
       defaultSortDirection: 'asc',
+      user: {},
       global_id: 0,
       search: {
         lname: ''
@@ -11587,6 +11666,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     initData: function initData() {
       this.services = JSON.parse(this.propServices);
+      this.user = JSON.parse(this.propUser);
     }
   },
   mounted: function mounted() {
@@ -32777,7 +32857,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-4c5aac78]{\n    font-weight: bold;\n    color: green;\n    font-size: .8em;\n}\n.cancel[data-v-4c5aac78]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-4c5aac78]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n.modal .animation-content .modal-card[data-v-4c5aac78] {\n    /* overflow: visible !important; */\n}\n.modal-card-body[data-v-4c5aac78] {\n    /* overflow: visible !important; */\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-4c5aac78]{\n    font-weight: bold;\n    color: green;\n    font-size: .8em;\n}\n.cancel[data-v-4c5aac78]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-4c5aac78]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n.img-avatar-container[data-v-4c5aac78]{\n    display: flex;\n    justify-content: center;\n    margin-bottom: 10px;\n}\n.img-avatar-container img[data-v-4c5aac78]{\n    height: 200px;\n    margin: auto;\n}\n.modal .animation-content .modal-card[data-v-4c5aac78] {\n    /* overflow: visible !important; */\n}\n.modal-card-body[data-v-4c5aac78] {\n    /* overflow: visible !important; */\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42302,65 +42382,94 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _c(
-                                "div",
-                                { staticClass: "is-flex" },
+                                "b-dropdown",
+                                {
+                                  attrs: { "aria-role": "list" },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "trigger",
+                                        fn: function (ref) {
+                                          var active = ref.active
+                                          return [
+                                            _c("b-button", {
+                                              attrs: {
+                                                label: "Option",
+                                                type: "is-primary is-small",
+                                                "icon-right": active
+                                                  ? "menu-up"
+                                                  : "menu-down",
+                                              },
+                                            }),
+                                          ]
+                                        },
+                                      },
+                                    ],
+                                    null,
+                                    true
+                                  ),
+                                },
                                 [
-                                  props.row.appoint_status == 0
-                                    ? _c(
-                                        "b-tooltip",
-                                        {
-                                          attrs: {
-                                            label: "Edit",
-                                            type: "is-warning",
-                                          },
-                                        },
-                                        [
-                                          _c("b-button", {
-                                            staticClass: "button is-small mr-1",
-                                            attrs: {
-                                              tag: "a",
-                                              "icon-right": "pencil",
-                                            },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.getData(
-                                                  props.row.appointment_id
-                                                )
-                                              },
-                                            },
-                                          }),
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e(),
                                   _vm._v(" "),
-                                  props.row.appoint_status == 0
-                                    ? _c(
-                                        "b-tooltip",
-                                        {
-                                          attrs: {
-                                            label: "Cancel appointment",
-                                            type: "is-danger",
-                                          },
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.getData(
+                                            props.row.appointment_id
+                                          )
                                         },
-                                        [
-                                          _c("b-button", {
-                                            staticClass: "button is-small mr-1",
-                                            attrs: {
-                                              "icon-right": "minus-circle",
-                                            },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.cancelAppointment(
-                                                  props.row
-                                                )
-                                              },
-                                            },
-                                          }),
-                                        ],
-                                        1
-                                      )
-                                    : _vm._e(),
+                                      },
+                                    },
+                                    [_vm._v("Update")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.approveAppointment(
+                                            props.row
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Approve")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.cancelAppointment(
+                                            props.row
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Cancel")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.pendingAppointment(
+                                            props.row
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Pending")]
+                                  ),
                                 ],
                                 1
                               ),
@@ -43230,8 +43339,103 @@ var render = function () {
     "div",
     [
       _c("div", { staticClass: "section" }, [
-        _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-10" }, [
+        _c("div", { staticClass: "columns" }, [
+          _c("div", { staticClass: "column" }, [
+            _c(
+              "div",
+              { staticClass: "box" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  {
+                    attrs: { label: "Lastname", "label-position": "on-border" },
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: { readonly: "" },
+                      model: {
+                        value: _vm.user.lname,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.user, "lname", $$v)
+                        },
+                        expression: "user.lname",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Firstname",
+                      "label-position": "on-border",
+                    },
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: { readonly: "" },
+                      model: {
+                        value: _vm.user.fname,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.user, "fname", $$v)
+                        },
+                        expression: "user.fname",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Middlename",
+                      "label-position": "on-border",
+                    },
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: { readonly: "" },
+                      model: {
+                        value: _vm.user.mname,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.user, "mname", $$v)
+                        },
+                        expression: "user.mname",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Sex", "label-position": "on-border" } },
+                  [
+                    _c("b-input", {
+                      attrs: { readonly: "" },
+                      model: {
+                        value: _vm.user.sex,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.user, "sex", $$v)
+                        },
+                        expression: "user.sex",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+              ],
+              1
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "column is-8" }, [
             _c(
               "div",
               { staticClass: "box" },
@@ -43817,7 +44021,16 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "img-avatar-container" }, [
+      _c("img", { attrs: { src: "/img/avatar/avatar.png" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 

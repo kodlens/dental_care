@@ -19,9 +19,10 @@ class MyAppointmentController extends Controller
 
     public function index(){
         $services = Service::orderBy('service', 'asc')->get();
-       
+        $user = Auth::user();
         return view('my-appointment')
-            ->with('services', $services);
+            ->with('services', $services)
+            ->with('user', $user);
     }
 
 
