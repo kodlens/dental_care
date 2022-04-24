@@ -47,6 +47,13 @@ Route::get('/covid-updates', [App\Http\Controllers\CovidUpdatesController::class
 Route::post('/sign-up', [App\Http\Controllers\SignUpController::class, 'store']);
 
 
+
+Route::get('/get-user/{id}', [App\Http\Controllers\OpenUserController::class, 'getUser']);
+
+
+
+
+
 //QUICK BOOK NOW
 Route::post('/book-now', [App\Http\Controllers\BookNowController::class, 'store']);
 
@@ -72,6 +79,7 @@ Route::resource('/admin-home', App\Http\Controllers\Administrator\AdminHomeContr
 Route::resource('/users', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
 Route::get('/get-user-offices', [App\Http\Controllers\Administrator\UserController::class, 'getOffices']);
+
 
 //services
 Route::resource('/services', App\Http\Controllers\Administrator\ServicesController::class);
@@ -122,13 +130,22 @@ Route::get('/my-upcoming-appointment', [App\Http\Controllers\User\MyAppointmentC
 
 
 //DENTIST MODULE
-Route::resource('/dentist/dashboard', App\Http\Controllers\Dentist\DashboardController::class);
+Route::resource('/dentist/dashboard', 
+    App\Http\Controllers\Dentist\DashboardController::class);
 
-Route::resource('/dentist/appointments', App\Http\Controllers\Dentist\DentistAppointmentController::class);
-Route::get('/dentist/get-appointments', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
-Route::post('/dentist/approve-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
-Route::post('/dentist/cancel-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
-Route::post('/dentist/pending-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
+Route::resource('/dentist/appointments', 
+    App\Http\Controllers\Dentist\DentistAppointmentController::class);
+Route::get('/dentist/get-appointments', 
+    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
+Route::post('/dentist/approve-appointment/{id}', 
+    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
+Route::post('/dentist/cancel-appointment/{id}', 
+    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
+Route::post('/dentist/pending-appointment/{id}', 
+    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
+
+Route::get('/dentist/inv-logs', 
+    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'invLogs']);
 
 
 Route::get('/session', function(){

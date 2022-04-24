@@ -10534,6 +10534,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices'],
   name: "AppointmentType",
@@ -10958,6 +10959,85 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/get-user').then(function (res) {
       _this.user = res.data;
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propPatientId: {
+      type: Number,
+      "default": 0
+    },
+    propAppId: {
+      type: Number,
+      "default": 0
+    },
+    propServiceId: {
+      type: Number,
+      "default": 0
+    }
+  },
+  data: function data() {
+    return {
+      user: {}
+    };
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get('/get-user/' + this.propPatientId).then(function (res) {
+        _this.user = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUser();
   }
 });
 
@@ -32761,7 +32841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: green;\n    font-size: .8em;\n}\n.cancel[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n.modal .animation-content .modal-card[data-v-bd0ea49a] {\n    /* overflow: visible !important; */\n}\n.modal-card-body[data-v-bd0ea49a] {\n    /* overflow: visible !important; */\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: green;\n    font-size: .8em;\n}\n.cancel[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-bd0ea49a]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n\n\n/* .modal .animation-content .modal-card { */\n    /* overflow: visible !important; */\n/* } */\n\n/* .modal-card-body { */\n    /* overflow: visible !important; */\n/* } */\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35519,6 +35599,45 @@ component.options.__file = "resources/js/components/Dentist/DentistNavbar.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/InvLogs.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/Dentist/InvLogs.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InvLogs.vue?vue&type=template&id=faff62ce& */ "./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&");
+/* harmony import */ var _InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InvLogs.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.render,
+  _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/InvLogs.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -36453,6 +36572,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InvLogs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Login.vue?vue&type=script&lang=js&":
 /*!********************************************************************!*\
   !*** ./resources/js/components/Login.vue?vue&type=script&lang=js& ***!
@@ -37189,6 +37324,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistNavbar_vue_vue_type_template_id_e16b5ba8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistNavbar_vue_vue_type_template_id_e16b5ba8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InvLogs.vue?vue&type=template&id=faff62ce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&");
 
 
 /***/ }),
@@ -42470,6 +42622,24 @@ var render = function () {
                                     },
                                     [_vm._v("Pending")]
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: {
+                                        "aria-role": "listitem",
+                                        tag: "a",
+                                        href:
+                                          "/dentist/inv-logs?patient=" +
+                                          props.row.user_id +
+                                          "&appid=" +
+                                          props.row.appointment_id +
+                                          "&service=" +
+                                          props.row.service_id,
+                                      },
+                                    },
+                                    [_vm._v("Inv/Logs")]
+                                  ),
                                 ],
                                 1
                               ),
@@ -42834,6 +43004,77 @@ var staticRenderFns = [
     ])
   },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-6" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", [
+              _vm._v(
+                "\n                        PATIENT: " +
+                  _vm._s(_vm.user.lname) +
+                  ", " +
+                  _vm._s(_vm.user.fname) +
+                  " " +
+                  _vm._s(_vm.user.mname) +
+                  "\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v(
+                "\n                        ADDRESS: " +
+                  _vm._s(_vm.user.barangay) +
+                  "\n                    "
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-6" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", [
+              _vm._v(
+                "\n                        SERVICE(S): " +
+                  _vm._s(_vm.user.lname) +
+                  ", " +
+                  _vm._s(_vm.user.fname) +
+                  " " +
+                  _vm._s(_vm.user.mname) +
+                  "\n                    "
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -71744,6 +71985,7 @@ var map = {
 	"./components/Dentist/DentistAppointment.vue": "./resources/js/components/Dentist/DentistAppointment.vue",
 	"./components/Dentist/DentistDashboard.vue": "./resources/js/components/Dentist/DentistDashboard.vue",
 	"./components/Dentist/DentistNavbar.vue": "./resources/js/components/Dentist/DentistNavbar.vue",
+	"./components/Dentist/InvLogs.vue": "./resources/js/components/Dentist/InvLogs.vue",
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
 	"./components/Login.vue": "./resources/js/components/Login.vue",
 	"./components/Modals/ModalBrowseDentist.vue": "./resources/js/components/Modals/ModalBrowseDentist.vue",

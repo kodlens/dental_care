@@ -98,6 +98,7 @@
                                     <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/inv-logs?patient=${props.row.user_id}&appid=${props.row.appointment_id}&service=${props.row.service_id}`">Inv/Logs</b-dropdown-item>
                                     
                                 </b-dropdown>
 
@@ -482,11 +483,11 @@ export default {
     }
 
     
-    .modal .animation-content .modal-card {
+    /* .modal .animation-content .modal-card { */
         /* overflow: visible !important; */
-    }
+    /* } */
 
-    .modal-card-body {
+    /* .modal-card-body { */
         /* overflow: visible !important; */
-    }
+    /* } */
 </style>

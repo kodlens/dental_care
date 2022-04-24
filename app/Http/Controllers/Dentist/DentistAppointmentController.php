@@ -77,4 +77,15 @@ class DentistAppointmentController extends Controller
     }
 
 
+    public function invLogs(Request $req){
+        return view('dentist.inv-logs')
+            ->with('patient', $req->patient)
+            ->with('appid', $req->appid)
+            ->with('service', $req->service);
+    }
+
+
+    
+
+
 }
