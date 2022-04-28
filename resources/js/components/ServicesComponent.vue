@@ -66,7 +66,8 @@
                                              :type="this.errors.appointment_date ? 'is-danger':''"
                                              :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
                                         <b-datetimepicker v-model="fields.appointment_date"
-                                                 placeholder="Appointment Date" required>
+                                            editable
+                                            placeholder="Appointment Date" required>
                                         </b-datetimepicker>
                                     </b-field>
 
@@ -230,12 +231,12 @@ export default {
         background-color: #3490dc;
     }
 
-    .modal .animation-content .modal-card {
+    /* .modal .animation-content .modal-card {
         overflow: visible !important;
     }
 
     .modal-card-body {
         overflow: visible !important;
-    }
+    } */
 
 </style>

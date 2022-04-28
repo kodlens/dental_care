@@ -234,6 +234,7 @@ export default {
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total
+
                     if (data.total / this.perPage > 1000) {
                         currentTotal = this.perPage * 1000
                     }

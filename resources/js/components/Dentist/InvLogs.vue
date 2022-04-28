@@ -18,7 +18,7 @@
                 <div class="column is-6">
                     <div class="box">
                         <div>
-                            SERVICE(S): {{ user.lname }}, {{user.fname}} {{ user.mname }}
+                            SERVICE(S): {{ user.lname }}, {{ user.fname }} {{ user.mname }}
                         </div>
                         
                     </div>

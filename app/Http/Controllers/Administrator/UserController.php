@@ -117,8 +117,6 @@ class UserController extends Controller
             ->where('role', 'DENTIST')
             ->paginate($req->perpage);
         return $data;
-
-
     }
 
 

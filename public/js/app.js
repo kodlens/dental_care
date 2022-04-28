@@ -13377,6 +13377,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -33057,7 +33058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.service-card[data-v-1e616838]{\n    width: 520px;\n    margin: 15px;\n\n    box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -webkit-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -moz-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n\n    border: 1px solid rgb(226, 226, 226);\n    border-top: 4px solid blue;\n    border-radius: 10px;\n}\n.service-card-header[data-v-1e616838]{\n    padding: 25px;\n   \n    border-bottom: 1px solid blue;\n}\n.service-card-header-title[data-v-1e616838]{\n     font-weight: bold;\n    font-size: 2em;\n}\n.service-card-content[data-v-1e616838]{\n    padding: 20px;\n    font-size: 1.3em;\n}\n.service-price[data-v-1e616838]{\n    display: flex;\n    padding: 20px;\n}\n.peso-sign[data-v-1e616838]{\n    margin-left: auto;\n    color: red;\n    font-weight: bold;\n    font-size: 2em;\n}\n.price[data-v-1e616838]{\n    color: orange;\n    font-size: 3.5em;\n    font-weight: bold;\n}\n.line[data-v-1e616838]{\n    height: 10px;\n    background-color: #3490dc;\n}\n.modal .animation-content .modal-card[data-v-1e616838] {\n    overflow: visible !important;\n}\n.modal-card-body[data-v-1e616838] {\n    overflow: visible !important;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.service-card[data-v-1e616838]{\n    width: 520px;\n    margin: 15px;\n\n    box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -webkit-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -moz-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n\n    border: 1px solid rgb(226, 226, 226);\n    border-top: 4px solid blue;\n    border-radius: 10px;\n}\n.service-card-header[data-v-1e616838]{\n    padding: 25px;\n   \n    border-bottom: 1px solid blue;\n}\n.service-card-header-title[data-v-1e616838]{\n     font-weight: bold;\n    font-size: 2em;\n}\n.service-card-content[data-v-1e616838]{\n    padding: 20px;\n    font-size: 1.3em;\n}\n.service-price[data-v-1e616838]{\n    display: flex;\n    padding: 20px;\n}\n.peso-sign[data-v-1e616838]{\n    margin-left: auto;\n    color: red;\n    font-weight: bold;\n    font-size: 2em;\n}\n.price[data-v-1e616838]{\n    color: orange;\n    font-size: 3.5em;\n    font-weight: bold;\n}\n.line[data-v-1e616838]{\n    height: 10px;\n    background-color: #3490dc;\n}\n\n/* .modal .animation-content .modal-card {\n    overflow: visible !important;\n}\n\n.modal-card-body {\n    overflow: visible !important;\n} */\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46507,6 +46508,7 @@ var render = function () {
                             [
                               _c("b-datetimepicker", {
                                 attrs: {
+                                  editable: "",
                                   placeholder: "Appointment Date",
                                   required: "",
                                 },

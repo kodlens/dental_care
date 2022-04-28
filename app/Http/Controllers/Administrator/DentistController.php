@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dentist;
+
+use App\Models\User;
+
+
 use Illuminate\Http\Request;
 
 class DentistController extends Controller
@@ -28,11 +32,20 @@ class DentistController extends Controller
     }
 
     public function getBrowseDentist(Request $req){
-        $data = Dentist::where('lname', 'like', $req->lname . '%')
+
+        $data = User::where('lname', 'like', $req->lname . '%')
             ->where('fname', 'like', $req->fname . '%')
+            ->where('role', 'DENTIST')
             ->paginate($req->perpage);
         return $data;
     }
+
+    // public function getBrowseDentist(Request $req){
+    //     $data = Dentist::where('lname', 'like', $req->lname . '%')
+    //         ->where('fname', 'like', $req->fname . '%')
+    //         ->paginate($req->perpage);
+    //     return $data;
+    // }
 
 
 

@@ -106,7 +106,11 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackC
 
 //USER
 //dentist
-Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\UserController::class, 'getBrowseDentist']);
+//Route::resource('/dentist', App\Http\Controllers\Administrator\DentistController::class);
+//Route::get('/get-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getDentists']);
+
+
+Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getBrowseDentist']);
 
 
 
@@ -135,12 +139,16 @@ Route::resource('/dentist/dashboard',
 
 Route::resource('/dentist/appointments', 
     App\Http\Controllers\Dentist\DentistAppointmentController::class);
+
 Route::get('/dentist/get-appointments', 
     [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
+
 Route::post('/dentist/approve-appointment/{id}', 
     [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
+
 Route::post('/dentist/cancel-appointment/{id}', 
     [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
+    
 Route::post('/dentist/pending-appointment/{id}', 
     [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
 

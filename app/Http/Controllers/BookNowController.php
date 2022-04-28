@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\AppointmentService;
+
 use Illuminate\Http\Request;
 use Auth;
 
@@ -15,7 +17,8 @@ class BookNowController extends Controller
     }
 
     public function store(Request $req){
-                
+
+        
         $user = Auth::user();
         
         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
@@ -24,13 +27,18 @@ class BookNowController extends Controller
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
         $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'user_id' => $user->user_id,
             'service_id' => $req->service['service_id'],
             'qr_code' => $qr_code,
             'appoint_date' => $ndate,
             'appoint_time' => $ntime,
             'dentist_id' => $req->dentist_id
+        ]);
+
+        AppointmentService::create([
+            'appointment_id' => $appointment->appointment_id,
+            'service_id' => $req->service['service_id']
         ]);
 
          return response()->json([
