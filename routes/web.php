@@ -156,6 +156,11 @@ Route::get('/dentist/inv-logs',
     [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'invLogs']);
 
 
+Route::resource('/dentist/dentist-items', App\Http\Controllers\Dentist\DentistItemController::class);
+Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistItemController::class, 'getDentistItems']);
+
+
+
 Route::get('/session', function(){
     return Session::all();
 });

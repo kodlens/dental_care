@@ -33,6 +33,9 @@
 
                             <b-menu-item label="Appointment" icon="calendar-blank" tag="a" href="/dentist/appointments"></b-menu-item>
 
+                            <b-menu-item label="Items" icon="sitemap" tag="a" href="/dentist/dentist-items"></b-menu-item>
+
+
 <!--                            <b-menu-item icon="settings">-->
 <!--                                <template #label="props">-->
 <!--                                    Administrator-->

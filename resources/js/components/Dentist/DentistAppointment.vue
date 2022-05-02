@@ -93,7 +93,6 @@
                                             type="is-primary is-small"
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
-
                                     <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
@@ -124,7 +123,8 @@
             aria-label="Modal"
             aria-modal
             type = "is-link">
-            
+
+        
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
