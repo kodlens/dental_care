@@ -26633,10 +26633,26 @@
 @charset "UTF-8";
 html body {
   font-family: "Amaranth", sans-serif;
+  background: white;
 }
 
 .box {
   border: 1px solid #e4e4e4;
+}
+
+.tooth-chart {
+  width: 450px;
+}
+
+#Spots polygon,
+#Spots path {
+  transition: fill 0.25s;
+}
+#Spots polygon:hover,
+#Spots polygon:active,
+#Spots path:hover,
+#Spots path:active {
+  fill: #dddddd !important;
 }
 
 /* Bulma Utilities */

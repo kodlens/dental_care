@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             UserSeeder::class,
             ItemSeeder::class,
+            TeethSeeder::class,
+            AppointmentSeeder::class,
         ]);
     }
 }

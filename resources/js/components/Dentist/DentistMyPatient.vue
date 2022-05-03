@@ -5,7 +5,7 @@
             <div class="columns is-centered">
                 <div class="column is-10">
                     <div class="box">
-                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">DENTIST APPOINTMENTS</div>
+                        <div class="is-flex is-justify-content-center mb-2" style="font-size: 20px; font-weight: bold;">MY PATIENTS</div>
 
                         <div class="level">
                             <div class="level-left">
@@ -40,8 +40,6 @@
                             </div>
                         </div>
 
-
-
                         <b-table
                             :data="data"
                             :loading="loading"
@@ -58,30 +56,16 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="appointment_id" label="ID" v-slot="props">
-                                {{ props.row.appointment_id }}
+                            <b-table-column field="admit_id" label="ID" v-slot="props">
+                                {{ props.row.admit_id }}
                             </b-table-column>
 
                             <b-table-column field="name" label="Patient Name" v-slot="props">
-                                {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
+                                {{ props.row.patient_lname }}, {{ props.row.patient_fname }} {{ props.row.patient_mname }}
                             </b-table-column>
 
                             <b-table-column field="service" label="Service" v-slot="props">
                                 {{ props.row.service }} (&#8369;{{ props.row.price}})
-                            </b-table-column>
-
-                            <b-table-column field="dateTime" label="Appointment DateTime" v-slot="props">
-                                {{ props.row.appoint_date }} {{ props.row.appoint_time | formatTime }}
-                            </b-table-column>
-
-                            <b-table-column field="contact_no" label="Contact No." v-slot="props">
-                                {{ props.row.user_contact_no }}
-                            </b-table-column>
-
-                            <b-table-column field="appoint_status" centered label="Status" v-slot="props">
-                                <span class="pending" v-if="props.row.appoint_status == 0">PENDING</span>
-                                <span class="approve" v-else-if="props.row.appoint_status == 1">APPORVED</span>
-                                <span class="cancel" v-else>CANCELLED</span>
                             </b-table-column>
 
                             <b-table-column label="Action" v-slot="props">
@@ -93,13 +77,7 @@
                                             type="is-primary is-small"
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
-                                    <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item>
-                                    <!-- <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/services-log?patient=${props.row.user_id}&appid=${props.row.appointment_id}`">Services Log</b-dropdown-item> -->
-                                    <b-dropdown-item aria-role="listitem" @click="admitPatient(props.row)">Admit Patient</b-dropdown-item>
-                                    
+                                    <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/dentist-dashboard-patients?admitid=${props.row.admit_id}`">Go</b-dropdown-item>
                                 </b-dropdown>
 
                             </b-table-column>
@@ -107,7 +85,7 @@
                         </b-table>
 
                         <div class="buttons mt-3">
-                            <b-button @click="bookNow" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
+                            <b-button icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
                         </div>
 
                     </div>
@@ -116,71 +94,12 @@
         </div><!--section div-->
 
 
-
-        <b-modal v-model="modalBookNow" :width="640"
-            has-modal-card
-            trap-focus
-            aria-role="dialog"
-            aria-label="Modal"
-            aria-modal
-            type = "is-link">
-
-        
-            <form @submit.prevent="submit">
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Book Information</p>
-                        <button
-                            type="button"
-                            class="delete"
-                            @click="modalBookNow = false"/>
-                    </header>
-
-                    <section class="modal-card-body">
-                        <div class="">
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Service">
-                                        <b-select required v-model="fields.service_id">
-                                            <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
-                                        </b-select>
-                                    </b-field>
-                                    <b-field label="Appointment Date"
-                                             :type="this.errors.appointment_date ? 'is-danger':''"
-                                             :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
-                                        <b-datetimepicker editable v-model="fields.appointment_date"
-                                                 placeholder="Appointment Date" required>
-                                        </b-datetimepicker>
-                                    </b-field>
-
-                                    <modal-browse-dentist
-                                        :prop-dentist="dentist_fullname"
-                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <b-button
-                            label="Close"
-                            @click="modalBookNow=false"/>
-                        <button
-                            :class="btnClass"
-                            label="Save"
-                            type="is-success">SAVE</button>
-                    </footer>
-                </div>
-            </form><!--close form-->
-        </b-modal>
-
-
     </div>
 </template>
 
 <script>
 export default {
-    props: ['propServices'],
+    // props: ['propServices'],
 
     name: "AppointmentType",
     data(){
@@ -188,7 +107,7 @@ export default {
             data: [],
             total: 0,
             loading: false,
-            sortField: 'appointment_id',
+            sortField: 'admit_id',
             sortOrder: 'desc',
             page: 1,
             perPage: 5,
@@ -202,7 +121,7 @@ export default {
             },
 
             modalBookNow: false,
-            dentist_fullname: '',
+           
 
             fields: {},
             errors: {},
@@ -231,7 +150,7 @@ export default {
             ].join('&')
 
             this.loading = true
-            axios.get(`/dentist/get-appointments?${params}`)
+            axios.get(`/dentist/get-admits-patients?${params}`)
                 .then(({ data }) => {
                     this.data = [];
                     let currentTotal = data.total
@@ -293,22 +212,7 @@ export default {
             });
         },
 
-        //update code here
-        getData: function(data_id){
-            this.clearFields();
-            this.global_id = data_id;
-            this.modalBookNow = true;
-
-            axios.get('/my-appointment/' + data_id).then(res=>{
-                this.fields = res.data;
-                let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
-                ndateTime = new Date(ndateTime);
-
-                this.fields.appointment_date = ndateTime;
-                this.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
-            });
-        },
-
+        
         clearFields(){
             this.fields = {};
         },
@@ -368,113 +272,13 @@ export default {
         },
 
 
-        approveAppointment(row){
-            this.$buefy.dialog.confirm({
-                title: 'APPROVE?',
-                type: 'is-info',
-                message: 'Are you sure you want to approve this appointment?',
-                cancelText: 'Close',
-                confirmText: 'Approve',
-                onConfirm: () => this.approveSubmit(row.appointment_id)
-            });
-        },
-        approveSubmit(dataId){
-            axios.post('/dentist/approve-appointment/' + dataId).then(res => {
-                this.loadAsyncData();
-            }).catch(err => {
-                if (err.response.status === 422) {
-                    this.errors = err.response.data.errors;
-                }
-            });
-        },
-
-
-        pendingAppointment(row){
-            this.$buefy.dialog.confirm({
-                title: 'PENDING?',
-                type: 'is-info',
-                message: 'Are you sure you want to mark as pending this appointment?',
-                cancelText: 'Close',
-                confirmText: 'OK',
-                onConfirm: () => this.pendingSubmit(row.appointment_id)
-            });
-        },
-
-        pendingSubmit(dataId){
-            axios.post('/dentist/pending-appointment/' + dataId).then(res => {
-                this.loadAsyncData();
-            }).catch(err => {
-                if (err.response.status === 422) {
-                    this.errors = err.response.data.errors;
-                }
-            });
-        },
-
-
-
-        //alert box ask for deletion
-        cancelAppointment(row) {
-            this.$buefy.dialog.confirm({
-                title: 'CANCEL?',
-                type: 'is-danger',
-                message: 'Are you sure you want to cancel this data?',
-                cancelText: 'Close',
-                confirmText: 'Cancel',
-                onConfirm: () => this.cancelSubmit(row.appointment_id)
-            });
-        },
-        //execute delete after confirming
-        cancelSubmit(dataId) {
-            axios.post('/dentist/cancel-appointment/' + dataId).then(res => {
-                this.loadAsyncData();
-            }).catch(err => {
-                if (err.response.status === 422) {
-                    this.errors = err.response.data.errors;
-                }
-            });
-        },
-
-
-        bookNow(){
-            this.modalBookNow = true;
-            this.fields = {};
-            this.errors = {};
-        },
-
-
-        emitBrowseDentist: function(data){
-            this.fields.dentist_id = data.user_id; //user id to dentist id
-            this.fields.lname = data.lname;
-            this.fields.fname = data.fname;
-            this.fields.mname = data.mname;
-            this.fields.suffix = data.suffix;
-            this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
-            this.fields.sex = data.sex;
-        },
-
-        initData(){
-            this.services = JSON.parse(this.propServices);
-        },
-
-
-        //admit patient
-        admitPatient: function(row){
-            axios.post('/dentist/admit-appointment/'+ row.appointment_id).then(res=>{
-                if(res.data.status === 'saved'){
-                    this.$buefy.toast.open({
-                        message: 'Admitted successfully!',
-                        type: 'is-success'
-                    });
-                }
-                this.loadAsyncData();
-            })
-        }
+        
 
 
     },
 
     mounted() {
-        this.initData();
+        //this.initData();
         this.loadAsyncData();
     }
 

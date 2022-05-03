@@ -84,6 +84,8 @@ Route::get('/get-user-offices', [App\Http\Controllers\Administrator\UserControll
 //services
 Route::resource('/services', App\Http\Controllers\Administrator\ServicesController::class);
 Route::get('/get-services', [App\Http\Controllers\Administrator\ServicesController::class, 'getServices']);
+Route::get('/get-all-services', [App\Http\Controllers\Administrator\ServicesController::class, 'getAllServices']);
+
 //Route::get('/get-open-appointment-types', [App\Http\Controllers\ServicesController::class, 'getOpenSer']);
 
 
@@ -134,30 +136,55 @@ Route::get('/my-upcoming-appointment', [App\Http\Controllers\User\MyAppointmentC
 
 
 //DENTIST MODULE
-Route::resource('/dentist/dashboard', 
-    App\Http\Controllers\Dentist\DashboardController::class);
+Route::resource('/dentist/dashboard', App\Http\Controllers\Dentist\DashboardController::class);
 
-Route::resource('/dentist/appointments', 
-    App\Http\Controllers\Dentist\DentistAppointmentController::class);
+Route::resource('/dentist/appointments', App\Http\Controllers\Dentist\DentistAppointmentController::class);
 
-Route::get('/dentist/get-appointments', 
-    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
+Route::get('/dentist/get-appointments', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getAppointments']);
 
-Route::post('/dentist/approve-appointment/{id}', 
-    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
+Route::post('/dentist/approve-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
 
-Route::post('/dentist/cancel-appointment/{id}', 
-    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
+Route::post('/dentist/cancel-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
     
-Route::post('/dentist/pending-appointment/{id}', 
-    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
+Route::post('/dentist/admit-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'admitAppointment']);
 
-Route::get('/dentist/inv-logs', 
-    [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'invLogs']);
+Route::resource('/dentist/my-patients', App\Http\Controllers\Dentist\DentistMyPatientController::class);
+Route::get('/dentist/get-admits-patients', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmitsPatients']);
+Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmit']);
+
+Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistMyPatientController::class);
+
+
+//patient dentist dashboard
+//during admit
+Route::resource('/dentist/dentist-dashboard-patients', App\Http\Controllers\Dentist\DentistDashboardPatientController::class);
+
+Route::resource('/dentist//dentist-service-patient', App\Http\Controllers\Dentist\DentistServicePatientController::class);
+
+
+
+
+
+
+
+
+//possible below not use
+Route::post('/dentist/pending-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'pendingAppointment']);
+
+Route::get('/dentist/services-log', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'servicesLog']);
+Route::get('/dentist/get-services-log', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'getServicesLog']);
 
 
 Route::resource('/dentist/dentist-items', App\Http\Controllers\Dentist\DentistItemController::class);
 Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistItemController::class, 'getDentistItems']);
+
+
+//appointment services controller
+
+Route::resource('/dentist/appointment-services', App\Http\Controllers\Dentist\AppointmentServiceController::class);
+
+//inventory item for each service
+Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\DentistServiceInventoryController::class);
 
 
 

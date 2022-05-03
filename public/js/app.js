@@ -10331,6 +10331,392 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['propAdmitId'],
+  methods: {
+    gotoUrl: function gotoUrl(toothId, aId) {
+      window.location = '/dentist/dentist-service-patient?toothid=' + toothId + '&admitid=' + aId;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -10356,6 +10742,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -10807,6 +11194,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     initData: function initData() {
       this.services = JSON.parse(this.propServices);
+    },
+    //admit patient
+    admitPatient: function admitPatient(row) {
+      var _this12 = this;
+
+      axios.post('/dentist/admit-appointment/' + row.appointment_id).then(function (res) {
+        if (res.data.status === 'saved') {
+          _this12.$buefy.toast.open({
+            message: 'Admitted successfully!',
+            type: 'is-success'
+          });
+        }
+
+        _this12.loadAsyncData();
+      });
     }
   },
   mounted: function mounted() {
@@ -10835,6 +11237,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propData: {
+      type: String,
+      "default": ''
+    }
+  },
+  data: function data() {
+    return {
+      admit: {}
+    };
+  },
+  methods: {
+    initData: function initData() {
+      this.admit = JSON.parse(this.propData);
+    }
+  },
+  mounted: function mounted() {
+    this.initData();
+  }
+});
 
 /***/ }),
 
@@ -11176,6 +11663,287 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // props: ['propServices'],
+  name: "AppointmentType",
+  data: function data() {
+    return {
+      data: [],
+      total: 0,
+      loading: false,
+      sortField: 'admit_id',
+      sortOrder: 'desc',
+      page: 1,
+      perPage: 5,
+      defaultSortDirection: 'asc',
+      global_id: 0,
+      search: {
+        lname: ''
+      },
+      modalBookNow: false,
+      fields: {},
+      errors: {},
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      },
+      services: []
+    };
+  },
+  methods: {
+    /*
+    * Load async data
+    */
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "lname=".concat(this.search.lname), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
+      this.loading = true;
+      axios.get("/dentist/get-admits-patients?".concat(params)).then(function (_ref) {
+        var data = _ref.data;
+        _this.data = [];
+        var currentTotal = data.total;
+
+        if (data.total / _this.perPage > 1000) {
+          currentTotal = _this.perPage * 1000;
+        }
+
+        _this.total = currentTotal;
+        data.data.forEach(function (item) {
+          _this.data.push(item);
+        });
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.data = [];
+        _this.total = 0;
+        _this.loading = false;
+        throw error;
+      });
+    },
+
+    /*
+    * Handle page-change event
+    */
+    onPageChange: function onPageChange(page) {
+      this.page = page;
+      this.loadAsyncData();
+    },
+    onSort: function onSort(field, order) {
+      this.sortField = field;
+      this.sortOrder = order;
+      this.loadAsyncData();
+    },
+    setPerPage: function setPerPage() {
+      this.loadAsyncData();
+    },
+    //alert box ask for deletion
+    confirmDelete: function confirmDelete(delete_id) {
+      var _this2 = this;
+
+      this.$buefy.dialog.confirm({
+        title: 'DELETE!',
+        type: 'is-danger',
+        message: 'Are you sure you want to delete this data?',
+        cancelText: 'Cancel',
+        confirmText: 'Delete',
+        onConfirm: function onConfirm() {
+          return _this2.deleteSubmit(delete_id);
+        }
+      });
+    },
+    //execute delete after confirming
+    deleteSubmit: function deleteSubmit(delete_id) {
+      var _this3 = this;
+
+      axios["delete"]('/dentist/' + delete_id).then(function (res) {
+        _this3.loadAsyncData();
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this3.errors = err.response.data.errors;
+        }
+      });
+    },
+    clearFields: function clearFields() {
+      this.fields = {};
+    },
+    submit: function submit() {
+      var _this4 = this;
+
+      if (this.global_id > 0) {
+        //update
+        axios.put('/my-appointment/' + this.global_id, this.fields).then(function (res) {
+          if (res.data.status === 'updated') {
+            _this4.$buefy.toast.open({
+              message: 'Appointment saved.!',
+              type: 'is-success'
+            });
+
+            _this4.fields = {};
+            _this4.errors = {};
+            _this4.dentist_fullname = '';
+            _this4.modalBookNow = false;
+            _this4.global_id = 0;
+
+            _this4.loadAsyncData();
+          }
+
+          _this4.btnClass['is-loading'] = false;
+        })["catch"](function (err) {
+          _this4.btnClass['is-loading'] = false;
+
+          if (err.response.status === 422) {
+            _this4.errors = err.response.data.errors;
+          }
+        });
+      } else {
+        //INSERT HERE
+        this.btnClass['is-loading'] = true;
+        axios.post('/my-appointment', this.fields).then(function (res) {
+          if (res.data.status === 'saved') {
+            _this4.$buefy.toast.open({
+              message: 'Appointment saved.!',
+              type: 'is-success'
+            });
+
+            _this4.fields = {};
+            _this4.errors = {};
+            _this4.global_id = 0;
+            _this4.dentist_fullname = '';
+            _this4.modalBookNow = false;
+
+            _this4.loadAsyncData();
+          }
+
+          _this4.btnClass['is-loading'] = false;
+        })["catch"](function (err) {
+          _this4.btnClass['is-loading'] = false;
+
+          if (err.response.status === 422) {
+            _this4.errors = err.response.data.errors;
+          }
+        });
+      }
+    }
+  },
+  mounted: function mounted() {
+    //this.initData();
+    this.loadAsyncData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js& ***!
@@ -11187,6 +11955,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -11305,10 +12076,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11348,24 +12119,303 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    propPatientId: {
-      type: Number,
+    propData: {
+      type: String,
+      "default": ''
+    },
+    propToothId: {
+      type: [String, Number],
       "default": 0
     },
-    propAppId: {
-      type: Number,
-      "default": 0
-    },
-    propServiceId: {
-      type: Number,
+    propAdmitId: {
+      type: [String, Number],
       "default": 0
     }
   },
   data: function data() {
     return {
-      user: {}
+      fields: {},
+      errors: {},
+      btnClass: {
+        'is-success': true,
+        'button': true
+      },
+      isModalCreate: false,
+      admit: {},
+      admitServices: [],
+      services: {}
+    };
+  },
+  methods: {
+    getAdmit: function getAdmit() {
+      var _this = this;
+
+      axios.get('/dentist/get-admit/' + this.propAdmitId).then(function (res) {
+        _this.admit = res.data;
+        console.log(_this.admit);
+      });
+    },
+    getAllServices: function getAllServices() {
+      var _this2 = this;
+
+      axios.get('/get-all-services').then(function (res) {
+        _this2.services = res.data;
+        console.log(_this2.services);
+      });
+    },
+    openModal: function openModal() {
+      this.isModalCreate = true;
+    },
+    submit: function submit() {
+      var _this3 = this;
+
+      this.fields.appointment_id = this.propAppId;
+      axios.post('/dentist/admit-services', this.fields).then(function (res) {
+        if (res.data.status === 'saved') {
+          _this3.$buefy.dialog.alert({
+            title: 'SAVED!',
+            message: 'Successfully saved!',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              _this3.isModalCreate = false;
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this3.errors = err.response.data.errors;
+        }
+      });
+    },
+    deleteService: function deleteService(row) {
+      var _this4 = this;
+
+      axios["delete"]('/dentist/appointment-services/' + row.appointment_service_id).then(function (res) {
+        if (res.data.status === 'deleted') {
+          _this4.$buefy.dialog.alert({
+            title: 'DELETED!',
+            message: 'Successfully deleted!',
+            type: 'is-success',
+            onConfirm: function onConfirm() {}
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getAdmit();
+    this.getAllServices();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propPatientId: {
+      type: [String, Number],
+      "default": 0
+    },
+    propAppId: {
+      type: [String, Number],
+      "default": 0
+    }
+  },
+  data: function data() {
+    return {
+      fields: {},
+      errors: {},
+      btnClass: {
+        'is-success': true,
+        'button': true
+      },
+      isModalCreate: false,
+      user: {},
+      appointmentServices: {},
+      services: {}
     };
   },
   methods: {
@@ -11375,10 +12425,162 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/get-user/' + this.propPatientId).then(function (res) {
         _this.user = res.data;
       });
+    },
+    getAppointmentServices: function getAppointmentServices() {
+      var _this2 = this;
+
+      axios.get('/dentist/get-services-log?appid=' + this.propAppId).then(function (res) {
+        _this2.appointmentServices = res.data;
+      });
+    },
+    getAllServices: function getAllServices() {
+      var _this3 = this;
+
+      axios.get('/get-all-services').then(function (res) {
+        _this3.services = res.data;
+        console.log(_this3.services);
+      });
+    },
+    openModal: function openModal() {
+      this.isModalCreate = true;
+    },
+    submit: function submit() {
+      var _this4 = this;
+
+      this.fields.appointment_id = this.propAppId;
+      axios.post('/dentist/appointment-services', this.fields).then(function (res) {
+        if (res.data.status === 'saved') {
+          _this4.$buefy.dialog.alert({
+            title: 'SAVED!',
+            message: 'Successfully saved!',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              _this4.getAppointmentServices();
+
+              _this4.isModalCreate = false;
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this4.errors = err.response.data.errors;
+        }
+      });
+    },
+    deleteService: function deleteService(row) {
+      var _this5 = this;
+
+      axios["delete"]('/dentist/appointment-services/' + row.appointment_service_id).then(function (res) {
+        if (res.data.status === 'deleted') {
+          _this5.$buefy.dialog.alert({
+            title: 'DELETED!',
+            message: 'Successfully deleted!',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              _this5.getAppointmentServices();
+            }
+          });
+        }
+      });
     }
   },
   mounted: function mounted() {
     this.getUser();
+    this.getAppointmentServices();
+    this.getAllServices();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    propServiceId: {
+      type: [String, Number],
+      "default": 0
+    }
+  },
+  data: function data() {
+    return {
+      user: {},
+      services: {}
+    };
+  },
+  methods: {
+    getUser: function getUser() {
+      var _this = this;
+
+      axios.get('/get-user/' + this.propPatientId).then(function (res) {
+        _this.user = res.data;
+      });
+    },
+    getServices: function getServices() {
+      var _this2 = this;
+
+      axios.get('/dentist/get-services-log?appid=' + this.propAppId).then(function (res) {
+        _this2.services = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUser();
+    this.getServices();
   }
 });
 
@@ -33142,10 +34344,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.table > tbody > tr {\n    /* backgr
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -33159,7 +34361,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.teeth-container{\n    position: absolute;\n    top: 50%;\n    left: 180px;\n    /* border: 1px solid red; */\n}\n.img2{\n    position: relative;\n    top: -40px;\n    left: -38px;\n}\n.img3{\n    position: relative;\n    top: -80px;\n    left: -72px;\n}\n.img4{\n    position: relative;\n    top: -118px;\n    left: -100px;\n}\n.img5{\n    position: relative;\n    top: -148px;\n    left: -128px;\n}\n.img6{\n    position: relative;\n    top: -172px;\n    left: -148px;\n}\n.img7{\n    position: relative;\n    top: -195px;\n    left: -158px;\n}\n.img8{\n    position: relative;\n    top: -205px;\n    left: -162px;\n}\n.img9{\n    position: relative;\n    top: -205px;\n    left: -165px;\n}\n.img10{\n    position: relative;\n    top: -195px;\n    left: -175px;\n}\n.img11{\n    position: relative;\n    top: -175px;\n    left: -185px;\n}\n.img12{\n    position: relative;\n    top: -155px;\n    left: -200px;\n}\n.img13{\n    position: relative;\n    top: -125px;\n    left: -225px;\n}\n.img14{\n    position: relative;\n    top: -80px;\n    left: -255px;\n}\n.img15{\n    position: relative;\n    top: -40px;\n    left: -290px;\n}\n.img16{\n    position: relative;\n    top: 0;\n    left: -330px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.img[data-v-76afcc31]{\n    border: 1px solid red;\n}\n.teeth-container[data-v-76afcc31]{\n    display: flex;\n    flex-wrap: wrap;\n}\n\n /*.img2{\n    position: relative;\n    top: -40px;\n    left: -38px;\n}\n.img3{\n    position: relative;\n    top: -80px;\n    left: -72px;\n}\n.img4{\n    position: relative;\n    top: -118px;\n    left: -100px;\n}\n.img5{\n    position: relative;\n    top: -148px;\n    left: -128px;\n}\n.img6{\n    position: relative;\n    top: -172px;\n    left: -148px;\n}\n.img7{\n    position: relative;\n    top: -195px;\n    left: -158px;\n}\n.img8{\n    position: relative;\n    top: -205px;\n    left: -162px;\n}\n.img9{\n    position: relative;\n    top: -205px;\n    left: -165px;\n}\n.img10{\n    position: relative;\n    top: -195px;\n    left: -175px;\n}\n.img11{\n    position: relative;\n    top: -175px;\n    left: -185px;\n}\n.img12{\n    position: relative;\n    top: -155px;\n    left: -200px;\n}\n.img13{\n    position: relative;\n    top: -125px;\n    left: -225px;\n}\n.img14{\n    position: relative;\n    top: -80px;\n    left: -255px;\n}\n.img15{\n    position: relative;\n    top: -40px;\n    left: -290px;\n}\n.img16{\n    position: relative;\n    top: 0;\n    left: -330px;\n} */\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33190,6 +34392,54 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-bd0ea49a]{\n    font
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.w-title[data-v-3817226d]{\n    font-weight: bold;\n    font-size: 1.3em;\n}\n.w-body[data-v-3817226d]{\n    padding: 15px;\n}\n.w-row[data-v-3817226d]{\n    display: flex;\n}\n.dental-chart[data-v-3817226d]{\n    position: relative;\n    border: 1px solid red;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.approve[data-v-3f8d3fcd]{\n    font-weight: bold;\n    color: green;\n    font-size: .8em;\n}\n.cancel[data-v-3f8d3fcd]{\n    font-weight: bold;\n    color: red;\n    font-size: .8em;\n}\n.pending[data-v-3f8d3fcd]{\n    font-weight: bold;\n    color: rgb(15, 66, 193);\n    font-size: .8em;\n}\n\n\n/* .modal .animation-content .modal-card { */\n    /* overflow: visible !important; */\n/* } */\n\n/* .modal-card-body { */\n    /* overflow: visible !important; */\n/* } */\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css& ***!
@@ -33208,6 +34458,78 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.logo[data-v-e16b5ba8]{\n      padding: 0 30px 0 30px;\n      height: 90px;\n}\n.burger-div[data-v-e16b5ba8]{\n      width: 20px;\n      height: 3px;\n      background-color: #696969;\n      margin: 0 0 3px 0;\n      margin-left: auto;\n      border-radius: 10px;\n}\n.burger-button[data-v-e16b5ba8]{\n      display: flex;\n      flex-direction: column;\n      margin-left: auto;\n}\n.mynav[data-v-e16b5ba8]{\n      padding: 25px;\n      border-bottom: 2px solid rgba(196, 196, 196, 0.53);\n      display: flex;\n}\n.mynav-brand[data-v-e16b5ba8]{\n      font-weight: bold;\n      font-size: 1.2em;\n}\n\n/* .hero{\n      background-image: url(\"/img/bg-hero.jpg\");\n      background-repeat: no-repeat;\n      background-size: cover;\n  } */\n.textcenter[data-v-e16b5ba8]{\n      width: 100%;\n      text-align: center;\n      font-size: 1em;\n      font-weight: bold;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\r\n    margin: 15px;\n}\r\n\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-e2d4d042]{\r\n    margin: 15px;\n}\r\n\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-38ecc342]{\r\n    margin: 15px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33423,7 +34745,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34663,10 +35985,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -34676,7 +35998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChart.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_style_index_0_id_76afcc31_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&");
 
             
 
@@ -34685,11 +36007,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_style_index_0_id_76afcc31_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_style_index_0_id_76afcc31_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -34723,6 +36045,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_style_index_0_id_3817226d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_style_index_0_id_3817226d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_style_index_0_id_3817226d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_style_index_0_id_3f8d3fcd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_style_index_0_id_3f8d3fcd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_style_index_0_id_3f8d3fcd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css& ***!
@@ -34750,6 +36132,96 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistNavbar_vue_vue_type_style_index_0_id_e16b5ba8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_style_index_0_id_1e16e8ac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_style_index_0_id_1e16e8ac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_style_index_0_id_1e16e8ac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_style_index_0_id_e2d4d042_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_style_index_0_id_e2d4d042_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_style_index_0_id_e2d4d042_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_style_index_0_id_38ecc342_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_style_index_0_id_38ecc342_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_style_index_0_id_38ecc342_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -35790,9 +37262,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentalChart.vue?vue&type=template&id=68f30f71& */ "./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&");
+/* harmony import */ var _DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentalChart.vue?vue&type=template&id=68f30f71&scoped=true& */ "./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true&");
 /* harmony import */ var _DentalChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentalChart.vue?vue&type=script&lang=js& */ "./resources/js/components/DentalChart.vue?vue&type=script&lang=js&");
-/* harmony import */ var _DentalChart_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DentalChart.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DentalChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "68f30f71",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/DentalChart.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/DentalChartxx.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/DentalChartxx.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true& */ "./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true&");
+/* harmony import */ var _DentalChartxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentalChartxx.vue?vue&type=script&lang=js& */ "./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DentalChartxx_vue_vue_type_style_index_0_id_76afcc31_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& */ "./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -35803,19 +37314,19 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _DentalChart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__.render,
-  _DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _DentalChartxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "76afcc31",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/DentalChart.vue"
+component.options.__file = "resources/js/components/DentalChartxx.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -35900,6 +37411,47 @@ component.options.__file = "resources/js/components/Dentist/DentistDashboard.vue
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistDashboardPatient.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistDashboardPatient.vue ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true& */ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true&");
+/* harmony import */ var _DentistDashboardPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentistDashboardPatient.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DentistDashboardPatient_vue_vue_type_style_index_0_id_3817226d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& */ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DentistDashboardPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "3817226d",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/DentistDashboardPatient.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistItem.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Dentist/DentistItem.vue ***!
@@ -35935,6 +37487,47 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/Dentist/DentistItem.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/DentistMyPatient.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyPatient.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true& */ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true&");
+/* harmony import */ var _DentistMyPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentistMyPatient.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DentistMyPatient_vue_vue_type_style_index_0_id_3f8d3fcd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& */ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DentistMyPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "3f8d3fcd",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/DentistMyPatient.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -35980,10 +37573,10 @@ component.options.__file = "resources/js/components/Dentist/DentistNavbar.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/Dentist/InvLogs.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/Dentist/InvLogs.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/components/Dentist/DentistServicePatient.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistServicePatient.vue ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -35991,30 +37584,114 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InvLogs.vue?vue&type=template&id=faff62ce& */ "./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&");
-/* harmony import */ var _InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InvLogs.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true& */ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true&");
+/* harmony import */ var _DentistServicePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentistServicePatient.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DentistServicePatient_vue_vue_type_style_index_0_id_1e16e8ac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& */ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.render,
-  _InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DentistServicePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "1e16e8ac",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Dentist/InvLogs.vue"
+component.options.__file = "resources/js/components/Dentist/DentistServicePatient.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLog.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLog.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true& */ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true&");
+/* harmony import */ var _ServicesLog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServicesLog.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ServicesLog_vue_vue_type_style_index_0_id_e2d4d042_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& */ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ServicesLog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "e2d4d042",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/ServicesLog.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLogInv.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLogInv.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true& */ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true&");
+/* harmony import */ var _ServicesLogInv_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServicesLogInv.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ServicesLogInv_vue_vue_type_style_index_0_id_38ecc342_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& */ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ServicesLogInv_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "38ecc342",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/ServicesLogInv.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -36905,6 +38582,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChartxx.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistAppointment.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistAppointment.vue?vue&type=script&lang=js& ***!
@@ -36937,6 +38630,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistDashboardPatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistItem.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistItem.vue?vue&type=script&lang=js& ***!
@@ -36950,6 +38659,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistItem.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyPatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -36969,10 +38694,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -36980,8 +38705,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InvLogs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistServicePatient.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLog.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLogInv.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -37296,15 +39053,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChart.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_style_index_0_id_76afcc31_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=style&index=0&id=76afcc31&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -37322,6 +39079,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_style_index_0_id_3817226d_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=style&index=0&id=3817226d&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_style_index_0_id_3f8d3fcd_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=style&index=0&id=3f8d3fcd&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css&":
 /*!********************************************************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css& ***!
@@ -37331,6 +39114,45 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistNavbar_vue_vue_type_style_index_0_id_e16b5ba8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=style&index=0&id=e16b5ba8&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_style_index_0_id_1e16e8ac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=style&index=0&id=1e16e8ac&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_style_index_0_id_e2d4d042_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=style&index=0&id=e2d4d042&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_style_index_0_id_38ecc342_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=style&index=0&id=38ecc342&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -37657,19 +39479,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71& ***!
-  \********************************************************************************/
+/***/ "./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChart.vue?vue&type=template&id=68f30f71& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChart_vue_vue_type_template_id_68f30f71_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChart.vue?vue&type=template&id=68f30f71&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentalChartxx_vue_vue_type_template_id_76afcc31_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true&");
 
 
 /***/ }),
@@ -37708,6 +39547,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistDashboardPatient_vue_vue_type_template_id_3817226d_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistItem.vue?vue&type=template&id=c39eeea2&scoped=true&":
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistItem.vue?vue&type=template&id=c39eeea2&scoped=true& ***!
@@ -37721,6 +39577,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistItem_vue_vue_type_template_id_c39eeea2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistItem_vue_vue_type_template_id_c39eeea2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistItem.vue?vue&type=template&id=c39eeea2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistItem.vue?vue&type=template&id=c39eeea2&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyPatient_vue_vue_type_template_id_3f8d3fcd_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true&");
 
 
 /***/ }),
@@ -37742,19 +39615,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true& ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InvLogs_vue_vue_type_template_id_faff62ce___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InvLogs.vue?vue&type=template&id=faff62ce& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistServicePatient_vue_vue_type_template_id_1e16e8ac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLog_vue_vue_type_template_id_e2d4d042_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true& ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ServicesLogInv_vue_vue_type_template_id_38ecc342_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true&");
 
 
 /***/ }),
@@ -42482,10 +44389,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChart.vue?vue&type=template&id=68f30f71&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -42499,104 +44406,1848 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "section" }, [
-      _c("div", { staticClass: "teeth-container" }, [
-        _c("img", {
-          staticClass: "img img1",
-          attrs: { src: "/img/teeth/1.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img2",
-          attrs: { src: "/img/teeth/2.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img3",
-          attrs: { src: "/img/teeth/3.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img4",
-          attrs: { src: "/img/teeth/4.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img5",
-          attrs: { src: "/img/teeth/5.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img6",
-          attrs: { src: "/img/teeth/6.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img7",
-          attrs: { src: "/img/teeth/7.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img8",
-          attrs: { src: "/img/teeth/8.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img9",
-          attrs: { src: "/img/teeth/9.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img10",
-          attrs: { src: "/img/teeth/10.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img11",
-          attrs: { src: "/img/teeth/11.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img12",
-          attrs: { src: "/img/teeth/12.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img13",
-          attrs: { src: "/img/teeth/13.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img14",
-          attrs: { src: "/img/teeth/14.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img15",
-          attrs: { src: "/img/teeth/15.png" },
-          on: { click: _vm.imgFunction },
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "img img16",
-          attrs: { src: "/img/teeth/16.png" },
-          on: { click: _vm.imgFunction },
-        }),
-      ]),
+    _c("div", { staticClass: "tooth-chart" }, [
+      _c(
+        "svg",
+        {
+          attrs: {
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "xmlns:xlink": "http://www.w3.org/1999/xlink",
+            x: "0px",
+            y: "0px",
+            viewBox: "0 0 450 700",
+            "enable-background": "new 0 0 450 700",
+            "xml:space": "preserve",
+          },
+        },
+        [
+          _c("g", { attrs: { id: "toothLabels" } }, [
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl32",
+                  transform: "matrix(1 0 0 1 97.9767 402.1409)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("32")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl31",
+                  transform: "matrix(1 0 0 1 94.7426 449.1693)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("31")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl30",
+                  transform: "matrix(1 0 0 1 106.0002 495.5433)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("30")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl29",
+                  transform: "matrix(1 0 0 1 118.0002 538.667)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("29")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl28",
+                  transform:
+                    "matrix(0.9999 -1.456241e-02 1.456241e-02 0.9999 136.4086 573.5098)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("28")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl27",
+                  transform: "matrix(1 0 0 1 157.3335 603.8164)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "17px",
+                },
+              },
+              [_vm._v("27")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl26",
+                  transform: "matrix(1 0 0 1 179.3335 623.8164)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "18px",
+                },
+              },
+              [_vm._v("26")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl25",
+                  transform: "matrix(1 0 0 1 204.6669 628.483)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "18px",
+                },
+              },
+              [_vm._v("25")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl24",
+                  transform: "matrix(1 0 0 1 231.3335 628.1497)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "18px",
+                },
+              },
+              [_vm._v("24")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl23",
+                  transform: "matrix(1 0 0 1 256.3335 619.1497)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "17px",
+                },
+              },
+              [_vm._v("23")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl22",
+                  transform: "matrix(1 0 0 1 276.3335 602.483)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "18px",
+                },
+              },
+              [_vm._v("22")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl21",
+                  transform: "matrix(1 0 0 1 286.6669 573.1497)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("21")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl20",
+                  transform: "matrix(1 0 0 1 303.6327 538.667)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("20")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl19",
+                  transform: "matrix(1 0 0 1 322.983 495.5432)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("19")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl18",
+                  transform: "matrix(1 0 0 1 325.1251 449.1686)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("18")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl17",
+                  transform: "matrix(1 0 0 1 324.0004 402.1405)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("17")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl16",
+                  transform: "matrix(1 0 0 1 312.8534 324.1021)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("16")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl15",
+                  transform: "matrix(1 0 0 1 315.3335 275.3333)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("15")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl14",
+                  transform: "matrix(1 0 0 1 311.3335 236)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("14")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl13",
+                  transform: "matrix(1 0 0 1 300.3335 200.6667)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("13")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl12",
+                  transform: "matrix(1 0 0 1 286.6669 172)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("12")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl11",
+                  transform: "matrix(1 0 0 1 270.2269 142.439)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("11")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl10",
+                  transform: "matrix(1 0 0 1 247.5099 118.9722)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("10")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl9",
+                  transform: "matrix(1 0 0 1 227.8432 112.9722)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("9")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl8",
+                  transform: "matrix(1 0 0 1 200.1766 112.9722)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("8")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl7",
+                  transform: "matrix(1 0 0 1 170.5099 117.6388)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("7")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl6",
+                  transform: "matrix(1 0 0 1 148.6667 134.167)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("6")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl5",
+                  transform: "matrix(1 0 0 1 131.3605 164.8335)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("5")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl4",
+                  transform: "matrix(1 0 0 1 119.3927 195.6387)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("4")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl3",
+                  transform: "matrix(1 0 0 1 103.8631 234.4391)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("3")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl2",
+                  transform: "matrix(1 0 0 1 96.2504 275.9999)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("2")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "lbl1",
+                  transform: "matrix(1 0 0 1 93.9767 324.769)",
+                  "font-family": "'Avenir-Heavy'",
+                  "font-size": "21px",
+                },
+              },
+              [_vm._v("1")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("g", { attrs: { id: "dmftLabels" } }, [
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth32",
+                  transform: "matrix(1 0 0 1 5.0001 386.3778)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth31",
+                  transform: "matrix(1 0 0 1 0.9998 449.7374)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth30",
+                  transform: "matrix(1 0 0 1 9.6668 513.5912)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth29",
+                  transform: "matrix(1 0 0 1 36.3335 578.2579)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth28",
+                  transform: "matrix(1 0 0 1 74.3335 626.9246)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth27",
+                  transform: "matrix(1 0 0 1 109.0001 660.9246)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth26",
+                  transform: "matrix(1 0 0 1 145.6668 678.2579)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth25",
+                  transform: "matrix(1 0 0 1 191.6668 687.5912)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth24",
+                  transform: "matrix(1 0 0 1 233.0001 687.5915)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth23",
+                  transform: "matrix(1 0 0 1 283.0001 673.5915)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth22",
+                  transform: "matrix(1 0 0 1 329.6668 644.9248)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth21",
+                  transform: "matrix(1 0 0 1 359.6668 604.9248)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth20",
+                  transform: "matrix(1 0 0 1 390.3334 558.2581)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth19",
+                  transform: "matrix(1 0 0 1 412.6435 494.2493)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth18",
+                  transform: "matrix(1 0 0 1 416.1565 449.7382)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth17",
+                  transform: "matrix(1 0 0 1 409.9765 386.378)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth16",
+                  transform: "matrix(1 0 0 1 410.5356 325.845)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth15",
+                  transform: "matrix(1 0 0 1 414.0005 251.8453)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth14",
+                  transform: "matrix(1 0 0 1 408.7707 211.7113)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth13",
+                  transform: "matrix(1 0 0 1 386.7073 165.7383)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth12",
+                  transform: "matrix(1 0 0 1 360.5876 123.5825)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth11",
+                  transform: "matrix(1 0 0 1 344.0069 89.5916)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth10",
+                  transform: "matrix(1 0 0 1 301.0546 54.1648)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth9",
+                  transform: "matrix(1 0 0 1 229.2251 29.2916)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth8",
+                  transform: "matrix(1 0 0 1 172.7413 30.3285)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth7",
+                  transform: "matrix(1 0 0 1 114.3296 51.5455)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth6",
+                  transform: "matrix(1 0 0 1 72.0002 91.2056)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth5",
+                  transform: "matrix(1 0 0 1 48.5357 127.8719)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth4",
+                  transform: "matrix(1 0 0 1 27.2052 167.0134)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth3",
+                  transform: "matrix(1 0 0 1 8.7983 212.3336)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth2",
+                  transform: "matrix(1 0 0 1 3.25 260.1059)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+            _vm._v(" "),
+            _c(
+              "text",
+              {
+                attrs: {
+                  id: "txtTooth1",
+                  transform: "matrix(1 0 0 1 5.0001 338.4393)",
+                  "font-family": "'MyriadPro-Regular'",
+                  "font-size": "16px",
+                },
+              },
+              [_vm._v("DFM")]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("g", { attrs: { id: "Spots" } }, [
+            _c("polygon", {
+              attrs: {
+                id: "Tooth32",
+                fill: "#FFFFFF",
+                "data-key": "32",
+                points:
+                  "66.7,369.7 59,370.3 51,373.7 43.7,384.3 42.3,392 38.7,406 41,415.3 44.3,420.3 \n                47.3,424 51.7,424.3 57.7,424 62.3,422.7 66.7,422.7 71,424.3 76.3,422.7 80.7,419.3 84.7,412.3 85.3,405 87.3,391.7 85,380 \n                80.7,375 73.7,371.3",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(32, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth31",
+                fill: "#FFFFFF",
+                "data-key": "31",
+                points:
+                  "76,425.7 80.3,427.7 83.3,433 85.3,447.7 84.3,458.7 79.7,472.3 73,475 50.3,479.7 \n                46.7,476.7 37.7,446.3 39.7,438.3 43.3,432 49,426.7 56,424.7 65,424.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(31, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth30",
+                fill: "#FFFFFF",
+                "data-key": "30",
+                points:
+                  "78.7,476 85,481 90.3,488.3 96.3,499.3 97.7,511.3 93,522 86,526.3 67,533 \n                60.3,529.7 56.3,523.7 51.7,511 47.7,494.7 47.7,488.3 50.3,483.3 55,479.7 67,476.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(30, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth29",
+                fill: "#FFFFFF",
+                "data-key": "29",
+                points:
+                  "93.3,525 99.3,527.3 108.3,536 114,546.7 115.7,559.3 114.3,567.3 106.3,573 \n                98.3,578.3 88,579 82,575 75,565 69.3,552.3 67.3,542 69.7,536 74.3,531.7 84.3,528.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(29, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("path", {
+              attrs: {
+                id: "Tooth28",
+                fill: "#FFFFFF",
+                "data-key": "28",
+                d: "M117.3,569.7l7.7,1.3l6.3,3.7l6.3,7.7l4,8.3L144,602l-1.3,6.7l-6.7,6.7l-7.7,3.3l-7.3-1l-7-3\n                l-7.3-7l-5-9l-2-10c0,0-0.7-7,0.3-7.3c1-0.3,5.3-6.7,5.3-6.7l9-5H117.3z",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(28, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth27",
+                fill: "#FFFFFF",
+                "data-key": "27",
+                points:
+                  "155.7,611 160.3,615.3 165,624.7 161.7,634.3 156,641.3 149,644 140.7,644.3 \n                133.3,641.3 128.7,634.7 128.7,629 132.7,621.3 137.7,615 143.7,611 149.7,610 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(27, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth26",
+                fill: "#FFFFFF",
+                "data-key": "26",
+                points:
+                  "178.3,627 186,629 187.7,633.7 188.7,644 189,657 189.3,662.7 186.3,663.7 176.7,663 \n                168,656.3 159.3,649.7 156.7,644 162,639.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(26, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth25",
+                fill: "#FFFFFF",
+                "data-key": "25",
+                points:
+                  "214,637 218,642.7 223,654.3 225.7,664 225.3,666.3 219,668.3 206.7,668 196,665.7 \n                190.3,662.7 193,657.3 199.7,647.3 207,638 210.7,635.5 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(25, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("path", {
+              attrs: {
+                id: "Tooth24",
+                fill: "#FFFFFF",
+                "data-key": "24",
+                d: "M235.3,637c0,0,3-2,4-2.3c1-0.3,4.3,0,4.3,0l5,4.3l5.3,7.3l3.3,6.7l2,7.3l-2,3l-7.7,2.7\n                l-10,0.3h-10l-2-6.7l2.7-7.3L235.3,637z",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(24, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth23",
+                fill: "#FFFFFF",
+                "data-key": "23",
+                points:
+                  "269.3,624 273.3,624.7 275.3,627.3 279,628.7 281.7,631.3 285.3,634.7 289.3,638.3 \n                292,643.3 291.3,650 287,655 280.7,658.7 272,660 265,660.7 261.3,657.3 261.7,650 263.7,637 264.3,627 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(23, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth22",
+                fill: "#FFFFFF",
+                "data-key": "22",
+                points:
+                  "286,629.3 286.7,633.3 291.3,638.7 295.3,642.3 302,644 311.7,643.3 318.3,637.7 \n                321,630 321.3,620.3 317,614.3 308,608 298.3,607 291,609.3 287,612.3 286.7,617.7 287.3,624.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(22, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth21",
+                fill: "#FFFFFF",
+                "data-key": "21",
+                points:
+                  "331,565.7 335,565.7 341.3,568 349.3,574.3 352.3,578.3 352.7,583.7 350.7,593.7 \n                342.7,604 337.7,609 328,612.7 320,613.3 315,611 308.3,604.7 306.7,598 307.3,591.3 309,584.7 312.7,578.3 318.3,571.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(21, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth20",
+                fill: "#FFFFFF",
+                "data-key": "20",
+                points:
+                  "334,561 338.7,566 346,570 354.7,573 360.7,571.7 368,568.3 383,545 385.3,532.7 \n                381.3,524.3 374,520.7 363.7,516.3 356.3,515.3 351.3,518.3 346.3,524 340.3,534.3 336,546.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(20, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("path", {
+              attrs: {
+                id: "Tooth19",
+                fill: "#FFFFFF",
+                "data-key": "19",
+                d: "M398,470l4.7,5.7l3,7.7l-0.3,11.7l-6,13.3l-6.3,10.3l-8.3,4.3l-7.3-1l-16.3-7c0,0-2.7-6-3-7.3\n                c-0.3-1.3-0.3-11-0.3-11l3.7-14.3l3.7-7l5.3-6.7l8-2l9.7-0.7L398,470z",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(19, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth18",
+                fill: "#FFFFFF",
+                "data-key": "18",
+                points:
+                  "410,435 408.7,447.3 404.3,459 399.3,467.7 393.7,468 388,466 376.3,466.3 \n                369.7,466.3 365.7,460 364.7,444.7 366.3,434.3 369,424 378.3,417.3 386.7,415.7 391.7,415.3 396,418 399.7,418 404,421.7 \n                407.7,427.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(18, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth17",
+                fill: "#FFFFFF",
+                "data-key": "17",
+                points:
+                  "371.7,417 378.3,417.3 386.7,415.7 391.7,415.3 397.3,417.7 402.7,416.3 407.7,409.7 \n                406.7,395 401,377.7 397.3,373 390.7,367.3 380,365 373,366.7 367.3,369 364,374.3 360,389 363.3,401.3 367.7,412.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(17, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth16",
+                fill: "#FFFFFF",
+                "data-key": "16",
+                points:
+                  "404.3,293.7 408.7,299.3 408.7,308 405.3,318.7 401,329.7 392.3,339.7 382.7,341 \n                369,339.7 359,335 354.7,327.7 354.3,316 358.3,304 363.7,294 368.7,294.7 378.7,296 389,296 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(16, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth15",
+                fill: "#FFFFFF",
+                "data-key": "15",
+                points:
+                  "362.3,247.3 357.3,251 357,259.3 358.7,268 359.7,279.7 361.3,286.7 365,291.7 \n                371,294.3 392,295 404.3,293.7 410,280.7 412,263.3 407.3,246.7 401,240.3 396,239.7 389.3,243 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(15, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth14",
+                fill: "#FFFFFF",
+                "data-key": "14",
+                points:
+                  "359.7,243.7 350.7,224 345.7,211.7 348.7,205 358.3,202.7 375.7,197 388.7,193 \n                393,196 399.3,207 401.3,222.7 400,234.3 394.7,240.7 381.7,244.7 371,246 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(14, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth13",
+                fill: "#FFFFFF",
+                "data-key": "13",
+                points:
+                  "386,188.7 383.3,192.7 377.7,196 356.3,203.3 345.7,202.3 341.7,199.7 338.7,196.3 \n                335,188.7 332,177 333.7,169.7 338,164.7 346.3,161 353.7,156.7 360.3,150.3 364,151 370.7,156.3 376.3,164.3 380,170.3 \n                383.3,178.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(13, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth12",
+                fill: "#FFFFFF",
+                "data-key": "12",
+                points:
+                  "358.7,134.3 360.3,145.7 357.3,152.7 352,157.3 346.3,161 336,164 329.7,163.3 \n                321.7,157.7 314.3,149 310.7,139.3 310,133.7 312.3,127 318.3,125.7 326,122 332.7,116 334.7,114.3 337.7,117.3 343.3,119.7 \n                348.7,122.7 354.3,127.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(12, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth11",
+                fill: "#FFFFFF",
+                "data-key": "11",
+                points:
+                  "336,93.3 337.7,100 336,104.7 332.7,113.7 324.3,121.3 315.3,125.7 306.3,126 \n                297.3,120.3 294,112 295.7,102.7 299,95 303.3,90 309.3,88 316.3,87.3 322.7,87.3 328,88.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(11, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth10",
+                fill: "#FFFFFF",
+                "data-key": "10",
+                points:
+                  "310.3,83.3 298,90.7 286,95 276.3,98.3 270.3,93.3 269,82.7 269,69.3 270,58.7 \n                274.7,54.7 282,53 287.7,54.7 297.3,60.3 304,64.3 308.7,68.7 312.3,74 313,81 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(10, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth9",
+                fill: "#FFFFFF",
+                "data-key": "9",
+                points:
+                  "273.3,52 266.7,61.7 258.3,72.3 253.3,79.7 247.3,85 239,87.7 232.3,82 224.7,67 \n                222,58.3 219,50 220,44.3 224.3,40.3 230,38.7 237.3,38.7 253,39.3 258.7,41.3 264.3,43.7 268.3,45.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(9, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth8",
+                fill: "#FFFFFF",
+                "data-key": "8",
+                points:
+                  "176.7,46.3 195,41 203.3,39.7 209.3,40.7 215.3,42.7 217,47 217.7,54.3 215,64.7 \n                212.3,75.7 208,83 201.7,85.7 195.7,86.7 189.7,83.3 183.7,74.7 175,62 171.7,54 172.7,49.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(8, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("path", {
+              attrs: {
+                id: "Tooth7",
+                fill: "#FFFFFF",
+                "data-key": "7",
+                d: "M167,55l6.7,6.3L174,68l0.3,8l1,10l-2,8.3l-4.7,4.3l-6.7,1.7l-8-4.3l-7.3-4.7l-9.3-4.7\n                l-6.3-5.3l-1-4.3l1.3-5c0,0,3.3-6,4.3-6s5.3-6,6.3-6s10.3-4.7,10.3-4.7L167,55z",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(7, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth6",
+                fill: "#FFFFFF",
+                "data-key": "6",
+                points:
+                  "126.3,82 134.3,86.3 139.7,92.3 144.7,104.7 145.7,115.3 143.7,120.7 138,124.3 \n                131.3,125 121,125 114.7,119.3 110.3,112.3 108.3,104.7 108.7,94.7 110.7,88.7 116,84 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(6, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth5",
+                fill: "#FFFFFF",
+                "data-key": "5",
+                points:
+                  "109,116.7 116,122.3 122.7,125.3 127.7,131.3 128.3,141 122.7,153.7 114,161.7 \n                105.7,162.3 96.7,161 85.7,156 82,150 81,139.3 86.3,128 93,121.3 100.7,117.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(5, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth4",
+                fill: "#FFFFFF",
+                "data-key": "4",
+                points:
+                  "82,155.3 102.3,163.3 108.7,172 109.3,182 104.7,192 100,199 94,203.7 85.3,201.7 \n                73.7,201 64.3,196.7 60.3,190.7 59,183.3 61.7,175.3 66.3,167.7 71.3,161.3 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(4, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("path", {
+              attrs: {
+                id: "Tooth3",
+                fill: "#FFFFFF",
+                "data-key": "3",
+                d: "M92.7,207.3l2,5.3l-1.7,8l-1.7,9l-4,8l-5,7.7l-11,4.7l-13.7,0.7l-10-7l-1.7-5L45,220l3-10.7\n                l5-7.3l4-3.3l4.7-2.7l5.3,3.7l6.7,1.3c0,0,7.3,1.3,9.3,1.3s6.3,0.7,6.3,0.7L92.7,207.3z",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(3, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth2",
+                fill: "#FFFFFF",
+                "data-key": "2",
+                points:
+                  "79.7,288.3 71.7,291 55,293 40.3,291.3 36,287 33,273.7 36.3,260 42,248.7 44.7,244.7 \n                50.3,246.7 56,249 65.3,250.7 74,249.7 80.3,249.7 82.3,254 85.3,259.3 87,267.7 87.7,274.7 85.3,282.7 \t",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(2, _vm.propAdmitId)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c("polygon", {
+              attrs: {
+                id: "Tooth1",
+                fill: "#FFFFFF",
+                "data-key": "1",
+                points:
+                  "33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3 \n                82,314.3 81.3,302 80.7,292.7 73.7,292 51.3,293.7 38.7,293.7 34,298 31.7,302.3 32,311",
+              },
+              on: {
+                click: function ($event) {
+                  return _vm.gotoUrl(1, _vm.propAdmitId)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("g", { attrs: { id: "adult-outlines" } }, [
+            _c("g", { attrs: { id: "XMLID_210_" } }, [
+              _c("path", {
+                attrs: {
+                  id: "XMLID_208_",
+                  fill: "#010101",
+                  d: "M372.6,180.5c0.2,1.4-2,2.3-2.9,1.2c-0.7-1.1,1.5-1.8,2.4-0.9L372.6,180.5z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_207_",
+                  fill: "#010101",
+                  d: "M71.4,392.6c-0.5,1.1-2,1.5-2.9,0.9c-0.3-1.6,2.6-2.4,3.2-0.9L71.4,392.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_199_",
+                  fill: "#010101",
+                  d: "M83.6,183.9c1.2,0.1,2.2,1.1,2.3,2.3c-1.2,1.3-3.7-1.1-2.4-2.3L83.6,183.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_192_",
+                  fill: "#010101",
+                  d: "M341.6,587.6c-0.3-0.9,1.1-1.3,2-1.1c0.7,1.1-0.3,2.8-1.6,2.8\n                    C341.2,589.2,341,588,341.6,587.6L341.6,587.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_188_",
+                  fill: "#010101",
+                  d: "M87.8,552.3c-1.5,0-3,0-4.6,0c-0.4-0.6-0.5-1.3-0.4-2c1.4-0.4,2.8-0.5,4.2-0.3\n                    c0.3,0.7,0.6,1.5,0.8,2.2L87.8,552.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_186_",
+                  fill: "#010101",
+                  d: "M63.1,269.9c2.1,0.4,3.5,2.9,2.7,4.9c-1.8-0.7-3-2.8-2.7-4.7L63.1,269.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_64_",
+                  fill: "#010101",
+                  d: "M407.7,456.5c5.4-9,6.6-22,0.9-30c-0.6-1.7-1.7-3.4-2.9-4.4c-0.9-0.7-1.8-1.4-2.6-2.1\n                    c-0.4-0.4-0.8-0.7-1.2-1c2.4-1.1,4.5-3.1,5.6-5.4c2.5-5.1,1.8-11,0.8-16.6c-1.6-8.7-4.1-17.6-9.8-24.5c-5.6-6.9-15-11.3-23.5-8.9\n                    c-9.2,2.6-14.9,12.4-15.5,21.9c-0.6,9.5,3,18.8,7.2,27.4c1,2.1,2.1,4.3,2.2,6.7c0,2.1-0.8,4.2-1.5,6.2c-3.5,9.5-4.8,19.7-4.1,29.8\n                    c0.4,4.9,2.8,10.8,6.5,13.2c-0.6,0.6-1.2,1.5-1.8,2.1c-1.2,1.2-2.5,2.3-3.6,3.6c-5,4.6-6.7,12.7-7.1,19.9\n                    c-0.5,8.9-0.8,18.9-7.3,24.9c-9.4,8.5-15.3,20.7-16.3,33.3c-0.4,4.8-0.9,10.9-5.5,12.3c-16.4,5.2-26.6,24.8-21.3,41.2\n                    c-8.6-1-20.5,0.4-21.6,9c-0.4,3.3,1.1,6.5,0.9,9.8c-0.1,2.3-1.9,4.8-4,5.4c-1.4-1.1-2.7-2.2-4.5-2.8c-1.3-0.4-1.7-0.9-2.4-1.7\n                    c0.1,0,0.2,0,0.3,0.1c-1.4-4.1-8-3.8-10.7-0.3c-2.7,3.4-2.7,8.2-2.9,12.5c-0.2,4.4-1,9.2-4.5,11.8c-2.2-4.9-4.5-10-8.7-13.3\n                    S238,632,234,635.6c-5.2,4.7-2.9,13.6-6.3,19.8c-4.4-1.8-5.7-7.3-7-11.9c-1.3-4.6-4.6-9.9-9.4-9.1c-2.6,0.4-4.4,2.6-6.1,4.6\n                    c-4.8,5.8-9.5,11.6-14.3,17.4c-4.6-9,3.5-22.7-4.5-29c-6.7-5.2-15.8,1.6-21.4,7.9c1-5.8,2.1-11.8,0.3-17.4\n                    c-1.8-5.6-7.4-10.4-13.1-9.2c-5.6,1.2-8.2-6.7-8.1-12.4c0.1-4.8-0.7-11.1-4.4-13.2c-1.3-1.9-2.7-3.8-4-5.7c-1.7-2.5-3.2-4.2-6-5.6\n                    c0,0-0.1,0-0.1,0c-3.4-2.8-7.7-4.4-12-4.4c3.2-16.9-5.5-35.3-20.6-43.5c4.2-10.4,2.9-22.8-3-32.3c-3.1-5.8-7.1-11.1-12.4-14.8\n                    c3.8-12.1,5.3-24.8,4.6-37.5c-0.2-2.9-0.8-6.2-2.4-8.6c-0.4-1.2-1-2.3-1.9-3.1c-1.1-0.9-2.6-1.6-4.1-2.1c1.1-0.7,2.1-1.6,2.9-2.6\n                    c3-3.6,4.3-8.2,5.4-12.7c2.4-9.5,4.5-19.9,0.6-28.9c-3.2-7.3-10.3-12.7-18.2-13.8s-16.2,2.2-21.3,8.3c-4.6,5.6-6.4,13.1-7.9,20.2\n                    c-2.1,9.3-3.3,20.9,4.5,26.4c2,1.4,1.7,4.7,0.3,6.7s-3.6,3.5-5.1,5.5c-2.6,3.6-2.5,8.5-2,13c1.5,12.7,5.6,25.1,11.8,36.3\n                    c-0.4,0.7-0.9,1.3-1.2,2c-0.8,1.5-1,3.2-1.1,4.8c-0.8,3.2-0.2,6.9,0.5,10.2c3,14.2,8.1,30.9,21.9,35.3c-5,5.4-2.4,14,0.5,20.8\n                    c2.7,6.4,5.5,12.9,10.3,18c4.8,5,12.1,8.3,18.7,6.4c-4,19.4,13.3,40,33,40.1c-1.1,2.1-2.1,4.2-3.1,6.4c-0.2,0.4-0.1,0.8,0.1,1.1\n                    c-2.2,6.2,0.8,14.6,7.4,16.3c7.7,2,18.2-2.8,22.3,3.9c5.4,9,15.4,15,25.9,15.7c-0.2-0.2-0.5-0.3-0.7-0.5c1,0.1,2,0.2,3,0.2\n                    c1.5,0.1,2.8,0.2,4.1-0.6c6.6,5.3,15.8,7.3,24,5.3c2.2,0,4.3,0.2,6.5-0.2c2.3-0.4,4.4-1,6.3-2.3c8.3,3.6,18.2,3.2,26.2-1\n                    c0.3-0.1,0.5-0.1,0.8-0.2c1.3-0.3,2.5-0.6,3.5-1.5c0.2-0.2,0.3-0.5,0.3-0.7c1.2-0.9,2.3-1.8,3.5-2.7c13.1,6.3,31.1-2.4,34.2-16.7\n                    c7.4,3.6,17.1,1.8,22.7-4.2c5.6-6,6.8-15.8,2.7-22.9c19.4-1.8,35.2-21.6,32.6-40.9c21.2-5.9,36-29.1,32.3-50.8\n                    c9.8-4.6,14.6-15.7,18.6-25.8c3.1-7.9,5.7-17.9-0.4-23.8C399.1,470.9,404,462.6,407.7,456.5z M40.6,410c-1-1.9-0.5-4.3,0-6.4\n                    c1.1-4.4,2.2-8.8,3.3-13.2c1.5-5.8,3.3-12.1,8.1-15.6c1.4-1,2.9-1.7,4.5-2.2c7.1-2.5,15.4-1.7,21.5,2.7c6.1,4.4,9.5,12.5,7.6,19.7\n                    c-1.5,6-0.9,12.3-2.8,18.2c-1.9,5.8-7.9,11.3-13.7,9.2c-7.2-2.5-16.2,4.1-22.4-0.4C43.1,419.3,42.8,414,40.6,410z M45.6,471.3\n                    c-1.3-5-2.5-10.1-3.8-15.1c-1-3.8-1.9-7.7-1.8-11.6c0.3-6.5,3.9-12.8,9.5-16.3c5.5-3.5,12.8-4,18.8-1.5c2.1,0.9,4.5,0.8,6.7,0\n                    c1.8,0.3,3.9,1,5.3,2c3.9,11.8,4.2,24.7,1,36.6c-0.6,2.2-1.4,4.6-3.2,6c-1.5,1.3-3.5,1.7-5.5,2.1c-6.8,1.5-13.7,3-20.5,4.5\n                    C48.6,479,46.5,474.7,45.6,471.3z M63.2,530c-3.3-1.7-5.2-5.3-6.6-8.7c-4.3-9.8-7-20.3-8.1-31c0.1-1,0.2-2.1,0.7-3\n                    c0.4-0.9,1.1-1.7,1.6-2.6c0.2-0.1,0.4-0.1,0.6-0.3c0.4-0.2,0.5-0.6,0.4-1c8-4.9,17.7-7.1,27-6.1c0,0,0,0,0,0\n                    c7.9,4.7,12.8,13.2,16.4,21.4c0,0.1,0.1,0.2,0.2,0.2c0.9,3.1,1.4,6.2,1.3,9.4c-0.1,7.2-4.2,14.8-11.1,16.8\n                    C78,527.3,70.2,533.6,63.2,530z M89.1,577.8c-6.7-1.7-10.3-8.7-13.2-15c-1.4-3-2.7-6.1-4.1-9.1c-1.7-3.8-3.4-7.8-2.7-11.9\n                    c0.7-3.9,3.5-7.2,6.9-9.3c3.4-2.1,7.2-3.2,11-4.3c2.1-0.6,4.3-1.2,6.5-1.1c4,0.2,7.5,2.6,10.3,5.4c6.6,6.5,10.6,15.4,11.1,24.6\n                    c0.1,2.6,0,5.2-1.1,7.5c-1.3,2.7-3.8,4.5-6.1,6.3C102.3,575.2,95.8,579.5,89.1,577.8z M120.8,616.5c-7.1-1.9-12.8-7.5-16.2-14\n                    c-3-5.7-4.5-12.3-3-18.6c1.5-6.2,6.4-11.8,12.7-13c6.2-1.2,12.2,1.8,17.6,5.1c1.1,1.2,2.1,2.6,3.1,4.1c1.2,1.7,2.3,3.4,3.5,5\n                    c3.6,8,6.2,17.3,1.6,24.6C136.4,615.9,127.9,618.4,120.8,616.5z M150.4,642.4c-5.6,2-12.3,1.4-16.7-2.6c-3-2.7-4.5-7-3.9-10.9\n                    c0,0,0,0,0,0c1.3-2.7,2.6-5.4,4-8c3.6-4.3,7.6-8.8,13.1-9.8c7.7-1.5,15.6,5.5,16.1,13.3C163.7,632.3,157.9,639.8,150.4,642.4z\n                    M184.5,662.6c-1.6-0.1-3.2-0.3-4.8-0.4c-5.9-3.9-11.8-7.7-17.6-11.6c-1.4-0.9-3-2-3.4-3.7c-0.6-2.6,1.7-4.8,3.8-6.4\n                    c3.9-2.9,7.8-5.9,11.7-8.8c2.2-1.7,4.7-3.4,7.5-3c4.8,0.7,6,7.1,6,12c0,7.1,0,14.1,0.1,21.2c0.3,0.3,0.6,0.6,0.9,0.9\n                    C187.4,663,185.8,662.7,184.5,662.6z M212.9,667.5C212.9,667.5,212.8,667.5,212.9,667.5c-7.3-0.3-14.5-2.1-21-5.4\n                    c4.7-8,10.1-15.6,16.1-22.7c0.9-1,2-2.2,3.3-2.1c1.3,0,2.4,1.2,3.2,2.3c5.6,7.7,9.2,16.8,10.3,26.3c0.1,0,0.1,0.1,0.2,0.1\n                    C221.2,667.9,217.1,667.3,212.9,667.5z M257.1,662.6c-0.3-0.1-0.6,0-0.9,0.2c-1,0.9-2.6,1-3.8,1.3c-0.4,0.1-0.8,0.3-1.3,0.4\n                    l-12.4,1c-3.6,0.3-8.3-0.1-9.4-3.5c-0.6-1.7,0.1-3.6,0.7-5.3c1.7-4.7,3.5-9.5,5.2-14.2c1.3-3.6,4-7.9,7.7-6.9\n                    c1.4,0.4,2.5,1.5,3.4,2.6C252.6,645.1,259.2,654,257.1,662.6z M366.7,407.2c-2.7-7.6-5.5-15.8-3.5-23.6c0.6-2.6,1.8-5.1,2.1-7.7\n                    c0.4-3.1,2.8-5.8,5.7-7.2c2.8-1.4,6.1-1.8,9.3-1.8c5.7,0,11.8,1.4,15.8,5.4c5.1,5.2,5.6,13.2,7.5,20.3c0.9,3.4,2.2,6.7,2.8,10.2\n                    s0.2,7.3-1.9,10.1c-2.1,2.8-6.3,4.2-9.3,2.3c-7-4.4-17.3,4.1-24-0.7C368.8,412.8,367.7,409.9,366.7,407.2z M368.9,463.2\n                    c-1.7-1.9-2-4.6-2.2-7.2c-0.8-9.6-1.5-19.8,2.9-28.3s15.9-14.2,24-9c1.8,1.2,4,1.4,6.1,0.9c1.4,1.1,2.5,2.3,3.9,3.3\n                    c1.5,1.1,3.2,2.9,3.4,4.8c0.1,0.4,0.3,0.7,0.6,0.8c3.2,9.3-0.5,21.4-4.7,31.2c-1.8,4.2-6.5,9.1-9.8,6\n                    C386.9,460.1,374.5,469.6,368.9,463.2z M285,655.6c-4.7,3.2-10.7,3.7-16.3,4.2c-1.5,0.1-3.2,0.2-4.5-0.7c-1.9-1.4-1.7-4.2-1.3-6.5\n                    c1.3-8.2,2.6-16.5,3.8-24.7c1.6-1.4,3.7-2.3,5.8-2.5c1.3,0.9,1.7,2.6,3.2,3.3c0.9,0.5,2,0.5,2.9,1c0.5,0.3,1.1,0.7,1.6,1.1\n                    c1.7,4.1,7.2,6,9.6,9.9C292.6,645.7,289.7,652.4,285,655.6z M311.4,641.3c-7.7,3.9-18.2,0.5-22.1-7.2c-0.7-1.4-0.8-3.1-0.8-4.6\n                    c0-2.8-0.1-5.5-0.1-8.3c-0.1-3.2,0-6.6,1.9-9.1c2.2-2.7,6-3.5,9.5-3.4c7.5,0.2,15.3,3.8,18.8,10.5\n                    C322.5,626.9,319,637.4,311.4,641.3z M349.8,590.1c-3.7,7.8-8.6,15.5-16.2,19.6c-7.6,4.1-18.5,3.1-23.2-4.2\n                    c-3-4.6-3-10.6-1.5-15.8c2.3-8.3,7.9-15.7,15.4-20c2.7-1.6,5.7-2.8,8.8-2.6c3.9,0.2,7.4,2.6,10.6,4.8c3.6,2.6,7.6,5.7,8.1,10.1\n                    C352.1,584.8,351,587.5,349.8,590.1z M382.6,543c-1.9,4.3-4.8,8.1-7.3,12.1c-3.4,5.4-6.2,11.7-11.8,14.7c-6.2,3.2-13.8,1.4-19.9-2\n                    c-3.5-2-6.9-4.7-8-8.6c-1.1-3.9,0.5-8.1,2-11.9c1.8-4.4,3.6-8.8,5.4-13.3c2.8-7,6.6-14.8,13.9-16.7c6.1-1.5,12.2,1.8,17.6,5\n                    c3.1,1.9,6.4,3.9,8.2,7C385.1,533.4,384.5,538.7,382.6,543z M397.9,508c-2.4,4.8-5.1,10-10,12.1c-5.6,2.4-12,0-17.6-2.4\n                    c-8-3.4-11.8-13.2-11-21.9c0.7-7.7,4.2-14.8,7.9-21.7c0.5-0.5,1-0.9,1.5-1.4c0.5-0.5,1.1-1,1.5-1.5c0.2-0.2,1.1-1.6,1.3-1.6\n                    c0.3,0.1,0.5,0,0.7-0.1c1,0.2,2.1,0.2,3.2-0.2c8.8-2.8,19.7-1.8,25.3,5.5C407.9,484.2,403,497.5,397.9,508z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_183_",
+                  fill: "#010101",
+                  d: "M378.3,306.7c1.2,0.4,1.9,1.7,1.7,2.9c-1.9,0.2-3.7-1.6-3.6-3.4c0.5-0.6,1.6-0.3,1.8,0.4\n                    L378.3,306.7z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_177_",
+                  fill: "#010101",
+                  d: "M358.7,536.6c0.7,2.3,2.4,4.2,4.7,5.2c3.3-3,6.9-6.1,11.4-6.2c-1.9,3.5-5.3,6.2-9.1,7.1\n                    c-3.2,0.8-4.9,4.6-4.4,7.9c0.5,3.3,2.6,6.1,4.6,8.7c-1.2,1.5-3.5-0.3-4.4-2c-0.9-1.7-2.9-3.7-4.3-2.4c-1.2-2.8,1.5-5.7,1.7-8.7\n                    c0.3-4.4-4.6-8.2-3.5-12.4c0.5-0.8,1.8-0.5,2.4,0.2S358.5,535.7,358.7,536.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_176_",
+                  fill: "#010101",
+                  d: "M63.1,270.1c-1.4-0.5-2.4-2.1-2.2-3.6c0.2-1.5,1.5-2.9,3-3.1c-0.2,2.2-0.5,4.4-0.9,6.7\n                    L63.1,270.1z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_175_",
+                  fill: "#010101",
+                  d: "M320.6,597.9c-0.2-1-0.3-1.9-0.5-2.9c1.7-0.7,3.5,0.6,5.3,0.9c3.5,0.6,6.7-2.8,7.3-6.3\n                    s-0.8-7-2.1-10.3c0.6-0.1,1.2-0.2,1.7-0.3c5.3,5.5,4,15.7-2.4,19.8c-0.6,0.4-1.3,0.8-2.1,0.8C325.4,599.9,323,596.8,320.6,597.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_174_",
+                  fill: "#010101",
+                  d: "M119.7,592.5c2.5-1.5,6.2-0.5,7.6,2.1C124.7,595.7,121.3,594.8,119.7,592.5z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_172_",
+                  fill: "#010101",
+                  d: "M389.2,304.3c1.4-0.6,2.6,1.8,1.7,3c-1,1.3-2.7,1.4-4.3,1.5c-0.6-1.8,0.9-3.9,2.8-4\n                    L389.2,304.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_167_",
+                  fill: "#010101",
+                  d: "M97.4,545.2c-0.7,1.1-1.4,2.1-2.1,3.2c-0.8,0.8-2.3-0.3-2.3-1.4c0-1.1,0.9-2.1,1.7-2.9\n                    c0.9-0.9,1.8-1.8,2.7-2.7C98.3,542.4,98.3,544.2,97.4,545.2L97.4,545.2z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_165_",
+                  fill: "#010101",
+                  d: "M58.9,456c-0.1-1.2-0.3-2.3-0.4-3.5c0.7-0.1,1.5-0.2,2.2-0.3c-0.4,1.4,0.2,2.9,0.8,4.3\n                    c0.6,1.4,1.2,2.9,0.7,4.3c-0.5,1.4-2.6,2.1-3.5,0.9C58.4,459.7,58.5,457.8,58.9,456L58.9,456z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_163_",
+                  fill: "#010101",
+                  d: "M59,444.6c-0.2-1.4,1.6-2.4,2.9-1.8c1.2,0.6,1.6,2.4,1,3.6c-0.6,1.3-2,2-3.3,2.3\n                    c-2,0.3-3.2-3.1-1.4-4.1L59,444.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_162_",
+                  fill: "#010101",
+                  d: "M378.1,510.6c0.5-3.6,0-7.3-1.3-10.7c1.9,1.7,4.9,1.8,7,0.3c2-1.5,2.8-4.5,1.7-6.8\n                    c2.9,1,5.9,1.8,8.9,2.3c-6,3.6-12.5,8-13.6,14.8C379.9,510.6,379,510.6,378.1,510.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_161_",
+                  fill: "#010101",
+                  d: "M66.5,229c0.7,1.9,1.4,3.8,2.1,5.7c-0.7,0.2-1.4,0.3-2.1,0.5c-1-2.7-2.1-5.4-3.1-8.1\n                    C64.3,226,65.9,227.6,66.5,229z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_157_",
+                  fill: "#010101",
+                  d: "M373.1,216.3c1.2-2.9,3.1-5.5,5.5-7.5c0.8,0,1.6,0,2.4,0\n                    C379.5,212.4,377,216.7,373.1,216.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_154_",
+                  fill: "#010101",
+                  d: "M63.1,219.6c-0.2,2.4-1.4,4.6-3.4,6c-1.2-0.9-0.8-2.8-0.3-4.2c1-2.8,2-5.6,3.1-8.3\n                    C64.3,214.7,64.6,217.8,63.1,219.6L63.1,219.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_150_",
+                  fill: "#010101",
+                  d: "M91.9,552.9c2.1,0.3,4.5,0.9,5.6,2.7c1.1,1.8-0.7,5-2.7,4c-1.9-2.4-3.9-4.8-5.8-7.2\n                    C90,552.6,91,552.8,91.9,552.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_148_",
+                  fill: "#010101",
+                  d: "M111.7,137.3c-3.4,0.7-6.9,0.6-10.2-0.3c-1.3-1.3-1.6-3.5-0.6-5c1.3,2,3.7,3.3,6,3.2\n                    c1,0,2.1-0.3,3.1-0.1C111.1,135.3,112,136.3,111.7,137.3L111.7,137.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_129_",
+                  fill: "#010101",
+                  d: "M102.5,140.9c-0.4,1.9-1,3.7-1.8,5.4c-2.4,0.3-4.7,0.6-7.1,0.9c2.5-2.7,4.9-5.4,7.4-8\n                    c0.2-0.5,1.1-0.5,1.4,0C102.7,139.6,102.6,140.3,102.5,140.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_119_",
+                  fill: "#010101",
+                  d: "M262.1,54.8c-4.1-0.8-8.2-2.1-12.1-3.7c-0.5-0.2-0.9-0.8-1-1.4\n                    C253.8,47.6,259.9,50,262.1,54.8z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_117_",
+                  fill: "#010101",
+                  d: "M359.4,184.9c2.1-2.4,4.2-4.8,6.3-7.2c0.1,4.3-2.2,8.6-5.9,10.8c-0.8,0.3-1.6-0.6-1.6-1.4\n                    C358.3,186.2,358.9,185.5,359.4,184.9z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_97_",
+                  fill: "#010101",
+                  d: "M77.7,167c1.7,0.3,3,1.6,4.3,2.8c2,1.9,4,3.8,6,5.8c-3.1,0.1-5.4,2.7-7.5,4.9\n                    c-2.1,2.2-5,4.4-8,3.6c-0.1-0.7-0.2-1.5-0.3-2.2c3.3-0.2,6.5-2.5,7.6-5.6C81,173.1,80.1,169.3,77.7,167z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_67_",
+                  fill: "#010101",
+                  d: "M201.2,50.3c-6.4,2.4-13.2,3.8-20.1,4.1C186.6,49.8,194.4,48.2,201.2,50.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_60_",
+                  fill: "#010101",
+                  d: "M391.5,280.2c-1.3-2.9-4.6-4.4-7.2-6.3c-2.6-1.9-5-5.3-3.6-8.2c0.5-1,1.4-1.8,2-2.7\n                    c1.1-1.5,1.7-3.3,1.6-5.1c1.3,1.2,1.6,3.3,1.3,5.1c-0.3,1.8-1,3.5-1.1,5.3c-0.2,1.8,0.3,3.9,1.9,4.8c1.5,1,4.1,0,4.1-1.8\n                    C391.7,274.1,392.1,277.3,391.5,280.2z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_49_",
+                  fill: "#010101",
+                  d: "M70.8,209.5c1.2,2.9,2.5,5.9,3.7,8.8c0.3,0.7,0.6,1.4,0.5,2.1c-0.1,0.7-0.5,1.3-0.8,1.8\n                    c-1.2,1.8-2.4,3.6-3.6,5.4c-1.4-0.3-1.7-2.2-1.2-3.5c0.5-1.3,1.6-2.4,2-3.7c0.9-3.6-3.4-7.1-2.2-10.6\n                    C69.6,209.3,70.4,209.2,70.8,209.5z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_48_",
+                  fill: "#010101",
+                  d: "M292.7,71.3c-0.8-0.7-1.6-2.1-0.7-2.6c4.8,1.5,9,4.8,11.6,9.1c-0.4,0.6-1.1,1-1.8,1.1\n                    C298.8,76.3,295.7,73.8,292.7,71.3z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_46_",
+                  fill: "#010101",
+                  d: "M382.4,441.6c-0.7-0.5-1.3-1.3-1.4-2.1c3.8-1.8,5.5-6.9,3.7-10.6c1.3-0.9,2.4,1.3,3.6,2.3\n                    c1.7,1.6,4.4,0.7,6.3-0.4c2-1.2,4.1-2.6,6.3-2.1c-0.8,3-3.7,5.3-6.8,5.4c-2.8,0.1-5.1,3.1-4.5,5.8\n                    C387.5,438,383.5,438.9,382.4,441.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_44_",
+                  fill: "#010101",
+                  d: "M366.5,164.1c-0.4,1.3-0.7,2.6-1.4,3.8c-2.4,4.5-8.6,6.6-13.2,4.3\n                    c2.9-3.2,9.5-1.5,11.4-5.4c0.4-0.8,0.5-1.7,1-2.4S366,163.5,366.5,164.1z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_43_",
+                  fill: "#010101",
+                  d: "M392.5,251.6c-1.6,3-0.8,7.1,1.9,9.3c1.4,1.2,1.9,3.3,1.2,5c-0.8,1.7-2.8,2.7-4.6,2.3\n                    c1.3-2.6,1.3-5.9,0.1-8.6c-0.8-1.8-2.2-3.4-2.3-5.3C388.7,252.4,391,250.3,392.5,251.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_39_",
+                  fill: "#010101",
+                  d: "M370.9,231.8c1.5-4.6,5.7-8.2,10.5-8.9c1.6-0.2,4,0.9,3.2,2.4\n                    C380.1,227.5,375.5,229.6,370.9,231.8z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_35_",
+                  fill: "#010101",
+                  d: "M385,401c0.2-3.3-2-6.6-5.1-7.7c-0.9-0.3-2-0.5-2.8-1.1c-0.8-0.6-1.3-1.8-0.6-2.6\n                    c4.7-0.4,9.5,2.4,11.5,6.7c0.6,1.2,0.9,2.7,0.3,3.9C387.7,401.5,385.9,402,385,401z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_66_",
+                  fill: "#010101",
+                  d: "M408.9,285.8c7.9-15.8,6-38.2-9.1-47.3c7.5-16.1,2.5-37.1-11.5-48.1\n                    c-2.6-15.9-11.2-30.8-23.7-41.1c-3.5-2.9-3.3-8.2-3.9-12.7c-0.3-2.2-1.3-4.7-2.7-6.4c0,0,0-0.1-0.1-0.1c-0.7-1.1-1.7-2-2.6-2.8\n                    c-1.4-2-3.1-4-5-5.3c-0.4-0.3-0.8-0.5-1.3-0.8c0.1,0,0.3,0,0.4,0c-0.4-0.2-0.8-0.3-1.2-0.5c-0.8-0.4-1.7-0.8-2.4-1.4\n                    c-1.1-0.7-1.9-1.1-2.9-1.1c-1.4-0.8-2.7-1.8-3.8-3c-2.7-3-3.9-7.8-1.4-11c4-5.3,0.2-13.6-5.8-16.5s-13.1-2.1-19.7-1.2\n                    c3.3-3.9,3.4-9.8,1.4-14.5c-2.1-4.7-6-8.3-10.2-11.2c-8.1-5.6-17.6-9.1-27.4-10c-2.4-1.7-4.3-3.7-6.5-5.4c-2.5-1.9-5.6-3-8.4-4.3\n                    c-0.1,0-0.1,0-0.2,0c-12.1-6.2-27.1-6.6-39.4-0.7c-4.2,2-9-0.1-13.5-1.3c-14.4-4-31,2.2-39.3,14.6c-15.1-3.5-32.1,5.4-37.9,19.8\n                    c-1.4,3.4-3.4,7.8-7,7.1c-6.8-1.2-13.3,4.4-15.5,11c-2.2,6.6-1,13.7,0.4,20.5c0.6,2.8-3.4,4-6.2,4.4c-13.6,2-24.2,16.2-22.3,29.8\n                    c0.4,2.5,0.9,5.6-1,7.2c-8,6.9-16.4,14.4-19.6,24.5c-1.8,5.7-1.1,12.4,1.7,17.5c0,0-0.1,0-0.1,0.1c-1,0.7-2.1,1.4-3.1,2\n                    c-0.4,0.2-0.7,0.5-1.1,0.7c-6.1,0.9-10.5,7.4-11.6,13.7c-1.2,6.9,0.3,14.1-0.4,21.1c-1,10.4-6.6,19.8-9.9,29.7\n                    c-3.3,9.9-3.8,22.3,3.8,29.5c-3.6,2.2-6.3,5.9-7.2,10c-0.2,0.2-0.2,0.4-0.3,0.6c-0.2,0.2-0.3,0.4-0.3,0.7c0,2.3,0,4.6,0.8,6.8\n                    c0.3,6.8,3.2,13.5,7.8,18.5c0.2,0.5,0.4,0.9,0.7,1.3c0,0,0,0,0,0c1.5,2.6,3.5,4.6,6.1,6.4c2,1.4,4,3.3,6.1,4.7\n                    c4.3,4.6,12.1,5.7,18,3c7-3.2,11.5-10.5,13.2-18.1s1-15.4,0.3-23.1c-0.4-4.3-0.7-8.5-1.1-12.8c1.8-2.6,3.1-5.5,4-8.5\n                    c0.3-0.7,0.6-1.3,0.8-2c0.4-1.5,0.6-3.2,1-4.7c0.2-0.7,0.3-1.3,0.3-2c3.4-9.7-9.3-22.2-2.6-30.3c8.7-10.4,12.1-25,9-38.2l2-1.8\n                    c0.9-0.3,1.7-0.8,2.4-1.6c1-1.2,2.3-2,3.3-3.3c0.6-0.8,1.1-1.6,1.5-2.4c0.5-0.5,1-1,1.5-1.6c0-0.1,0.1-0.1,0.1-0.2\n                    c3.6-3.1,4.9-9.4,4.8-14.6c-0.2-7-0.1-15.7,6.2-18.7c11.4-5.6,16.9-21,11.4-32.5c6.1-0.7,12.5-2.7,16.2-7.6\n                    c6.6-8.8,1.2-21.2-4.3-30.7c9.3,2.2,16.2,12.8,25.7,11.6c6.5-0.8,11.1-7.3,11.9-13.7s-1.1-13-3.1-19.2c8.3,4.9,11.6,17,21,19.4\n                    c6.8,1.8,13.9-2.8,17.4-8.9c3.5-6.1,4.2-13.3,4.9-20.3c5.4,3.6,7,10.6,9,16.7c2,6.1,6,12.9,12.4,13.3c4.8,0.4,9-3,12.5-6.3\n                    c5.5-5.4,10.6-11.3,14.9-17.7c3,5.6,1.5,12.3,1,18.6c-0.4,6.3,1.2,13.9,7.2,16.1c7.7,2.7,14.8-6,23-6.9c-3,7.9-7.4,16.3-4.6,24.2\n                    c2.5,7.1,10.3,11.1,17.8,11.1c-0.7,0.9-1.3,1.9-1.5,3c-0.4,1.8-0.1,3.8-0.1,5.6c0,0.1,0,0.3,0.1,0.4c-1,9.7,7,19.7,16,25\n                    c3.6,2.1,8,5.4,6.6,9.2c-2.5,6.8-1,14.8,3.5,20.4c0.3,2.7,2.6,5.2,4.3,7.2c1.5,1.8,3.2,3.4,5.2,4.5c0.5,1,1,2.1,1.5,3.1\n                    c-1.2,1.6-1.1,4.2-0.9,6c0.1,1.3,0.3,2.7,0.7,3.9c0.4,1.1,1.1,2,1.5,3.2c1.5,6.7,4,13.2,7.3,19.1c1.3,2.3,2.8,4.8,2.3,7.5\n                    c-2.5,14-1.1,28.8,4.1,42c1.6,4.1-0.5,8.6-2.4,12.6c-2.8,5.6-5.4,11.5-6.1,17.7c-0.7,6.2,0.7,13,5.2,17.4\n                    c5.3,5.3,13.3,6.2,20.7,6.7c3.7,0.2,7.4,0.4,10.9-0.7c8-2.5,12.5-10.9,16.1-18.5c4.2-8.8,8.1-20,1.9-27.5\n                    C405.4,293.1,407.3,289,408.9,285.8z M73.7,338.6c-5.9,4.3-13.9,3.3-21,1c-1.7-1.2-3.4-2.8-5-3.9c-3-2.1-5.4-4.3-6.9-7.7\n                    c-0.1-0.2-0.2-0.3-0.3-0.3c-0.3-0.7-0.5-1.5-0.8-2.2c-2.2-5.4-4.3-10.8-6.5-16.2c-0.1-0.2-0.2-0.3-0.3-0.5c-0.4-1.6-0.4-3.3-0.3-5\n                    c0.2-0.2,0.2-0.5,0.2-0.7c2.2-2.7,4.5-5.4,6.7-8.1c11.8-0.5,23.7-1,35.5-1.6c1.5-0.1,3.2-0.1,4.3,0.8c1.5,1.2,1.7,3.4,1.7,5.3\n                    c0,5.1,0.1,10.3,0.1,15.4C81.2,323.6,80.6,333.5,73.7,338.6z M84.1,260.4c0.5,4.1,0.4,8.7,2.4,12.1c0.2,2.1-0.8,4.8-1.3,6.7\n                    c-0.4,1.7-1.8,4.2-3,5.3c-0.1,0.1-0.1,0.1-0.1,0.2c-5.9,4.8-15.2,6.3-23.2,7c-8.3,0.7-18.8,0.2-22.4-7.3\n                    c-1.8-3.6-1.3-7.9-0.8-11.9c1.2-9.5,2.9-19.9,10.3-26c8.5,5.4,19.2,7.1,29,4.6C79.7,249.7,83.5,255.5,84.1,260.4z M93,214.7\n                    c-0.7,12.3-5.3,25.3-15.8,31.7c-10.5,6.4-27.2,2.5-30.3-9.4c-3.3-12.5,0.2-26.5,8.9-36.1c0.9-0.3,1.6-0.8,2.4-1.3\n                    c1.2-0.7,2.4-1.5,3.6-2.3c0.1,0,0.1-0.1,0.1-0.1c2.2,3.2,5.3,5.6,9.2,6.4c7.5,1.6,18-1.8,21.3,5.2C93.2,210.6,93.1,212.7,93,214.7\n                    z M102,194.9c-0.4,0.1-0.6,0.5-0.7,0.9c0,0,0,0,0,0.1c-0.7,0.7-1.3,1.4-2,2.1c-0.9,0.9-1.9,1.9-3,2.6c-0.5,0.3-1,0.4-1.5,0.6\n                    c-4.2-0.2-8.4-0.4-12.5-0.7c-6.7-0.3-14.3-1.1-18.5-6.4c-6.7-8.4,0-20.5,6.6-29c3.2-4,7.5-8.5,12.5-7.4\n                    c10.3,2.3,22.3,6.3,24.9,16.5C109.7,181.4,105.9,188.6,102,194.9z M123.9,148.8c-3.2,5.8-8,11.5-14.5,12.7\n                    c-4.4,0.8-8.9-0.6-13.1-2c-3-1-6.1-2-8.5-4c-5.1-4.1-6.5-11.6-4.7-17.8c1.8-6.3,6.4-11.4,11.5-15.5c1.3-1.1,2.7-2.1,4.2-2.8\n                    c5.1-2.4,11.8-1,15.5,3.2c2.1,2.4,5.7,2.8,8.3,4.5c3.3,2.2,5,6.4,4.9,10.4C127.4,141.5,125.8,145.3,123.9,148.8z M143,105\n                    c0.8,3,1.6,6,1.4,9.1s-1.6,6.2-4.1,7.9c-2.5,1.7-5.6,1.8-8.6,1.8c-4,0.1-8.1,0.1-11.6-1.5c-4-1.8-6.9-5.6-8.4-9.8\n                    c-1.5-4.1-1.7-8.6-1.6-13c0.2-4.3,0.8-9,3.8-12.2c4.7-5.2,13.5-4.5,19-0.1C138.3,91.4,141,98.3,143,105z M169.3,97.2\n                    c-3.9,2.5-9.2,1.3-13.1-1.1s-7.3-5.7-11.5-7.8c-4.5-2.2-10.4-3.4-12.3-8c-2.2-5.1,2.2-10.6,6.5-14.1c2.3-1.9,4.8-3.6,7.3-5.2\n                    c4.6-2.9,9.8-5.5,15.3-5.2s11,4.3,11.4,9.8c0.1,1.8-0.3,3.5-0.5,5.2c-0.4,4.6,1,9.2,1.4,13.9C174.3,89.4,173.2,94.7,169.3,97.2z\n                    M215.9,55.6c-0.9,3.8-1.7,7.6-2.6,11.4c-0.9,4-1.8,8.1-4,11.6c-2.2,3.5-5.8,6.4-9.9,6.4c-5.8,0.1-10.2-4.9-13.8-9.5\n                    c-4.6-5.9-9.2-12-11.4-19.2c-0.6-2-1-4.2-0.1-6.1c1-2.1,3.4-3.2,5.6-4c6.5-2.4,13.2-4.1,20-5c3.1-0.4,6.3-0.7,9.4,0.1\n                    c3,0.8,5.9,2.8,7,5.7C217.1,49.8,216.5,52.8,215.9,55.6z M253.2,78.2c-2.8,3.4-6.1,7.1-10.5,7.4c-7.2,0.6-11.7-7.5-14.3-14.3\n                    c-1.9-5-3.9-10.1-5.8-15.1c-1.4-3.6-2.7-7.7-0.9-11c2-3.9,7.2-4.9,11.6-5.1c9.6-0.4,19.3,0.9,28.5,3.6c2.6,1.2,5.4,2.4,7.4,4.3\n                    c1,1,2,1.8,3,2.6C266.5,60.3,260.2,69.5,253.2,78.2z M285.7,94.2c-4.4,1.9-10.3,3.5-13.3-0.2c-1.7-2-1.8-5-1.7-7.6l0.4-23.8\n                    c0.1-5.1,5.8-8.5,10.8-8.2c5,0.4,9.5,3.4,13.6,6.3c2.6,1.9,5.3,3.7,7.9,5.6c4.3,3,9,7.2,8.1,12.3c-0.8,4.4-5.5,6.9-9.7,8.6\n                    C296.5,89.6,291.1,91.9,285.7,94.2z M305.4,123.7c-2.5-0.8-4.9-2.2-6.6-4.2c-4-4.9-3-12.1-0.9-18c1.7-4.8,4.3-9.8,9-11.6\n                    c3.4-1.3,7.1-0.7,10.7-0.6c4,0.2,8-0.2,11.8,1.1c3.8,1.2,7.2,4.7,6.8,8.6c-0.8,7.5-4,14.8-9.7,19.8\n                    C320.7,123.7,312.5,126,305.4,123.7z M322.8,157.1c-6-5.6-10.1-13.2-11.6-21.2c0-1.1,0-2.1,0-3.2c0.1-1.8,0.7-2.9,1.8-4.2\n                    c0.2-0.2,0.2-0.4,0.2-0.6c8-0.9,15.2-5.7,21.2-11.1c1.9,1.1,3.9,2.1,6,2.8c3.1,1.8,6.6,3.6,9.3,5.9c0.7,0.6,1.2,1.4,1.9,2\n                    c0.2,0.2,0.4,0.3,0.6,0.5c0,0,0,0,0,0c0.7,0.5,1.4,1,2,1.5c0.4,0.6,0.8,1.2,1.1,1.8c0.2,0.3,0.5,0.5,0.8,0.5\n                    c3,4.4,3.6,10.5,1.6,15.5c-2.6,6.8-8.9,11.6-15.7,14.1c-3,1.1-6.1,1.7-9.3,1.3C329,162.1,325.6,159.8,322.8,157.1z M341.6,198.1\n                    c-1-1.1-2.5-2.8-3.5-4.5l-0.8-2.2c0-0.1,0-0.1,0-0.2c0-0.3-0.1-0.5-0.3-0.7l-1.3-3.8c-1.6-4.7-3.3-9.8-1.5-14.5\n                    c3.7-9.8,18.7-9.8,24.5-18.5c2.3-3.4,7.5-0.5,10.1,2.7c5.9,7.2,10.8,15.2,14.5,23.7c0.9,2,1.7,4.1,1.4,6.3c-0.5,4.3-5,6.8-9,8.6\n                    c-10.1,4.6-21.5,9.2-31.8,5.3C343.1,199.7,342.3,198.9,341.6,198.1z M347.3,212.8c-0.2-1.5-0.2-3.3,0.2-4.5\n                    c11.8-4.2,23.7-8.3,35.5-12.5c1.7-0.6,3.4-1.2,5.2-0.9c2.3,0.3,4.2,2.1,5.6,4c4.5,6.2,5.3,14.2,5.9,21.8\n                    c0.4,5.3,0.7,11.2-2.7,15.2c-2.3,2.8-5.9,4.1-9.4,5.1c-5.9,1.7-12,2.8-18.2,3.3c-3.1,0.2-6.5,0.2-8.8-1.9\n                    c-1.3-1.2-2.1-2.9-2.8-4.6C354.3,229.6,350.8,221.2,347.3,212.8z M360.8,269.5c-0.6-3.5-2-6.9-2.5-10.4s0.2-7.6,3-9.8\n                    c1.9-1.4,4.3-1.8,6.6-2c8.9-0.7,18.5,0.3,25.9-4.8c3-2,7.2-0.5,9.8,2.1c7.1,6.8,6.6,18.1,5.7,27.9c-0.7,7.5-2.3,16.3-9.1,19.5\n                    c-2.9,1.4-6.1,1.4-9.3,1.4c-3.8,0-7.6,0.1-11.4,0.1c-5.3,0-11.3-0.2-15-4.1C359.9,284.3,361.9,276.3,360.8,269.5z M402.2,323.4\n                    c-2.2,4.8-4.6,9.9-9,12.8c-5.7,3.8-13.2,3-20,1.9c-4-0.7-8.1-1.4-11.6-3.6s-6.2-5.9-5.8-10c0.6-7.6,2.2-15.1,4.8-22.3\n                    c0.9-2.4,2.1-5,4.5-6c1.7-0.7,3.6-0.3,5.4,0c9.6,1.7,19.4,1.4,28.9-0.6c1.3-0.3,2.7-0.6,4-0.3c2.4,0.7,3.6,3.4,4,5.9\n                    C408.6,308.9,405.3,316.4,402.2,323.4z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_33_",
+                  fill: "#010101",
+                  d: "M79.4,509.8c0.8,0.4,0.3,1.7-0.6,1.9c-0.8,0.2-1.7-0.2-2.6-0.3c-3.9-0.5-6.7,4.6-10.6,4.6\n                    c0-1.1,0.7-2,1.3-2.8c2-2.6,4-5.1,6-7.7C73.4,508.4,76.5,510.5,79.4,509.8z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_32_",
+                  fill: "#010101",
+                  d: "M64.9,501.7c0.4-2.9,0.9-5.8,1.3-8.7c0.2-1.2,0.5-2.6,1.7-3c2.3,3.5,6.6,5.5,10.8,5\n                    c-1.9,2.6-6,1.8-9,0.7C69.5,498.5,67.5,501.1,64.9,501.7z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_30_",
+                  fill: "#010101",
+                  d: "M380.9,376.7c0.2-0.9,1.6-0.7,2.1,0.1s0.2,1.7,0.2,2.6c-0.3,4.6,4.5,8.7,9,7.8\n                    c-0.7,1.9-2.6,3.2-4.6,3.2C383.2,387.4,380.5,382,380.9,376.7z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_25_",
+                  fill: "#010101",
+                  d: "M339.6,130.4c2.1,3.2,3.6,6.8,4.7,10.5c-4.2-1.5-9.2,2.8-8.3,7.2c-2-0.7-2.5-3.5-1.7-5.5\n                    c0.8-2,2.3-3.6,3.3-5.5c1-1.9,1.3-4.5-0.2-5.9C338.1,130.9,338.8,130.7,339.6,130.4z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_21_",
+                  fill: "#010101",
+                  d: "M381.7,454.8c-1.1-0.5-0.7-2.4,0.4-3.1c1.1-0.7,2.4-0.7,3.5-1.3c3-1.5,3.3-5.5,3.2-8.8\n                    c1.3-0.3,2.3,1.4,2.2,2.8c0,1.4-0.5,2.9,0.2,4c0.8,1.4,2.7,1.5,4.2,2c1.5,0.5,3.1,2.2,2.1,3.5\n                    C392.5,451.9,386.5,452.2,381.7,454.8z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_20_",
+                  fill: "#010101",
+                  d: "M386.8,329.1c0.4-5-2.7-10.1-7.4-12.1c0.1-1.4,2.3-1,3.6-0.6c2.7,0.9,5.8,0.1,7.7-2\n                    c1.2,0.2,1.1,2.1,0.3,3c-0.8,0.9-2.1,1.4-2.7,2.5c-0.9,1.7,0.4,3.6,1,5.4S388.4,330,386.8,329.1z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_19_",
+                  fill: "#010101",
+                  d: "M113.4,601.5c-0.9-0.8-0.7-2.2-0.4-3.3c0.4-2,0.8-4,1.2-5.9c0.9-4.5,3.8-8.6,7.7-10.9\n                    c1,1.4,0.4,3.4-0.7,4.8s-2.5,2.5-3.3,4c-1,1.9-1,4.1-1.3,6.2C116.3,598.5,115.4,600.8,113.4,601.5z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_18_",
+                  fill: "#010101",
+                  d: "M388.3,481.6c-0.7,3-1.5,6.2-3.5,8.5c-2.1,2.3-5.9,3.4-8.4,1.5c5.6-2.1,9.5-8.1,9.2-14.1\n                    c0.7-0.8,2.2-0.3,2.7,0.7C388.8,479.3,388.6,480.5,388.3,481.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_15_",
+                  fill: "#010101",
+                  d: "M155,66.8c1.3-0.8,3.7-1,3.7,0.5c-5.6,3.5-11.1,7-16.8,10.4c-1.6-1,0.1-3.4,1.7-4.3\n                    C147.4,71.2,151.2,69,155,66.8z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_13_",
+                  fill: "#010101",
+                  d: "M56,411.5c-1.4-1.5,0.9-3.6,2.6-4.9c3.5-2.6,5.3-7.3,4.4-11.6c0.9-1,2.8-0.5,3.4,0.7\n                    c0.6,1.2,0.4,2.7-0.1,4C64.7,404.8,60.8,409,56,411.5z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_7_",
+                  fill: "#010101",
+                  d: "M55,311.6c-1.1,2.8-3.7,4.9-6.7,5.5c2.3-2.7,3.9-6.1,4.5-9.7c2.3,0.8,4.7,1.6,7,2.4\n                    c0.9,0.3,2.1,1.3,1.4,2c-1.2,1.4-0.2,3.6,0.4,5.3c0.7,1.8,0.4,4.5-1.5,4.6C59.7,317.9,57.8,314.3,55,311.6z",
+                },
+              }),
+              _vm._v(" "),
+              _c("path", {
+                attrs: {
+                  id: "XMLID_6_",
+                  fill: "#010101",
+                  d: "M47.9,271.6c1.3-4.4,3-8.8,4.9-13c1.6,0.1,2.4,2.2,2,3.7c-0.4,1.6-1.5,2.9-2,4.4\n                    c-0.6,1.5-0.3,3.6,1.1,4.2c2.7,1.1,4.3,4.2,3.8,7.1c-1,1-2.2-0.9-2.6-2.2C54.3,272.8,50.8,270.2,47.9,271.6z",
+                },
+              }),
+            ]),
+          ]),
+        ]
+      ),
+    ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=template&id=76afcc31&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "teeth-container" }, [
+      _c("img", {
+        staticClass: "img img1",
+        attrs: { src: "/img/teeth/1.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img2",
+        attrs: { src: "/img/teeth/2.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img3",
+        attrs: { src: "/img/teeth/3.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img4",
+        attrs: { src: "/img/teeth/4.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img5",
+        attrs: { src: "/img/teeth/5.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img6",
+        attrs: { src: "/img/teeth/6.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img7",
+        attrs: { src: "/img/teeth/7.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img8",
+        attrs: { src: "/img/teeth/8.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img9",
+        attrs: { src: "/img/teeth/9.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img10",
+        attrs: { src: "/img/teeth/10.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img11",
+        attrs: { src: "/img/teeth/11.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img12",
+        attrs: { src: "/img/teeth/12.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img13",
+        attrs: { src: "/img/teeth/13.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img14",
+        attrs: { src: "/img/teeth/14.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img15",
+        attrs: { src: "/img/teeth/15.png" },
+        on: { click: _vm.imgFunction },
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "img img16",
+        attrs: { src: "/img/teeth/16.png" },
+        on: { click: _vm.imgFunction },
+      }),
     ]),
   ])
 }
@@ -43040,19 +46691,14 @@ var render = function () {
                                   _c(
                                     "b-dropdown-item",
                                     {
-                                      attrs: {
-                                        "aria-role": "listitem",
-                                        tag: "a",
-                                        href:
-                                          "/dentist/inv-logs?patient=" +
-                                          props.row.user_id +
-                                          "&appid=" +
-                                          props.row.appointment_id +
-                                          "&service=" +
-                                          props.row.service_id,
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.admitPatient(props.row)
+                                        },
                                       },
                                     },
-                                    [_vm._v("Inv/Logs")]
+                                    [_vm._v("Admit Patient")]
                                   ),
                                 ],
                                 1
@@ -43285,6 +46931,85 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistDashboardPatient.vue?vue&type=template&id=3817226d&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-8" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "w-title" }, [
+              _vm._v(
+                "\n                        PATIENT DASHBOARD\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-body" }, [
+              _c("div", { staticClass: "w-row" }, [
+                _c("div", [_vm._v("NAME:")]),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.admit.lname) +
+                      ", " +
+                      _vm._s(_vm.admit.fname)
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "w-title" }, [
+              _vm._v(
+                "\n                        DENTAL CHART\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-body" }, [
+              _c("div", { staticClass: "w-row" }, [
+                _c("div", [
+                  _c(
+                    "div",
+                    { staticClass: "dental-chart" },
+                    [
+                      _c("dental-chart", {
+                        attrs: { "prop-admit-id": _vm.admit.admit_id },
+                      }),
+                    ],
+                    1
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43761,6 +47486,355 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyPatient.vue?vue&type=template&id=3f8d3fcd&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-10" }, [
+          _c(
+            "div",
+            { staticClass: "box" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "is-flex is-justify-content-center mb-2",
+                  staticStyle: { "font-size": "20px", "font-weight": "bold" },
+                },
+                [_vm._v("MY PATIENTS")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "level" }, [
+                _c(
+                  "div",
+                  { staticClass: "level-left" },
+                  [
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Page" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.setPerPage },
+                            model: {
+                              value: _vm.perPage,
+                              callback: function ($$v) {
+                                _vm.perPage = $$v
+                              },
+                              expression: "perPage",
+                            },
+                          },
+                          [
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("5 per page"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("10 per page"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "15" } }, [
+                              _vm._v("15 per page"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "20" } }, [
+                              _vm._v("20 per page"),
+                            ]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-select",
+                          {
+                            on: { input: _vm.loadAsyncData },
+                            model: {
+                              value: _vm.sortOrder,
+                              callback: function ($$v) {
+                                _vm.sortOrder = $$v
+                              },
+                              expression: "sortOrder",
+                            },
+                          },
+                          [
+                            _c("option", { attrs: { value: "asc" } }, [
+                              _vm._v("ASC"),
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "desc" } }, [
+                              _vm._v("DESC"),
+                            ]),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "level-right" }, [
+                  _c(
+                    "div",
+                    { staticClass: "level-item" },
+                    [
+                      _c(
+                        "b-field",
+                        { attrs: { label: "Search" } },
+                        [
+                          _c("b-input", {
+                            attrs: {
+                              type: "text",
+                              placeholder: "Search Lastname",
+                            },
+                            nativeOn: {
+                              keyup: function ($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.loadAsyncData.apply(null, arguments)
+                              },
+                            },
+                            model: {
+                              value: _vm.search.lname,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.search, "lname", $$v)
+                              },
+                              expression: "search.lname",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            { staticClass: "control" },
+                            [
+                              _c(
+                                "b-tooltip",
+                                {
+                                  attrs: {
+                                    label: "Search",
+                                    type: "is-success",
+                                  },
+                                },
+                                [
+                                  _c("b-button", {
+                                    attrs: {
+                                      type: "is-primary",
+                                      "icon-right": "account-filter",
+                                    },
+                                    on: { click: _vm.loadAsyncData },
+                                  }),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-table",
+                {
+                  attrs: {
+                    data: _vm.data,
+                    loading: _vm.loading,
+                    paginated: "",
+                    "backend-pagination": "",
+                    total: _vm.total,
+                    "per-page": _vm.perPage,
+                    "aria-next-label": "Next page",
+                    "aria-previous-label": "Previous page",
+                    "aria-page-label": "Page",
+                    "aria-current-label": "Current page",
+                    "backend-sorting": "",
+                    "default-sort-direction": _vm.defaultSortDirection,
+                  },
+                  on: { "page-change": _vm.onPageChange, sort: _vm.onSort },
+                },
+                [
+                  _c("b-table-column", {
+                    attrs: { field: "admit_id", label: "ID" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function (props) {
+                          return [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(props.row.admit_id) +
+                                "\n                        "
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: { field: "name", label: "Patient Name" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function (props) {
+                          return [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(props.row.patient_lname) +
+                                ", " +
+                                _vm._s(props.row.patient_fname) +
+                                " " +
+                                _vm._s(props.row.patient_mname) +
+                                "\n                        "
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: { field: "service", label: "Service" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function (props) {
+                          return [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(props.row.service) +
+                                " (₱" +
+                                _vm._s(props.row.price) +
+                                ")\n                        "
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                  _vm._v(" "),
+                  _c("b-table-column", {
+                    attrs: { label: "Action" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function (props) {
+                          return [
+                            _c(
+                              "b-dropdown",
+                              {
+                                attrs: { "aria-role": "list" },
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "trigger",
+                                      fn: function (ref) {
+                                        var active = ref.active
+                                        return [
+                                          _c("b-button", {
+                                            attrs: {
+                                              label: "Option",
+                                              type: "is-primary is-small",
+                                              "icon-right": active
+                                                ? "menu-up"
+                                                : "menu-down",
+                                            },
+                                          }),
+                                        ]
+                                      },
+                                    },
+                                  ],
+                                  null,
+                                  true
+                                ),
+                              },
+                              [
+                                _vm._v(" "),
+                                _c(
+                                  "b-dropdown-item",
+                                  {
+                                    attrs: {
+                                      "aria-role": "listitem",
+                                      tag: "a",
+                                      href:
+                                        "/dentist/dentist-dashboard-patients?admitid=" +
+                                        props.row.admit_id,
+                                    },
+                                  },
+                                  [_vm._v("Go")]
+                                ),
+                              ],
+                              1
+                            ),
+                          ]
+                        },
+                      },
+                    ]),
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons mt-3" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "is-success",
+                      attrs: { "icon-right": "account-arrow-up-outline" },
+                    },
+                    [_vm._v("NEW")]
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true& ***!
@@ -43848,6 +47922,15 @@ var render = function () {
                       _vm._v(" "),
                       _c("b-menu-item", {
                         attrs: {
+                          label: "My Patients",
+                          icon: "sitemap",
+                          tag: "a",
+                          href: "/dentist/my-patients",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("b-menu-item", {
+                        attrs: {
                           label: "Items",
                           icon: "sitemap",
                           tag: "a",
@@ -43901,10 +47984,538 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/InvLogs.vue?vue&type=template&id=faff62ce& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistServicePatient.vue?vue&type=template&id=1e16e8ac&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "section" },
+        [
+          _c("div", { staticClass: "columns is-centered" }, [
+            _c("div", { staticClass: "column is-6" }, [
+              _c("div", { staticClass: "box" }, [
+                _c("div", [
+                  _vm._v(
+                    "\n                        PATIENT: " +
+                      _vm._s(_vm.admit.patient_lname) +
+                      ", " +
+                      _vm._s(_vm.admit.patient_fname) +
+                      " " +
+                      _vm._s(_vm.admit.patient_mname) +
+                      "\n                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v(
+                    "\n                        ADDRESS: " +
+                      _vm._s(_vm.admit.barangay) +
+                      "\n                    "
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.admitServices, function (item, index) {
+            return _c(
+              "div",
+              { key: index, staticClass: "columns is-centered" },
+              [_vm._m(0, true)]
+            )
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "columns is-centered" }, [
+            _c("div", { staticClass: "column is-6" }, [
+              _c(
+                "div",
+                { staticClass: "buttons is-right" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      attrs: { type: "is-primary" },
+                      on: { click: _vm.openModal },
+                    },
+                    [_vm._v("NEW SERVICE")]
+                  ),
+                ],
+                1
+              ),
+            ]),
+          ]),
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+            type: "is-link",
+          },
+          model: {
+            value: _vm.isModalCreate,
+            callback: function ($$v) {
+              _vm.isModalCreate = $$v
+            },
+            expression: "isModalCreate",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Add Services"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.isModalCreate = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Service",
+                                type: this.errors.service ? "is-danger" : "",
+                                message: this.errors.service
+                                  ? this.errors.service[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { placeholder: "Service" },
+                                  model: {
+                                    value: _vm.fields.service,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "service", $$v)
+                                    },
+                                    expression: "fields.service",
+                                  },
+                                },
+                                _vm._l(_vm.services, function (item, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: item.service_id },
+                                    },
+                                    [_vm._v(_vm._s(item.service))]
+                                  )
+                                }),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.isModalCreate = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-6" }, [
+      _c("div", { staticClass: "box" }, [
+        _c("div", [
+          _c("div", { staticClass: "service-title" }, [
+            _vm._v(
+              "\n                            SERVICE(S):\n                        "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "service-body" }, [_c("ul")]),
+        ]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLog.vue?vue&type=template&id=e2d4d042&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "section" }, [
+        _c("div", { staticClass: "columns is-centered" }, [
+          _c("div", { staticClass: "column is-6" }, [
+            _c("div", { staticClass: "box" }, [
+              _c("div", [
+                _vm._v(
+                  "\n                        PATIENT: " +
+                    _vm._s(_vm.user.lname) +
+                    ", " +
+                    _vm._s(_vm.user.fname) +
+                    " " +
+                    _vm._s(_vm.user.mname) +
+                    "\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _vm._v(
+                  "\n                        ADDRESS: " +
+                    _vm._s(_vm.user.barangay) +
+                    "\n                    "
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "columns is-centered" }, [
+          _c("div", { staticClass: "column is-6" }, [
+            _c("div", { staticClass: "box" }, [
+              _c("div", [
+                _c("div", { staticClass: "service-title" }, [
+                  _vm._v(
+                    "\n                            SERVICE(S):\n                        "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "service-body" }, [
+                  _c(
+                    "ul",
+                    _vm._l(_vm.appointmentServices, function (item, index) {
+                      return _c(
+                        "li",
+                        { key: index, staticClass: "service-row" },
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(item.service) +
+                              " - " +
+                              _vm._s(item.price) +
+                              "\n                                    "
+                          ),
+                          _c(
+                            "span",
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  staticClass:
+                                    "is-small is-outlined is-rounded",
+                                  attrs: {
+                                    type: "is-info",
+                                    tag: "a",
+                                    href:
+                                      "services-log-inv?serviceid=" +
+                                      item.service_id +
+                                      "&appid=" +
+                                      _vm.propAppId +
+                                      "&appserviceid=" +
+                                      item.appointment_service_id,
+                                  },
+                                },
+                                [_vm._v("Inv")]
+                              ),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            [
+                              _c(
+                                "b-button",
+                                {
+                                  staticClass:
+                                    "is-small is-outlined is-rounded",
+                                  attrs: { type: "is-danger" },
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.deleteService(item)
+                                    },
+                                  },
+                                },
+                                [_vm._v("x")]
+                              ),
+                            ],
+                            1
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "buttons is-right" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { type: "is-primary" },
+                        on: { click: _vm.openModal },
+                      },
+                      [_vm._v("NEW SERVICE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+            type: "is-link",
+          },
+          model: {
+            value: _vm.isModalCreate,
+            callback: function ($$v) {
+              _vm.isModalCreate = $$v
+            },
+            expression: "isModalCreate",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Add Services"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.isModalCreate = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Service",
+                                type: this.errors.service ? "is-danger" : "",
+                                message: this.errors.service
+                                  ? this.errors.service[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { placeholder: "Service" },
+                                  model: {
+                                    value: _vm.fields.service,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "service", $$v)
+                                    },
+                                    expression: "fields.service",
+                                  },
+                                },
+                                _vm._l(_vm.services, function (item, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: item.service_id },
+                                    },
+                                    [_vm._v(_vm._s(item.service))]
+                                  )
+                                }),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.isModalCreate = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/ServicesLogInv.vue?vue&type=template&id=38ecc342&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -43949,14 +48560,63 @@ var render = function () {
         _c("div", { staticClass: "column is-6" }, [
           _c("div", { staticClass: "box" }, [
             _c("div", [
-              _vm._v(
-                "\n                        SERVICE(S): " +
-                  _vm._s(_vm.user.lname) +
-                  ", " +
-                  _vm._s(_vm.user.fname) +
-                  " " +
-                  _vm._s(_vm.user.mname) +
-                  "\n                    "
+              _c("div", { staticClass: "service-title" }, [
+                _vm._v(
+                  "\n                            SERVICE(S):\n                        "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "service-body" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.services, function (item, index) {
+                    return _c(
+                      "li",
+                      { key: index, staticClass: "service-row" },
+                      [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(item.service) +
+                            " - " +
+                            _vm._s(item.price) +
+                            "\n                                    "
+                        ),
+                        _c(
+                          "span",
+                          [
+                            _c(
+                              "b-button",
+                              {
+                                staticClass: "is-small is-outlined is-rounded",
+                                attrs: {
+                                  type: "is-info",
+                                  tag: "a",
+                                  href:
+                                    "services-log-inv?serviceid=" +
+                                    item.service_id,
+                                },
+                              },
+                              [_vm._v("Inv")]
+                            ),
+                          ],
+                          1
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "buttons is-right" },
+                [
+                  _c("b-button", { attrs: { type: "is-primary" } }, [
+                    _vm._v("NEW SERVICE"),
+                  ]),
+                ],
+                1
               ),
             ]),
           ]),
@@ -72874,11 +77534,16 @@ var map = {
 	"./components/Administrator/Services/ServicesPage.vue": "./resources/js/components/Administrator/Services/ServicesPage.vue",
 	"./components/Administrator/User/UserPage.vue": "./resources/js/components/Administrator/User/UserPage.vue",
 	"./components/DentalChart.vue": "./resources/js/components/DentalChart.vue",
+	"./components/DentalChartxx.vue": "./resources/js/components/DentalChartxx.vue",
 	"./components/Dentist/DentistAppointment.vue": "./resources/js/components/Dentist/DentistAppointment.vue",
 	"./components/Dentist/DentistDashboard.vue": "./resources/js/components/Dentist/DentistDashboard.vue",
+	"./components/Dentist/DentistDashboardPatient.vue": "./resources/js/components/Dentist/DentistDashboardPatient.vue",
 	"./components/Dentist/DentistItem.vue": "./resources/js/components/Dentist/DentistItem.vue",
+	"./components/Dentist/DentistMyPatient.vue": "./resources/js/components/Dentist/DentistMyPatient.vue",
 	"./components/Dentist/DentistNavbar.vue": "./resources/js/components/Dentist/DentistNavbar.vue",
-	"./components/Dentist/InvLogs.vue": "./resources/js/components/Dentist/InvLogs.vue",
+	"./components/Dentist/DentistServicePatient.vue": "./resources/js/components/Dentist/DentistServicePatient.vue",
+	"./components/Dentist/ServicesLog.vue": "./resources/js/components/Dentist/ServicesLog.vue",
+	"./components/Dentist/ServicesLogInv.vue": "./resources/js/components/Dentist/ServicesLogInv.vue",
 	"./components/ExampleComponent.vue": "./resources/js/components/ExampleComponent.vue",
 	"./components/Login.vue": "./resources/js/components/Login.vue",
 	"./components/Modals/ModalBrowseDentist.vue": "./resources/js/components/Modals/ModalBrowseDentist.vue",
@@ -72928,7 +77593,7 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\Users\\\\eshen\\\\Desktop\\\\Github\\\\dental_care"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"C:\\\\Users\\\\eshen\\\\Desktop\\\\Github\\\\dental_care","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

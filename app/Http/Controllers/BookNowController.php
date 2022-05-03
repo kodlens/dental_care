@@ -18,7 +18,6 @@ class BookNowController extends Controller
 
     public function store(Request $req){
 
-        
         $user = Auth::user();
         
         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
@@ -36,12 +35,12 @@ class BookNowController extends Controller
             'dentist_id' => $req->dentist_id
         ]);
 
-        AppointmentService::create([
-            'appointment_id' => $appointment->appointment_id,
-            'service_id' => $req->service['service_id']
-        ]);
+        // AppointmentService::create([
+        //     'appointment_id' => $appointment->appointment_id,
+        //     'service_id' => $req->service['service_id']
+        // ]);
 
-         return response()->json([
+        return response()->json([
             'status' => 'saved'
         ],200);
     }

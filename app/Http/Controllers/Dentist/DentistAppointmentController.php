@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Service;
 use App\Models\Appointment;
+use App\Models\Admit;
 
 use Auth;
 
@@ -77,11 +78,38 @@ class DentistAppointmentController extends Controller
     }
 
 
-    public function invLogs(Request $req){
-        return view('dentist.inv-logs')
+    public function admitAppointment($id){
+        $data = Appointment::find($id);
+
+
+        Admit::create([
+            'patient_id' => $data->user_id,
+            'service_id' => $data->service_id,
+            'qr_code' => $data->qr_code,
+            'dentist_id' => $data->dentist_id,
+        ]);
+
+        return response()->json([
+            'status' => 'saved'
+        ],200);
+    }
+
+
+    public function servicesLog(Request $req){
+        return view('dentist.services-log')
             ->with('patient', $req->patient)
-            ->with('appid', $req->appid)
-            ->with('service', $req->service);
+            ->with('appid', $req->appid);
+    }
+
+
+    public function getServicesLog(Request $req){
+        $data = DB::table('appointments as a')
+            ->join('appointment_services as b', 'a.appointment_id', 'b.appointment_id')
+            ->join('services as c', 'b.service_id', 'c.service_id')
+            ->where('a.appointment_id', $req->appid)
+            ->get();
+
+        return $data;
     }
 
 

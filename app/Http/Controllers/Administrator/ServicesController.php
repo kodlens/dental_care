@@ -32,6 +32,18 @@ class ServicesController extends Controller
         return $data;
     }
 
+
+
+    public function getAllServices(Request $req){
+        $sort = explode('.', $req->sort_by);
+
+        $data = \DB::table('services as a')
+            ->orderBy('service', 'asc')
+            ->get();
+
+        return $data;
+    }
+
     //getDentalServices cater the welcome page
     public function getDentalServices(){
         return \DB::table('services')
