@@ -27,17 +27,21 @@ class DentistAdmitServiceController extends Controller
 
     public function store(Request $req){
 
+        return $req;
+
+
+
         $req->validate([
-            'service_id' => ['required']
+            'service' => ['required']
         ],
         $message = [
-            'service_id.required' => 'Service is required.'
+            'service.required' => 'Service is required.'
         ]);
 
         AdmitService::create([
             'admit_id' => $req->admit_id,
-            'service_id' => $req->service_id
-
+            'service_id' => $req->service,
+            'tooth_id' => $req->tooth_id,
         ]);
 
         return response()->json([

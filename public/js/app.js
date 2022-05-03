@@ -12243,7 +12243,8 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this3 = this;
 
-      this.fields.appointment_id = this.propAppId;
+      this.fields.admit_id = this.propAdmitId;
+      this.fields.tooth_id = this.propToothId;
       axios.post('/dentist/admit-services', this.fields).then(function (res) {
         if (res.data.status === 'saved') {
           _this3.$buefy.dialog.alert({

@@ -20,9 +20,6 @@ class TeethSeeder extends Seeder
             //maxillary right
             [
                 'tooth_name' => 'Maxillary Right Third Molar',
-                'fill_color' => '#FFFFFF',
-                'teeth_points' => '33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3 
-                    82,314.3 81.3,302 80.7,292.7 73.7,292 51.3,293.7 38.7,293.7 34,298 31.7,302.3 32,311'
             ],
             [
                 'tooth_name' => 'Maxillary Right Second Molar',

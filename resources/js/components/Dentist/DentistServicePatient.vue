@@ -160,9 +160,10 @@ export default {
         openModal(){
             this.isModalCreate = true;
         },
-
+    
         submit: function(){
-            this.fields.appointment_id = this.propAppId;
+            this.fields.admit_id = this.propAdmitId;
+            this.fields.tooth_id = this.propToothId;
 
             axios.post('/dentist/admit-services', this.fields).then(res=>{
                 if(res.data.status === 'saved'){

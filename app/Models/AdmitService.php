@@ -13,8 +13,6 @@ class AdmitService extends Model
     protected $table = 'admit_services';
     protected $primaryKey = 'admit_service_id';
 
-
-    protected $fillable = ['admit_id', 'service_id'];
-
+    protected $fillable = ['admit_id', 'service_id', 'tooth_id'];
 
 }

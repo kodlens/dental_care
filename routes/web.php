@@ -152,7 +152,7 @@ Route::resource('/dentist/my-patients', App\Http\Controllers\Dentist\DentistMyPa
 Route::get('/dentist/get-admits-patients', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmitsPatients']);
 Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmit']);
 
-Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistMyPatientController::class);
+Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 
 
 //patient dentist dashboard

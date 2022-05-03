@@ -22,7 +22,9 @@ class CreateAdmitServicesTable extends Migration
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('service_id')->on('services')
                 ->onUpdate('cascade')->onDelete('cascade');
-
+            $table->unsignedBigInteger('tooth_id');
+            $table->foreign('tooth_id')->references('tooth_id')->on('teeth')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });
