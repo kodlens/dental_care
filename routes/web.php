@@ -148,9 +148,12 @@ Route::post('/dentist/cancel-appointment/{id}', [App\Http\Controllers\Dentist\De
     
 Route::post('/dentist/admit-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'admitAppointment']);
 
+
 Route::resource('/dentist/my-patients', App\Http\Controllers\Dentist\DentistMyPatientController::class);
 Route::get('/dentist/get-admits-patients', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmitsPatients']);
 Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmit']);
+
+
 
 Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 
@@ -159,7 +162,10 @@ Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistA
 //during admit
 Route::resource('/dentist/dentist-dashboard-patients', App\Http\Controllers\Dentist\DentistDashboardPatientController::class);
 
-Route::resource('/dentist//dentist-service-patient', App\Http\Controllers\Dentist\DentistServicePatientController::class);
+Route::resource('/dentist/dentist-service-patient', App\Http\Controllers\Dentist\DentistServicePatientController::class);
+//admit services table
+Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Dentist\DentistAdmitServiceController::class, 'getAdmitServices']);
+Route::resource('/dentist/admit-services/{id}', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 
 
 

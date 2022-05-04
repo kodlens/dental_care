@@ -21,15 +21,23 @@ class DentistAdmitServiceController extends Controller
             ->with('serviceid', $req->serviceid);
     }
 
+    public function getAdmitServices($admitid, $toothid){
+        $data = DB::table('admit_services as a')
+            ->join('admits as b', 'a.admit_id', 'b.admit_id')
+            ->join('services as c', 'a.service_id', 'c.service_id')
+            ->join('teeth as d', 'a.tooth_id', 'd.tooth_id')
+            ->select('a.admit_service_id', 'a.admit_id', 'a.service_id', 'a.tooth_id', 'b.patient_id', 'b.qr_code', 'b.dentist_id', 'b.created_at',
+                'c.service', 'c.description', 'c.price', 'd.tooth_name')
+            ->where('a.admit_id', $admitid)
+            ->where('a.tooth_id', $toothid)
+            ->get();
 
+        return $data;
+    }
 
    
 
     public function store(Request $req){
-
-        return $req;
-
-
 
         $req->validate([
             'service' => ['required']
@@ -67,7 +75,7 @@ class DentistAdmitServiceController extends Controller
 
 
     public function destroy($id){
-        AppointmentService::destroy($id);
+        AdmitService::destroy($id);
         return response()->json([
             'status' => 'deleted'
         ],200);

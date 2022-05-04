@@ -20,9 +20,23 @@
                     <div class="box">
                         <div>
                             <div class="service-title">
-                                SERVICE(S):
+                                <div class="is-flex">
+                                    <div>Admitted on: {{ item.created_at }}</div>
+                                    <div class="ml-auto">
+                                        <b-button type="is-danger" @click="removeService(item.admit_service_id)" class="is-small is-rounded is-outlined">X</b-button>
+                                    </div>
+                                </div>
+                                
+
+                                <div>Service: {{ item.service }} - &#x20B1; {{ item.price }}</div>
+                                
                             </div>
+
+                            <hr>
+
+                            <div>INVENTORY</div>
                             <div class="service-body">
+
                                 <ul>
                                     <!-- <li class="service-row" v-for="(item, index) in appointmentServices" :key="index">
                                         {{ item.service }} - {{ item.price }}
@@ -31,7 +45,11 @@
                                     </li> -->
                                 </ul>
                             </div>
-                            
+                            <div class="service-footer">
+                                <div class="buttons">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,6 +168,14 @@ export default {
             });
         },
 
+        getAdmitServices(){
+            //param is admit_id and tooth_id
+             axios.get('/dentist/get-admit-services/' + this.propAdmitId + '/' + this.propToothId).then(res=>{
+                this.admitServices = res.data;
+                console.log(this.admitServices);
+            });
+        },
+
         getAllServices(){
             axios.get('/get-all-services').then(res=>{
                 this.services = res.data;
@@ -174,6 +200,7 @@ export default {
                         onConfirm: ()=> {
                           
                             this.isModalCreate = false;
+                            this.getAdmitServices();
                         }
                     });
                 }
@@ -184,15 +211,15 @@ export default {
             })
         },
 
-        deleteService: function(row){
-            axios.delete('/dentist/appointment-services/' + row.appointment_service_id).then(res=>{
+        removeService: function(nId){
+            axios.delete('/dentist/admit-services/' + nId).then(res=>{
                 if(res.data.status === 'deleted'){
                     this.$buefy.dialog.alert({
                         title: 'DELETED!',
                         message: 'Successfully deleted!',
                         type: 'is-success',
                         onConfirm: ()=> {
-                           
+                            this.getAdmitServices();
                         }
                     });
                 }
@@ -205,7 +232,7 @@ export default {
 
     mounted(){
         this.getAdmit();
-       
+        this.getAdmitServices();
         this.getAllServices();
     }
 }
@@ -215,6 +242,10 @@ export default {
 
 .service-body{
     margin: 15px;
+}
+
+.service-footer{
+
 }
 
 

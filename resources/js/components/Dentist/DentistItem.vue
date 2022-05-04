@@ -236,8 +236,6 @@ export default {
             this.isModalCreate=true;
             this.fields = {};
             this.errors = {};
-
-
         },
 
 
