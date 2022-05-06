@@ -12209,6 +12209,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propData: {
@@ -48119,9 +48123,23 @@ var render = function () {
                       _vm._v(" "),
                       _c("div", [_vm._v("INVENTORY")]),
                       _vm._v(" "),
-                      _vm._m(0, true),
+                      _c("div", { staticClass: "service-body" }, [
+                        _c("ul"),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "buttons is-right" },
+                          [
+                            _c("b-button", {
+                              staticClass: "is-small is-outlined",
+                              attrs: { type: "is-info", "icon-right": "plus" },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
                       _vm._v(" "),
-                      _vm._m(1, true),
+                      _vm._m(0, true),
                     ]),
                   ]),
                 ]),
@@ -48288,12 +48306,6 @@ var render = function () {
   )
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "service-body" }, [_c("ul")])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

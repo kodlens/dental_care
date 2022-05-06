@@ -44,6 +44,10 @@
                                         <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteService(item)">x</b-button></span>
                                     </li> -->
                                 </ul>
+
+                                <div class="buttons is-right">
+                                    <b-button type="is-info" class="is-small is-outlined" icon-right="plus"></b-button>
+                                </div>
                             </div>
                             <div class="service-footer">
                                 <div class="buttons">
