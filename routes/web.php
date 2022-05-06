@@ -47,7 +47,6 @@ Route::get('/covid-updates', [App\Http\Controllers\CovidUpdatesController::class
 Route::post('/sign-up', [App\Http\Controllers\SignUpController::class, 'store']);
 
 
-
 Route::get('/get-user/{id}', [App\Http\Controllers\OpenUserController::class, 'getUser']);
 
 
@@ -155,18 +154,18 @@ Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPat
 
 
 
-Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
-
 
 //patient dentist dashboard
 //during admit
 Route::resource('/dentist/dentist-dashboard-patients', App\Http\Controllers\Dentist\DentistDashboardPatientController::class);
 
 Route::resource('/dentist/dentist-service-patient', App\Http\Controllers\Dentist\DentistServicePatientController::class);
-//admit services table
-Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Dentist\DentistAdmitServiceController::class, 'getAdmitServices']);
-Route::resource('/dentist/admit-services/{id}', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 
+
+//admit services table
+
+Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
+Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Dentist\DentistAdmitServiceController::class, 'getAdmitServices']);
 
 
 
@@ -194,9 +193,20 @@ Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\Dentis
 
 
 
+
+//ITEM
+Route::resource('/dentist/items', App\Http\Controllers\Dentist\ItemController::class);
+Route::get('/dentist/get-items', [App\Http\Controllers\Dentist\ItemController::class, 'getItems']);
+Route::get('/dentist/get-browse-items', [App\Http\Controllers\Dentist\ItemController::class, 'getBrowseItems']);
+
+
+
+
 Route::get('/session', function(){
     return Session::all();
 });
+
+
 
 
 Route::get('/applogout', function(Request $req){

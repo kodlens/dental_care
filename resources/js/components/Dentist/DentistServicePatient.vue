@@ -46,10 +46,10 @@
                                 </ul>
 
                                 <div class="buttons is-right">
-                                    <b-button type="is-info" class="is-small is-outlined" icon-right="plus"></b-button>
+                                    <b-button type="is-info" class="is-small is-outlined" icon-right="plus" @click="openModalInventory(item.admit_service_id)"></b-button>
                                 </div>
                             </div>
-                            <div class="service-footer">
+                            <div class="service-footer"> 
                                 <div class="buttons">
                                     
                                 </div>
@@ -86,7 +86,7 @@
                         <button
                             type="button"
                             class="delete"
-                            @click="isModalCreate = false"/>
+                            @click="isModalCreate = false" />
                     </header>
 
                     <section class="modal-card-body">
@@ -120,8 +120,60 @@
         <!--close modal-->
 
 
+
+
+
+        <!--modal create-->
+        <b-modal v-model="modalAddInventory" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal
+                type = "is-link">
+
+            <form @submit.prevent="submitInventory">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Add Inventory</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalAddInventory = false" />
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label=""
+                                        :type="this.errors.item ? 'is-danger':''"
+                                        :message="this.errors.item ? this.errors.item[0] : ''">
+                                        <modal-item :prop-item="itemname"
+                                            @browseItem="browseItem($event)"></modal-item>
+                                    </b-field>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button
+                            label="Close"
+                            @click="modalAddInventory=false"/>
+                        <button
+                            :class="btnClass"
+                            label="Save"
+                            type="is-success">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+        <!--close modal-->
+
+
         
-    </div>
+    </div> <!-- root div -->
 </template>
 
 <script>
@@ -154,7 +206,11 @@ export default {
                 'button': true,
                 
             },
+
             isModalCreate: false,
+            modalAddInventory: false,
+
+            itemname: '',
 
             admit: {},
             admitServices: [],
@@ -168,7 +224,6 @@ export default {
         getAdmit(){
             axios.get('/dentist/get-admit/' + this.propAdmitId).then(res=>{
                 this.admit = res.data;
-                console.log(this.admit);
             });
         },
 
@@ -176,14 +231,12 @@ export default {
             //param is admit_id and tooth_id
              axios.get('/dentist/get-admit-services/' + this.propAdmitId + '/' + this.propToothId).then(res=>{
                 this.admitServices = res.data;
-                console.log(this.admitServices);
             });
         },
 
         getAllServices(){
             axios.get('/get-all-services').then(res=>{
                 this.services = res.data;
-                console.log(this.services)
             });
         },
 
@@ -215,6 +268,39 @@ export default {
             })
         },
 
+
+        submitInventory: function(){
+            
+            this.fields.admit_id = this.propAdmitId;
+            this.fields.tooth_id = this.propToothId;
+
+            axios.post('/dentist/admit-services-inventory', this.fields).then(res=>{
+                if(res.data.status === 'saved'){
+                    this.$buefy.dialog.alert({
+                        title: 'SAVED!',
+                        message: 'Successfully saved!',
+                        type: 'is-success',
+                        onConfirm: ()=> {
+                          
+                            this.isModalCreate = false;
+                            this.getAdmitServices();
+                        }
+                    });
+                }
+            }).catch(err=>{
+                if(err.response.status === 422){
+                    this.errors = err.response.data.errors;
+                }
+            })
+        },
+
+        openModalInventory(dataId){
+            this.modalAddInventory = true;
+            this.fields = {};
+
+            this.fields.admit_service_id = dataId;
+        },
+
         removeService: function(nId){
             axios.delete('/dentist/admit-services/' + nId).then(res=>{
                 if(res.data.status === 'deleted'){
@@ -228,9 +314,14 @@ export default {
                     });
                 }
             })
+        },
+
+        browseItem(nData){
+            this.itemname = nData.item_name;
+            this.fields.item_id = nData.item_id;
+
         }
         
-
 
     },
 

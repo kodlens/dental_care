@@ -77,10 +77,10 @@
 
         <navbar-component></navbar-component>
 
-    <div>
-        @yield('content')
-    </div>
+        <div>
+            @yield('content')
 
+        </div>
 
     </div>
 </body>

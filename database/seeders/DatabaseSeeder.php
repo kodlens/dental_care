@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             ItemSeeder::class,
             TeethSeeder::class,
             AppointmentSeeder::class,
+            AdmitServiceSeeder::class,
+
         ]);
     }
 }

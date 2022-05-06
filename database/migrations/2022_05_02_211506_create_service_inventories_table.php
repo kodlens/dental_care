@@ -16,9 +16,9 @@ class CreateServiceInventoriesTable extends Migration
         Schema::create('service_inventories', function (Blueprint $table) {
             $table->id('service_inventory_id');
 
-            // $table->unsignedBigInteger('appointment_service_id');
-            // $table->foreign('appointment_service_id')->references('appointment_service_id')->on('appointment_services')
-            //     ->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('admit_service_id');
+            $table->foreign('admit_service_id')->references('admit_service_id')->on('admit_services')
+                ->onUpdate('cascade')->onDelete('cascade');
             // $table->string('item_name')->nullable();
             $table->timestamps();
         });
