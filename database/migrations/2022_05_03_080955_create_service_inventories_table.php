@@ -19,7 +19,11 @@ class CreateServiceInventoriesTable extends Migration
             $table->unsignedBigInteger('admit_service_id');
             $table->foreign('admit_service_id')->references('admit_service_id')->on('admit_services')
                 ->onUpdate('cascade')->onDelete('cascade');
-            // $table->string('item_name')->nullable();
+
+            $table->unsignedBigInteger('item_id');
+            $table->foreign('item_id')->references('item_id')->on('items')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

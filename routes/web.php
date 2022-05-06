@@ -186,10 +186,11 @@ Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistIt
 
 //appointment services controller
 
-Route::resource('/dentist/appointment-services', App\Http\Controllers\Dentist\AppointmentServiceController::class);
+//Route::resource('/dentist/appointment-services', App\Http\Controllers\Dentist\AppointmentServiceController::class);
 
 //inventory item for each service
-Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\DentistServiceInventoryController::class);
+//Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\DentistServiceInventoryController::class);
+Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\ServiceInventoryController::class, 'store']);
 
 
 
