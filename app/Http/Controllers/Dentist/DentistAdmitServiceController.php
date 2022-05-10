@@ -22,7 +22,8 @@ class DentistAdmitServiceController extends Controller
     }
 
     public function getAdmitServices($admitid, $toothid){
-        $data = DB::table('admit_services as a')
+
+        /*$data = DB::table('admit_services as a')
             ->join('admits as b', 'a.admit_id', 'b.admit_id')
             ->join('services as c', 'a.service_id', 'c.service_id')
             ->join('teeth as d', 'a.tooth_id', 'd.tooth_id')
@@ -30,12 +31,17 @@ class DentistAdmitServiceController extends Controller
                 'c.service', 'c.description', 'c.price', 'd.tooth_name')
             ->where('a.admit_id', $admitid)
             ->where('a.tooth_id', $toothid)
+            ->get();*/
+
+        $data = AdmitService::with(['service_inventories', 'services', 'teeth'])
+            ->where('admit_id', $admitid)
+            ->where('tooth_id', $toothid)
             ->get();
 
         return $data;
     }
 
-   
+
 
     public function store(Request $req){
 

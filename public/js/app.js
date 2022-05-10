@@ -12314,6 +12314,7 @@ __webpack_require__.r(__webpack_exports__);
       //param is admit_id and tooth_id
       axios.get('/dentist/get-admit-services/' + this.propAdmitId + '/' + this.propToothId).then(function (res) {
         _this2.admitServices = res.data;
+        console.log(_this2.admitServices);
       });
     },
     getAllServices: function getAllServices() {
@@ -12364,7 +12365,9 @@ __webpack_require__.r(__webpack_exports__);
             onConfirm: function onConfirm() {
               _this5.isModalCreate = false;
 
-              _this5.getAdmitServices();
+              _this5.getServicesInventory(_this5.fields.admit_service_id);
+
+              _this5.modalAddInventory = false;
             }
           });
         }
@@ -48635,9 +48638,9 @@ var render = function () {
                         _c("div", [
                           _vm._v(
                             "Service: " +
-                              _vm._s(item.service) +
+                              _vm._s(item.services.service) +
                               " - ₱ " +
-                              _vm._s(item.price)
+                              _vm._s(item.services.price)
                           ),
                         ]),
                       ]),
@@ -48647,7 +48650,72 @@ var render = function () {
                       _c("div", [_vm._v("INVENTORY")]),
                       _vm._v(" "),
                       _c("div", { staticClass: "service-body" }, [
-                        _c("ul"),
+                        _c(
+                          "ul",
+                          _vm._l(
+                            item.service_inventories,
+                            function (inv, index) {
+                              return _c(
+                                "li",
+                                { key: index, staticClass: "service-row" },
+                                [
+                                  _vm._v(
+                                    "\n                                   " +
+                                      _vm._s(inv.item_id) +
+                                      "\n                                    "
+                                  ),
+                                  _c(
+                                    "span",
+                                    [
+                                      _c(
+                                        "b-button",
+                                        {
+                                          staticClass:
+                                            "is-small is-outlined is-rounded",
+                                          attrs: {
+                                            type: "is-info",
+                                            tag: "a",
+                                            href:
+                                              "services-log-inv?serviceid=" +
+                                              item.service_id +
+                                              "&appid=" +
+                                              _vm.propAppId +
+                                              "&appserviceid=" +
+                                              item.appointment_service_id,
+                                          },
+                                        },
+                                        [_vm._v("Inv")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    [
+                                      _c(
+                                        "b-button",
+                                        {
+                                          staticClass:
+                                            "is-small is-outlined is-rounded",
+                                          attrs: { type: "is-danger" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.deleteService(item)
+                                            },
+                                          },
+                                        },
+                                        [_vm._v("x")]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ]
+                              )
+                            }
+                          ),
+                          0
+                        ),
                         _vm._v(" "),
                         _c(
                           "div",

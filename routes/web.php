@@ -144,7 +144,7 @@ Route::get('/dentist/get-appointments', [App\Http\Controllers\Dentist\DentistApp
 Route::post('/dentist/approve-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'approveAppointment']);
 
 Route::post('/dentist/cancel-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'cancelAppointment']);
-    
+
 Route::post('/dentist/admit-appointment/{id}', [App\Http\Controllers\Dentist\DentistAppointmentController::class, 'admitAppointment']);
 
 
@@ -167,6 +167,8 @@ Route::resource('/dentist/dentist-service-patient', App\Http\Controllers\Dentist
 Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Dentist\DentistAdmitServiceController::class, 'getAdmitServices']);
 
+//service inventory
+Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'store']);
 
 
 
@@ -190,8 +192,6 @@ Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistIt
 
 //inventory item for each service
 //Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\DentistServiceInventoryController::class);
-Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'store']);
-
 
 
 

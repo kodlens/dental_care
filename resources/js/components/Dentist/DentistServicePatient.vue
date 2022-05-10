@@ -28,7 +28,7 @@
                                 </div>
 
 
-                                <div>Service: {{ item.service }} - &#x20B1; {{ item.price }}</div>
+                                <div>Service: {{ item.services.service }} - &#x20B1; {{ item.services.price }}</div>
 
                             </div>
 
@@ -38,11 +38,11 @@
                             <div class="service-body">
 
                                 <ul>
-                                    <!-- <li class="service-row" v-for="(item, index) in appointmentServices" :key="index">
-                                        {{ item.service }} - {{ item.price }}
+                                     <li class="service-row" v-for="(inv, index) in item.service_inventories" :key="index">
+                                       {{ inv.item_id }}
                                         <span><b-button type="is-info" tag="a" :href="`services-log-inv?serviceid=${ item.service_id }&appid=${propAppId}&appserviceid=${item.appointment_service_id}`" class="is-small is-outlined is-rounded">Inv</b-button></span>
                                         <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteService(item)">x</b-button></span>
-                                    </li> -->
+                                    </li>
                                 </ul>
 
                                 <div class="buttons is-right">
@@ -220,6 +220,8 @@ export default {
             admitServices: [],
             services: {},
 
+
+
         }
     },
 
@@ -235,8 +237,11 @@ export default {
             //param is admit_id and tooth_id
              axios.get('/dentist/get-admit-services/' + this.propAdmitId + '/' + this.propToothId).then(res=>{
                 this.admitServices = res.data;
+                console.log(this.admitServices)
             });
         },
+
+
 
         getAllServices(){
             axios.get('/get-all-services').then(res=>{
@@ -287,7 +292,8 @@ export default {
                         onConfirm: ()=> {
 
                             this.isModalCreate = false;
-                            this.getAdmitServices();
+                            this.getServicesInventory(this.fields.admit_service_id);
+                            this.modalAddInventory = false;
                         }
                     });
                 }
@@ -334,6 +340,7 @@ export default {
         this.getAdmit();
         this.getAdmitServices();
         this.getAllServices();
+
     }
 }
 </script>

@@ -13,5 +13,8 @@ class ServiceInventory extends Model
     protected $table = 'service_inventories';
     protected $primaryKey = 'service_inventory_id';
     //tobe continue
-    protected $fillable = ['admin_service_id', 'item_id', 'tooth_id', 'remarks'];
+    protected $fillable = ['admit_service_id', 'item_id', 'tooth_id', 'remarks'];
+
+
+
 }

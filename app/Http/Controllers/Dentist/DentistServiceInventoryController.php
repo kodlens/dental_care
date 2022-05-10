@@ -28,14 +28,9 @@ class DentistServiceInventoryController extends Controller
         return Item::find($id);
     }
 
-    public function getDentistItems(Request $req){
-
-        $sort = explode('.', $req->sort_by);
-
-        $data = Item::where('item_name', 'like', $req->itemname . '%')
-            ->orderBy($sort[0], $sort[1])
-            ->paginate($req->perpage);
-
+    public function getServiceInventories($admitServiceId){
+        $data = ServiceInventory::where('admit_service_id', $admitServiceId)
+            ->get();
         return $data;
     }
 
@@ -49,7 +44,7 @@ class DentistServiceInventoryController extends Controller
         ]);
 
         ServiceInventory::create([
-            'admin_service_id' => $req->admin_service_id,
+            'admit_service_id' => $req->admit_service_id,
             'item_id' => $req->item_id,
             'tooth_id' => $req->tooth_id,
             'remarks' => $req->remarks

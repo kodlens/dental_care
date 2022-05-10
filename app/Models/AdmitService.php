@@ -15,4 +15,21 @@ class AdmitService extends Model
 
     protected $fillable = ['admit_id', 'service_id', 'tooth_id'];
 
+
+    public function service_inventories(){
+        return $this->hasMany(ServiceInventory::class, 'admit_service_id', 'admit_service_id');
+    }
+
+    public function services(){
+        return $this->hasOne(Service::class, 'service_id', 'service_id');
+    }
+
+    public function teeth(){
+        return $this->hasOne(Teeth::class, 'tooth_id', 'tooth_id');
+    }
+
+
+
+
+
 }
