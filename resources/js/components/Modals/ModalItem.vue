@@ -1,9 +1,6 @@
 <template>
     <div>
-        <b-field label="Item Name"
-            :type="this.errors.item_id ? 'is-danger':''"
-            :message="this.errors.item_id ? this.errors.item_id[0] : ''">
-
+        <b-field>
             <b-input :value="valueItemName" expanded icon-pack="fa"
                     icon="user" placeholder="SELECT ITEM NAME" required readonly>
             </b-input>
@@ -95,6 +92,9 @@ export default {
         },
        
     },
+
+
+
     data(){
         return{
             data: [],
@@ -183,7 +183,11 @@ export default {
     computed: {
         valueItemName(){
             return this.propItem;
-        }
+        },
+
+      
+
+        
     },
 
 }

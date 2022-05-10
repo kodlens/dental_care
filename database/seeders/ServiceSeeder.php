@@ -21,7 +21,7 @@ class ServiceSeeder extends Seeder
                 'price' => 250
             ],
             [
-                'service' => ' Dental Crowns',
+                'service' => 'Dental Crowns',
                 'description' => 'A dental crown is a dental prosthesis which replaces the visible part of a tooth. A dental crown functions to strengthen teeth, restore their original shape, and improve their appearance. Dental crowns are also used to hold dental bridges in place and cover dental implants.',
                 'price' => 300
             ],

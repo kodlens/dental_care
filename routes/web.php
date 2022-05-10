@@ -190,7 +190,7 @@ Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistIt
 
 //inventory item for each service
 //Route::resource('/dentist/services-log-inv', App\Http\Controllers\Dentist\DentistServiceInventoryController::class);
-Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\ServiceInventoryController::class, 'store']);
+Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'store']);
 
 
 

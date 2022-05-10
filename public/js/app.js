@@ -12265,6 +12265,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propData: {
@@ -12373,6 +12377,7 @@ __webpack_require__.r(__webpack_exports__);
     openModalInventory: function openModalInventory(dataId) {
       this.modalAddInventory = true;
       this.fields = {};
+      this.errors = {};
       this.fields.admit_service_id = dataId;
     },
     removeService: function removeService(nId) {
@@ -13034,9 +13039,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
 //
 //
 //
@@ -34826,7 +34828,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\r\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48890,10 +48892,10 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "",
-                                type: this.errors.item ? "is-danger" : "",
-                                message: this.errors.item
-                                  ? this.errors.item[0]
+                                label: "Item Name",
+                                type: this.errors.item_id ? "is-danger" : "",
+                                message: this.errors.item_id
+                                  ? this.errors.item_id[0]
                                   : "",
                               },
                             },
@@ -48904,6 +48906,26 @@ var render = function () {
                                   browseItem: function ($event) {
                                     return _vm.browseItem($event)
                                   },
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "textarea",
+                                  placeholder: "Remarks...",
+                                },
+                                model: {
+                                  value: _vm.fields.remarks,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "remarks", $$v)
+                                  },
+                                  expression: "fields.remarks",
                                 },
                               }),
                             ],
@@ -49908,13 +49930,6 @@ var render = function () {
     [
       _c(
         "b-field",
-        {
-          attrs: {
-            label: "Item Name",
-            type: this.errors.item_id ? "is-danger" : "",
-            message: this.errors.item_id ? this.errors.item_id[0] : "",
-          },
-        },
         [
           _c("b-input", {
             attrs: {

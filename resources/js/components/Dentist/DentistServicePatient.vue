@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="section">
-            
+
             <div class="columns is-centered">
                 <div class="column is-6">
                     <div class="box">
@@ -26,10 +26,10 @@
                                         <b-button type="is-danger" @click="removeService(item.admit_service_id)" class="is-small is-rounded is-outlined">X</b-button>
                                     </div>
                                 </div>
-                                
+
 
                                 <div>Service: {{ item.service }} - &#x20B1; {{ item.price }}</div>
-                                
+
                             </div>
 
                             <hr>
@@ -49,9 +49,9 @@
                                     <b-button type="is-info" class="is-small is-outlined" icon-right="plus" @click="openModalInventory(item.admit_service_id)"></b-button>
                                 </div>
                             </div>
-                            <div class="service-footer"> 
+                            <div class="service-footer">
                                 <div class="buttons">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -147,11 +147,15 @@
 
                             <div class="columns">
                                 <div class="column">
-                                    <b-field label=""
-                                        :type="this.errors.item ? 'is-danger':''"
-                                        :message="this.errors.item ? this.errors.item[0] : ''">
+                                    <b-field label="Item Name"
+                                        :type="this.errors.item_id ? 'is-danger':''"
+                                        :message="this.errors.item_id ? this.errors.item_id[0] : ''">
                                         <modal-item :prop-item="itemname"
                                             @browseItem="browseItem($event)"></modal-item>
+                                    </b-field>
+
+                                    <b-field>
+                                        <b-input type="textarea" v-model="fields.remarks" placeholder="Remarks..." />
                                     </b-field>
                                 </div>
                             </div>
@@ -172,7 +176,7 @@
         <!--close modal-->
 
 
-        
+
     </div> <!-- root div -->
 </template>
 
@@ -193,18 +197,18 @@ export default {
             type: [String, Number],
             default: 0
         },
-       
+
     },
     data(){
         return{
-            
+
             fields: {},
             errors: {},
 
             btnClass: {
                 'is-success' : true,
                 'button': true,
-                
+
             },
 
             isModalCreate: false,
@@ -243,7 +247,7 @@ export default {
         openModal(){
             this.isModalCreate = true;
         },
-    
+
         submit: function(){
             this.fields.admit_id = this.propAdmitId;
             this.fields.tooth_id = this.propToothId;
@@ -255,7 +259,7 @@ export default {
                         message: 'Successfully saved!',
                         type: 'is-success',
                         onConfirm: ()=> {
-                          
+
                             this.isModalCreate = false;
                             this.getAdmitServices();
                         }
@@ -270,7 +274,7 @@ export default {
 
 
         submitInventory: function(){
-            
+
             this.fields.admit_id = this.propAdmitId;
             this.fields.tooth_id = this.propToothId;
 
@@ -281,7 +285,7 @@ export default {
                         message: 'Successfully saved!',
                         type: 'is-success',
                         onConfirm: ()=> {
-                          
+
                             this.isModalCreate = false;
                             this.getAdmitServices();
                         }
@@ -297,6 +301,7 @@ export default {
         openModalInventory(dataId){
             this.modalAddInventory = true;
             this.fields = {};
+            this.errors = {};
 
             this.fields.admit_service_id = dataId;
         },
@@ -321,7 +326,7 @@ export default {
             this.fields.item_id = nData.item_id;
 
         }
-        
+
 
     },
 

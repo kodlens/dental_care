@@ -23,6 +23,8 @@ class CreateServiceInventoriesTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->foreign('item_id')->references('item_id')->on('items')
                 ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->unsignedBigInteger('tooth_id')->default(0);
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

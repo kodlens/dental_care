@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dentist;
 
 use App\Http\Controllers\Controller;
+use App\Models\ServiceInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +29,7 @@ class DentistServiceInventoryController extends Controller
     }
 
     public function getDentistItems(Request $req){
-        
+
         $sort = explode('.', $req->sort_by);
 
         $data = Item::where('item_name', 'like', $req->itemname . '%')
@@ -42,11 +43,16 @@ class DentistServiceInventoryController extends Controller
     public function store(Request $req){
 
         $req->validate([
-            'item_name' => ['required', 'unique:items']
+            'item_id' => ['required'],
+        ], $message = [
+            'item_id.required' => ['Item is required. Please select item.']
         ]);
 
-        Item::create([
-            'item_name' => strtoupper($req->item_name)
+        ServiceInventory::create([
+            'admin_service_id' => $req->admin_service_id,
+            'item_id' => $req->item_id,
+            'tooth_id' => $req->tooth_id,
+            'remarks' => $req->remarks
         ]);
 
         return response()->json([
