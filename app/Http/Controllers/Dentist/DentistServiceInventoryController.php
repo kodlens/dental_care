@@ -73,7 +73,8 @@ class DentistServiceInventoryController extends Controller
 
 
     public function destroy($id){
-        Item::destroy($id);
+        ServiceInventory::destroy($id);
+        
         return response()->json([
             'status' => 'deleted'
         ],200);

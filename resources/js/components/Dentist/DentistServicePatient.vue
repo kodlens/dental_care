@@ -36,12 +36,11 @@
 
                             <div>INVENTORY</div>
                             <div class="service-body">
-
                                 <ul>
                                      <li class="service-row" v-for="(inv, index) in item.service_inventories" :key="index">
-                                       {{ inv.item_id }}
-                                        <span><b-button type="is-info" tag="a" :href="`services-log-inv?serviceid=${ item.service_id }&appid=${propAppId}&appserviceid=${item.appointment_service_id}`" class="is-small is-outlined is-rounded">Inv</b-button></span>
-                                        <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteService(item)">x</b-button></span>
+                                       {{ inv.item_id }} - {{ inv.remarks }}
+                                        <span><b-button type="is-info" tag="a" class="is-small is-outlined is-rounded" icon-left="pencil"></b-button></span>
+                                        <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteServiceInv(inv.service_inventory_id)">x</b-button></span>
                                     </li>
                                 </ul>
 
@@ -66,18 +65,17 @@
                     </div>
                 </div>
             </div>
-
         </div> <!--section -->
 
 
         <!--modal create-->
         <b-modal v-model="isModalCreate" has-modal-card
-                 trap-focus
-                 :width="640"
-                 aria-role="dialog"
-                 aria-label="Modal"
-                 aria-modal
-                type = "is-link">
+             trap-focus
+             :width="640"
+             aria-role="dialog"
+             aria-label="Modal"
+             aria-modal
+            type = "is-link">
 
             <form @submit.prevent="submit">
                 <div class="modal-card">
@@ -237,7 +235,6 @@ export default {
             //param is admit_id and tooth_id
              axios.get('/dentist/get-admit-services/' + this.propAdmitId + '/' + this.propToothId).then(res=>{
                 this.admitServices = res.data;
-                console.log(this.admitServices)
             });
         },
 
@@ -276,42 +273,6 @@ export default {
                 }
             })
         },
-
-
-        submitInventory: function(){
-
-            this.fields.admit_id = this.propAdmitId;
-            this.fields.tooth_id = this.propToothId;
-
-            axios.post('/dentist/admit-services-inventory', this.fields).then(res=>{
-                if(res.data.status === 'saved'){
-                    this.$buefy.dialog.alert({
-                        title: 'SAVED!',
-                        message: 'Successfully saved!',
-                        type: 'is-success',
-                        onConfirm: ()=> {
-
-                            this.isModalCreate = false;
-                            this.getServicesInventory(this.fields.admit_service_id);
-                            this.modalAddInventory = false;
-                        }
-                    });
-                }
-            }).catch(err=>{
-                if(err.response.status === 422){
-                    this.errors = err.response.data.errors;
-                }
-            })
-        },
-
-        openModalInventory(dataId){
-            this.modalAddInventory = true;
-            this.fields = {};
-            this.errors = {};
-
-            this.fields.admit_service_id = dataId;
-        },
-
         removeService: function(nId){
             axios.delete('/dentist/admit-services/' + nId).then(res=>{
                 if(res.data.status === 'deleted'){
@@ -331,7 +292,61 @@ export default {
             this.itemname = nData.item_name;
             this.fields.item_id = nData.item_id;
 
-        }
+        },
+
+
+
+        //SERVICE INVENTORY
+        submitInventory: function(){
+            this.fields.admit_id = this.propAdmitId;
+            this.fields.tooth_id = this.propToothId;
+
+            axios.post('/dentist/admit-services-inventory', this.fields).then(res=>{
+                if(res.data.status === 'saved'){
+                    this.$buefy.dialog.alert({
+                        title: 'SAVED!',
+                        message: 'Successfully saved!',
+                        type: 'is-success',
+                        onConfirm: ()=> {
+                            this.itemname = null;
+                            this.fields = {};
+                            this.modalAddInventory = false;
+
+                            this.getAdmitServices();
+
+                        }
+                    });
+                }
+            }).catch(err=>{
+                if(err.response.status === 422){
+                    this.errors = err.response.data.errors;
+                }
+            })
+        },
+
+        openModalInventory(dataId){
+            this.modalAddInventory = true;
+            this.fields = {};
+            this.errors = {};
+
+            this.fields.admit_service_id = dataId;
+        },
+
+        //deleting service_inventory
+        deleteServiceInv: function(nId){
+            axios.delete('/dentist/admit-services-inventory/' + nId).then(res=>{
+                if(res.data.status === 'deleted'){
+                    this.$buefy.dialog.alert({
+                        title: 'DELETED!',
+                        message: 'Successfully deleted!',
+                        type: 'is-success',
+                        onConfirm: ()=> {
+                            this.getAdmitServices();
+                        }
+                    });
+                }
+            })
+        },
 
 
     },

@@ -169,6 +169,7 @@ Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Denti
 
 //service inventory
 Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'store']);
+Route::delete('/dentist/admit-services-inventory/{id}', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'destroy']);
 
 
 
