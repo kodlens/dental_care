@@ -210,6 +210,10 @@ Route::get('/session', function(){
 
 
 
+Route::get('/collect', function(){
+    return $collection = collect([1, 2, 3]);
+});
+
 
 Route::get('/applogout', function(Request $req){
     \Auth::logout();
