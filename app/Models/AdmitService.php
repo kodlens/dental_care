@@ -25,7 +25,8 @@ class AdmitService extends Model
         //     'id', // Local key on the projects table...
         //     'id' // Local key on the environments table...
         // );
-        return $this->hasMany(ServiceInventory::class, 'admit_service_id', 'admit_service_id');
+        return $this->hasMany(ServiceInventory::class, 'admit_service_id', 'admit_service_id')
+            ->join('items', 'service_inventories.item_id', 'items.item_id');
         //return $this->relation()->with(ServiceInventory::class, 'admit_service_id', 'admit_service_id');
     }
 

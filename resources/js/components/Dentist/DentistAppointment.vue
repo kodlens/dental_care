@@ -80,7 +80,7 @@
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
                                 <span class="pending" v-if="props.row.appoint_status == 0">PENDING</span>
-                                <span class="approve" v-else-if="props.row.appoint_status == 1">APPORVED</span>
+                                <span class="approve" v-else-if="props.row.appoint_status == 1">ADMITTED</span>
                                 <span class="cancel" v-else>CANCELLED</span>
                             </b-table-column>
 
@@ -94,12 +94,12 @@
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
                                     <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
+<!--                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>-->
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item>
                                     <!-- <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/services-log?patient=${props.row.user_id}&appid=${props.row.appointment_id}`">Services Log</b-dropdown-item> -->
                                     <b-dropdown-item aria-role="listitem" @click="admitPatient(props.row)">Admit Patient</b-dropdown-item>
-                                    
+
                                 </b-dropdown>
 
                             </b-table-column>
@@ -125,7 +125,7 @@
             aria-modal
             type = "is-link">
 
-        
+
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -239,7 +239,7 @@ export default {
                     if (data.total / this.perPage > 1000) {
                         currentTotal = this.perPage * 1000
                     }
-                 
+
                     this.total = currentTotal
                     data.data.forEach((item) => {
                         this.data.push(item)
@@ -459,6 +459,14 @@ export default {
 
         //admit patient
         admitPatient: function(row){
+
+            if(row.appoint_status === 1){
+                this.$buefy.toast.open({
+                    message: 'Already admitted.',
+                    type: 'is-warning'
+                });
+                return false;
+            }
             axios.post('/dentist/admit-appointment/'+ row.appointment_id).then(res=>{
                 if(res.data.status === 'saved'){
                     this.$buefy.toast.open({
@@ -498,7 +506,7 @@ export default {
         font-size: .8em;
     }
 
-    
+
     /* .modal .animation-content .modal-card { */
         /* overflow: visible !important; */
     /* } */

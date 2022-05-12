@@ -33,16 +33,10 @@ class DentistAdmitServiceController extends Controller
             ->where('a.tooth_id', $toothid)
             ->get();*/
 
-//        $data = AdmitService::with(['service_inventories', 'services', 'teeth'])
-//            ->where('admit_id', $admitid)
-//            ->where('tooth_id', $toothid)
-//            ->get();
-
-
-        $data = DB::table('admit_services')
-            ->join('admits', function() {
-
-            })
+        $data = AdmitService::with(['service_inventories', 'services', 'teeth'])
+            ->where('admit_id', $admitid)
+            ->where('tooth_id', $toothid)
+            ->get();
 
         return $data;
     }

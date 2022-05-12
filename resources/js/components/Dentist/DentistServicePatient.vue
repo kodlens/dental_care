@@ -4,6 +4,9 @@
 
             <div class="columns is-centered">
                 <div class="column is-6">
+                    <div class="buttons">
+                        <b-button label="BACK" @click="goBack()"></b-button>
+                    </div>
                     <div class="box">
                         <div>
                             PATIENT: {{ admit.patient_lname }}, {{admit.patient_fname}} {{ admit.patient_mname }}
@@ -38,8 +41,8 @@
                             <div class="service-body">
                                 <ul>
                                      <li class="service-row" v-for="(inv, index) in item.service_inventories" :key="index">
-                                       {{ inv.item_id }} - {{ inv.remarks }}
-                                        <span><b-button type="is-info" tag="a" class="is-small is-outlined is-rounded" icon-left="pencil"></b-button></span>
+                                         {{ inv.item_id }} - {{ inv.item_name }} <span v-if="inv.remarks">({{ inv.remarks }})</span>
+<!--                                        <span><b-button type="is-info" tag="a" class="is-small is-outlined is-rounded" icon-left="pencil"></b-button></span>-->
                                         <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteServiceInv(inv.service_inventory_id)">x</b-button></span>
                                     </li>
                                 </ul>
@@ -292,6 +295,10 @@ export default {
             this.itemname = nData.item_name;
             this.fields.item_id = nData.item_id;
 
+        },
+
+        goBack(){
+            history.back();
         },
 
 

@@ -18,15 +18,39 @@ class ItemSeeder extends Seeder
 
         $data = [
             [
-                'item_name' => 'ITEM PANG IBOT',
+                'item_name' => 'Mouth mirror',
             ],
             [
-                'item_name' => 'ITEM PANG BRUSH',
+                'item_name' => 'Dental probe',
             ],
             [
-                'item_name' => 'ITEM PANG PASTA',
+                'item_name' => 'Anaesthetic',
             ],
-           
+            [
+                'item_name' => 'Dental syringe',
+            ],
+            [
+                'item_name' => 'Dental drill',
+            ],
+            [
+                'item_name' => 'Spoon excavator',
+            ],
+            [
+                'item_name' => 'Burnisher',
+            ],
+            [
+                'item_name' => 'Scaler',
+            ],
+            [
+                'item_name' => 'Curette',
+            ],
+            [
+                'item_name' => 'Suction Device',
+            ],
+            [
+                'item_name' => 'X-ray',
+            ],
+
         ];
 
         \App\Models\Item::insertOrIgnore($data);

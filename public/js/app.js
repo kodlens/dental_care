@@ -11199,6 +11199,14 @@ __webpack_require__.r(__webpack_exports__);
     admitPatient: function admitPatient(row) {
       var _this12 = this;
 
+      if (row.appoint_status === 1) {
+        this.$buefy.toast.open({
+          message: 'Already admitted.',
+          type: 'is-warning'
+        });
+        return false;
+      }
+
       axios.post('/dentist/admit-appointment/' + row.appointment_id).then(function (res) {
         if (res.data.status === 'saved') {
           _this12.$buefy.toast.open({
@@ -11230,6 +11238,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12267,6 +12280,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propData: {
@@ -12367,6 +12383,9 @@ __webpack_require__.r(__webpack_exports__);
     browseItem: function browseItem(nData) {
       this.itemname = nData.item_name;
       this.fields.item_id = nData.item_id;
+    },
+    goBack: function goBack() {
+      history.back();
     },
     //SERVICE INVENTORY
     submitInventory: function submitInventory() {
@@ -47046,9 +47065,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                            " +
+                                "\n                                " +
                                   _vm._s(props.row.appointment_id) +
-                                  "\n                        "
+                                  "\n                            "
                               ),
                             ]
                           },
@@ -47064,13 +47083,13 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                            " +
+                                "\n                                " +
                                   _vm._s(props.row.user_lname) +
                                   ", " +
                                   _vm._s(props.row.user_fname) +
                                   " " +
                                   _vm._s(props.row.user_mname) +
-                                  "\n                        "
+                                  "\n                            "
                               ),
                             ]
                           },
@@ -47086,11 +47105,11 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                            " +
+                                "\n                                " +
                                   _vm._s(props.row.service) +
                                   " (₱" +
                                   _vm._s(props.row.price) +
-                                  ")\n                        "
+                                  ")\n                            "
                               ),
                             ]
                           },
@@ -47109,13 +47128,13 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                            " +
+                                "\n                                " +
                                   _vm._s(props.row.appoint_date) +
                                   " " +
                                   _vm._s(
                                     _vm._f("formatTime")(props.row.appoint_time)
                                   ) +
-                                  "\n                        "
+                                  "\n                            "
                               ),
                             ]
                           },
@@ -47131,9 +47150,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                            " +
+                                "\n                                " +
                                   _vm._s(props.row.user_contact_no) +
-                                  "\n                        "
+                                  "\n                            "
                               ),
                             ]
                           },
@@ -47158,7 +47177,7 @@ var render = function () {
                                   ])
                                 : props.row.appoint_status == 1
                                 ? _c("span", { staticClass: "approve" }, [
-                                    _vm._v("APPORVED"),
+                                    _vm._v("ADMITTED"),
                                   ])
                                 : _c("span", { staticClass: "cancel" }, [
                                     _vm._v("CANCELLED"),
@@ -47219,21 +47238,6 @@ var render = function () {
                                       },
                                     },
                                     [_vm._v("Update")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.approveAppointment(
-                                            props.row
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Approve")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -47508,9 +47512,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "columns" }, [
+        _c("div", { staticClass: "column" }, [
+          _c("div", { staticClass: "box" }),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -48587,24 +48604,40 @@ var render = function () {
         [
           _c("div", { staticClass: "columns is-centered" }, [
             _c("div", { staticClass: "column is-6" }, [
+              _c(
+                "div",
+                { staticClass: "buttons" },
+                [
+                  _c("b-button", {
+                    attrs: { label: "BACK" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.goBack()
+                      },
+                    },
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("div", { staticClass: "box" }, [
                 _c("div", [
                   _vm._v(
-                    "\n                        PATIENT: " +
+                    "\n                            PATIENT: " +
                       _vm._s(_vm.admit.patient_lname) +
                       ", " +
                       _vm._s(_vm.admit.patient_fname) +
                       " " +
                       _vm._s(_vm.admit.patient_mname) +
-                      "\n                    "
+                      "\n                        "
                   ),
                 ]),
                 _vm._v(" "),
                 _c("div", [
                   _vm._v(
-                    "\n                        ADDRESS: " +
+                    "\n                            ADDRESS: " +
                       _vm._s(_vm.admit.barangay) +
-                      "\n                    "
+                      "\n                        "
                   ),
                 ]),
               ]),
@@ -48675,27 +48708,17 @@ var render = function () {
                                 { key: index, staticClass: "service-row" },
                                 [
                                   _vm._v(
-                                    "\n                                   " +
+                                    "\n                                         " +
                                       _vm._s(inv.item_id) +
                                       " - " +
-                                      _vm._s(inv.remarks) +
-                                      "\n                                    "
+                                      _vm._s(inv.item_name) +
+                                      " "
                                   ),
-                                  _c(
-                                    "span",
-                                    [
-                                      _c("b-button", {
-                                        staticClass:
-                                          "is-small is-outlined is-rounded",
-                                        attrs: {
-                                          type: "is-info",
-                                          tag: "a",
-                                          "icon-left": "pencil",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
+                                  inv.remarks
+                                    ? _c("span", [
+                                        _vm._v("(" + _vm._s(inv.remarks) + ")"),
+                                      ])
+                                    : _vm._e(),
                                   _vm._v(" "),
                                   _c(
                                     "span",

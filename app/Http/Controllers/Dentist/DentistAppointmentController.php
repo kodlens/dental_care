@@ -38,7 +38,7 @@ class DentistAppointmentController extends Controller
             ->join('users as c', 'a.dentist_id', 'c.user_id')
             ->join('services as d', 'a.service_id', 'd.service_id')
             ->join('users as e', 'a.user_id', 'e.user_id')
-            ->select('a.*', 'c.lname as dentist_lname', 'c.fname as dentist_fname', 'c.mname as dentist_mname', 'd.*', 'e.lname as user_lname', 
+            ->select('a.*', 'c.lname as dentist_lname', 'c.fname as dentist_fname', 'c.mname as dentist_mname', 'd.*', 'e.lname as user_lname',
                 'e.fname as user_fname', 'e.mname as user_mname', 'e.contact_no as user_contact_no')
             ->where('a.dentist_id', $user->user_id)
             ->orderBy($sort[0], $sort[1])
@@ -80,7 +80,8 @@ class DentistAppointmentController extends Controller
 
     public function admitAppointment($id){
         $data = Appointment::find($id);
-
+        $data->appoint_status = 1;
+        $data->save();
 
         Admit::create([
             'patient_id' => $data->user_id,
@@ -113,7 +114,7 @@ class DentistAppointmentController extends Controller
     }
 
 
-    
+
 
 
 }
