@@ -12198,15 +12198,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       fields: {},
       errors: {},
       global_id: 0,
+      modalChangePassword: false,
       provinces: [],
       cities: [],
-      barangays: []
+      barangays: [],
+      btnClass: {
+        'is-success': true,
+        'button': true,
+        'is-loading': false
+      }
     };
   },
   methods: {
@@ -12269,7 +12340,36 @@ __webpack_require__.r(__webpack_exports__);
         _this5.barangays = res.data;
       });
     },
-    openModalChangePassword: function openModalChangePassword() {}
+    openModalChangePassword: function openModalChangePassword() {
+      this.modalChangePassword = true;
+      this.fields.password = null;
+      this.errors = {};
+    },
+    changePassword: function changePassword() {
+      var _this6 = this;
+
+      axios.post('/change-password', this.fields).then(function (res) {
+        if (res.data.status === 'changed') {
+          _this6.$buefy.dialog.alert({
+            title: 'PASSWORD CHANGED?',
+            type: 'is-success',
+            message: 'Password successfully changed.',
+            confirmText: 'Ok',
+            onConfirm: function onConfirm() {
+              _this6.modalChangePassword = false;
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this6.errors = err.response.data.errors;
+        }
+
+        if (err.response.status === 406) {
+          alert('Invalid password');
+        }
+      });
+    }
   },
   mounted: function mounted() {
     this.loadProvince();
@@ -13580,66 +13680,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -48798,441 +48838,643 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "section" }, [
-      _c("div", { staticClass: "columns is-centered" }, [
-        _c("div", { staticClass: "column is-6" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.submit.apply(null, arguments)
+    _c(
+      "div",
+      { staticClass: "section" },
+      [
+        _c("div", { staticClass: "columns is-centered" }, [
+          _c("div", { staticClass: "column is-6" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.submit.apply(null, arguments)
+                  },
                 },
               },
+              [
+                _c("div", { staticClass: "box" }, [
+                  _c("h1", { staticClass: "title is-4" }, [
+                    _vm._v("MY PROFILE"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "container" }, [
+                    _c(
+                      "div",
+                      { staticClass: "buttons is-right" },
+                      [
+                        _c("b-button", {
+                          attrs: { "icon-left": "lock" },
+                          on: { click: _vm.openModalChangePassword },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Username" } },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text", readonly: "" },
+                                model: {
+                                  value: _vm.fields.username,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "username", $$v)
+                                  },
+                                  expression: "fields.username",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Lastname",
+                                type: this.errors.lname ? "is-danger" : "",
+                                message: this.errors.lname
+                                  ? this.errors.lname[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.fields.lname,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "lname", $$v)
+                                  },
+                                  expression: "fields.lname",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Firstname",
+                                type: this.errors.fname ? "is-danger" : "",
+                                message: this.errors.fname
+                                  ? this.errors.fname[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.fields.fname,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "fname", $$v)
+                                  },
+                                  expression: "fields.fname",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Middlename" } },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.fields.mname,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "mname", $$v)
+                                  },
+                                  expression: "fields.mname",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Suffix" } },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.fields.suffix,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "suffix", $$v)
+                                  },
+                                  expression: "fields.suffix",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Sex",
+                                expanded: "",
+                                type: this.errors.sex ? "is-danger" : "",
+                                message: this.errors.sex
+                                  ? this.errors.sex[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { expanded: "" },
+                                  model: {
+                                    value: _vm.fields.sex,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "sex", $$v)
+                                    },
+                                    expression: "fields.sex",
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "MALE" } }, [
+                                    _vm._v("MALE"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "FEMALE" } }, [
+                                    _vm._v("FEMALE"),
+                                  ]),
+                                ]
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Contact No." } },
+                            [
+                              _c("b-input", {
+                                attrs: { type: "text" },
+                                model: {
+                                  value: _vm.fields.contact_no,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "contact_no", $$v)
+                                  },
+                                  expression: "fields.contact_no",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Province",
+                                expanded: "",
+                                type: this.errors.province ? "is-danger" : "",
+                                message: this.errors.province
+                                  ? this.errors.province[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { expanded: "" },
+                                  on: { input: _vm.loadCity },
+                                  model: {
+                                    value: _vm.fields.province,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "province", $$v)
+                                    },
+                                    expression: "fields.province",
+                                  },
+                                },
+                                _vm._l(_vm.provinces, function (item, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: item.provCode },
+                                    },
+                                    [_vm._v(_vm._s(item.provDesc))]
+                                  )
+                                }),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "City",
+                                expanded: "",
+                                type: this.errors.city ? "is-danger" : "",
+                                message: this.errors.city
+                                  ? this.errors.city[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { expanded: "" },
+                                  on: { input: _vm.loadBarangay },
+                                  model: {
+                                    value: _vm.fields.city,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "city", $$v)
+                                    },
+                                    expression: "fields.city",
+                                  },
+                                },
+                                _vm._l(_vm.cities, function (item, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: item.citymunCode },
+                                    },
+                                    [_vm._v(_vm._s(item.citymunDesc))]
+                                  )
+                                }),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Barangay",
+                                expanded: "",
+                                type: this.errors.barangay ? "is-danger" : "",
+                                message: this.errors.barangay
+                                  ? this.errors.barangay[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { expanded: "" },
+                                  model: {
+                                    value: _vm.fields.barangay,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "barangay", $$v)
+                                    },
+                                    expression: "fields.barangay",
+                                  },
+                                },
+                                _vm._l(_vm.barangays, function (item, index) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: index,
+                                      domProps: { value: item.brgyCode },
+                                    },
+                                    [_vm._v(_vm._s(item.brgyDesc))]
+                                  )
+                                }),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Street" } },
+                            [
+                              _c("b-input", {
+                                attrs: { placeholder: "Street" },
+                                model: {
+                                  value: _vm.fields.street,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "street", $$v)
+                                  },
+                                  expression: "fields.street",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              "has-modal-card": "",
+              "trap-focus": "",
+              width: 640,
+              "aria-role": "dialog",
+              "aria-label": "Modal",
+              "aria-modal": "",
             },
-            [
-              _c("div", { staticClass: "box" }, [
-                _c("h1", { staticClass: "title is-4" }, [_vm._v("MY PROFILE")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "container" }, [
-                  _c(
-                    "div",
-                    { staticClass: "buttons is-right" },
-                    [
-                      _c("b-button", {
-                        attrs: { "icon-left": "lock" },
-                        on: { clicl: _vm.openModalChangePassword },
-                      }),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Username" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text", readonly: "" },
-                              model: {
-                                value: _vm.fields.username,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "username", $$v)
-                                },
-                                expression: "fields.username",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Lastname",
-                              type: this.errors.lname ? "is-danger" : "",
-                              message: this.errors.lname
-                                ? this.errors.lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.lname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "lname", $$v)
-                                },
-                                expression: "fields.lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
+            model: {
+              value: _vm.modalChangePassword,
+              callback: function ($$v) {
+                _vm.modalChangePassword = $$v
+              },
+              expression: "modalChangePassword",
+            },
+          },
+          [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.changePassword.apply(null, arguments)
+                  },
+                },
+              },
+              [
+                _c("div", { staticClass: "modal-card" }, [
+                  _c("header", { staticClass: "modal-card-head" }, [
+                    _c("p", { staticClass: "modal-card-title" }, [
+                      _vm._v("Change Password"),
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Firstname",
-                              type: this.errors.fname ? "is-danger" : "",
-                              message: this.errors.fname
-                                ? this.errors.fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.fname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "fname", $$v)
-                                },
-                                expression: "fields.fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
+                    _c("button", {
+                      staticClass: "delete",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          _vm.modalChangePassword = false
+                        },
+                      },
+                    }),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
+                  _c("section", { staticClass: "modal-card-body" }, [
+                    _c("div", {}, [
+                      _c("div", { staticClass: "columns" }, [
                         _c(
-                          "b-field",
-                          { attrs: { label: "Middlename" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.mname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "mname", $$v)
-                                },
-                                expression: "fields.mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Suffix" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.suffix,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "suffix", $$v)
-                                },
-                                expression: "fields.suffix",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Sex",
-                              expanded: "",
-                              type: this.errors.sex ? "is-danger" : "",
-                              message: this.errors.sex
-                                ? this.errors.sex[0]
-                                : "",
-                            },
-                          },
+                          "div",
+                          { staticClass: "column" },
                           [
                             _c(
-                              "b-select",
+                              "b-field",
                               {
-                                attrs: { expanded: "" },
-                                model: {
-                                  value: _vm.fields.sex,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "sex", $$v)
-                                  },
-                                  expression: "fields.sex",
+                                attrs: {
+                                  label: "Old Password",
+                                  "label-position": "on-border",
+                                  type: this.errors.old_password
+                                    ? "is-danger"
+                                    : "",
+                                  message: this.errors.old_password
+                                    ? this.errors.old_password[0]
+                                    : "",
                                 },
                               },
                               [
-                                _c("option", { attrs: { value: "MALE" } }, [
-                                  _vm._v("MALE"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "FEMALE" } }, [
-                                  _vm._v("FEMALE"),
-                                ]),
-                              ]
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "password",
+                                    "password-reveal": "",
+                                    placeholder: "Password",
+                                    required: "",
+                                  },
+                                  model: {
+                                    value: _vm.fields.old_password,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "old_password", $$v)
+                                    },
+                                    expression: "fields.old_password",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-field",
+                              {
+                                attrs: {
+                                  label: "Password",
+                                  "label-position": "on-border",
+                                  type: this.errors.password ? "is-danger" : "",
+                                  message: this.errors.password
+                                    ? this.errors.password[0]
+                                    : "",
+                                },
+                              },
+                              [
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "password",
+                                    "password-reveal": "",
+                                    placeholder: "Password",
+                                    required: "",
+                                  },
+                                  model: {
+                                    value: _vm.fields.password,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "password", $$v)
+                                    },
+                                    expression: "fields.password",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-field",
+                              {
+                                attrs: {
+                                  label: "Confirm Password",
+                                  "label-position": "on-border",
+                                  type: this.errors.password_confirmation
+                                    ? "is-danger"
+                                    : "",
+                                  message: this.errors.password_confirmation
+                                    ? this.errors.password_confirmation[0]
+                                    : "",
+                                },
+                              },
+                              [
+                                _c("b-input", {
+                                  attrs: {
+                                    type: "password",
+                                    "password-reveal": "",
+                                    placeholder: "Confirm Password",
+                                    required: "",
+                                  },
+                                  model: {
+                                    value: _vm.fields.password_confirmation,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.fields,
+                                        "password_confirmation",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "fields.password_confirmation",
+                                  },
+                                }),
+                              ],
+                              1
                             ),
                           ],
                           1
                         ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Contact No." } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.contact_no,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "contact_no", $$v)
-                                },
-                                expression: "fields.contact_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
+                      ]),
+                    ]),
                   ]),
                   _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Province",
-                              expanded: "",
-                              type: this.errors.province ? "is-danger" : "",
-                              message: this.errors.province
-                                ? this.errors.province[0]
-                                : "",
-                            },
+                  _c(
+                    "footer",
+                    { staticClass: "modal-card-foot" },
+                    [
+                      _c("b-button", {
+                        attrs: { label: "Close" },
+                        on: {
+                          click: function ($event) {
+                            _vm.modalChangePassword = false
                           },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                on: { input: _vm.loadCity },
-                                model: {
-                                  value: _vm.fields.province,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "province", $$v)
-                                  },
-                                  expression: "fields.province",
-                                },
-                              },
-                              _vm._l(_vm.provinces, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.provCode },
-                                  },
-                                  [_vm._v(_vm._s(item.provDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "City",
-                              expanded: "",
-                              type: this.errors.city ? "is-danger" : "",
-                              message: this.errors.city
-                                ? this.errors.city[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                on: { input: _vm.loadBarangay },
-                                model: {
-                                  value: _vm.fields.city,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "city", $$v)
-                                  },
-                                  expression: "fields.city",
-                                },
-                              },
-                              _vm._l(_vm.cities, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.citymunCode },
-                                  },
-                                  [_vm._v(_vm._s(item.citymunDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Barangay",
-                              expanded: "",
-                              type: this.errors.barangay ? "is-danger" : "",
-                              message: this.errors.barangay
-                                ? this.errors.barangay[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                model: {
-                                  value: _vm.fields.barangay,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "barangay", $$v)
-                                  },
-                                  expression: "fields.barangay",
-                                },
-                              },
-                              _vm._l(_vm.barangays, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.brgyCode },
-                                  },
-                                  [_vm._v(_vm._s(item.brgyDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Street" } },
-                          [
-                            _c("b-input", {
-                              attrs: { placeholder: "Street" },
-                              model: {
-                                value: _vm.fields.street,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "street", $$v)
-                                },
-                                expression: "fields.street",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0),
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          class: _vm.btnClass,
+                          attrs: { label: "Save", type: "is-success" },
+                        },
+                        [_vm._v("SAVE")]
+                      ),
+                    ],
+                    1
+                  ),
                 ]),
-              ]),
-            ]
-          ),
-        ]),
-      ]),
-    ]),
+              ]
+            ),
+          ]
+        ),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = [
@@ -51802,201 +52044,6 @@ var render = function () {
                       on: {
                         click: function ($event) {
                           _vm.modalBookNow = false
-                        },
-                      },
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        class: _vm.btnClass,
-                        attrs: { label: "Save", type: "is-success" },
-                      },
-                      [_vm._v("SAVE")]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-            ]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            "has-modal-card": "",
-            "trap-focus": "",
-            width: 640,
-            "aria-role": "dialog",
-            "aria-label": "Modal",
-            "aria-modal": "",
-          },
-          model: {
-            value: _vm.modalChangePassword,
-            callback: function ($$v) {
-              _vm.modalChangePassword = $$v
-            },
-            expression: "modalChangePassword",
-          },
-        },
-        [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.changePassword.apply(null, arguments)
-                },
-              },
-            },
-            [
-              _c("div", { staticClass: "modal-card" }, [
-                _c("header", { staticClass: "modal-card-head" }, [
-                  _c("p", { staticClass: "modal-card-title" }, [
-                    _vm._v("Change Password"),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "delete",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function ($event) {
-                        _vm.modalChangePassword = false
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("section", { staticClass: "modal-card-body" }, [
-                  _c("div", {}, [
-                    _c("div", { staticClass: "columns" }, [
-                      _c(
-                        "div",
-                        { staticClass: "column" },
-                        [
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Old Password",
-                                "label-position": "on-border",
-                                type: this.errors.old_password
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.old_password
-                                  ? this.errors.old_password[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Password",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.old_password,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "old_password", $$v)
-                                  },
-                                  expression: "fields.old_password",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Password",
-                                "label-position": "on-border",
-                                type: this.errors.password ? "is-danger" : "",
-                                message: this.errors.password
-                                  ? this.errors.password[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Password",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.password,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "password", $$v)
-                                  },
-                                  expression: "fields.password",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-field",
-                            {
-                              attrs: {
-                                label: "Confirm Password",
-                                "label-position": "on-border",
-                                type: this.errors.password_confirmation
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.password_confirmation
-                                  ? this.errors.password_confirmation[0]
-                                  : "",
-                              },
-                            },
-                            [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Confirm Password",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.password_confirmation,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "password_confirmation",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "fields.password_confirmation",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                        ],
-                        1
-                      ),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "footer",
-                  { staticClass: "modal-card-foot" },
-                  [
-                    _c("b-button", {
-                      attrs: { label: "Close" },
-                      on: {
-                        click: function ($event) {
-                          _vm.modalChangePassword = false
                         },
                       },
                     }),
