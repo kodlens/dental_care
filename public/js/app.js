@@ -8498,9 +8498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10034,6 +10031,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10050,6 +10111,7 @@ __webpack_require__.r(__webpack_exports__);
         lname: ''
       },
       isModalCreate: false,
+      modalResetPassword: false,
       fields: {
         username: '',
         lname: '',
@@ -10278,10 +10340,40 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/get-user-offices').then(function (res) {
         _this9.offices = res.data;
       });
+    },
+    //CHANGE PASSWORD
+    openModalResetPassword: function openModalResetPassword(dataId) {
+      this.modalResetPassword = true;
+      this.fields = {};
+      this.errors = {};
+      this.global_id = dataId;
+    },
+    resetPassword: function resetPassword() {
+      var _this10 = this;
+
+      axios.post('/user-reset-password/' + this.global_id, this.fields).then(function (res) {
+        if (res.data.status === 'changed') {
+          _this10.$buefy.dialog.alert({
+            title: 'PASSWORD CHANGED',
+            type: 'is-success',
+            message: 'Password changed successfully.',
+            confirmText: 'OK',
+            onConfirm: function onConfirm() {
+              _this10.modalResetPassword = false;
+              _this10.fields = {};
+              _this10.errors = {};
+
+              _this10.loadAsyncData();
+            }
+          });
+        }
+      })["catch"](function (err) {
+        _this10.errors = err.response.data.errors;
+      });
     }
   },
   mounted: function mounted() {
-    this.loadOffices();
+    //this.loadOffices();
     this.loadAsyncData();
     this.loadProvince();
   }
@@ -11249,6 +11341,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -11957,6 +12052,233 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      fields: {},
+      errors: {},
+      global_id: 0,
+      provinces: [],
+      cities: [],
+      barangays: []
+    };
+  },
+  methods: {
+    /*
+    * Load async data
+    */
+    loadAsyncData: function loadAsyncData() {
+      var _this = this;
+
+      axios.get("/dentist/get-my-profile").then(function (res) {
+        _this.fields = res.data;
+        _this.global_id = res.data.user_id;
+        var tempData = res.data; //load city first
+
+        axios.get('/load-cities?prov=' + _this.fields.province).then(function (res) {
+          //load barangay
+          _this.cities = res.data;
+          axios.get('/load-barangays?prov=' + _this.fields.province + '&city_code=' + _this.fields.city).then(function (res) {
+            _this.barangays = res.data; //this.fields = tempData;
+          });
+        });
+      })["catch"](function (error) {
+        throw error;
+      });
+    },
+    submit: function submit() {
+      var _this2 = this;
+
+      axios.put('/dentist/my-profile/' + this.global_id, this.fields).then(function (res) {
+        if (res.data.status === 'updated') {
+          _this2.$buefy.dialog.alert({
+            title: 'UPDATED!',
+            message: 'Successfully udpated!',
+            type: 'is-success',
+            onConfirm: function onConfirm() {
+              _this2.loadAsyncData();
+            }
+          });
+        }
+      });
+    },
+    loadProvince: function loadProvince() {
+      var _this3 = this;
+
+      axios.get('/load-provinces').then(function (res) {
+        _this3.provinces = res.data;
+      });
+    },
+    loadCity: function loadCity() {
+      var _this4 = this;
+
+      axios.get('/load-cities?prov=' + this.fields.province).then(function (res) {
+        _this4.cities = res.data;
+      });
+    },
+    loadBarangay: function loadBarangay() {
+      var _this5 = this;
+
+      axios.get('/load-barangays?prov=' + this.fields.province + '&city_code=' + this.fields.city).then(function (res) {
+        _this5.barangays = res.data;
+      });
+    },
+    openModalChangePassword: function openModalChangePassword() {}
+  },
+  mounted: function mounted() {
+    this.loadProvince();
+    this.loadAsyncData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js& ***!
@@ -11968,6 +12290,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -13450,6 +13774,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices', 'propUser'],
   name: "AppointmentType",
@@ -13469,6 +13862,7 @@ __webpack_require__.r(__webpack_exports__);
         lname: ''
       },
       modalBookNow: false,
+      modalChangePassword: false,
       dentist_fullname: '',
       fields: {},
       errors: {},
@@ -13674,6 +14068,37 @@ __webpack_require__.r(__webpack_exports__);
     initData: function initData() {
       this.services = JSON.parse(this.propServices);
       this.user = JSON.parse(this.propUser);
+    },
+    //CHANGE PASSWORD
+    openModalChangePassword: function openModalChangePassword() {
+      this.modalChangePassword = true;
+      this.fields = {};
+      this.errors = {};
+    },
+    changePassword: function changePassword() {
+      var _this8 = this;
+
+      axios.post('/change-password', this.fields).then(function (res) {
+        if (res.data.status === 'changed') {
+          _this8.$buefy.dialog.alert({
+            title: 'PASSWORD CHANGED?',
+            type: 'is-success',
+            message: 'Password successfully changed.',
+            confirmText: 'Ok',
+            onConfirm: function onConfirm() {
+              _this8.modalChangePassword = false;
+            }
+          });
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this8.errors = err.response.data.errors;
+        }
+
+        if (err.response.status === 406) {
+          alert('Invalid password');
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -15966,238 +16391,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.search.appointment_date = null;
-    this.loadAsyncData();
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      fields: {},
-      errors: {},
-      global_id: 0,
-      provinces: [],
-      cities: [],
-      barangays: []
-    };
-  },
-  methods: {
-    /*
-    * Load async data
-    */
-    loadAsyncData: function loadAsyncData() {
-      var _this = this;
-
-      axios.get("/get-my-profile").then(function (res) {
-        _this.fields = res.data;
-        _this.global_id = res.data.user_id;
-        var tempData = res.data; //load city first
-
-        axios.get('/load-cities?prov=' + _this.fields.province).then(function (res) {
-          //load barangay
-          _this.cities = res.data;
-          axios.get('/load-barangays?prov=' + _this.fields.province + '&city_code=' + _this.fields.city).then(function (res) {
-            _this.barangays = res.data; //this.fields = tempData;
-          });
-        });
-      })["catch"](function (error) {
-        throw error;
-      });
-    },
-    submit: function submit() {
-      var _this2 = this;
-
-      axios.put('/my-profile/' + this.global_id, this.fields).then(function (res) {
-        if (res.data.status === 'updated') {
-          _this2.$buefy.dialog.alert({
-            title: 'UPDATED!',
-            message: 'Successfully udpated!',
-            type: 'is-success',
-            onConfirm: function onConfirm() {
-              _this2.loadAsyncData();
-            }
-          });
-        }
-      });
-    },
-    loadProvince: function loadProvince() {
-      var _this3 = this;
-
-      axios.get('/load-provinces').then(function (res) {
-        _this3.provinces = res.data;
-      });
-    },
-    loadCity: function loadCity() {
-      var _this4 = this;
-
-      axios.get('/load-cities?prov=' + this.fields.province).then(function (res) {
-        _this4.cities = res.data;
-      });
-    },
-    loadBarangay: function loadBarangay() {
-      var _this5 = this;
-
-      axios.get('/load-barangays?prov=' + this.fields.province + '&city_code=' + this.fields.city).then(function (res) {
-        _this5.barangays = res.data;
-      });
-    }
-  },
-  mounted: function mounted() {
-    this.loadProvince();
     this.loadAsyncData();
   }
 });
@@ -37970,6 +38163,45 @@ component.options.__file = "resources/js/components/Dentist/DentistMyPatient.vue
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistMyProfile.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyProfile.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DentistMyProfile.vue?vue&type=template&id=2acfec71& */ "./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71&");
+/* harmony import */ var _DentistMyProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DentistMyProfile.vue?vue&type=script&lang=js& */ "./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DentistMyProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Dentist/DentistMyProfile.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistNavbar.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/Dentist/DentistNavbar.vue ***!
@@ -38819,45 +39051,6 @@ component.options.__file = "resources/js/components/User/MyAppointmentxxx.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/User/MyProfie.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/User/MyProfie.vue ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyProfie.vue?vue&type=template&id=4b2753ec& */ "./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec&");
-/* harmony import */ var _MyProfie_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyProfie.vue?vue&type=script&lang=js& */ "./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MyProfie_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__.render,
-  _MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/User/MyProfie.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/User/NavbarUser.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/User/NavbarUser.vue ***!
@@ -39196,6 +39389,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyProfile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js&":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistNavbar.vue?vue&type=script&lang=js& ***!
@@ -39513,22 +39722,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyAppointmentxxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyAppointmentxxx.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyAppointmentxxx.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyAppointmentxxx_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfie_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyProfie.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfie_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -40161,6 +40354,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DentistMyProfile_vue_vue_type_template_id_2acfec71___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DentistMyProfile.vue?vue&type=template&id=2acfec71& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true&":
 /*!******************************************************************************************************!*\
   !*** ./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true& ***!
@@ -40514,23 +40724,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyAppointmentxxx_vue_vue_type_template_id_3f2ba64e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyAppointmentxxx_vue_vue_type_template_id_3f2ba64e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyAppointmentxxx.vue?vue&type=template&id=3f2ba64e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyAppointmentxxx.vue?vue&type=template&id=3f2ba64e&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec& ***!
-  \**********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyProfie_vue_vue_type_template_id_4b2753ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MyProfie.vue?vue&type=template&id=4b2753ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec&");
 
 
 /***/ }),
@@ -42037,80 +42230,41 @@ var render = function () {
                         },
                       }),
                       _vm._v(" "),
-                      _c(
-                        "b-menu-list",
-                        [
-                          _c("b-menu-item", {
-                            attrs: {
-                              label: "User",
-                              icon: "account",
-                              tag: "a",
-                              href: "/users",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
+                      _c("b-menu-item", {
+                        attrs: {
+                          label: "User",
+                          icon: "account",
+                          tag: "a",
+                          href: "/users",
+                        },
+                      }),
                       _vm._v(" "),
-                      _c(
-                        "b-menu-list",
-                        [
-                          _c("b-menu-item", {
-                            attrs: {
-                              label: "Services",
-                              icon: "calendar-blank",
-                              tag: "a",
-                              href: "/services",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
+                      _c("b-menu-item", {
+                        attrs: {
+                          label: "Services",
+                          icon: "calendar-blank",
+                          tag: "a",
+                          href: "/services",
+                        },
+                      }),
                       _vm._v(" "),
-                      _c(
-                        "b-menu-list",
-                        [
-                          _c("b-menu-item", {
-                            attrs: {
-                              label: "Dentist",
-                              icon: "account",
-                              tag: "a",
-                              href: "/dentist",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
+                      _c("b-menu-item", {
+                        attrs: {
+                          label: "Dentist",
+                          icon: "account",
+                          tag: "a",
+                          href: "/dentist",
+                        },
+                      }),
                       _vm._v(" "),
-                      _c(
-                        "b-menu-list",
-                        [
-                          _c("b-menu-item", {
-                            attrs: {
-                              label: "Appointment",
-                              icon: "calendar-blank",
-                              tag: "a",
-                              href: "/appointments",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "b-menu-list",
-                        [
-                          _c("b-menu-item", {
-                            attrs: {
-                              label: "Report Track",
-                              icon: "chart-timeline",
-                              tag: "a",
-                              href: "/report-track",
-                            },
-                          }),
-                        ],
-                        1
-                      ),
+                      _c("b-menu-item", {
+                        attrs: {
+                          label: "Appointment",
+                          icon: "calendar-blank",
+                          tag: "a",
+                          href: "/appointments",
+                        },
+                      }),
                     ],
                     1
                   ),
@@ -44224,6 +44378,30 @@ var render = function () {
                                     ],
                                     1
                                   ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-tooltip",
+                                    {
+                                      attrs: {
+                                        label: "Reset Password",
+                                        type: "is-info",
+                                      },
+                                    },
+                                    [
+                                      _c("b-button", {
+                                        staticClass: "button is-small mr-1",
+                                        attrs: { "icon-right": "lock" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.openModalResetPassword(
+                                              props.row.user_id
+                                            )
+                                          },
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
                                 ],
                                 1
                               ),
@@ -44695,8 +44873,18 @@ var render = function () {
                                     _vm._v("ADMINISTRATOR"),
                                   ]),
                                   _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "DENTIST" } },
+                                    [_vm._v("DENTIST")]
+                                  ),
+                                  _vm._v(" "),
                                   _c("option", { attrs: { value: "STAFF" } }, [
                                     _vm._v("STAFF"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "USER" } }, [
+                                    _vm._v("USER"),
                                   ]),
                                 ]
                               ),
@@ -44955,6 +45143,167 @@ var render = function () {
                       on: {
                         click: function ($event) {
                           _vm.isModalCreate = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.modalResetPassword,
+            callback: function ($$v) {
+              _vm.modalResetPassword = $$v
+            },
+            expression: "modalResetPassword",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.resetPassword.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Change Password"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.modalResetPassword = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Password",
+                                "label-position": "on-border",
+                                type: this.errors.password ? "is-danger" : "",
+                                message: this.errors.password
+                                  ? this.errors.password[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Password",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.password,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "password", $$v)
+                                  },
+                                  expression: "fields.password",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Confirm Password",
+                                "label-position": "on-border",
+                                type: this.errors.password_confirmation
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.password_confirmation
+                                  ? this.errors.password_confirmation[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Confirm Password",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.password_confirmation,
+                                  callback: function ($$v) {
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "password_confirmation",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "fields.password_confirmation",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.modalResetPassword = false
                         },
                       },
                     }),
@@ -47520,9 +47869,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("div", { staticClass: "columns" }, [
-        _c("div", { staticClass: "column" }, [
-          _c("div", { staticClass: "box" }),
+      _c("div", { staticClass: "section" }, [
+        _c("div", { staticClass: "columns is-centered" }, [
+          _c("div", { staticClass: "column is-4" }, [
+            _c("div", { staticClass: "box" }),
+          ]),
         ]),
       ]),
     ])
@@ -48430,6 +48781,476 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistMyProfile.vue?vue&type=template&id=2acfec71& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-6" }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.submit.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "box" }, [
+                _c("h1", { staticClass: "title is-4" }, [_vm._v("MY PROFILE")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "container" }, [
+                  _c(
+                    "div",
+                    { staticClass: "buttons is-right" },
+                    [
+                      _c("b-button", {
+                        attrs: { "icon-left": "lock" },
+                        on: { clicl: _vm.openModalChangePassword },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Username" } },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text", readonly: "" },
+                              model: {
+                                value: _vm.fields.username,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "username", $$v)
+                                },
+                                expression: "fields.username",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Lastname",
+                              type: this.errors.lname ? "is-danger" : "",
+                              message: this.errors.lname
+                                ? this.errors.lname[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.lname,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "lname", $$v)
+                                },
+                                expression: "fields.lname",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Firstname",
+                              type: this.errors.fname ? "is-danger" : "",
+                              message: this.errors.fname
+                                ? this.errors.fname[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.fname,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "fname", $$v)
+                                },
+                                expression: "fields.fname",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Middlename" } },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.mname,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "mname", $$v)
+                                },
+                                expression: "fields.mname",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Suffix" } },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.suffix,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "suffix", $$v)
+                                },
+                                expression: "fields.suffix",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Sex",
+                              expanded: "",
+                              type: this.errors.sex ? "is-danger" : "",
+                              message: this.errors.sex
+                                ? this.errors.sex[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.sex,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "sex", $$v)
+                                  },
+                                  expression: "fields.sex",
+                                },
+                              },
+                              [
+                                _c("option", { attrs: { value: "MALE" } }, [
+                                  _vm._v("MALE"),
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "FEMALE" } }, [
+                                  _vm._v("FEMALE"),
+                                ]),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Contact No." } },
+                          [
+                            _c("b-input", {
+                              attrs: { type: "text" },
+                              model: {
+                                value: _vm.fields.contact_no,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "contact_no", $$v)
+                                },
+                                expression: "fields.contact_no",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Province",
+                              expanded: "",
+                              type: this.errors.province ? "is-danger" : "",
+                              message: this.errors.province
+                                ? this.errors.province[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                on: { input: _vm.loadCity },
+                                model: {
+                                  value: _vm.fields.province,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "province", $$v)
+                                  },
+                                  expression: "fields.province",
+                                },
+                              },
+                              _vm._l(_vm.provinces, function (item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: { value: item.provCode },
+                                  },
+                                  [_vm._v(_vm._s(item.provDesc))]
+                                )
+                              }),
+                              0
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "City",
+                              expanded: "",
+                              type: this.errors.city ? "is-danger" : "",
+                              message: this.errors.city
+                                ? this.errors.city[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                on: { input: _vm.loadBarangay },
+                                model: {
+                                  value: _vm.fields.city,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "city", $$v)
+                                  },
+                                  expression: "fields.city",
+                                },
+                              },
+                              _vm._l(_vm.cities, function (item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: { value: item.citymunCode },
+                                  },
+                                  [_vm._v(_vm._s(item.citymunDesc))]
+                                )
+                              }),
+                              0
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "columns" }, [
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          {
+                            attrs: {
+                              label: "Barangay",
+                              expanded: "",
+                              type: this.errors.barangay ? "is-danger" : "",
+                              message: this.errors.barangay
+                                ? this.errors.barangay[0]
+                                : "",
+                            },
+                          },
+                          [
+                            _c(
+                              "b-select",
+                              {
+                                attrs: { expanded: "" },
+                                model: {
+                                  value: _vm.fields.barangay,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "barangay", $$v)
+                                  },
+                                  expression: "fields.barangay",
+                                },
+                              },
+                              _vm._l(_vm.barangays, function (item, index) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: index,
+                                    domProps: { value: item.brgyCode },
+                                  },
+                                  [_vm._v(_vm._s(item.brgyDesc))]
+                                )
+                              }),
+                              0
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "column" },
+                      [
+                        _c(
+                          "b-field",
+                          { attrs: { label: "Street" } },
+                          [
+                            _c("b-input", {
+                              attrs: { placeholder: "Street" },
+                              model: {
+                                value: _vm.fields.street,
+                                callback: function ($$v) {
+                                  _vm.$set(_vm.fields, "street", $$v)
+                                },
+                                expression: "fields.street",
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0),
+                ]),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons" }, [
+      _c("button", { staticClass: "button is-link" }, [_vm._v("UPDATE")]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Dentist/DentistNavbar.vue?vue&type=template&id=e16b5ba8&scoped=true& ***!
@@ -48454,9 +49275,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "textcenter" }, [
           _vm._v(
-            "\n               HI " +
-              _vm._s(_vm.user.fname) +
-              "\n               \n            "
+            "\n               HI " + _vm._s(_vm.user.fname) + "\n\n            "
           ),
         ]),
         _vm._v(" "),
@@ -48530,6 +49349,15 @@ var render = function () {
                           icon: "sitemap",
                           tag: "a",
                           href: "/dentist/dentist-items",
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("b-menu-item", {
+                        attrs: {
+                          label: "My Profile",
+                          icon: "face-man-profile",
+                          tag: "a",
+                          href: "/dentist/my-profile",
                         },
                       }),
                     ],
@@ -50391,6 +51219,22 @@ var render = function () {
                   ],
                   1
                 ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _c("b-button", {
+                      attrs: {
+                        type: "is-info",
+                        label: "Change Password",
+                        "icon-left": "lock",
+                      },
+                      on: { click: _vm.openModalChangePassword },
+                    }),
+                  ],
+                  1
+                ),
               ],
               1
             ),
@@ -50958,6 +51802,201 @@ var render = function () {
                       on: {
                         click: function ($event) {
                           _vm.modalBookNow = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            "has-modal-card": "",
+            "trap-focus": "",
+            width: 640,
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+          },
+          model: {
+            value: _vm.modalChangePassword,
+            callback: function ($$v) {
+              _vm.modalChangePassword = $$v
+            },
+            expression: "modalChangePassword",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.changePassword.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Change Password"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.modalChangePassword = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Old Password",
+                                "label-position": "on-border",
+                                type: this.errors.old_password
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.old_password
+                                  ? this.errors.old_password[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Password",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.old_password,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "old_password", $$v)
+                                  },
+                                  expression: "fields.old_password",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Password",
+                                "label-position": "on-border",
+                                type: this.errors.password ? "is-danger" : "",
+                                message: this.errors.password
+                                  ? this.errors.password[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Password",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.password,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "password", $$v)
+                                  },
+                                  expression: "fields.password",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            {
+                              attrs: {
+                                label: "Confirm Password",
+                                "label-position": "on-border",
+                                type: this.errors.password_confirmation
+                                  ? "is-danger"
+                                  : "",
+                                message: this.errors.password_confirmation
+                                  ? this.errors.password_confirmation[0]
+                                  : "",
+                              },
+                            },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  "password-reveal": "",
+                                  placeholder: "Confirm Password",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.fields.password_confirmation,
+                                  callback: function ($$v) {
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "password_confirmation",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "fields.password_confirmation",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.modalChangePassword = false
                         },
                       },
                     }),
@@ -54449,489 +55488,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/User/MyProfie.vue?vue&type=template&id=4b2753ec& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "section" }, [
-      _c("div", { staticClass: "columns is-centered" }, [
-        _c("div", { staticClass: "column is-6" }, [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function ($event) {
-                  $event.preventDefault()
-                  return _vm.submit.apply(null, arguments)
-                },
-              },
-            },
-            [
-              _c("div", { staticClass: "box" }, [
-                _c("h1", { staticClass: "title is-4" }, [_vm._v("MY PROFILE")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "container" }, [
-                  _c("div", { staticClass: "columns is-centered" }, [
-                    _c("div", { staticClass: "column is-6" }, [
-                      _c("div", { staticClass: "qr-container" }, [
-                        _c("div", [
-                          _vm._v("QR CODE: " + _vm._s(_vm.fields.qr_ref)),
-                        ]),
-                        _vm._v(" "),
-                        _vm.fields.qr_ref
-                          ? _c(
-                              "div",
-                              [
-                                _c("qrcode", {
-                                  attrs: {
-                                    value: _vm.fields.qr_ref,
-                                    options: { width: 200 },
-                                  },
-                                }),
-                              ],
-                              1
-                            )
-                          : _vm._e(),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Username" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text", readonly: "" },
-                              model: {
-                                value: _vm.fields.username,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "username", $$v)
-                                },
-                                expression: "fields.username",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Lastname",
-                              type: this.errors.lname ? "is-danger" : "",
-                              message: this.errors.lname
-                                ? this.errors.lname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.lname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "lname", $$v)
-                                },
-                                expression: "fields.lname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Firstname",
-                              type: this.errors.fname ? "is-danger" : "",
-                              message: this.errors.fname
-                                ? this.errors.fname[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.fname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "fname", $$v)
-                                },
-                                expression: "fields.fname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Middlename" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.mname,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "mname", $$v)
-                                },
-                                expression: "fields.mname",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Suffix" } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.suffix,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "suffix", $$v)
-                                },
-                                expression: "fields.suffix",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Sex",
-                              expanded: "",
-                              type: this.errors.sex ? "is-danger" : "",
-                              message: this.errors.sex
-                                ? this.errors.sex[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                model: {
-                                  value: _vm.fields.sex,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "sex", $$v)
-                                  },
-                                  expression: "fields.sex",
-                                },
-                              },
-                              [
-                                _c("option", { attrs: { value: "MALE" } }, [
-                                  _vm._v("MALE"),
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "FEMALE" } }, [
-                                  _vm._v("FEMALE"),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Contact No." } },
-                          [
-                            _c("b-input", {
-                              attrs: { type: "text" },
-                              model: {
-                                value: _vm.fields.contact_no,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "contact_no", $$v)
-                                },
-                                expression: "fields.contact_no",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Province",
-                              expanded: "",
-                              type: this.errors.province ? "is-danger" : "",
-                              message: this.errors.province
-                                ? this.errors.province[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                on: { input: _vm.loadCity },
-                                model: {
-                                  value: _vm.fields.province,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "province", $$v)
-                                  },
-                                  expression: "fields.province",
-                                },
-                              },
-                              _vm._l(_vm.provinces, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.provCode },
-                                  },
-                                  [_vm._v(_vm._s(item.provDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "City",
-                              expanded: "",
-                              type: this.errors.city ? "is-danger" : "",
-                              message: this.errors.city
-                                ? this.errors.city[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                on: { input: _vm.loadBarangay },
-                                model: {
-                                  value: _vm.fields.city,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "city", $$v)
-                                  },
-                                  expression: "fields.city",
-                                },
-                              },
-                              _vm._l(_vm.cities, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.citymunCode },
-                                  },
-                                  [_vm._v(_vm._s(item.citymunDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "columns" }, [
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          {
-                            attrs: {
-                              label: "Barangay",
-                              expanded: "",
-                              type: this.errors.barangay ? "is-danger" : "",
-                              message: this.errors.barangay
-                                ? this.errors.barangay[0]
-                                : "",
-                            },
-                          },
-                          [
-                            _c(
-                              "b-select",
-                              {
-                                attrs: { expanded: "" },
-                                model: {
-                                  value: _vm.fields.barangay,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "barangay", $$v)
-                                  },
-                                  expression: "fields.barangay",
-                                },
-                              },
-                              _vm._l(_vm.barangays, function (item, index) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: index,
-                                    domProps: { value: item.brgyCode },
-                                  },
-                                  [_vm._v(_vm._s(item.brgyDesc))]
-                                )
-                              }),
-                              0
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "column" },
-                      [
-                        _c(
-                          "b-field",
-                          { attrs: { label: "Street" } },
-                          [
-                            _c("b-input", {
-                              attrs: { placeholder: "Street" },
-                              model: {
-                                value: _vm.fields.street,
-                                callback: function ($$v) {
-                                  _vm.$set(_vm.fields, "street", $$v)
-                                },
-                                expression: "fields.street",
-                              },
-                            }),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(0),
-                ]),
-              ]),
-            ]
-          ),
-        ]),
-      ]),
-    ]),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "buttons" }, [
-      _c("button", { staticClass: "button is-link" }, [_vm._v("UPDATE")]),
-    ])
-  },
-]
 render._withStripped = true
 
 
@@ -78709,6 +79265,7 @@ var map = {
 	"./components/Dentist/DentistDashboardPatient.vue": "./resources/js/components/Dentist/DentistDashboardPatient.vue",
 	"./components/Dentist/DentistItem.vue": "./resources/js/components/Dentist/DentistItem.vue",
 	"./components/Dentist/DentistMyPatient.vue": "./resources/js/components/Dentist/DentistMyPatient.vue",
+	"./components/Dentist/DentistMyProfile.vue": "./resources/js/components/Dentist/DentistMyProfile.vue",
 	"./components/Dentist/DentistNavbar.vue": "./resources/js/components/Dentist/DentistNavbar.vue",
 	"./components/Dentist/DentistServicePatient.vue": "./resources/js/components/Dentist/DentistServicePatient.vue",
 	"./components/Dentist/ServicesLog.vue": "./resources/js/components/Dentist/ServicesLog.vue",
@@ -78729,7 +79286,6 @@ var map = {
 	"./components/SignupComponent.vue": "./resources/js/components/SignupComponent.vue",
 	"./components/User/DashboardUser.vue": "./resources/js/components/User/DashboardUser.vue",
 	"./components/User/MyAppointmentxxx.vue": "./resources/js/components/User/MyAppointmentxxx.vue",
-	"./components/User/MyProfie.vue": "./resources/js/components/User/MyProfie.vue",
 	"./components/User/NavbarUser.vue": "./resources/js/components/User/NavbarUser.vue",
 	"./components/UserNavbar.vue": "./resources/js/components/UserNavbar.vue",
 	"./components/WelcomePage.vue": "./resources/js/components/WelcomePage.vue"

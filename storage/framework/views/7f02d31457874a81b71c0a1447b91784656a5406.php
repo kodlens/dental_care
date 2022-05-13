@@ -25,10 +25,10 @@
 
         <navbar-component></navbar-component>
 
-    <div>
-        <?php echo $__env->yieldContent('content'); ?>
-    </div>
+        <div>
+            <?php echo $__env->yieldContent('content'); ?>
 
+        </div>
 
     </div>
 </body>

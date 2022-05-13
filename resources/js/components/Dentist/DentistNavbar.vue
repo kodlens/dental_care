@@ -4,14 +4,14 @@
             <div class="mynav-brand">DENTIST</div>
             <div class="textcenter">
                HI {{ user.fname }}
-               
+
             </div>
             <div class="burger-button">
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
             </div>
-            
+
         </div>
 
             <b-sidebar
@@ -36,10 +36,12 @@
                             <b-menu-item label="My Patients" icon="sitemap" tag="a" href="/dentist/my-patients"></b-menu-item>
 
                             <b-menu-item label="Items" icon="sitemap" tag="a" href="/dentist/dentist-items"></b-menu-item>
-                           
+
+                            <b-menu-item label="My Profile" icon="face-man-profile" tag="a" href="/dentist/my-profile"></b-menu-item>
 
 
-<!--                            <b-menu-item icon="settings">-->
+
+                            <!--                            <b-menu-item icon="settings">-->
 <!--                                <template #label="props">-->
 <!--                                    Administrator-->
 <!--                                    <b-icon class="is-pulled-right" :icon="props.expanded ? 'menu-down' : 'menu-up'"></b-icon>-->
@@ -68,7 +70,7 @@
 
                         </b-menu-list>
 
-                        
+
 
 
 <!--                        <b-menu-list>-->
@@ -110,8 +112,8 @@ export default {
         },
 
         getUser(){
-        
-        
+
+
         },
     },
 
@@ -121,7 +123,7 @@ export default {
         })
     }
 
-    
+
 }
 </script>
 

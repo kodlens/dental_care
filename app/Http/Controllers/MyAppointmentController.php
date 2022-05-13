@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
 
 
 class MyAppointmentController extends Controller
@@ -16,7 +17,6 @@ class MyAppointmentController extends Controller
     public function __construct(){
         $this->middleware('auth');
         $this->middleware('user');
-
     }
 
     public function index(){
@@ -67,7 +67,7 @@ class MyAppointmentController extends Controller
 
 
     public function cancelMyAppointment($id){
-       
+
         $data = Appointment::find($id);
         $data->appoint_status = 2;
         $data->save();
@@ -85,7 +85,7 @@ class MyAppointmentController extends Controller
         ]);
 
         $user = Auth::user();
-        
+
         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
 
         $date =  $req->appointment_date; //date and time
@@ -114,7 +114,7 @@ class MyAppointmentController extends Controller
         $date =  $req->appointment_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
         $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
-        
+
         $data = Appointment::find($id);
 
         $data->service_id = $req->service_id;
@@ -126,6 +126,32 @@ class MyAppointmentController extends Controller
         return response()->json([
             'status' => 'updated'
         ],200);
+    }
+
+    public function changePassword(Request $req){
+
+        $req->validate([
+            'password' => ['required', 'confirmed']
+        ]);
+
+        $user = Auth::user();
+        $hashedPassword = $user->password;
+        $id = $user->user_id;
+
+        if (Hash::check($req->old_password, $hashedPassword)) {
+            // The passwords match...
+            $data = User::find($id);
+            $data->password = Hash::make($req->password);
+            $data->save();
+
+            return response()->json([
+                'status' => 'changed'
+            ],200);
+        }
+
+        return response()->json([
+            'status' => 'password_error'
+        ],406);
     }
 
 }

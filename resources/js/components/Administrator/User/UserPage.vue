@@ -93,11 +93,14 @@
                                     <b-tooltip label="Delete" type="is-danger">
                                         <b-button class="button is-small mr-1" icon-right="delete" @click="confirmDelete(props.row.user_id)"></b-button>
                                     </b-tooltip>
+                                    <b-tooltip label="Reset Password" type="is-info">
+                                        <b-button class="button is-small mr-1" icon-right="lock" @click="openModalResetPassword(props.row.user_id)"></b-button>
+                                    </b-tooltip>
                                 </div>
                             </b-table-column>
                         </b-table>
 
-                        
+
 
                     </div>
                 </div><!--col -->
@@ -233,7 +236,10 @@
                                              :message="this.errors.role ? this.errors.role[0] : ''">
                                         <b-select v-model="fields.role" expanded>
                                             <option value="ADMIN">ADMINISTRATOR</option>
+                                            <option value="DENTIST">DENTIST</option>
                                             <option value="STAFF">STAFF</option>
+                                            <option value="USER">USER</option>
+
                                         </b-select>
                                     </b-field>
                                 </div>
@@ -310,6 +316,64 @@
         <!--close modal-->
 
 
+
+
+        <!--modal reset password-->
+        <b-modal v-model="modalResetPassword" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+
+            <form @submit.prevent="resetPassword">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Change Password</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalResetPassword = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Password" label-position="on-border"
+                                             :type="this.errors.password ? 'is-danger':''"
+                                             :message="this.errors.password ? this.errors.password[0] : ''">
+                                        <b-input type="password" v-model="fields.password" password-reveal
+                                                 placeholder="Password" required>
+                                        </b-input>
+                                    </b-field>
+                                    <b-field label="Confirm Password" label-position="on-border"
+                                             :type="this.errors.password_confirmation ? 'is-danger':''"
+                                             :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
+                                        <b-input type="password" v-model="fields.password_confirmation"
+                                                 password-reveal
+                                                 placeholder="Confirm Password" required>
+                                        </b-input>
+                                    </b-field>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button
+                            label="Close"
+                            @click="modalResetPassword=false"/>
+                        <button
+                            :class="btnClass"
+                            label="Save"
+                            type="is-success">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+        <!--close modal-->
+
+
     </div>
 </template>
 
@@ -335,6 +399,7 @@ export default{
             },
 
             isModalCreate: false,
+            modalResetPassword: false,
 
             fields: {
                 username: '',
@@ -355,6 +420,8 @@ export default{
             provinces: [],
             cities: [],
             barangays: [],
+
+
         }
 
     },
@@ -548,13 +615,44 @@ export default{
             axios.get('/get-user-offices').then(res=>{
                 this.offices = res.data
             });
-        }
+        },
+
+
+        //CHANGE PASSWORD
+        openModalResetPassword(dataId){
+            this.modalResetPassword = true;
+            this.fields = {};
+            this.errors = {};
+            this.global_id = dataId;
+        },
+        resetPassword(){
+            axios.post('/user-reset-password/' + this.global_id, this.fields).then(res=>{
+
+                if(res.data.status === 'changed'){
+                    this.$buefy.dialog.alert({
+                        title: 'PASSWORD CHANGED',
+                        type: 'is-success',
+                        message: 'Password changed successfully.',
+                        confirmText: 'OK',
+                        onConfirm: () => {
+                            this.modalResetPassword = false;
+                            this.fields = {};
+                            this.errors = {};
+                            this.loadAsyncData()
+                        }
+                    });
+                }
+
+            }).catch(err=>{
+                this.errors = err.response.data.errors;
+            })
+        },
 
 
     },
 
     mounted() {
-        this.loadOffices();
+        //this.loadOffices();
         this.loadAsyncData();
         this.loadProvince();
     }
@@ -571,7 +669,7 @@ export default{
 
     .table > tbody > tr:hover {
         background-color: rgb(233, 233, 233);
-       
+
     }
 
 </style>

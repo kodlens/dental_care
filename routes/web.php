@@ -78,6 +78,7 @@ Route::resource('/admin-home', App\Http\Controllers\Administrator\AdminHomeContr
 Route::resource('/users', App\Http\Controllers\Administrator\UserController::class);
 Route::get('/get-users', [App\Http\Controllers\Administrator\UserController::class, 'getUsers']);
 Route::get('/get-user-offices', [App\Http\Controllers\Administrator\UserController::class, 'getOffices']);
+Route::post('/user-reset-password/{id}', [App\Http\Controllers\Administrator\UserController::class, 'resetPassword']);
 
 
 //services
@@ -120,6 +121,7 @@ Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\DentistCon
 Route::resource('/my-appointment', App\Http\Controllers\MyAppointmentController::class);
 Route::get('/get-my-appointments', [App\Http\Controllers\MyAppointmentController::class, 'getMyAppointments']);
 Route::post('/cancel-my-appointment/{id}', [App\Http\Controllers\MyAppointmentController::class, 'cancelMyAppointment']);
+Route::post('/change-password', [App\Http\Controllers\MyAppointmentController::class, 'changePassword']);
 
 
 
@@ -152,6 +154,10 @@ Route::resource('/dentist/my-patients', App\Http\Controllers\Dentist\DentistMyPa
 Route::get('/dentist/get-admits-patients', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmitsPatients']);
 Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmit']);
 
+//My Dentist Profile
+Route::resource('/dentist/my-profile', App\Http\Controllers\Dentist\DentistMyProfileController::class);
+Route::get('/dentist/get-my-profile', [App\Http\Controllers\Dentist\DentistMyProfileController::class, 'myProfile']);
+Route::get('/dentist/change-password', [App\Http\Controllers\Dentist\DentistMyProfileController::class, 'changePassword']);
 
 
 

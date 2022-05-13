@@ -25,6 +25,15 @@
                         <b-menu-list label="Menu">
 
                             <b-menu-item icon="home" label="Home" tag="a" href="/admin-home"></b-menu-item>
+
+                            <b-menu-item label="User" icon="account" tag="a" href="/users"></b-menu-item>
+
+                            <b-menu-item label="Services" icon="calendar-blank" tag="a" href="/services"></b-menu-item>
+
+                            <b-menu-item label="Dentist" icon="account" tag="a" href="/dentist"></b-menu-item>
+
+                            <b-menu-item label="Appointment" icon="calendar-blank" tag="a" href="/appointments"></b-menu-item>
+
 <!--                            <b-menu-item icon="settings">-->
 <!--                                <template #label="props">-->
 <!--                                    Administrator-->
@@ -51,27 +60,15 @@
 <!--                                <b-menu-item label="My Account"></b-menu-item>-->
 <!--                            </b-menu-item>-->
 
-                            <b-menu-list>
-                                <b-menu-item label="User" icon="account" tag="a" href="/users"></b-menu-item>
-                            </b-menu-list>
-                            <b-menu-list>
-                                <b-menu-item label="Services" icon="calendar-blank" tag="a" href="/services"></b-menu-item>
-                            </b-menu-list>
-                            <b-menu-list>
-                                <b-menu-item label="Dentist" icon="account" tag="a" href="/dentist"></b-menu-item>
-                            </b-menu-list>
-                            <b-menu-list>
-                                <b-menu-item label="Appointment" icon="calendar-blank" tag="a" href="/appointments"></b-menu-item>
-                            </b-menu-list>
 
-                            <b-menu-list>
-                                <b-menu-item label="Report Track" icon="chart-timeline" tag="a" href="/report-track"></b-menu-item>
-                            </b-menu-list>
+<!--                            <b-menu-list>-->
+<!--                                <b-menu-item label="Report Track" icon="chart-timeline" tag="a" href="/report-track"></b-menu-item>-->
+<!--                            </b-menu-list>-->
 
 
                         </b-menu-list>
 
-                        
+
 
 
 <!--                        <b-menu-list>-->

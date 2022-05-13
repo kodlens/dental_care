@@ -21,6 +21,10 @@
                         <b-field label="Sex" label-position="on-border">
                             <b-input readonly v-model="user.sex"></b-input>
                         </b-field>
+
+                        <div class="buttons">
+                            <b-button type="is-info" label="Change Password" @click="openModalChangePassword" icon-left="lock"></b-button>
+                        </div>
                     </div>
                 </div>
 
@@ -139,7 +143,7 @@
             aria-label="Modal"
             aria-modal
             type = "is-link">
-            
+
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -189,6 +193,71 @@
         </b-modal>
 
 
+
+        <!--modal reset password-->
+        <b-modal v-model="modalChangePassword" has-modal-card
+                 trap-focus
+                 :width="640"
+                 aria-role="dialog"
+                 aria-label="Modal"
+                 aria-modal>
+
+            <form @submit.prevent="changePassword">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Change Password</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalChangePassword = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                    <b-field label="Old Password" label-position="on-border"
+                                             :type="this.errors.old_password ? 'is-danger':''"
+                                             :message="this.errors.old_password ? this.errors.old_password[0] : ''">
+                                        <b-input type="password" v-model="fields.old_password" password-reveal
+                                                 placeholder="Password" required>
+                                        </b-input>
+                                    </b-field>
+                                    <b-field label="Password" label-position="on-border"
+                                             :type="this.errors.password ? 'is-danger':''"
+                                             :message="this.errors.password ? this.errors.password[0] : ''">
+                                        <b-input type="password" v-model="fields.password" password-reveal
+                                                 placeholder="Password" required>
+                                        </b-input>
+                                    </b-field>
+                                    <b-field label="Confirm Password" label-position="on-border"
+                                             :type="this.errors.password_confirmation ? 'is-danger':''"
+                                             :message="this.errors.password_confirmation ? this.errors.password_confirmation[0] : ''">
+                                        <b-input type="password" v-model="fields.password_confirmation"
+                                                 password-reveal
+                                                 placeholder="Confirm Password" required>
+                                        </b-input>
+                                    </b-field>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button
+                            label="Close"
+                            @click="modalChangePassword=false"/>
+                        <button
+                            :class="btnClass"
+                            label="Save"
+                            type="is-success">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+        <!--close modal-->
+
+
+
     </div>
 </template>
 
@@ -218,6 +287,9 @@ export default {
             },
 
             modalBookNow: false,
+            modalChangePassword: false,
+
+
             dentist_fullname: '',
 
             fields: {},
@@ -254,7 +326,7 @@ export default {
                     if (data.total / this.perPage > 1000) {
                         currentTotal = this.perPage * 1000
                     }
-                 
+
                     this.total = currentTotal
                     data.data.forEach((item) => {
                         this.data.push(item)
@@ -427,6 +499,35 @@ export default {
         initData(){
             this.services = JSON.parse(this.propServices);
             this.user = JSON.parse(this.propUser);
+        },
+
+        //CHANGE PASSWORD
+        openModalChangePassword(){
+            this.modalChangePassword = true;
+            this.fields = {};
+            this.errors = {};
+        },
+        changePassword(){
+            axios.post('/change-password', this.fields).then(res=>{
+                if(res.data.status === 'changed'){
+                    this.$buefy.dialog.alert({
+                        title: 'PASSWORD CHANGED?',
+                        type: 'is-success',
+                        message: 'Password successfully changed.',
+                        confirmText: 'Ok',
+                        onConfirm: ()=> {
+                            this.modalChangePassword = false;
+                        }
+                    });
+                }
+            }).catch(err=>{
+                if(err.response.status === 422){
+                    this.errors = err.response.data.errors;
+                }
+                if(err.response.status === 406){
+                    alert('Invalid password');
+                }
+            })
         }
 
 
@@ -468,7 +569,7 @@ export default {
         margin: auto;
     }
 
-    
+
     .modal .animation-content .modal-card {
         /* overflow: visible !important; */
     }

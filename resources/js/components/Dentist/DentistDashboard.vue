@@ -1,10 +1,13 @@
 <template>
     <div>
-        <div class="columns">
-            <div class="column">
-                <div class="box"></div>
+        <div class="section">
+            <div class="columns is-centered">
+                <div class="column is-4">
+                    <div class="box"></div>
+                </div>
             </div>
         </div>
+
 
     </div>
 </template>
