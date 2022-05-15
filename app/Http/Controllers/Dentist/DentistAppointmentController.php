@@ -84,6 +84,7 @@ class DentistAppointmentController extends Controller
         $data->save();
 
         Admit::create([
+            'appointment_id' => $id,
             'patient_id' => $data->user_id,
             'service_id' => $data->service_id,
             'qr_code' => $data->qr_code,

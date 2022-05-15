@@ -26636,6 +26636,40 @@ html body {
   background: white;
 }
 
+@media screen and (max-width: 1023px) {
+  .b-sidebar .sidebar-content.is-mini-mobile:not(.is-mini-expand) .menu-list li a span:nth-child(2), .b-sidebar .sidebar-content.is-mini-mobile.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li a span:nth-child(2) {
+    display: none;
+  }
+  .b-sidebar .sidebar-content.is-mini-mobile:not(.is-mini-expand) .menu-list li ul, .b-sidebar .sidebar-content.is-mini-mobile.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li ul {
+    padding-left: 0;
+  }
+  .b-sidebar .sidebar-content.is-mini-mobile:not(.is-mini-expand) .menu-list li ul li a, .b-sidebar .sidebar-content.is-mini-mobile.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li ul li a {
+    display: inline-block;
+  }
+  .b-sidebar .sidebar-content.is-mini-mobile:not(.is-mini-expand) .menu-label:not(:last-child), .b-sidebar .sidebar-content.is-mini-mobile.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-label:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .b-sidebar .sidebar-content.is-mini:not(.is-mini-expand) .menu-list li a span:nth-child(2), .b-sidebar .sidebar-content.is-mini.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li a span:nth-child(2) {
+    display: none;
+  }
+  .b-sidebar .sidebar-content.is-mini:not(.is-mini-expand) .menu-list li ul, .b-sidebar .sidebar-content.is-mini.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li ul {
+    padding-left: 0;
+  }
+  .b-sidebar .sidebar-content.is-mini:not(.is-mini-expand) .menu-list li ul li a, .b-sidebar .sidebar-content.is-mini.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-list li ul li a {
+    display: inline-block;
+  }
+  .b-sidebar .sidebar-content.is-mini:not(.is-mini-expand) .menu-label:not(:last-child), .b-sidebar .sidebar-content.is-mini.is-mini-expand:not(:hover):not(.is-mini-delayed) .menu-label:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+.is-mini-expand .menu-list a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .box {
   border: 1px solid #e4e4e4;
 }

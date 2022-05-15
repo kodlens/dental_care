@@ -95,7 +95,7 @@ Route::get('/get-request-appointments', [App\Http\Controllers\Administrator\Requ
 
 Route::resource('/appointments', App\Http\Controllers\Administrator\AppointmentController::class);
 Route::get('/get-appointments', [App\Http\Controllers\Administrator\AppointmentController::class, 'getAppointments']);
-Route::post('appointment-approve/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentApprove']);
+Route::post('appointment-admit/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentAdmit']);
 Route::post('appointment-cancel/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentCancel']);
 
 Route::get('/report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'index']);
@@ -122,6 +122,13 @@ Route::resource('/my-appointment', App\Http\Controllers\MyAppointmentController:
 Route::get('/get-my-appointments', [App\Http\Controllers\MyAppointmentController::class, 'getMyAppointments']);
 Route::post('/cancel-my-appointment/{id}', [App\Http\Controllers\MyAppointmentController::class, 'cancelMyAppointment']);
 Route::post('/change-password', [App\Http\Controllers\MyAppointmentController::class, 'changePassword']);
+
+
+//ITEM
+Route::resource('/items', App\Http\Controllers\Administrator\ItemController::class);
+Route::get('/get-items', [App\Http\Controllers\Administrator\ItemController::class, 'getItems']);
+Route::get('/get-browse-items', [App\Http\Controllers\Administrator\ItemController::class, 'getBrowseItems']);
+
 
 
 
@@ -173,6 +180,7 @@ Route::resource('/dentist/dentist-service-patient', App\Http\Controllers\Dentist
 Route::resource('/dentist/admit-services', App\Http\Controllers\Dentist\DentistAdmitServiceController::class);
 Route::get('/dentist/get-admit-services/{id}/{tid}', [App\Http\Controllers\Dentist\DentistAdmitServiceController::class, 'getAdmitServices']);
 
+
 //service inventory
 Route::post('/dentist/admit-services-inventory', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'store']);
 Route::delete('/dentist/admit-services-inventory/{id}', [App\Http\Controllers\Dentist\DentistServiceInventoryController::class, 'destroy']);
@@ -202,10 +210,12 @@ Route::get('/dentist/get-dentist-items', [App\Http\Controllers\Dentist\DentistIt
 
 
 
-//ITEM
+//ITEM sa dentist
 Route::resource('/dentist/items', App\Http\Controllers\Dentist\ItemController::class);
 Route::get('/dentist/get-items', [App\Http\Controllers\Dentist\ItemController::class, 'getItems']);
 Route::get('/dentist/get-browse-items', [App\Http\Controllers\Dentist\ItemController::class, 'getBrowseItems']);
+
+
 
 
 

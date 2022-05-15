@@ -49,7 +49,7 @@ export default {
         submit: function(){
             axios.post('/login', this.fields).then(res=>{
                 console.log(res.data)
-                if(res.data.role === 'ADMINISTRATOR'){
+                if(res.data.role === 'ADMINISTRATOR' || res.data.role === 'STAFF'){
                     window.location = '/admin-home';
                 }
                 if(res.data.role === 'USER'){

@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'role' => 'ADMINISTRATOR',
                 'password' => Hash::make('a')
             ],
-            
+
             //client
             [
                 'username' => 'neri',
@@ -125,6 +125,24 @@ class UserSeeder extends Seeder
                 'email' => 'angel@dev.com',
                 'contact_no' => '09167789546',
                 'role' => 'DENTIST',
+                'password' => Hash::make('a')
+            ],
+
+
+            //STAFF
+            [
+                'username' => 'grace',
+                'lname' => 'LOFRANCO',
+                'fname' => 'GRACE',
+                'mname' => 'P',
+                'sex' => 'FEMALE',
+                'province' => 'MISAMIS OCCIDENTAL',
+                'city' => 'TANGUB CITY',
+                'barangay' => 'CANIANGAN',
+                'street' => 'P-6',
+                'email' => 'grace@dev.com',
+                'contact_no' => '09167789533',
+                'role' => 'STAFF',
                 'password' => Hash::make('a')
             ],
         ];

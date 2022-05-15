@@ -8,15 +8,15 @@
                         <div class="w-title">
                             PATIENT DASHBOARD
                         </div>
-                        
+
                         <div class="w-body">
                             <div class="w-row">
                                 <div>NAME:</div>
                                 <div> {{ admit.lname }}, {{ admit.fname }}</div>
                             </div>
-                           
+
                         </div>
-                        
+
 
                     </div>
 
@@ -24,7 +24,7 @@
                         <div class="w-title">
                             DENTAL CHART
                         </div>
-                        
+
                         <div class="w-body">
                             <div class="w-row">
                                 <div>
@@ -33,18 +33,12 @@
                                     </div>
                                 </div>
                             </div>
-                           
                         </div>
-                        
-
                     </div>
 
                 </div>
             </div>
         </div>
-        
-
-       
     </div>
 </template>
 
@@ -79,6 +73,7 @@ export default {
 </script>
 
 <style scoped>
+
     .w-title{
         font-weight: bold;
         font-size: 1.3em;
@@ -90,10 +85,10 @@ export default {
 
     .w-row{
         display: flex;
+        justify-content: center;
     }
 
     .dental-chart{
         position: relative;
-        border: 1px solid red;
     }
 </style>

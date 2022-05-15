@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admit;
 use App\Models\Appointment;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -26,13 +27,16 @@ class AppointmentController extends Controller
     }
 
     public function getAppointments(Request $req){
+
         $sort = explode('.', $req->sort_by);
 
         $data = DB::table('appointments as a')
-            ->join('dentists as c', 'a.dentist_id', 'c.dentist_id')
-            ->join('services as d', 'a.service_id', 'd.service_id')
-            ->join('users as e', 'a.user_id', 'e.user_id')
-            ->select('a.*', 'c.*', 'd.*', 'e.lname as user_lname', 'e.fname as user_fname', 'e.mname as user_mname')
+            ->join('users as b', 'a.dentist_id', 'b.user_id')
+            ->join('services as c', 'a.service_id', 'c.service_id')
+            ->join('users as d', 'a.user_id', 'd.user_id')
+            ->select('a.*', 'b.lname as dentist_lname', 'b.fname as dentist_fname',
+                'b.mname as dentist_mname',
+                'c.*', 'd.lname as user_lname', 'd.fname as user_fname', 'd.mname as user_mname')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
 
@@ -58,20 +62,28 @@ class AppointmentController extends Controller
     }
 
 
-    public function appointmentApprove($id){
-        
+    public function appointmentAdmit($id){
+
         $data = Appointment::find($id);
         $data->appoint_status = 1;
         $data->save();
 
+        Admit::create([
+            'appointment_id' => $id,
+            'patient_id' => $data->user_id,
+            'service_id' => $data->service_id,
+            'qr_code' => $data->qr_code,
+            'dentist_id' => $data->dentist_id,
+        ]);
+
         return response()->json([
-            'status' => 'approved'
+            'status' => 'admitted'
         ], 200);
     }
 
 
     public function appointmentCancel($id){
-       
+
         $data = Appointment::find($id);
         $data->appoint_status = 2;
         $data->save();

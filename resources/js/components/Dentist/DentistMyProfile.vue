@@ -12,7 +12,7 @@
                             <div class="container">
 
                                 <div class="buttons is-right">
-                                    <b-button @click="openModalChangePassword" icon-left="lock"></b-button>
+                                    <b-button @click="openModalChangePassword" icon-left="lock">Change Password</b-button>
                                 </div>
 
 

@@ -61,7 +61,7 @@
                             </b-table-column>
 
                             <b-table-column field="dentist_name" label="Dentist" v-slot="props">
-                                {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
+                                {{ props.row.dentist_lname }}, {{ props.row.dentist_fname }} {{ props.row.dentist_mname }}
                             </b-table-column>
 
                             <b-table-column field="service" label="Service" v-slot="props">
@@ -77,8 +77,8 @@
                             </b-table-column>
 
                             <b-table-column field="status" label="Status" v-slot="props">
-                                <span class="pending" v-if="props.row.appoint_status == 0">PENDING</span>
-                                <span class="approve" v-else-if="props.row.appoint_status == 1">APPORVED</span>
+                                <span class="pending" v-if="props.row.appoint_status === 0">PENDING</span>
+                                <span class="approve" v-else-if="props.row.appoint_status === 1">ADMITTED</span>
                                 <span class="cancel" v-else>CANCELLED</span>
                             </b-table-column>
 
@@ -94,9 +94,9 @@
 
 
                                     <b-dropdown-item aria-role="listitem" @click="openModalUpdate(props.row)">Update</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" @click="admitAppointment(props.row)">Admit</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem">View More</b-dropdown-item>
+
                                 </b-dropdown>
                             </b-table-column>
 
@@ -116,7 +116,7 @@
             aria-label="Modal"
             aria-modal
             type = "is-link">
-            
+
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -185,19 +185,19 @@ export default {
             page: 1,
             perPage: 5,
             defaultSortDirection: 'asc',
-            
+
             search: {
                 appointment_type: '',
                 appointment_date: new Date(),
             },
 
-     
+
             btnClass: {
                 'is-success': true,
                 'button': true,
                 'is-loading':false,
             },
-            
+
             errors: {},
             fields: {},
             dentist_fullname: '',
@@ -270,7 +270,7 @@ export default {
             this.fields = row;
             this.fields.appointment_date = new Date(row.appoint_date + " " + row.appoint_time);
             this.dentist_fullname = row.lname + ", " + row.fname + " " + row.mname;
-            
+
         },
 
         emitBrowseDentist: function(data){
@@ -284,7 +284,7 @@ export default {
         },
 
         submit: function(){
-            
+
             if(this.fields.appointment_id){
                 axios.put('/appointments/' + this.fields.appointment_id, this.fields).then(res=>{
                     if(res.data.status === 'updated'){
@@ -306,26 +306,26 @@ export default {
         },
 
         //approve schedule
-        approveAppointment: function(row){
+        admitAppointment: function(row){
             this.$buefy.dialog.confirm({
                 title: 'APPROVE?',
                 type: 'is-info',
-                message: 'Are you sure you want to approve this appointment?',
+                message: 'Are you sure you want to admit this appointment?',
                 cancelText: 'Close',
                 confirmText: 'Approve',
-                onConfirm: () => this.approveSubmit(row)
+                onConfirm: () => this.admitSubmit(row)
             });
         },
-        approveSubmit(row) {
-            axios.post('/appointment-approve/' + row.appointment_id).then(res => {
+        admitSubmit(row) {
+            axios.post('/appointment-admit/' + row.appointment_id).then(res => {
                 this.loadAsyncData();
-                if(res.data.status === 'approved'){
+                if(res.data.status === 'admitted'){
                     this.$buefy.toast.open({
                         message: 'Approved successfully.',
                         type: 'is-success'
                     })
                 }
-                
+
             }).catch(err => {
                 if (err.response.status === 422) {
                     this.errors = err.response.data.errors;
@@ -335,7 +335,7 @@ export default {
 
 
 
-        
+
         //alert box ask for deletion
         cancelAppointment(row) {
             this.$buefy.dialog.confirm({

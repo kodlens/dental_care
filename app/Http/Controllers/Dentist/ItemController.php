@@ -18,6 +18,8 @@ class ItemController extends Controller
 
 
 
+
+
     public function getItems(Request $req){
         //for Item Management
         $sort = explode('.', $req->sort_by);
@@ -31,7 +33,7 @@ class ItemController extends Controller
         //For Modal Browe Item
 
         $sort = explode('.', $req->sort_by);
-        
+
         return Item::where('item_name', 'like', '%' . $req->itemname . '%')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);

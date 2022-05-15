@@ -66,6 +66,10 @@
                                 {{ props.row.item_name }}
                             </b-table-column>
 
+                            <b-table-column field="item_type" label="Item Type" v-slot="props">
+                                {{ props.row.item_type }}
+                            </b-table-column>
+
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
@@ -114,16 +118,19 @@
                     <section class="modal-card-body">
                         <div class="">
 
-                            <div class="columns">
-                                <div class="column">
-                                    <b-field label="Item Name"
-                                         :type="this.errors.item_name ? 'is-danger':''"
-                                         :message="this.errors.item_name ? this.errors.item_name[0] : ''">
-                                        <b-input type="text" v-model="fields.item_name" placeholder="Lastname" required />
-                                    </b-field>
-                                </div>
-                                
-                            </div>
+                            <b-field label="Item Name"
+                                     :type="this.errors.item_name ? 'is-danger':''"
+                                     :message="this.errors.item_name ? this.errors.item_name[0] : ''">
+                                <b-input type="text" v-model="fields.item_name" placeholder="Lastname" required />
+                            </b-field>
+                            <b-field label="Item Type"
+                                     :type="this.errors.item_type ? 'is-danger':''"
+                                     :message="this.errors.item_type ? this.errors.item_type[0] : ''">
+                                <b-select v-model="fields.item_type" placeholder="Item Type" required>
+                                    <option value="ASSET">ASSET</option>
+                                    <option value="CONSUMABLE">CONSUMABLE</option>
+                                </b-select>
+                            </b-field>
                         </div>
                     </section>
                     <footer class="modal-card-foot">
