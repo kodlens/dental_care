@@ -5,7 +5,8 @@
             <div class="columns is-centered">
                 <div class="column is-6">
                     <div class="buttons">
-                        <b-button label="BACK" @click="goBack()"></b-button>
+                        <b-button label="BACK" icon-left="arrow-left" @click="goBack()"></b-button>
+                        <b-button label="Refresh" icon-left="refresh" @click="getAdmitServices"></b-button>
                     </div>
                     <div class="box">
                         <div>
@@ -24,7 +25,7 @@
                         <div>
                             <div class="service-title">
                                 <div class="is-flex">
-                                    <div>Admitted on: {{ item.created_at }}</div>
+                                    <div>Admitted on: {{ item.created_at | formatTime }}</div>
                                     <div class="ml-auto">
                                         <b-button type="is-danger" @click="removeService(item.admit_service_id)" class="is-small is-rounded is-outlined">X</b-button>
                                     </div>
@@ -41,7 +42,7 @@
                             <div class="service-body">
                                 <ul>
                                      <li class="service-row" v-for="(inv, index) in item.service_inventories" :key="index">
-                                         {{ inv.item_id }} - {{ inv.item_name }} <span v-if="inv.remarks">({{ inv.remarks }})</span>
+                                         {{ inv.item_id }} - {{ inv.item_name }}, Quantity: {{ inv.use_qty }}, Remarks: <span v-if="inv.remarks">({{ inv.remarks }})</span>
 <!--                                        <span><b-button type="is-info" tag="a" class="is-small is-outlined is-rounded" icon-left="pencil"></b-button></span>-->
                                         <span><b-button type="is-danger" class="is-small is-outlined is-rounded" @click="deleteServiceInv(inv.service_inventory_id)">x</b-button></span>
                                     </li>
@@ -155,6 +156,10 @@
                                             @browseItem="browseItem($event)"></modal-item>
                                     </b-field>
 
+                                    <b-field expanded>
+                                        <b-numberinput expanded v-model="fields.qty" placeholder="Quantity" />
+                                    </b-field>
+
                                     <b-field>
                                         <b-input type="textarea" v-model="fields.remarks" placeholder="Remarks..." />
                                     </b-field>
@@ -203,13 +208,18 @@ export default {
     data(){
         return{
 
-            fields: {},
+            fields: {
+                item_id: 0,
+                qty: 0,
+                admit_id: 0,
+                tooth_id: 0,
+                remarks: '',
+            },
             errors: {},
 
             btnClass: {
                 'is-success' : true,
                 'button': true,
-
             },
 
             isModalCreate: false,
@@ -240,8 +250,6 @@ export default {
                 this.admitServices = res.data;
             });
         },
-
-
 
         getAllServices(){
             axios.get('/get-all-services').then(res=>{
@@ -294,7 +302,7 @@ export default {
         browseItem(nData){
             this.itemname = nData.item_name;
             this.fields.item_id = nData.item_id;
-
+            this.fields.qty = 0;
         },
 
         goBack(){
@@ -333,7 +341,7 @@ export default {
 
         openModalInventory(dataId){
             this.modalAddInventory = true;
-            this.fields = {};
+            this.clearFields();
             this.errors = {};
 
             this.fields.admit_service_id = dataId;
@@ -355,6 +363,15 @@ export default {
             })
         },
 
+        clearFields: function (){
+           this.fields = {
+                item_id: 0,
+                qty: 0,
+                admit_id: 0,
+                tooth_id: 0,
+                remarks: '',
+            };
+        },
 
     },
 

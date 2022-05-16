@@ -46,9 +46,16 @@ class DentistServiceInventoryController extends Controller
         ServiceInventory::create([
             'admit_service_id' => $req->admit_service_id,
             'item_id' => $req->item_id,
+            'use_qty' => $req->qty,
             'tooth_id' => $req->tooth_id,
             'remarks' => $req->remarks
         ]);
+
+        DB::table('items')
+            ->where('item_id', $req->item_id)
+            ->where('item_type', 'CONSUMABLE')
+            ->decrement('qty', $req->qty);
+
 
         return response()->json([
             'status' => 'saved'
@@ -63,6 +70,7 @@ class DentistServiceInventoryController extends Controller
 
         $data = Item::find($id);
         $data->item_name = strtoupper($req->item_name);
+        $data->qty = $req->qty;
         $data->save();
 
         return response()->json([
@@ -73,6 +81,15 @@ class DentistServiceInventoryController extends Controller
 
 
     public function destroy($id){
+        $data = ServiceInventory::find($id);
+        $qty = $data->use_qty;
+
+        DB::table('items')
+            ->where('item_id', $data->item_id)
+            ->where('item_type', 'CONSUMABLE')
+            ->increment('qty', $qty);
+
+
         ServiceInventory::destroy($id);
 
         return response()->json([

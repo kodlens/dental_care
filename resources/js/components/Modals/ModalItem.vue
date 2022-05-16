@@ -57,7 +57,14 @@
                                     {{props.row.item_name}}
                                 </b-table-column>
 
-                               
+                                <b-table-column field="item_type" label="Type" v-slot="props">
+                                    {{props.row.item_type}}
+                                </b-table-column>
+
+                                <b-table-column field="qty" label="Quantity" v-slot="props">
+                                    {{props.row.qty}}
+                                </b-table-column>
+
 
                                 <b-table-column field="" label="Action" v-slot="props">
                                     <div class="buttons">
@@ -90,7 +97,7 @@ export default {
             type: String,
             default: '',
         },
-       
+
     },
 
 
@@ -185,9 +192,9 @@ export default {
             return this.propItem;
         },
 
-      
 
-        
+
+
     },
 
 }

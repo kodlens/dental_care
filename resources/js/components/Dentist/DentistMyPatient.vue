@@ -84,9 +84,9 @@
 
                         </b-table>
 
-                        <div class="buttons mt-3">
-                            <b-button icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
-                        </div>
+<!--                        <div class="buttons mt-3">-->
+<!--                            <b-button icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>-->
+<!--                        </div>-->
 
                     </div>
                 </div><!--close column-->
@@ -121,7 +121,7 @@ export default {
             },
 
             modalBookNow: false,
-           
+
 
             fields: {},
             errors: {},
@@ -158,7 +158,7 @@ export default {
                     if (data.total / this.perPage > 1000) {
                         currentTotal = this.perPage * 1000
                     }
-                 
+
                     this.total = currentTotal
                     data.data.forEach((item) => {
                         this.data.push(item)
@@ -212,7 +212,7 @@ export default {
             });
         },
 
-        
+
         clearFields(){
             this.fields = {};
         },
@@ -272,7 +272,7 @@ export default {
         },
 
 
-        
+
 
 
     },
@@ -302,7 +302,7 @@ export default {
         font-size: .8em;
     }
 
-    
+
     /* .modal .animation-content .modal-card { */
         /* overflow: visible !important; */
     /* } */

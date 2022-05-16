@@ -70,6 +70,10 @@
                                 {{ props.row.item_type }}
                             </b-table-column>
 
+                            <b-table-column field="qty" label="Quantity" v-slot="props">
+                                {{ props.row.qty }}
+                            </b-table-column>
+
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
                                     <b-tooltip label="Edit" type="is-warning">
@@ -122,13 +126,18 @@
                                      :message="this.errors.item_name ? this.errors.item_name[0] : ''">
                                 <b-input type="text" v-model="fields.item_name" placeholder="Lastname" required />
                             </b-field>
-                            <b-field label="Item Type"
+                            <b-field label="Item Type" expanded
                                      :type="this.errors.item_type ? 'is-danger':''"
                                      :message="this.errors.item_type ? this.errors.item_type[0] : ''">
-                                <b-select v-model="fields.item_type" placeholder="Item Type" required>
+                                <b-select v-model="fields.item_type" placeholder="Item Type" expanded required>
                                     <option value="ASSET">ASSET</option>
                                     <option value="CONSUMABLE">CONSUMABLE</option>
                                 </b-select>
+                            </b-field>
+                            <b-field label="Quantity"
+                                     :type="this.errors.qty ? 'is-danger':''"
+                                     :message="this.errors.qty ? this.errors.qty[0] : ''">
+                                <b-numberinput min="0" v-model="fields.qty"  placeholder="Quantity"></b-numberinput>
                             </b-field>
                         </div>
                     </section>
@@ -173,7 +182,11 @@ export default {
 
             isModalCreate: false,
 
-            fields: {},
+            fields: {
+                item_name: null,
+                item_type: null,
+                qty: 0
+            },
             errors: {},
 
             btnClass: {
@@ -240,7 +253,7 @@ export default {
 
         openModal(){
             this.isModalCreate=true;
-            this.fields = {};
+            this.clearFields();
             this.errors = {};
         },
 
@@ -282,7 +295,11 @@ export default {
         },
 
         clearFields(){
-            this.fields = {};
+            this.fields = {
+                item_name: null,
+                item_type: null,
+                qty: 0
+            };
         },
 
 

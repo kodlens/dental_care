@@ -8,7 +8,7 @@
                             NO OF USERS
                         </div>
                         <div class="w-content">
-                            20
+                            {{ info.user }}
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                             NO OF APPOINTMENTS
                         </div>
                         <div class="w-content">
-                            125
+                            {{ info.appointment }}
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                             NO OF PATIENT
                         </div>
                         <div class="w-content">
-                            200
+                            {{ info.admit }}
                         </div>
                     </div>
                 </div>
@@ -45,13 +45,22 @@
 export default {
 	data(){
 		return{
+            info: {},
 
 		}
 	},
 
 	methods:{
+        getDashboardInfo(){
+            axios.get('/get-dashboard-info').then(res=>{
+                this.info = res.data;
+            })
+        }
+	},
 
-	}
+    mounted() {
+        this.getDashboardInfo();
+    }
 }
 </script>
 

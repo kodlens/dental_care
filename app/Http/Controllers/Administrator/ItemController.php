@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,15 +55,20 @@ class ItemController extends Controller
     //store
     public function store(Request $req){
 
+
         $req->validate([
             'item_name' => ['required', 'unique:items'],
-            'item_type' => ['required']
+            'item_type' => ['required'],
+            'qty' => ['required', 'min:0']
         ]);
 
-        Item::create([
+        $item = Item::create([
             'item_name' => strtoupper($req->item_name),
-             'item_type' => strtoupper($req->item_type)
+            'item_type' => strtoupper($req->item_type),
+            'qty' => $req->qty
         ]);
+
+
 
         return response()->json([
             'status' => 'saved'
@@ -74,12 +80,14 @@ class ItemController extends Controller
 
         $req->validate([
             'item_name' => ['required', 'unique:items,item_name,'. $id .',item_id'],
-            'item_type' => ['required']
+            'item_type' => ['required'],
+            'qty' => [ 'min:0']
         ]);
 
         $data = Item::find($id);
         $data->item_name = strtoupper($req->item_name);
         $data->item_type = strtoupper($req->item_type);
+        $data->qty = $req->qty === null ? 0 : $req->qty;
         $data->save();
 
         return response()->json([

@@ -25,6 +25,7 @@ class CreateServiceInventoriesTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
 
             $table->unsignedBigInteger('tooth_id')->default(0);
+            $table->double('use_qty')->default(0);
             $table->string('remarks')->nullable();
             $table->timestamps();
         });

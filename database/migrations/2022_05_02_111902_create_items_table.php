@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->id('item_id');
             $table->string('item_name')->nullable();
             $table->string('item_type')->nullable();
+            $table->double('qty')->default(0);
             $table->timestamps();
         });
     }

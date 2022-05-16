@@ -35,7 +35,7 @@
 
                             <b-menu-item label="My Patients" icon="hospital-box" tag="a" href="/dentist/my-patients"></b-menu-item>
 
-                            <b-menu-item label="Items" icon="sitemap" tag="a" href="/dentist/dentist-items"></b-menu-item>
+<!--                            <b-menu-item label="Items" icon="sitemap" tag="a" href="/dentist/dentist-items"></b-menu-item>-->
 
                             <b-menu-item label="My Profile" icon="face-man-profile" tag="a" href="/dentist/my-profile"></b-menu-item>
 

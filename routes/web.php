@@ -134,7 +134,7 @@ Route::get('/get-browse-items', [App\Http\Controllers\Administrator\ItemControll
 
 Route::resource('/dashboard-user', App\Http\Controllers\User\DashboardUserController::class);
 Route::get('/get-user', [App\Http\Controllers\User\DashboardUserController::class, 'getUser']);
-
+Route::get('/get-dashboard-info', [App\Http\Controllers\User\DashboardUserController::class, 'getDashboardInfo']);
 
 Route::resource('/my-profile', App\Http\Controllers\User\MyProfileController::class);
 Route::get('/get-my-profile', [App\Http\Controllers\User\MyProfileController::class, 'getProfile']);

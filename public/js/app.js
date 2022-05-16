@@ -7639,9 +7639,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      info: {}
+    };
   },
-  methods: {}
+  methods: {
+    getDashboardInfo: function getDashboardInfo() {
+      var _this = this;
+
+      axios.get('/get-dashboard-info').then(function (res) {
+        _this.info = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getDashboardInfo();
+  }
 });
 
 /***/ }),
@@ -8593,6 +8606,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -8610,7 +8632,11 @@ __webpack_require__.r(__webpack_exports__);
         itemname: ''
       },
       isModalCreate: false,
-      fields: {},
+      fields: {
+        item_name: null,
+        item_type: null,
+        qty: 0
+      },
       errors: {},
       btnClass: {
         'is-success': true,
@@ -8668,7 +8694,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     openModal: function openModal() {
       this.isModalCreate = true;
-      this.fields = {};
+      this.clearFields();
       this.errors = {};
     },
     //alert box ask for deletion
@@ -8711,7 +8737,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clearFields: function clearFields() {
-      this.fields = {};
+      this.fields = {
+        item_name: null,
+        item_type: null,
+        qty: 0
+      };
     },
     submit: function submit() {
       var _this5 = this;
@@ -13015,6 +13045,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propData: {
@@ -13032,7 +13067,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      fields: {},
+      fields: {
+        item_id: 0,
+        qty: 0,
+        admit_id: 0,
+        tooth_id: 0,
+        remarks: ''
+      },
       errors: {},
       btnClass: {
         'is-success': true,
@@ -13115,6 +13156,7 @@ __webpack_require__.r(__webpack_exports__);
     browseItem: function browseItem(nData) {
       this.itemname = nData.item_name;
       this.fields.item_id = nData.item_id;
+      this.fields.qty = 0;
     },
     goBack: function goBack() {
       history.back();
@@ -13148,7 +13190,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     openModalInventory: function openModalInventory(dataId) {
       this.modalAddInventory = true;
-      this.fields = {};
+      this.clearFields();
       this.errors = {};
       this.fields.admit_service_id = dataId;
     },
@@ -13168,6 +13210,15 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    clearFields: function clearFields() {
+      this.fields = {
+        item_id: 0,
+        qty: 0,
+        admit_id: 0,
+        tooth_id: 0,
+        remarks: ''
+      };
     }
   },
   mounted: function mounted() {
@@ -13808,6 +13859,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16946,16 +17004,11 @@ files.keys().map(function (key) {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.use(buefy__WEBPACK_IMPORTED_MODULE_2__["default"]);
-Vue.use((vue_qrcode_reader__WEBPACK_IMPORTED_MODULE_0___default())); //https://gruhn.github.io/vue-qrcode-reader/demos/CustomTracking.html
+Vue.use(buefy__WEBPACK_IMPORTED_MODULE_2__["default"]); //Vue.use(VueQrcodeReader); //https://gruhn.github.io/vue-qrcode-reader/demos/CustomTracking.html
+//Vue.component(VueQrcode.name, VueQrcode);
 
-Vue.component((_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default().name), (_chenfengyuan_vue_qrcode__WEBPACK_IMPORTED_MODULE_1___default()));
 Vue.filter('formatTime', function (value) {
-  var timeString = value;
-  var H = +timeString.substr(0, 2);
-  var h = H % 12 || 12;
-  var ampm = H < 12 ? " AM" : " PM";
-  timeString = h + timeString.substr(2, 3) + ampm;
+  var timeString = new Date(value).toLocaleString();
   return timeString;
 });
 var app = new Vue({
@@ -41267,64 +41320,69 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "section" }, [
-        _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-4" }, [
-            _c("div", { staticClass: "box" }, [
-              _c("div", { staticClass: "w-head-title" }, [
-                _vm._v(
-                  "\n                        NO OF USERS\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-content" }, [
-                _vm._v("\n                        20\n                    "),
-              ]),
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-4" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "w-head-title" }, [
+              _vm._v(
+                "\n                        NO OF USERS\n                    "
+              ),
             ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "column is-4" }, [
-            _c("div", { staticClass: "box" }, [
-              _c("div", { staticClass: "w-head-title" }, [
-                _vm._v(
-                  "\n                        NO OF APPOINTMENTS\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-content" }, [
-                _vm._v("\n                        125\n                    "),
-              ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-content" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.info.user) +
+                  "\n                    "
+              ),
             ]),
           ]),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-4" }, [
-            _c("div", { staticClass: "box" }, [
-              _c("div", { staticClass: "w-head-title" }, [
-                _vm._v(
-                  "\n                        NO OF PATIENT\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-content" }, [
-                _vm._v("\n                        200\n                    "),
-              ]),
+        _c("div", { staticClass: "column is-4" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "w-head-title" }, [
+              _vm._v(
+                "\n                        NO OF APPOINTMENTS\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-content" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.info.appointment) +
+                  "\n                    "
+              ),
             ]),
           ]),
         ]),
       ]),
-    ])
-  },
-]
+      _vm._v(" "),
+      _c("div", { staticClass: "columns is-centered" }, [
+        _c("div", { staticClass: "column is-4" }, [
+          _c("div", { staticClass: "box" }, [
+            _c("div", { staticClass: "w-head-title" }, [
+              _vm._v(
+                "\n                        NO OF PATIENT\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "w-content" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.info.admit) +
+                  "\n                    "
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -42948,6 +43006,24 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
+                      attrs: { field: "qty", label: "Quantity" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.qty) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
                       attrs: { label: "Action" },
                       scopedSlots: _vm._u([
                         {
@@ -43134,6 +43210,7 @@ var render = function () {
                         {
                           attrs: {
                             label: "Item Type",
+                            expanded: "",
                             type: this.errors.item_type ? "is-danger" : "",
                             message: this.errors.item_type
                               ? this.errors.item_type[0]
@@ -43144,7 +43221,11 @@ var render = function () {
                           _c(
                             "b-select",
                             {
-                              attrs: { placeholder: "Item Type", required: "" },
+                              attrs: {
+                                placeholder: "Item Type",
+                                expanded: "",
+                                required: "",
+                              },
                               model: {
                                 value: _vm.fields.item_type,
                                 callback: function ($$v) {
@@ -43163,6 +43244,30 @@ var render = function () {
                               ]),
                             ]
                           ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-field",
+                        {
+                          attrs: {
+                            label: "Quantity",
+                            type: this.errors.qty ? "is-danger" : "",
+                            message: this.errors.qty ? this.errors.qty[0] : "",
+                          },
+                        },
+                        [
+                          _c("b-numberinput", {
+                            attrs: { min: "0", placeholder: "Quantity" },
+                            model: {
+                              value: _vm.fields.qty,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "qty", $$v)
+                              },
+                              expression: "fields.qty",
+                            },
+                          }),
                         ],
                         1
                       ),
@@ -49608,9 +49713,9 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                            " +
+                              "\n                                " +
                                 _vm._s(props.row.admit_id) +
-                                "\n                        "
+                                "\n                            "
                             ),
                           ]
                         },
@@ -49626,13 +49731,13 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                            " +
+                              "\n                                " +
                                 _vm._s(props.row.patient_lname) +
                                 ", " +
                                 _vm._s(props.row.patient_fname) +
                                 " " +
                                 _vm._s(props.row.patient_mname) +
-                                "\n                        "
+                                "\n                            "
                             ),
                           ]
                         },
@@ -49648,11 +49753,11 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                            " +
+                              "\n                                " +
                                 _vm._s(props.row.service) +
                                 " (₱" +
                                 _vm._s(props.row.price) +
-                                ")\n                        "
+                                ")\n                            "
                             ),
                           ]
                         },
@@ -49718,22 +49823,6 @@ var render = function () {
                       },
                     ]),
                   }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "buttons mt-3" },
-                [
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "is-success",
-                      attrs: { "icon-right": "account-arrow-up-outline" },
-                    },
-                    [_vm._v("NEW")]
-                  ),
                 ],
                 1
               ),
@@ -50451,7 +50540,9 @@ var render = function () {
         _c("div", { staticClass: "mynav-brand" }, [_vm._v("DENTIST")]),
         _vm._v(" "),
         _c("div", { staticClass: "textcenter" }, [
-          _vm._v("\n           HI " + _vm._s(_vm.user.fname) + "\n\n        "),
+          _vm._v(
+            "\n               HI " + _vm._s(_vm.user.fname) + "\n\n            "
+          ),
         ]),
         _vm._v(" "),
         _vm._m(0),
@@ -50515,15 +50606,6 @@ var render = function () {
                           icon: "hospital-box",
                           tag: "a",
                           href: "/dentist/my-patients",
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("b-menu-item", {
-                        attrs: {
-                          label: "Items",
-                          icon: "sitemap",
-                          tag: "a",
-                          href: "/dentist/dentist-items",
                         },
                       }),
                       _vm._v(" "),
@@ -50612,12 +50694,17 @@ var render = function () {
                 { staticClass: "buttons" },
                 [
                   _c("b-button", {
-                    attrs: { label: "BACK" },
+                    attrs: { label: "BACK", "icon-left": "arrow-left" },
                     on: {
                       click: function ($event) {
                         return _vm.goBack()
                       },
                     },
+                  }),
+                  _vm._v(" "),
+                  _c("b-button", {
+                    attrs: { label: "Refresh", "icon-left": "refresh" },
+                    on: { click: _vm.getAdmitServices },
                   }),
                 ],
                 1
@@ -50658,7 +50745,10 @@ var render = function () {
                       _c("div", { staticClass: "service-title" }, [
                         _c("div", { staticClass: "is-flex" }, [
                           _c("div", [
-                            _vm._v("Admitted on: " + _vm._s(item.created_at)),
+                            _vm._v(
+                              "Admitted on: " +
+                                _vm._s(_vm._f("formatTime")(item.created_at))
+                            ),
                           ]),
                           _vm._v(" "),
                           _c(
@@ -50715,7 +50805,9 @@ var render = function () {
                                       _vm._s(inv.item_id) +
                                       " - " +
                                       _vm._s(inv.item_name) +
-                                      " "
+                                      ", Quantity: " +
+                                      _vm._s(inv.use_qty) +
+                                      ", Remarks: "
                                   ),
                                   inv.remarks
                                     ? _c("span", [
@@ -51009,6 +51101,27 @@ var render = function () {
                                   browseItem: function ($event) {
                                     return _vm.browseItem($event)
                                   },
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            { attrs: { expanded: "" } },
+                            [
+                              _c("b-numberinput", {
+                                attrs: {
+                                  expanded: "",
+                                  placeholder: "Quantity",
+                                },
+                                model: {
+                                  value: _vm.fields.qty,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "qty", $$v)
+                                  },
+                                  expression: "fields.qty",
                                 },
                               }),
                             ],
@@ -52199,6 +52312,42 @@ var render = function () {
                                     _vm._v(
                                       "\n                                " +
                                         _vm._s(props.row.item_name) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "item_type", label: "Type" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.item_type) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                          }),
+                          _vm._v(" "),
+                          _c("b-table-column", {
+                            attrs: { field: "qty", label: "Quantity" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "default",
+                                fn: function (props) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(props.row.qty) +
                                         "\n                            "
                                     ),
                                   ]
