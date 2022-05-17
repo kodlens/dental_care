@@ -98,8 +98,11 @@ Route::get('/get-appointments', [App\Http\Controllers\Administrator\AppointmentC
 Route::post('appointment-admit/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentAdmit']);
 Route::post('appointment-cancel/{id}', [App\Http\Controllers\Administrator\AppointmentController::class, 'appointmentCancel']);
 
-Route::get('/report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'index']);
-Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportTrackController::class, 'getReportTrack']);
+Route::get('/report/inventory', [App\Http\Controllers\Administrator\ReportController::class, 'reportInventory']);
+Route::get('/report/get-inventory', [App\Http\Controllers\Administrator\ReportController::class, 'getReportInventory']);
+
+
+Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportController::class, 'getReportTrack']);
 
 //Offices Administrator (For office management)
 
@@ -128,8 +131,6 @@ Route::post('/change-password', [App\Http\Controllers\MyAppointmentController::c
 Route::resource('/items', App\Http\Controllers\Administrator\ItemController::class);
 Route::get('/get-items', [App\Http\Controllers\Administrator\ItemController::class, 'getItems']);
 Route::get('/get-browse-items', [App\Http\Controllers\Administrator\ItemController::class, 'getBrowseItems']);
-
-
 
 
 Route::resource('/dashboard-user', App\Http\Controllers\User\DashboardUserController::class);
