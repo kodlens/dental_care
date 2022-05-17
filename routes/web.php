@@ -145,6 +145,7 @@ Route::get('/my-upcoming-appointment', [App\Http\Controllers\User\MyAppointmentC
 
 //DENTIST MODULE
 Route::resource('/dentist/dashboard', App\Http\Controllers\Dentist\DashboardController::class);
+Route::get('/dentist/get-dashboard-info', [App\Http\Controllers\Dentist\DashboardController::class, 'getDashboardInfo']);
 
 Route::resource('/dentist/appointments', App\Http\Controllers\Dentist\DentistAppointmentController::class);
 

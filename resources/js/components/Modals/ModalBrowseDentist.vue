@@ -5,7 +5,7 @@
             :message="this.errors.dentist_id ? this.errors.dentist_id[0] : ''">
 
             <b-input :value="valueFullname" expanded icon-pack="fa"
-                    icon="user" placeholder="SELECT DENTIST" required readonly>
+                    icon="account-outline" placeholder="SELECT DENTIST" required readonly>
             </b-input>
 
             <p class="control">
@@ -100,7 +100,7 @@ export default {
             type: String,
             default: '',
         },
-       
+
     },
     data(){
         return{

@@ -166,15 +166,12 @@
             </form><!--close form-->
         </b-modal>
 
-
-
     </div>
 </template>
 
 <script>
 export default {
     props: ['propServices'],
-    name: "AppointmentType",
     data(){
         return{
             data: [],
@@ -266,15 +263,16 @@ export default {
         openModalUpdate(row){
             this.fields.service = row;
             this.modalBookNow = true;
-
+            console.log(row)
             this.fields = row;
             this.fields.appointment_date = new Date(row.appoint_date + " " + row.appoint_time);
-            this.dentist_fullname = row.lname + ", " + row.fname + " " + row.mname;
+            this.dentist_fullname = row.dentist_lname + ", " + row.dentist_fname + " " + row.dentist_mname;
 
         },
 
         emitBrowseDentist: function(data){
-            this.fields.dentist_id = data.dentist_id;
+
+            this.fields.dentist_id = data.user_id;
             this.fields.lname = data.lname;
             this.fields.fname = data.fname;
             this.fields.mname = data.mname;
