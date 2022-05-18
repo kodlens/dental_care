@@ -100,6 +100,8 @@ Route::post('appointment-cancel/{id}', [App\Http\Controllers\Administrator\Appoi
 
 Route::get('/report/inventory', [App\Http\Controllers\Administrator\ReportController::class, 'reportInventory']);
 Route::get('/report/get-inventory', [App\Http\Controllers\Administrator\ReportController::class, 'getReportInventory']);
+Route::get('/report/appointment', [App\Http\Controllers\Administrator\ReportController::class, 'reportAppointment']);
+Route::get('/report/get-appointment', [App\Http\Controllers\Administrator\ReportController::class, 'getReportAppointment']);
 
 
 Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportController::class, 'getReportTrack']);

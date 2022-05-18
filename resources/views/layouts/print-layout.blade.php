@@ -18,13 +18,13 @@
 
 <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-{{--    <link href="{{ asset('css/print.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('css/print.css') }}" rel="stylesheet">
 
 
 </head>
 <body>
 <div id="app">
-    <navbar-component></navbar-component>
+{{--    <navbar-component></navbar-component>--}}
     <div>
         @yield('content')
     </div>

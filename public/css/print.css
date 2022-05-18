@@ -29,6 +29,10 @@
         display: none;
     }
 
+    .buttons{
+        display: none;
+    }
+
 }
 
 .debug{
