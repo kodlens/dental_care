@@ -9744,6 +9744,21 @@ __webpack_require__.r(__webpack_exports__);
     },
     setPerPage: function setPerPage() {
       this.loadAsyncData();
+    },
+    printMe: function printMe() {
+      var fromYear = this.search.from.getFullYear();
+      var fromMonth = this.search.from.getMonth() + 1;
+      var fromDay = this.search.from.getDate();
+      fromMonth = fromMonth > 9 ? fromMonth : '0' + fromMonth;
+      fromDay = fromDay > 9 ? fromDay : '0' + fromDay;
+      var wFrom = fromYear + '-' + fromMonth + '-' + fromDay;
+      var toYear = this.search.to.getFullYear();
+      var toMonth = this.search.to.getMonth() + 1;
+      var toDay = this.search.to.getDate();
+      toMonth = toMonth > 9 ? toMonth : '0' + toMonth;
+      toDay = toDay > 9 ? toDay : '0' + toDay;
+      var wTo = toYear + '-' + toMonth + '-' + toDay;
+      window.location = '/report/print-appointment?from=' + wFrom + '&to=' + wTo;
     }
   },
   mounted: function mounted() {
@@ -44766,9 +44781,9 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(props.row.appointment_id) +
-                                "\n                            "
+                                "\n                        "
                             ),
                           ]
                         },
@@ -44784,13 +44799,13 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(props.row.user_lname) +
                                 ", " +
                                 _vm._s(props.row.user_fname) +
                                 " " +
                                 _vm._s(props.row.user_mname) +
-                                "\n                            "
+                                "\n                        "
                             ),
                           ]
                         },
@@ -44806,13 +44821,13 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(props.row.appoint_date) +
                                 " - " +
                                 _vm._s(
                                   _vm._f("formatTime")(props.row.appoint_time)
                                 ) +
-                                "\n                            "
+                                "\n                        "
                             ),
                           ]
                         },
@@ -44828,13 +44843,13 @@ var render = function () {
                         fn: function (props) {
                           return [
                             _vm._v(
-                              "\n                                " +
+                              "\n                            " +
                                 _vm._s(props.row.dentist_lname) +
                                 ", " +
                                 _vm._s(props.row.dentist_fname) +
                                 " " +
                                 _vm._s(props.row.dentist_mname) +
-                                "\n                            "
+                                "\n                        "
                             ),
                           ]
                         },
@@ -44873,7 +44888,22 @@ var render = function () {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "buttons mt-3" }),
+              _c(
+                "div",
+                { staticClass: "buttons mt-3" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "is-info is-outlined",
+                      attrs: { "icon-right": "printer" },
+                      on: { click: _vm.printMe },
+                    },
+                    [_vm._v("NEW")]
+                  ),
+                ],
+                1
+              ),
             ],
             1
           ),

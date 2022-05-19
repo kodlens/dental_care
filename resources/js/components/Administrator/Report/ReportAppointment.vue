@@ -66,7 +66,7 @@
                         </b-table>
 
                         <div class="buttons mt-3">
-<!--                            <b-button @click="openModal" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>-->
+                            <b-button icon-right="printer" @click="printMe" class="is-info is-outlined">NEW</b-button>
                         </div>
 
                     </div>
@@ -173,6 +173,25 @@ export default {
         setPerPage(){
             this.loadAsyncData()
         },
+
+        printMe(){
+            let fromYear = this.search.from.getFullYear();
+            let fromMonth = this.search.from.getMonth() + 1;
+            let fromDay = this.search.from.getDate()
+            fromMonth = fromMonth > 9 ? fromMonth : '0'+fromMonth;
+            fromDay = fromDay > 9 ? fromDay : '0'+fromDay;
+            let wFrom = fromYear + '-' + fromMonth + '-' + fromDay;
+
+
+            let toYear = this.search.to.getFullYear();
+            let toMonth = this.search.to.getMonth() + 1;
+            let toDay = this.search.to.getDate()
+            toMonth = toMonth > 9 ? toMonth : '0'+toMonth;
+            toDay = toDay > 9 ? toDay : '0'+toDay;
+            let wTo = toYear + '-' + toMonth + '-' + toDay;
+
+             window.location = '/report/print-appointment?from='+wFrom+'&to='+wTo;
+        }
 
 
 

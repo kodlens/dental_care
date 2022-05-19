@@ -102,6 +102,7 @@ Route::get('/report/inventory', [App\Http\Controllers\Administrator\ReportContro
 Route::get('/report/get-inventory', [App\Http\Controllers\Administrator\ReportController::class, 'getReportInventory']);
 Route::get('/report/appointment', [App\Http\Controllers\Administrator\ReportController::class, 'reportAppointment']);
 Route::get('/report/get-appointment', [App\Http\Controllers\Administrator\ReportController::class, 'getReportAppointment']);
+Route::get('/report/print-appointment', [App\Http\Controllers\Administrator\ReportController::class, 'printAppointment']);
 
 
 Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportController::class, 'getReportTrack']);
