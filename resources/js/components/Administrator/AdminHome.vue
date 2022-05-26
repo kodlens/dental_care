@@ -37,6 +37,14 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="section">
+            <div class="buttons">
+                <b-button type="is-info" @click="sendSMS" label="Send"></b-button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -54,6 +62,16 @@ export default {
         getDashboardInfo(){
             axios.get('/get-dashboard-info').then(res=>{
                 this.info = res.data;
+            })
+        },
+
+        sendSMS: function(){
+            axios.post('http://192.168.88.231:1688/services/api/messaging?Message=smaple&To=09167789585&Slot=1',{},{
+                headers: {
+                    'Content-Type': 'text/plain' //void COR error
+                }
+            }).then(res=>{
+                console.log(res.data);
             })
         }
 	},

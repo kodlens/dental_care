@@ -7637,6 +7637,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7649,6 +7657,16 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/get-dashboard-info').then(function (res) {
         _this.info = res.data;
+      });
+    },
+    sendSMS: function sendSMS() {
+      axios.post('http://192.168.88.231:1688/services/api/messaging?Message=smaple&To=09167789585&Slot=1', {}, {
+        headers: {
+          'Content-Type': 'text/plain' //void COR error
+
+        }
+      }).then(function (res) {
+        console.log(res.data);
       });
     }
   },
@@ -41554,6 +41572,20 @@ var render = function () {
           ]),
         ]),
       ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "section" }, [
+      _c(
+        "div",
+        { staticClass: "buttons" },
+        [
+          _c("b-button", {
+            attrs: { type: "is-info", label: "Send" },
+            on: { click: _vm.sendSMS },
+          }),
+        ],
+        1
+      ),
     ]),
   ])
 }
