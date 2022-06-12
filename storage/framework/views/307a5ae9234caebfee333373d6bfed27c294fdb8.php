@@ -18,13 +18,13 @@
 
 <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
-
+    <link href="<?php echo e(asset('css/print.css')); ?>" rel="stylesheet">
 
 
 </head>
 <body>
 <div id="app">
-    <navbar-component></navbar-component>
+
     <div>
         <?php echo $__env->yieldContent('content'); ?>
     </div>
