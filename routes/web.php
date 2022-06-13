@@ -31,6 +31,14 @@ Auth::routes([
     'login' => 'false'
 ]);
 
+Route::get('/load-user', function(){
+    if(Auth::check()){
+        return Auth::user();
+    }
+});
+
+
+
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 
@@ -41,9 +49,6 @@ Route::get('/sample',[App\Http\Controllers\SampleController::class,'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/sign-up', [App\Http\Controllers\SignUpController::class, 'index']);
-
-Route::get('/covid-updates', [App\Http\Controllers\CovidUpdatesController::class, 'index']);
-
 Route::post('/sign-up', [App\Http\Controllers\SignUpController::class, 'store']);
 
 
@@ -68,8 +73,6 @@ Route::get('/dental-chart', [App\Http\Controllers\DentalChartController::class, 
 Route::get('/load-provinces', [App\Http\Controllers\AddressController::class, 'loadProvinces']);
 Route::get('/load-cities', [App\Http\Controllers\AddressController::class, 'loadCities']);
 Route::get('/load-barangays', [App\Http\Controllers\AddressController::class, 'loadBarangays']);
-
-
 
 
 /*     ADMINSITRATOR          */

@@ -63,21 +63,7 @@ class UserSeeder extends Seeder
                 'role' => 'USER',
                 'password' => Hash::make('a')
             ],
-            [
-                'username' => 'ann',
-                'lname' => 'ROSARIO',
-                'fname' => 'MARIA ANN',
-                'mname' => '',
-                'sex' => 'FEMALE',
-                'province' => 'MISAMIS OCCIDENTAL',
-                'city' => 'TANGUB CITY',
-                'barangay' => 'TITURON',
-                'street' => 'P-6',
-                'email' => 'marieann@dev.com',
-                'contact_no' => '09702654466',
-                'role' => 'USER',
-                'password' => Hash::make('a')
-            ],
+    
 
 
 
@@ -131,17 +117,17 @@ class UserSeeder extends Seeder
 
             //STAFF
             [
-                'username' => 'grace',
-                'lname' => 'LOFRANCO',
-                'fname' => 'GRACE',
+                'username' => 'jande',
+                'lname' => 'SOLIBIO',
+                'fname' => 'JANDE',
                 'mname' => 'P',
-                'sex' => 'FEMALE',
+                'sex' => 'MALE',
                 'province' => 'MISAMIS OCCIDENTAL',
                 'city' => 'TANGUB CITY',
                 'barangay' => 'CANIANGAN',
                 'street' => 'P-6',
-                'email' => 'grace@dev.com',
-                'contact_no' => '09167789533',
+                'email' => 'jande@dev.com',
+                'contact_no' => '09683014598',
                 'role' => 'STAFF',
                 'password' => Hash::make('a')
             ],

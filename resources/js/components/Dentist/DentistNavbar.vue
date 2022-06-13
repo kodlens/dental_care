@@ -6,7 +6,7 @@
                HI {{ user.fname }}
 
             </div>
-            <div class="burger-button">
+            <div class="burger-button" @click="open = true">
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
@@ -59,13 +59,13 @@
 export default {
     data(){
         return{
-            open: true,
+            open: false,
             overlay: false,
             fullheight: true,
             fullwidth: false,
             right: true,
             expandOnHover: true,
-            reduce :true,
+            reduce :false,
 
             user: {},
         }

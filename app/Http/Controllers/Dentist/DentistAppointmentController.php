@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Dentist;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 use App\Models\Service;
 use App\Models\Appointment;
 use App\Models\Admit;
+use App\Models\User;
 
 use Auth;
 
@@ -61,6 +63,16 @@ class DentistAppointmentController extends Controller
         $data = Appointment::find($id);
         $data->appoint_status = 2;
         $data->save();
+
+
+        $user = User::find($data->user_id);
+
+        $msg = 'Dear '.$user->lname.', '. $user->fname .'. Your appointment with a ref no. '. $data->qr_code.' has been canceled. Thank you!';
+        try{ 
+            Http::withHeaders([
+                'Content-Type' => 'text/plain'
+            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        }catch(Exception $e){} //just hide the error
 
         return response()->json([
             'status' => 'cancelled'

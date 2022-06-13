@@ -16,11 +16,7 @@
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
                                     </b-select>
-                                    <b-select v-model="sortOrder" @input="loadAsyncData">
-                                        <option value="asc">ASC</option>
-                                        <option value="desc">DESC</option>
-
-                                    </b-select>
+                                  
                                 </b-field>
                             </div>
 
@@ -56,11 +52,11 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="admit_id" label="ID" v-slot="props">
+                            <b-table-column field="admit_id" label="ID" sortable v-slot="props">
                                 {{ props.row.admit_id }}
                             </b-table-column>
 
-                            <b-table-column field="name" label="Patient Name" v-slot="props">
+                            <b-table-column field="patient_lname" label="Patient Name" sortable v-slot="props">
                                 {{ props.row.patient_lname }}, {{ props.row.patient_fname }} {{ props.row.patient_mname }}
                             </b-table-column>
 

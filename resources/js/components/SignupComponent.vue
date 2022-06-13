@@ -193,6 +193,8 @@ export default {
             }).catch(err=>{
                 if(err.response.status === 422){
                     this.errors = err.response.data.errors;
+                }else{
+                    alert('An error occured.');
                 }
             });
         },

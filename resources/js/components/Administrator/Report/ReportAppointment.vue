@@ -66,7 +66,7 @@
                         </b-table>
 
                         <div class="buttons mt-3">
-                            <b-button icon-right="printer" @click="printMe" class="is-info is-outlined">NEW</b-button>
+                            <b-button icon-right="printer" @click="printMe" class="is-info is-outlined">PRINT PREVIEW</b-button>
                         </div>
 
                     </div>

@@ -16,11 +16,6 @@
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
                                     </b-select>
-                                    <b-select v-model="sortOrder" @input="loadAsyncData">
-                                        <option value="asc">ASC</option>
-                                        <option value="desc">DESC</option>
-
-                                    </b-select>
                                 </b-field>
                             </div>
 
@@ -58,11 +53,11 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="appointment_id" label="ID" v-slot="props">
+                            <b-table-column field="appointment_id" sortable label="ID" v-slot="props">
                                 {{ props.row.appointment_id }}
                             </b-table-column>
 
-                            <b-table-column field="name" label="Patient Name" v-slot="props">
+                            <b-table-column field="user_lname" label="Patient Name" sortable v-slot="props">
                                 {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
                             </b-table-column>
 
@@ -86,19 +81,19 @@
 
                             <b-table-column label="Action" v-slot="props">
 
-                                <b-dropdown aria-role="list">
+                                <b-dropdown aria-role="list" v-if="props.row.appoint_status < 1">
                                     <template #trigger="{ active }">
                                         <b-button
                                             label="Option"
                                             type="is-primary is-small"
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
-                                    <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item>
+                                    <!-- <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item> -->
 <!--                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>-->
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
-                                    <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item>
+                                    <!-- <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item> -->
                                     <!-- <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/services-log?patient=${props.row.user_id}&appid=${props.row.appointment_id}`">Services Log</b-dropdown-item> -->
-                                    <b-dropdown-item aria-role="listitem" @click="admitPatient(props.row)">Admit Patient</b-dropdown-item>
+                                    <!-- <b-dropdown-item aria-role="listitem" v-if="props.row.appoint_status != 1" @click="admitPatient(props.row)">Admit Patient</b-dropdown-item> -->
 
                                 </b-dropdown>
 
@@ -106,9 +101,9 @@
 
                         </b-table>
 
-                        <div class="buttons mt-3">
+                        <!-- <div class="buttons mt-3">
                             <b-button @click="bookNow" icon-right="account-arrow-up-outline" class="is-success">NEW</b-button>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div><!--close column-->

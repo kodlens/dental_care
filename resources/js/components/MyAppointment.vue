@@ -196,6 +196,62 @@
 
 
 
+        <b-modal v-model="modalChangePassword" :width="640"
+            has-modal-card
+            trap-focus
+            aria-role="dialog"
+            aria-label="Modal"
+            aria-modal
+            type = "is-link">
+
+            <form @submit.prevent="changePassword">
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Change Password</p>
+                        <button
+                            type="button"
+                            class="delete"
+                            @click="modalChangePassword = false"/>
+                    </header>
+
+                    <section class="modal-card-body">
+                        <div class="">
+                            <div class="columns">
+                                <div class="column">
+                                     <b-field label="Old Password">
+                                        <b-input type="password" required placeholder="Password" v-model="fields.old_password"> 
+                                        </b-input>
+                                    </b-field>
+                                    <b-field label="New Password">
+                                        <b-input type="password" required placeholder="Password" v-model="fields.password"> 
+                                        </b-input>
+                                    </b-field>
+                                    <b-field label="Retype Password">
+                                        <b-input type="password" required placeholder="Password" v-model="fields.password_confirmation"> 
+                                        </b-input>
+                                    </b-field>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <b-button
+                            label="Close"
+                            @click="modalChangePassword=false"/>
+                        <button
+                            :class="btnClass"
+                            label="Save"
+                            type="is-success">SAVE</button>
+                    </footer>
+                </div>
+            </form><!--close form-->
+        </b-modal>
+
+
+
+
+
 
 
     </div>
@@ -447,6 +503,7 @@ export default {
             this.fields = {};
             this.errors = {};
         },
+
         changePassword(){
             axios.post('/change-password', this.fields).then(res=>{
                 if(res.data.status === 'changed'){

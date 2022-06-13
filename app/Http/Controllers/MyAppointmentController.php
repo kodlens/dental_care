@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 
 class MyAppointmentController extends Controller
@@ -91,8 +92,9 @@ class MyAppointmentController extends Controller
         $date =  $req->appointment_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
         $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
+        $txtTime = date("H:i A", strtotime($date));
 
-        Appointment::create([
+        $appointment = Appointment::create([
             'user_id' => $user->user_id,
             'service_id' => $req->service_id,
             'qr_code' => $qr_code,
@@ -100,6 +102,15 @@ class MyAppointmentController extends Controller
             'appoint_time' => $ntime,
             'dentist_id' => $req->dentist_id
         ]);
+
+
+        $msg = 'Dear '.$user->lname.', '. $user->fname .'. This is Dental Care Services. Thank you for booking with us! Your time and date Schedule:('.$ndate.', '. $txtTime . '). Reference No. :'. $appointment->qr_code;
+        try{ 
+            Http::withHeaders([
+                'Content-Type' => 'text/plain'
+            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        }catch(Exception $e){} //just hide the error
+
 
         return response()->json([
             'status' => 'saved'
@@ -129,6 +140,8 @@ class MyAppointmentController extends Controller
     }
 
     public function changePassword(Request $req){
+
+        //return $req;
 
         $req->validate([
             'password' => ['required', 'confirmed']

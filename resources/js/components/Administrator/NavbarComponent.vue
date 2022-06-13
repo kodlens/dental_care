@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="mynav">
-            <div class="mynav-brand">ADMINISTRATOR</div>
-            <div class="burger-button">
+            <div class="mynav-brand">{{userRole}}</div>
+            <div class="burger-button" @click="open = true">
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
                 <div class="burger-div"></div>
@@ -67,14 +67,21 @@
 export default {
     data(){
         return{
-            open: true,
+            open: false,
             overlay: false,
             fullheight: true,
             fullwidth: false,
             right: true,
             expandOnHover: true,
-            reduce: true,
+            reduce: false,
             mobile: "reduce",
+
+            user: {
+                role: '',
+                lname: '',
+                fname: '',
+                mname: '',
+            },
         }
     },
     methods: {
@@ -82,6 +89,22 @@ export default {
             axios.post('/logout').then(()=>{
                 window.location = '/';
             })
+        },
+
+        loadUser(){
+            axios.get('/load-user').then(res=>{
+                this.user = res.data;
+            })
+        }
+    },
+
+    mounted(){
+        this.loadUser();
+    },
+
+    computed: {
+        userRole(){
+            return this.user.role.toUpperCase();
         }
     }
 }

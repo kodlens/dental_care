@@ -2,7 +2,7 @@
     <div>
         <div class="section">
             <div class="columns is-centered">
-                <div class="column is-8">
+                <div class="column is-10">
                     <div class="box">
 
                         <div class="is-flex mb-2" style="font-size: 20px; font-weight: bold;">LIST OF USER</div>
@@ -15,11 +15,6 @@
                                         <option value="10">10 per page</option>
                                         <option value="15">15 per page</option>
                                         <option value="20">20 per page</option>
-                                    </b-select>
-                                    <b-select v-model="sortOrder" @input="loadAsyncData">
-                                        <option value="asc">ASC</option>
-                                        <option value="desc">DESC</option>
-
                                     </b-select>
                                 </b-field>
                             </div>
@@ -44,6 +39,7 @@
                             <b-button @click="openModal" icon-left="plus" class="is-success">NEW</b-button>
                         </div>
 
+
                         <b-table
                             :data="data"
                             :loading="loading"
@@ -61,15 +57,15 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="user_id" label="ID" v-slot="props">
+                            <b-table-column field="user_id" label="ID" sortable v-slot="props">
                                 {{ props.row.user_id }}
                             </b-table-column>
 
-                            <b-table-column field="username" label="Username" v-slot="props">
+                            <b-table-column field="username" label="Username" sortable v-slot="props">
                                 {{ props.row.username }}
                             </b-table-column>
 
-                            <b-table-column field="name" label="Name" v-slot="props">
+                            <b-table-column field="lname" label="Name" sortable v-slot="props">
                                 {{ props.row.lname }}, {{ props.row.fname }} {{ props.row.mname }}
                             </b-table-column>
 

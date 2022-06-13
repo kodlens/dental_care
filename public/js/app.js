@@ -7645,6 +7645,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -7688,6 +7689,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -8899,14 +8903,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      open: true,
+      open: false,
       overlay: false,
       fullheight: true,
       fullwidth: false,
       right: true,
       expandOnHover: true,
-      reduce: true,
-      mobile: "reduce"
+      reduce: false,
+      mobile: "reduce",
+      user: {
+        role: '',
+        lname: '',
+        fname: '',
+        mname: ''
+      }
     };
   },
   methods: {
@@ -8914,6 +8924,21 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/logout').then(function () {
         window.location = '/';
       });
+    },
+    loadUser: function loadUser() {
+      var _this = this;
+
+      axios.get('/load-user').then(function (res) {
+        _this.user = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadUser();
+  },
+  computed: {
+    userRole: function userRole() {
+      return this.user.role.toUpperCase();
     }
   }
 });
@@ -10546,10 +10571,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -11289,11 +11310,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -12369,10 +12385,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // props: ['propServices'],
   name: "AppointmentType",
@@ -12942,13 +12954,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      open: true,
+      open: false,
       overlay: false,
       fullheight: true,
       fullwidth: false,
       right: true,
       expandOnHover: true,
-      reduce: true,
+      reduce: false,
       user: {}
     };
   },
@@ -14166,6 +14178,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16537,6 +16605,8 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         if (err.response.status === 422) {
           _this4.errors = err.response.data.errors;
+        } else {
+          alert('An error occured.');
         }
       });
     }
@@ -35631,7 +35701,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\r\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35919,7 +35989,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41573,20 +41643,6 @@ var render = function () {
         ]),
       ]),
     ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "section" }, [
-      _c(
-        "div",
-        { staticClass: "buttons" },
-        [
-          _c("b-button", {
-            attrs: { type: "is-info", label: "Send" },
-            on: { click: _vm.sendSMS },
-          }),
-        ],
-        1
-      ),
-    ]),
   ])
 }
 var staticRenderFns = []
@@ -41667,29 +41723,6 @@ var render = function () {
                               _vm._v(" "),
                               _c("option", { attrs: { value: "20" } }, [
                                 _vm._v("20 per page"),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-select",
-                            {
-                              on: { input: _vm.loadAsyncData },
-                              model: {
-                                value: _vm.sortOrder,
-                                callback: function ($$v) {
-                                  _vm.sortOrder = $$v
-                                },
-                                expression: "sortOrder",
-                              },
-                            },
-                            [
-                              _c("option", { attrs: { value: "asc" } }, [
-                                _vm._v("ASC"),
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "desc" } }, [
-                                _vm._v("DESC"),
                               ]),
                             ]
                           ),
@@ -41799,7 +41832,11 @@ var render = function () {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "appointment_id", label: "ID" },
+                      attrs: {
+                        field: "appointment_id",
+                        label: "ID",
+                        sortable: "",
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -41817,7 +41854,33 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "dentist_name", label: "Dentist" },
+                      attrs: {
+                        field: "qr_code",
+                        label: "Ref No.",
+                        sortable: "",
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.qr_code) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: {
+                        field: "dentist_lname",
+                        label: "Dentist",
+                        sortable: "",
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -41906,6 +41969,27 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
+                      attrs: {
+                        field: "user_contact_no",
+                        label: "Patient Contact No.",
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.user_contact_no) +
+                                  "\n                        "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
                       attrs: { field: "status", label: "Status" },
                       scopedSlots: _vm._u([
                         {
@@ -41936,80 +42020,86 @@ var render = function () {
                           key: "default",
                           fn: function (props) {
                             return [
-                              _c(
-                                "b-dropdown",
-                                {
-                                  attrs: { "aria-role": "list" },
-                                  scopedSlots: _vm._u(
+                              props.row.appoint_status < 1
+                                ? _c(
+                                    "b-dropdown",
+                                    {
+                                      attrs: { "aria-role": "list" },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "trigger",
+                                            fn: function (ref) {
+                                              var active = ref.active
+                                              return [
+                                                _c("b-button", {
+                                                  staticClass: "is-small",
+                                                  attrs: {
+                                                    label: "Options",
+                                                    type: "is-primary",
+                                                    "icon-right": active
+                                                      ? "menu-up"
+                                                      : "menu-down",
+                                                  },
+                                                }),
+                                              ]
+                                            },
+                                          },
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                    },
                                     [
-                                      {
-                                        key: "trigger",
-                                        fn: function (ref) {
-                                          var active = ref.active
-                                          return [
-                                            _c("b-button", {
-                                              staticClass: "is-small",
-                                              attrs: {
-                                                label: "Options",
-                                                type: "is-primary",
-                                                "icon-right": active
-                                                  ? "menu-up"
-                                                  : "menu-down",
-                                              },
-                                            }),
-                                          ]
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.openModalUpdate(
+                                                props.row
+                                              )
+                                            },
+                                          },
                                         },
-                                      },
+                                        [_vm._v("Update")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.admitAppointment(
+                                                props.row
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [_vm._v("Admit")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.cancelAppointment(
+                                                props.row
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [_vm._v("Cancel")]
+                                      ),
                                     ],
-                                    null,
-                                    true
-                                  ),
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.openModalUpdate(props.row)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Update")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.admitAppointment(props.row)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Admit")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.cancelAppointment(
-                                            props.row
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Cancel")]
-                                  ),
-                                ],
-                                1
-                              ),
+                                    1
+                                  )
+                                : _vm._e(),
                             ]
                           },
                         },
@@ -43542,7 +43632,30 @@ var render = function () {
   return _c(
     "div",
     [
-      _vm._m(0),
+      _c("div", { staticClass: "mynav" }, [
+        _c("div", { staticClass: "mynav-brand" }, [
+          _vm._v(_vm._s(_vm.userRole)),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "burger-button",
+            on: {
+              click: function ($event) {
+                _vm.open = true
+              },
+            },
+          },
+          [
+            _c("div", { staticClass: "burger-div" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "burger-div" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "burger-div" }),
+          ]
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "b-sidebar",
@@ -43699,24 +43812,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mynav" }, [
-      _c("div", { staticClass: "mynav-brand" }, [_vm._v("ADMINISTRATOR")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "burger-button" }, [
-        _c("div", { staticClass: "burger-div" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "burger-div" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "burger-div" }),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44931,7 +45027,7 @@ var render = function () {
                       attrs: { "icon-right": "printer" },
                       on: { click: _vm.printMe },
                     },
-                    [_vm._v("NEW")]
+                    [_vm._v("PRINT PREVIEW")]
                   ),
                 ],
                 1
@@ -45565,7 +45661,7 @@ var render = function () {
     [
       _c("div", { staticClass: "section" }, [
         _c("div", { staticClass: "columns is-centered" }, [
-          _c("div", { staticClass: "column is-8" }, [
+          _c("div", { staticClass: "column is-10" }, [
             _c(
               "div",
               { staticClass: "box" },
@@ -45615,29 +45711,6 @@ var render = function () {
                               _vm._v(" "),
                               _c("option", { attrs: { value: "20" } }, [
                                 _vm._v("20 per page"),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "b-select",
-                            {
-                              on: { input: _vm.loadAsyncData },
-                              model: {
-                                value: _vm.sortOrder,
-                                callback: function ($$v) {
-                                  _vm.sortOrder = $$v
-                                },
-                                expression: "sortOrder",
-                              },
-                            },
-                            [
-                              _c("option", { attrs: { value: "asc" } }, [
-                                _vm._v("ASC"),
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "desc" } }, [
-                                _vm._v("DESC"),
                               ]),
                             ]
                           ),
@@ -45765,7 +45838,7 @@ var render = function () {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "user_id", label: "ID" },
+                      attrs: { field: "user_id", label: "ID", sortable: "" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -45783,7 +45856,11 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "username", label: "Username" },
+                      attrs: {
+                        field: "username",
+                        label: "Username",
+                        sortable: "",
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -45801,7 +45878,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "name", label: "Name" },
+                      attrs: { field: "lname", label: "Name", sortable: "" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -48709,29 +48786,6 @@ var render = function () {
                               ]),
                             ]
                           ),
-                          _vm._v(" "),
-                          _c(
-                            "b-select",
-                            {
-                              on: { input: _vm.loadAsyncData },
-                              model: {
-                                value: _vm.sortOrder,
-                                callback: function ($$v) {
-                                  _vm.sortOrder = $$v
-                                },
-                                expression: "sortOrder",
-                              },
-                            },
-                            [
-                              _c("option", { attrs: { value: "asc" } }, [
-                                _vm._v("ASC"),
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "desc" } }, [
-                                _vm._v("DESC"),
-                              ]),
-                            ]
-                          ),
                         ],
                         1
                       ),
@@ -48838,7 +48892,11 @@ var render = function () {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "appointment_id", label: "ID" },
+                      attrs: {
+                        field: "appointment_id",
+                        sortable: "",
+                        label: "ID",
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -48856,7 +48914,11 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "name", label: "Patient Name" },
+                      attrs: {
+                        field: "user_lname",
+                        label: "Patient Name",
+                        sortable: "",
+                      },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -48975,118 +49037,60 @@ var render = function () {
                           key: "default",
                           fn: function (props) {
                             return [
-                              _c(
-                                "b-dropdown",
-                                {
-                                  attrs: { "aria-role": "list" },
-                                  scopedSlots: _vm._u(
+                              props.row.appoint_status < 1
+                                ? _c(
+                                    "b-dropdown",
+                                    {
+                                      attrs: { "aria-role": "list" },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "trigger",
+                                            fn: function (ref) {
+                                              var active = ref.active
+                                              return [
+                                                _c("b-button", {
+                                                  attrs: {
+                                                    label: "Option",
+                                                    type: "is-primary is-small",
+                                                    "icon-right": active
+                                                      ? "menu-up"
+                                                      : "menu-down",
+                                                  },
+                                                }),
+                                              ]
+                                            },
+                                          },
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                    },
                                     [
-                                      {
-                                        key: "trigger",
-                                        fn: function (ref) {
-                                          var active = ref.active
-                                          return [
-                                            _c("b-button", {
-                                              attrs: {
-                                                label: "Option",
-                                                type: "is-primary is-small",
-                                                "icon-right": active
-                                                  ? "menu-up"
-                                                  : "menu-down",
-                                              },
-                                            }),
-                                          ]
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.cancelAppointment(
+                                                props.row
+                                              )
+                                            },
+                                          },
                                         },
-                                      },
+                                        [_vm._v("Cancel")]
+                                      ),
                                     ],
-                                    null,
-                                    true
-                                  ),
-                                },
-                                [
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.getData(
-                                            props.row.appointment_id
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Update")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.cancelAppointment(
-                                            props.row
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Cancel")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.pendingAppointment(
-                                            props.row
-                                          )
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Pending")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "b-dropdown-item",
-                                    {
-                                      attrs: { "aria-role": "listitem" },
-                                      on: {
-                                        click: function ($event) {
-                                          return _vm.admitPatient(props.row)
-                                        },
-                                      },
-                                    },
-                                    [_vm._v("Admit Patient")]
-                                  ),
-                                ],
-                                1
-                              ),
+                                    1
+                                  )
+                                : _vm._e(),
                             ]
                           },
                         },
                       ]),
                     }),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "buttons mt-3" },
-                  [
-                    _c(
-                      "b-button",
-                      {
-                        staticClass: "is-success",
-                        attrs: { "icon-right": "account-arrow-up-outline" },
-                        on: { click: _vm.bookNow },
-                      },
-                      [_vm._v("NEW")]
-                    ),
                   ],
                   1
                 ),
@@ -50012,29 +50016,6 @@ var render = function () {
                             ]),
                           ]
                         ),
-                        _vm._v(" "),
-                        _c(
-                          "b-select",
-                          {
-                            on: { input: _vm.loadAsyncData },
-                            model: {
-                              value: _vm.sortOrder,
-                              callback: function ($$v) {
-                                _vm.sortOrder = $$v
-                              },
-                              expression: "sortOrder",
-                            },
-                          },
-                          [
-                            _c("option", { attrs: { value: "asc" } }, [
-                              _vm._v("ASC"),
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "desc" } }, [
-                              _vm._v("DESC"),
-                            ]),
-                          ]
-                        ),
                       ],
                       1
                     ),
@@ -50138,7 +50119,7 @@ var render = function () {
                 },
                 [
                   _c("b-table-column", {
-                    attrs: { field: "admit_id", label: "ID" },
+                    attrs: { field: "admit_id", label: "ID", sortable: "" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -50156,7 +50137,11 @@ var render = function () {
                   }),
                   _vm._v(" "),
                   _c("b-table-column", {
-                    attrs: { field: "name", label: "Patient Name" },
+                    attrs: {
+                      field: "patient_lname",
+                      label: "Patient Name",
+                      sortable: "",
+                    },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -50977,7 +50962,24 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _vm._m(0),
+        _c(
+          "div",
+          {
+            staticClass: "burger-button",
+            on: {
+              click: function ($event) {
+                _vm.open = true
+              },
+            },
+          },
+          [
+            _c("div", { staticClass: "burger-div" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "burger-div" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "burger-div" }),
+          ]
+        ),
       ]),
       _vm._v(" "),
       _c(
@@ -51076,20 +51078,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "burger-button" }, [
-      _c("div", { staticClass: "burger-div" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "burger-div" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "burger-div" }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53558,6 +53547,168 @@ var render = function () {
                       on: {
                         click: function ($event) {
                           _vm.modalBookNow = false
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        class: _vm.btnClass,
+                        attrs: { label: "Save", type: "is-success" },
+                      },
+                      [_vm._v("SAVE")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            width: 640,
+            "has-modal-card": "",
+            "trap-focus": "",
+            "aria-role": "dialog",
+            "aria-label": "Modal",
+            "aria-modal": "",
+            type: "is-link",
+          },
+          model: {
+            value: _vm.modalChangePassword,
+            callback: function ($$v) {
+              _vm.modalChangePassword = $$v
+            },
+            expression: "modalChangePassword",
+          },
+        },
+        [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function ($event) {
+                  $event.preventDefault()
+                  return _vm.changePassword.apply(null, arguments)
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "modal-card" }, [
+                _c("header", { staticClass: "modal-card-head" }, [
+                  _c("p", { staticClass: "modal-card-title" }, [
+                    _vm._v("Change Password"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "delete",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function ($event) {
+                        _vm.modalChangePassword = false
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("section", { staticClass: "modal-card-body" }, [
+                  _c("div", {}, [
+                    _c("div", { staticClass: "columns" }, [
+                      _c(
+                        "div",
+                        { staticClass: "column" },
+                        [
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Old Password" } },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  required: "",
+                                  placeholder: "Password",
+                                },
+                                model: {
+                                  value: _vm.fields.old_password,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "old_password", $$v)
+                                  },
+                                  expression: "fields.old_password",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            { attrs: { label: "New Password" } },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  required: "",
+                                  placeholder: "Password",
+                                },
+                                model: {
+                                  value: _vm.fields.password,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.fields, "password", $$v)
+                                  },
+                                  expression: "fields.password",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Retype Password" } },
+                            [
+                              _c("b-input", {
+                                attrs: {
+                                  type: "password",
+                                  required: "",
+                                  placeholder: "Password",
+                                },
+                                model: {
+                                  value: _vm.fields.password_confirmation,
+                                  callback: function ($$v) {
+                                    _vm.$set(
+                                      _vm.fields,
+                                      "password_confirmation",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "fields.password_confirmation",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "footer",
+                  { staticClass: "modal-card-foot" },
+                  [
+                    _c("b-button", {
+                      attrs: { label: "Close" },
+                      on: {
+                        click: function ($event) {
+                          _vm.modalChangePassword = false
                         },
                       },
                     }),
@@ -56541,10 +56692,6 @@ var render = function () {
           return [
             _c("b-navbar-item", { attrs: { href: "/" } }, [
               _vm._v("\n            HOME\n        "),
-            ]),
-            _vm._v(" "),
-            _c("b-navbar-item", { attrs: { href: "/about" } }, [
-              _vm._v("\n            ABOUT\n        "),
             ]),
             _vm._v(" "),
             _vm.currentLogin

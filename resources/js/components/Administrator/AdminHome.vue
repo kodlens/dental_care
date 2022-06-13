@@ -40,12 +40,13 @@
 
         </div>
 
-        <div class="section">
+        <!-- <div class="section">
             <div class="buttons">
                 <b-button type="is-info" @click="sendSMS" label="Send"></b-button>
             </div>
+        </div> -->
 
-        </div>
+
     </div>
 </template>
 

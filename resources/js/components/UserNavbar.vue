@@ -15,9 +15,9 @@
              <b-navbar-item href="/">
                 HOME
             </b-navbar-item>
-            <b-navbar-item href="/about">
+            <!-- <b-navbar-item href="/about">
                 ABOUT
-            </b-navbar-item>
+            </b-navbar-item> -->
             <b-navbar-item href="/my-appointment" v-if="currentLogin">
                 MY APPOINTMENT
             </b-navbar-item>

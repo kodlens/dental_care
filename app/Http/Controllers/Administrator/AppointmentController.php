@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admit;
+use App\Models\User;
+
 use App\Models\Appointment;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -36,7 +39,7 @@ class AppointmentController extends Controller
             ->join('users as d', 'a.user_id', 'd.user_id')
             ->select('a.*', 'b.lname as dentist_lname', 'b.fname as dentist_fname',
                 'b.mname as dentist_mname',
-                'c.*', 'd.lname as user_lname', 'd.fname as user_fname', 'd.mname as user_mname')
+                'c.*', 'd.lname as user_lname', 'd.fname as user_fname', 'd.mname as user_mname', 'd.contact_no as user_contact_no')
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
 
@@ -76,6 +79,17 @@ class AppointmentController extends Controller
             'dentist_id' => $data->dentist_id,
         ]);
 
+        $user = User::find($data->user_id);
+
+        $user = User::find($data->user_id);
+        $msg = 'Dear '.$user->lname.', '. $user->fname .'. Your appointment with a ref no. '. $data->qr_code.' has been approved. Thank you!';
+        try{ 
+            Http::withHeaders([
+                'Content-Type' => 'text/plain'
+            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        }catch(Exception $e){} //just hide the error
+
+
         return response()->json([
             'status' => 'admitted'
         ], 200);
@@ -83,10 +97,20 @@ class AppointmentController extends Controller
 
 
     public function appointmentCancel($id){
+        //dere ang codeeeeeee!!!!
 
         $data = Appointment::find($id);
         $data->appoint_status = 2;
         $data->save();
+
+        $user = User::find($data->user_id);
+
+        $msg = 'Dear '.$user->lname.', '. $user->fname .'. Your appointment with a ref no. '. $data->qr_code.' has been canceled. Thank you!';
+        try{ 
+            Http::withHeaders([
+                'Content-Type' => 'text/plain'
+            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        }catch(Exception $e){} //just hide the error
 
         return response()->json([
             'status' => 'cancelled'
