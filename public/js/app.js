@@ -14437,6 +14437,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices', 'propUser'],
   name: "AppointmentType",
@@ -52959,6 +52962,29 @@ var render = function () {
                           _vm.$set(_vm.user, "sex", $$v)
                         },
                         expression: "user.sex",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  {
+                    attrs: {
+                      label: "Contact No.",
+                      "label-position": "on-border",
+                    },
+                  },
+                  [
+                    _c("b-input", {
+                      attrs: { readonly: "" },
+                      model: {
+                        value: _vm.user.contact_no,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.user, "contact_no", $$v)
+                        },
+                        expression: "user.contact_no",
                       },
                     }),
                   ],

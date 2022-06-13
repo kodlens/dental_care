@@ -21,6 +21,9 @@
                         <b-field label="Sex" label-position="on-border">
                             <b-input readonly v-model="user.sex"></b-input>
                         </b-field>
+                        <b-field label="Contact No." label-position="on-border">
+                            <b-input readonly v-model="user.contact_no"></b-input>
+                        </b-field>
 
                         <div class="buttons">
                             <b-button type="is-info" label="Change Password" @click="openModalChangePassword" icon-left="lock"></b-button>
