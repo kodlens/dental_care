@@ -179,6 +179,11 @@ Route::get('/dentist/get-my-profile', [App\Http\Controllers\Dentist\DentistMyPro
 Route::get('/dentist/change-password', [App\Http\Controllers\Dentist\DentistMyProfileController::class, 'changePassword']);
 
 
+//Dentist Schedule
+Route::resource('/dentist/dentist-schedule', App\Http\Controllers\Dentist\DentistScheduleContoller::class);
+Route::get('/dentist/get-dentist-schedules/{id}', [App\Http\Controllers\Dentist\DentistScheduleContoller::class, 'getDentistSchedules']);
+
+
 
 //patient dentist dashboard
 //during admit
