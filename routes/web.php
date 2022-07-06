@@ -181,7 +181,8 @@ Route::get('/dentist/change-password', [App\Http\Controllers\Dentist\DentistMyPr
 
 //Dentist Schedule
 Route::resource('/dentist/dentist-schedule', App\Http\Controllers\Dentist\DentistScheduleContoller::class);
-Route::get('/dentist/get-dentist-schedules/{id}', [App\Http\Controllers\Dentist\DentistScheduleContoller::class, 'getDentistSchedules']);
+Route::get('/dentist/get-dentist-schedules', [App\Http\Controllers\Dentist\DentistScheduleContoller::class, 'getDentistSchedules']);
+
 
 
 
@@ -245,21 +246,21 @@ Route::get('/session', function(){
 Route::get('/before', function(){
     //return Session::all();
 
-    
-    $beforeDay = date('Y-m-d H:i', strtotime('+24 hour', strtotime(date('Y-m-d H:i')))); 
+
+    $beforeDay = date('Y-m-d H:i', strtotime('+24 hour', strtotime(date('Y-m-d H:i'))));
 
     $data = \DB::table('appointments')
         ->where('appoint_date', date('Y-m-d', strtotime($beforeDay)))
         ->where('appoint_time', date('H:i', strtotime($beforeDay)))
         ->where('is_notify', 0)
         ->get();
-  
+
     foreach($data as $i){
 
         $user = User::find($i->user_id);
 
         $msg = 'Hi '.$user->lname . ', ' . $user->fname . ', this is just a reminder that you have an appointment tomorrow. Your ref no. is: ' . $i->qr_code . '.';
-        try{ 
+        try{
             Http::withHeaders([
                 'Content-Type' => 'text/plain'
             ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
@@ -270,7 +271,7 @@ Route::get('/before', function(){
         $appoint->save();
     }
 
-    //$beforeDay = date($today, strtotime('-1 day')); 
+    //$beforeDay = date($today, strtotime('-1 day'));
     return $data;
 });
 

@@ -13162,7 +13162,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propDentistId'],
   data: function data() {
@@ -13200,7 +13199,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var params = ["sort_by=".concat(this.sortField, ".").concat(this.sortOrder), "lname=".concat(this.search.lname), "perpage=".concat(this.perPage), "page=".concat(this.page)].join('&');
       this.loading = true;
-      axios.get("/dentist/get-dentist-schedules/".concat(this.dentistId)).then(function (_ref) {
+      axios.get("/dentist/get-dentist-schedules").then(function (_ref) {
         var data = _ref.data;
         _this.data = [];
         var currentTotal = data.total;
@@ -13265,14 +13264,24 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clearFields: function clearFields() {
-      this.fields = {};
+      this.fields = {
+        from_time: new Date('2022-06-07 08:00:00'),
+        to_time: new Date('2022-06-07 09:00:00'),
+        mon: false,
+        tue: false,
+        wed: false,
+        thur: false,
+        fri: false,
+        sat: false,
+        sun: false
+      };
     },
     submit: function submit() {
       var _this4 = this;
 
       if (this.global_id > 0) {
         //update
-        axios.put('/my-appointment/' + this.global_id, this.fields).then(function (res) {
+        axios.put('').then(function (res) {
           if (res.data.status === 'updated') {
             _this4.$buefy.toast.open({
               message: 'Appointment saved.!',
@@ -13299,7 +13308,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         //INSERT HERE
         this.btnClass['is-loading'] = true;
-        axios.post('/my-appointment', this.fields).then(function (res) {
+        axios.post('/dentist/dentist-schedule', this.fields).then(function (res) {
           if (res.data.status === 'saved') {
             _this4.$buefy.toast.open({
               message: 'Appointment saved.!',
@@ -36086,7 +36095,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.service-body[data-v-1e16e8ac]{\r\n    margin: 15px;\n}\n.service-footer[data-v-1e16e8ac]{\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36374,7 +36383,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51953,7 +51962,7 @@ var render = function () {
               _c("div", { staticClass: "modal-card" }, [
                 _c("header", { staticClass: "modal-card-head" }, [
                   _c("p", { staticClass: "modal-card-title" }, [
-                    _vm._v("Change Password"),
+                    _vm._v("Schedule Information"),
                   ]),
                   _vm._v(" "),
                   _c("button", {
@@ -51978,30 +51987,23 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Old Password",
+                                label: "From Time",
                                 "label-position": "on-border",
-                                type: this.errors.old_password
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.old_password
-                                  ? this.errors.old_password[0]
+                                type: this.errors.from_time ? "is-danger" : "",
+                                message: this.errors.from_time
+                                  ? this.errors.from_time[0]
                                   : "",
                               },
                             },
                             [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Password",
-                                  required: "",
-                                },
+                              _c("b-timepicker", {
+                                attrs: { editable: "", required: "" },
                                 model: {
-                                  value: _vm.fields.old_password,
+                                  value: _vm.fields.from_time,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "old_password", $$v)
+                                    _vm.$set(_vm.fields, "from_time", $$v)
                                   },
-                                  expression: "fields.old_password",
+                                  expression: "fields.from_time",
                                 },
                               }),
                             ],
@@ -52012,28 +52014,23 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Password",
+                                label: "To Time",
                                 "label-position": "on-border",
-                                type: this.errors.password ? "is-danger" : "",
-                                message: this.errors.password
-                                  ? this.errors.password[0]
+                                type: this.errors.to_time ? "is-danger" : "",
+                                message: this.errors.to_time
+                                  ? this.errors.to_time[0]
                                   : "",
                               },
                             },
                             [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Password",
-                                  required: "",
-                                },
+                              _c("b-timepicker", {
+                                attrs: { editable: "", required: "" },
                                 model: {
-                                  value: _vm.fields.password,
+                                  value: _vm.fields.to_time,
                                   callback: function ($$v) {
-                                    _vm.$set(_vm.fields, "password", $$v)
+                                    _vm.$set(_vm.fields, "to_time", $$v)
                                   },
-                                  expression: "fields.password",
+                                  expression: "fields.to_time",
                                 },
                               }),
                             ],
@@ -52042,38 +52039,105 @@ var render = function () {
                           _vm._v(" "),
                           _c(
                             "b-field",
-                            {
-                              attrs: {
-                                label: "Confirm Password",
-                                "label-position": "on-border",
-                                type: this.errors.password_confirmation
-                                  ? "is-danger"
-                                  : "",
-                                message: this.errors.password_confirmation
-                                  ? this.errors.password_confirmation[0]
-                                  : "",
-                              },
-                            },
+                            { attrs: { label: "Day" } },
                             [
-                              _c("b-input", {
-                                attrs: {
-                                  type: "password",
-                                  "password-reveal": "",
-                                  placeholder: "Confirm Password",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.fields.password_confirmation,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.fields,
-                                      "password_confirmation",
-                                      $$v
-                                    )
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.mon,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "mon", $$v)
+                                    },
+                                    expression: "fields.mon",
                                   },
-                                  expression: "fields.password_confirmation",
                                 },
-                              }),
+                                [_vm._v("Mon")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.tue,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "tue", $$v)
+                                    },
+                                    expression: "fields.tue",
+                                  },
+                                },
+                                [_vm._v("Tue")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.wed,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "wed", $$v)
+                                    },
+                                    expression: "fields.wed",
+                                  },
+                                },
+                                [_vm._v("Wed")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.thur,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "thur", $$v)
+                                    },
+                                    expression: "fields.thur",
+                                  },
+                                },
+                                [_vm._v("Thur")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.fri,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "fri", $$v)
+                                    },
+                                    expression: "fields.fri",
+                                  },
+                                },
+                                [_vm._v("Fri")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.sat,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "sat", $$v)
+                                    },
+                                    expression: "fields.sat",
+                                  },
+                                },
+                                [_vm._v("Sat")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "b-checkbox",
+                                {
+                                  model: {
+                                    value: _vm.fields.sun,
+                                    callback: function ($$v) {
+                                      _vm.$set(_vm.fields, "sun", $$v)
+                                    },
+                                    expression: "fields.sun",
+                                  },
+                                },
+                                [_vm._v("Sun")]
+                              ),
                             ],
                             1
                           ),

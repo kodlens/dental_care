@@ -23,24 +23,33 @@ class DentistScheduleContoller extends Controller
             ->with('id', $user->user_id);
     }
 
-    public function getDentistSchedules($id){
+    public function getDentistSchedules(){
+        $id = Auth::user()->user_id;
+
         return DentistSchedule::where('user_id', $id)->get();
     }
 
     public function store(Request $req){
+        $id = Auth::user()->user_id;
 
-        return $req;
+        $timeFrom =  $req->from_time;
+        $nTimeFrom = date('H:i:s', strtotime($timeFrom)); //convert to date format UNIX
 
-        $req->validate([
-            'user_id' => ['required']
-        ]);
-        $user = Auth::user();
+        $timeTo = $req->to_time;
+        $nTimeTo = date('H:i:s',strtotime($timeTo)); //convert to format time UNIX
+
         $data = DentistSchedule::create([
-            'user_id' => $user->user_id,
-            'from' => $nFrom,
-            'to' => $nTo
+            'user_id' => $id,
+            'from' => $nTimeFrom,
+            'to' => $nTimeTo,
+            'mon' => $req->mon,
+            'tue' => $req->tue,
+            'wed' => $req->wed,
+            'thur' => $req->thur,
+            'fri' => $req->fri,
+            'sat' => $req->sat,
+            'sun' => $req->sun,
         ]);
-
 
         return response()->json([
             'status' => 'saved'
