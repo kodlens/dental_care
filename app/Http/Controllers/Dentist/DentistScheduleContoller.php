@@ -23,6 +23,10 @@ class DentistScheduleContoller extends Controller
             ->with('id', $user->user_id);
     }
 
+    public function show($id){
+        return DentistSchedule::find($id);
+    }
+
     public function getDentistSchedules(){
         $id = Auth::user()->user_id;
 
@@ -57,4 +61,40 @@ class DentistScheduleContoller extends Controller
 
     }
 
+
+    public function update(Request $req, $id){
+        
+        $data = DentistSchedule::find($id);
+
+        $timeFrom =  $req->from_time;
+        $nTimeFrom = date('H:i:s', strtotime($timeFrom)); //convert to date format UNIX
+
+        $timeTo = $req->to_time;
+        $nTimeTo = date('H:i:s',strtotime($timeTo)); //convert to format time UNIX
+
+        $data->from = $nTimeFrom;
+        $data->to = $nTimeTo;
+        $data->mon = $req->mon;
+        $data->tue = $req->tue;
+        $data->wed = $req->wed;
+        $data->thur = $req->thur;
+        $data->fri = $req->fri;
+        $data->sat = $req->sat;
+        $data->sun = $req->sun;
+        
+        $data->save();
+
+        return response()->json([
+            'status' => 'updated'
+        ],200);
+    }
+
+    public function destroy($id){
+        
+        DentistSchedule::destroy($id);
+
+        return response()->json([
+            'status' => 'deleted'
+        ],200);
+    }
 }

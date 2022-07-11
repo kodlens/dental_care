@@ -181,6 +181,8 @@ Route::get('/dentist/change-password', [App\Http\Controllers\Dentist\DentistMyPr
 
 //Dentist Schedule
 Route::resource('/dentist/dentist-schedule', App\Http\Controllers\Dentist\DentistScheduleContoller::class);
+Route::put('/dentist/dentist-schedule-update', [App\Http\Controllers\Dentist\DentistScheduleContoller::class, 'update']);
+
 Route::get('/dentist/get-dentist-schedules', [App\Http\Controllers\Dentist\DentistScheduleContoller::class, 'getDentistSchedules']);
 
 

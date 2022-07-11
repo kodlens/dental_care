@@ -13162,6 +13162,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propDentistId'],
   data: function data() {
@@ -13209,7 +13220,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         _this.total = currentTotal;
-        data.data.forEach(function (item) {
+        data.forEach(function (item) {
           _this.data.push(item);
         });
         _this.loading = false;
@@ -13255,7 +13266,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteSubmit: function deleteSubmit(delete_id) {
       var _this3 = this;
 
-      axios["delete"]('/dentist/' + delete_id).then(function (res) {
+      axios["delete"]('/dentist/dentist-schedule/' + delete_id).then(function (res) {
         _this3.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
@@ -13281,17 +13292,16 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.global_id > 0) {
         //update
-        axios.put('').then(function (res) {
+        axios.put('/dentist/dentist-schedule/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
             _this4.$buefy.toast.open({
               message: 'Appointment saved.!',
               type: 'is-success'
             });
 
-            _this4.fields = {};
+            _this4.clearFields = {};
             _this4.errors = {};
-            _this4.dentist_fullname = '';
-            _this4.modalBookNow = false;
+            _this4.modalSchedule = false;
             _this4.global_id = 0;
 
             _this4.loadAsyncData();
@@ -13315,11 +13325,10 @@ __webpack_require__.r(__webpack_exports__);
               type: 'is-success'
             });
 
-            _this4.fields = {};
+            _this4.clearFields = {};
             _this4.errors = {};
             _this4.global_id = 0;
-            _this4.dentist_fullname = '';
-            _this4.modalBookNow = false;
+            _this4.modalSchedule = false;
 
             _this4.loadAsyncData();
           }
@@ -13334,9 +13343,30 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    openModal: function openModal() {
+    openModal: function openModal(id) {
       this.modalSchedule = true;
-      this.clearFields();
+      this.global_id = id; //dentist_schedule_id
+
+      if (id > 0) {
+        this.getData(id);
+      } else {
+        this.clearFields();
+      }
+    },
+    getData: function getData(id) {
+      var _this5 = this;
+
+      axios.get('/dentist/dentist-schedule/' + id).then(function (res) {
+        _this5.fields.from_time = new Date('2022-07-11 ' + res.data.from);
+        _this5.fields.to_time = new Date('2022-07-11 ' + res.data.to);
+        _this5.fields.mon = res.data.mon === 1 ? true : false;
+        _this5.fields.tue = res.data.tue === 1 ? true : false;
+        _this5.fields.wed = res.data.wed === 1 ? true : false;
+        _this5.fields.thur = res.data.thur === 1 ? true : false;
+        _this5.fields.fri = res.data.fri === 1 ? true : false;
+        _this5.fields.sat = res.data.sat === 1 ? true : false;
+        _this5.fields.sun = res.data.sun === 1 ? true : false;
+      });
     },
     initData: function initData() {
       this.dentistId = parseInt(this.propDentistId);
@@ -51770,7 +51800,11 @@ var render = function () {
                   [
                     _c("b-button", {
                       attrs: { label: "NEW SCHEDULE", type: "is-primary" },
-                      on: { click: _vm.openModal },
+                      on: {
+                        click: function ($event) {
+                          return _vm.openModal(0)
+                        },
+                      },
                     }),
                   ],
                   1
@@ -51797,27 +51831,9 @@ var render = function () {
                   },
                   [
                     _c("b-table-column", {
-                      attrs: { field: "admit_id", label: "ID", sortable: "" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "default",
-                          fn: function (props) {
-                            return [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(props.row.admit_id) +
-                                  "\n                            "
-                              ),
-                            ]
-                          },
-                        },
-                      ]),
-                    }),
-                    _vm._v(" "),
-                    _c("b-table-column", {
                       attrs: {
-                        field: "patient_lname",
-                        label: "Patient Name",
+                        field: "dentist_schedule_id",
+                        label: "ID",
                         sortable: "",
                       },
                       scopedSlots: _vm._u([
@@ -51827,11 +51843,7 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(props.row.patient_lname) +
-                                  ", " +
-                                  _vm._s(props.row.patient_fname) +
-                                  " " +
-                                  _vm._s(props.row.patient_mname) +
+                                  _vm._s(props.row.dentist_schedule_id) +
                                   "\n                            "
                               ),
                             ]
@@ -51841,7 +51853,7 @@ var render = function () {
                     }),
                     _vm._v(" "),
                     _c("b-table-column", {
-                      attrs: { field: "service", label: "Service" },
+                      attrs: { field: "from", label: "From", sortable: "" },
                       scopedSlots: _vm._u([
                         {
                           key: "default",
@@ -51849,11 +51861,67 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(props.row.service) +
-                                  " (₱" +
-                                  _vm._s(props.row.price) +
-                                  ")\n                            "
+                                  _vm._s(props.row.from) +
+                                  "\n                            "
                               ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: { field: "to", label: "To" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(props.row.to) +
+                                  "\n                            "
+                              ),
+                            ]
+                          },
+                        },
+                      ]),
+                    }),
+                    _vm._v(" "),
+                    _c("b-table-column", {
+                      attrs: { field: "day", label: "Day" },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "default",
+                          fn: function (props) {
+                            return [
+                              props.row.mon
+                                ? _c("span", [_vm._v("Mon")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.tue
+                                ? _c("span", [_vm._v("Tue")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.wed
+                                ? _c("span", [_vm._v("Wed")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.thur
+                                ? _c("span", [_vm._v("Thur")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.fri
+                                ? _c("span", [_vm._v("Fri")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.sat
+                                ? _c("span", [_vm._v("Sat")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              props.row.sun
+                                ? _c("span", [_vm._v("Sun")])
+                                : _vm._e(),
                             ]
                           },
                         },
@@ -51900,15 +51968,31 @@ var render = function () {
                                   _c(
                                     "b-dropdown-item",
                                     {
-                                      attrs: {
-                                        "aria-role": "listitem",
-                                        tag: "a",
-                                        href:
-                                          "/dentist/dentist-dashboard-patients?admitid=" +
-                                          props.row.admit_id,
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.openModal(
+                                            props.row.dentist_schedule_id
+                                          )
+                                        },
                                       },
                                     },
-                                    [_vm._v("Go")]
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "b-dropdown-item",
+                                    {
+                                      attrs: { "aria-role": "listitem" },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.confirmDelete(
+                                            props.row.dentist_schedule_id
+                                          )
+                                        },
+                                      },
+                                    },
+                                    [_vm._v("Delete")]
                                   ),
                                 ],
                                 1

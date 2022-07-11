@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="buttons">
-                            <b-button label="NEW SCHEDULE" type="is-primary" @click="openModal"></b-button>
+                            <b-button label="NEW SCHEDULE" type="is-primary" @click="openModal(0)"></b-button>
                         </div>
 
                         <b-table
@@ -56,20 +56,29 @@
                             :default-sort-direction="defaultSortDirection"
                             @sort="onSort">
 
-                            <b-table-column field="admit_id" label="ID" sortable v-slot="props">
-                                {{ props.row.admit_id }}
+                            <b-table-column field="dentist_schedule_id" label="ID" sortable v-slot="props">
+                                {{ props.row.dentist_schedule_id }}
                             </b-table-column>
 
-                            <b-table-column field="patient_lname" label="Patient Name" sortable v-slot="props">
-                                {{ props.row.patient_lname }}, {{ props.row.patient_fname }} {{ props.row.patient_mname }}
+                            <b-table-column field="from" label="From" sortable v-slot="props">
+                                {{ props.row.from }}
                             </b-table-column>
 
-                            <b-table-column field="service" label="Service" v-slot="props">
-                                {{ props.row.service }} (&#8369;{{ props.row.price}})
+                            <b-table-column field="to" label="To" v-slot="props">
+                                {{ props.row.to }}
+                            </b-table-column>
+
+                            <b-table-column field="day" label="Day" v-slot="props">
+                                <span v-if="props.row.mon">Mon</span>
+                                <span v-if="props.row.tue">Tue</span>
+                                <span v-if="props.row.wed">Wed</span>
+                                <span v-if="props.row.thur">Thur</span>
+                                <span v-if="props.row.fri">Fri</span>
+                                <span v-if="props.row.sat">Sat</span>
+                                <span v-if="props.row.sun">Sun</span>
                             </b-table-column>
 
                             <b-table-column label="Action" v-slot="props">
-
                                 <b-dropdown aria-role="list">
                                     <template #trigger="{ active }">
                                         <b-button
@@ -77,9 +86,11 @@
                                             type="is-primary is-small"
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
-                                    <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/dentist-dashboard-patients?admitid=${props.row.admit_id}`">Go</b-dropdown-item>
-                                </b-dropdown>
+                                    <b-dropdown-item aria-role="listitem" @click="openModal(props.row.dentist_schedule_id)">Edit</b-dropdown-item>
 
+                                    <b-dropdown-item aria-role="listitem" @click="confirmDelete(props.row.dentist_schedule_id)">Delete</b-dropdown-item>
+                                    
+                                </b-dropdown>
                             </b-table-column>
 
                         </b-table>
@@ -164,6 +175,7 @@
 </template>
 
 <script>
+
 export default {
     props: ['propDentistId'],
     data(){
@@ -225,7 +237,7 @@ export default {
                     }
 
                     this.total = currentTotal
-                    data.data.forEach((item) => {
+                    data.forEach((item) => {
                         this.data.push(item)
                     })
                     this.loading = false
@@ -268,7 +280,7 @@ export default {
         },
         //execute delete after confirming
         deleteSubmit(delete_id) {
-            axios.delete('/dentist/' + delete_id).then(res => {
+            axios.delete('/dentist/dentist-schedule/' + delete_id).then(res => {
                 this.loadAsyncData();
             }).catch(err => {
                 if (err.response.status === 422) {
@@ -296,17 +308,16 @@ export default {
         submit: function(){
             if(this.global_id > 0){
                 //update
-                axios.put('').then(res => {
+                axios.put('/dentist/dentist-schedule/' + this.global_id, this.fields).then(res => {
                     if(res.data.status === 'updated'){
                         this.$buefy.toast.open({
                             message: 'Appointment saved.!',
                             type: 'is-success'
                         });
 
-                        this.fields = {};
+                        this.clearFields = {};
                         this.errors = {};
-                        this.dentist_fullname = '';
-                        this.modalBookNow = false;
+                        this.modalSchedule = false;
                         this.global_id = 0;
                         this.loadAsyncData();
                     }
@@ -327,13 +338,10 @@ export default {
                             message: 'Appointment saved.!',
                             type: 'is-success'
                         });
-
-                        this.fields = {};
+                        this.clearFields = {};
                         this.errors = {};
                         this.global_id = 0;
-                        this.dentist_fullname = '';
-                        this.modalBookNow = false;
-
+                        this.modalSchedule = false;
                         this.loadAsyncData();
                     }
                     this.btnClass['is-loading'] = false;
@@ -346,9 +354,33 @@ export default {
             }
         },
 
-        openModal: function(){
+        openModal: function(id){
             this.modalSchedule = true;
-            this.clearFields();
+            this.global_id = id; //dentist_schedule_id
+
+            if(id > 0){
+                this.getData(id);
+            }else{
+                this.clearFields();
+            }
+          
+        },
+
+        getData(id){
+            axios.get('/dentist/dentist-schedule/' + id).then(res=>{
+
+               
+                this.fields.from_time = new Date('2022-07-11 ' + res.data.from);
+                this.fields.to_time = new Date('2022-07-11 ' + res.data.to);
+
+                this.fields.mon = res.data.mon === 1 ? true : false;
+                this.fields.tue = res.data.tue === 1 ? true : false;
+                this.fields.wed = res.data.wed === 1 ? true : false;
+                this.fields.thur = res.data.thur === 1 ? true : false;
+                this.fields.fri = res.data.fri === 1 ? true : false;
+                this.fields.sat = res.data.sat === 1 ? true : false;
+                this.fields.sun = res.data.sun === 1 ? true : false;
+            });
         },
 
         initData: function(){

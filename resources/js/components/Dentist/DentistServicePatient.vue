@@ -232,7 +232,6 @@ export default {
             services: {},
 
 
-
         }
     },
 
@@ -284,6 +283,7 @@ export default {
                 }
             })
         },
+
         removeService: function(nId){
             axios.delete('/dentist/admit-services/' + nId).then(res=>{
                 if(res.data.status === 'deleted'){
