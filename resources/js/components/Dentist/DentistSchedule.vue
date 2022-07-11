@@ -315,7 +315,7 @@ export default {
                             type: 'is-success'
                         });
 
-                        this.clearFields = {};
+                        this.clearFields();
                         this.errors = {};
                         this.modalSchedule = false;
                         this.global_id = 0;
@@ -338,7 +338,7 @@ export default {
                             message: 'Appointment saved.!',
                             type: 'is-success'
                         });
-                        this.clearFields = {};
+                        this.clearFields();
                         this.errors = {};
                         this.global_id = 0;
                         this.modalSchedule = false;
