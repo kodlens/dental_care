@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="section debug">
+        <div class="section">
             <div class="columns">
                 <div class="column">
                     <p class="title has-text-centered">
@@ -47,7 +47,7 @@
             aria-label="Modal"
             aria-modal
             type = "is-link">
-            
+
             <form @submit.prevent="submit">
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -114,7 +114,7 @@ export default {
             },
 
             modalBookNow: false,
-           
+
         }
     },
     methods: {
@@ -196,14 +196,14 @@ export default {
     }
     .service-card-header{
         padding: 25px;
-       
+
         border-bottom: 1px solid blue;
     }
     .service-card-header-title{
          font-weight: bold;
         font-size: 2em;
     }
-    
+
     .service-card-content{
         padding: 20px;
         font-size: 1.3em;
@@ -224,12 +224,9 @@ export default {
         font-size: 3.5em;
         font-weight: bold;
     }
-    
 
-    .line{
-        height: 10px;
-        background-color: #3490dc;
-    }
+
+
 
     /* .modal .animation-content .modal-card {
         overflow: visible !important;

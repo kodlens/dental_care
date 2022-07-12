@@ -1,6 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <welcome-page></welcome-page>
 
+    <booking-component></booking-component>
 
     <?php if(auth()->guard()->check()): ?>
         <services-component></services-component>

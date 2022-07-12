@@ -10857,6 +10857,91 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      dentists: [],
+      schedules: [],
+      fields: {
+        dentist_id: 0
+      },
+      errors: {}
+    };
+  },
+  methods: {
+    initData: function initData() {
+      var _this = this;
+
+      axios.get('/get-open-dentists').then(function (res) {
+        _this.dentists = res.data;
+      });
+    },
+    showSchedule: function showSchedule() {
+      var _this2 = this;
+
+      axios.get('/get-dentist-schedules/' + this.fields.dentist_id).then(function (res) {
+        _this2.schedules = res.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.initData();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js& ***!
@@ -36391,7 +36476,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.service-card[data-v-1e616838]{\n    width: 520px;\n    margin: 15px;\n\n    box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -webkit-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -moz-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n\n    border: 1px solid rgb(226, 226, 226);\n    border-top: 4px solid blue;\n    border-radius: 10px;\n}\n.service-card-header[data-v-1e616838]{\n    padding: 25px;\n   \n    border-bottom: 1px solid blue;\n}\n.service-card-header-title[data-v-1e616838]{\n     font-weight: bold;\n    font-size: 2em;\n}\n.service-card-content[data-v-1e616838]{\n    padding: 20px;\n    font-size: 1.3em;\n}\n.service-price[data-v-1e616838]{\n    display: flex;\n    padding: 20px;\n}\n.peso-sign[data-v-1e616838]{\n    margin-left: auto;\n    color: red;\n    font-weight: bold;\n    font-size: 2em;\n}\n.price[data-v-1e616838]{\n    color: orange;\n    font-size: 3.5em;\n    font-weight: bold;\n}\n.line[data-v-1e616838]{\n    height: 10px;\n    background-color: #3490dc;\n}\n\n/* .modal .animation-content .modal-card {\n    overflow: visible !important;\n}\n\n.modal-card-body {\n    overflow: visible !important;\n} */\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.services[data-v-1e616838]{\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-evenly;\n}\n.service-card[data-v-1e616838]{\n    width: 520px;\n    margin: 15px;\n\n    box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -webkit-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n    -moz-box-shadow: 8px -14px 56px -54px rgba(0,0,0,1);\n\n    border: 1px solid rgb(226, 226, 226);\n    border-top: 4px solid blue;\n    border-radius: 10px;\n}\n.service-card-header[data-v-1e616838]{\n    padding: 25px;\n\n    border-bottom: 1px solid blue;\n}\n.service-card-header-title[data-v-1e616838]{\n     font-weight: bold;\n    font-size: 2em;\n}\n.service-card-content[data-v-1e616838]{\n    padding: 20px;\n    font-size: 1.3em;\n}\n.service-price[data-v-1e616838]{\n    display: flex;\n    padding: 20px;\n}\n.peso-sign[data-v-1e616838]{\n    margin-left: auto;\n    color: red;\n    font-weight: bold;\n    font-size: 2em;\n}\n.price[data-v-1e616838]{\n    color: orange;\n    font-size: 3.5em;\n    font-weight: bold;\n}\n\n\n\n\n/* .modal .animation-content .modal-card {\n    overflow: visible !important;\n}\n\n.modal-card-body {\n    overflow: visible !important;\n} */\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39082,6 +39167,45 @@ component.options.__file = "resources/js/components/Administrator/User/UserPage.
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookingComponent.vue?vue&type=template&id=ba51ade2& */ "./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&");
+/* harmony import */ var _BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BookingComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/DentalChartxx.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/DentalChartxx.vue ***!
@@ -40536,6 +40660,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/DentalChartxx.vue?vue&type=script&lang=js& ***!
@@ -41562,6 +41702,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_template_id_705f41e1___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserPage_vue_vue_type_template_id_705f41e1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./UserPage.vue?vue&type=template&id=705f41e1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Administrator/User/UserPage.vue?vue&type=template&id=705f41e1&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingComponent_vue_vue_type_template_id_ba51ade2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BookingComponent.vue?vue&type=template&id=ba51ade2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&");
 
 
 /***/ }),
@@ -47508,6 +47665,112 @@ var render = function () {
   )
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BookingComponent.vue?vue&type=template&id=ba51ade2& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "section" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "columns" }, [
+        _c(
+          "div",
+          { staticClass: "column" },
+          [
+            _c(
+              "b-field",
+              { attrs: { label: "Select Dentist" } },
+              [
+                _c(
+                  "b-select",
+                  {
+                    on: { input: _vm.showSchedule },
+                    model: {
+                      value: _vm.fields.dentist_id,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.fields, "dentist_id", $$v)
+                      },
+                      expression: "fields.dentist_id",
+                    },
+                  },
+                  _vm._l(_vm.dentists, function (item, index) {
+                    return _c(
+                      "option",
+                      { key: index, domProps: { value: item.user_id } },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(item.lname) +
+                            ", " +
+                            _vm._s(item.fname) +
+                            " " +
+                            _vm._s(item.mname) +
+                            "\n                        "
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ],
+              1
+            ),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(1),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "line" }),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }, [
+        _c("p", { staticClass: "title has-text-centered" }, [
+          _vm._v(
+            "\n                    APPOINTMENT INFORMATION\n                "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column" }, [
+      _c("div", { staticClass: "subtitle" }, [_vm._v("Dentist Schedule")]),
+      _vm._v(" "),
+      _c("div"),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -57263,7 +57526,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section debug" }, [
+    return _c("div", { staticClass: "section" }, [
       _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column" }, [
           _c("p", { staticClass: "title has-text-centered" }, [
@@ -82179,6 +82442,7 @@ var map = {
 	"./components/Administrator/Report/ReportAppointment.vue": "./resources/js/components/Administrator/Report/ReportAppointment.vue",
 	"./components/Administrator/Services/ServicesPage.vue": "./resources/js/components/Administrator/Services/ServicesPage.vue",
 	"./components/Administrator/User/UserPage.vue": "./resources/js/components/Administrator/User/UserPage.vue",
+	"./components/BookingComponent.vue": "./resources/js/components/BookingComponent.vue",
 	"./components/DentalChartxx.vue": "./resources/js/components/DentalChartxx.vue",
 	"./components/Dentist/DentalChart.vue": "./resources/js/components/Dentist/DentalChart.vue",
 	"./components/Dentist/DentistAppointment.vue": "./resources/js/components/Dentist/DentistAppointment.vue",

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\Appointment;
 use App\Models\User;
+use App\Models\DentistSchedule;
+
+
 
 
 /*
@@ -28,7 +31,25 @@ Route::get('/', function () {
     // }
     return view('welcome');
 });
+
+
 Route::get('/get-dental-services', [App\Http\Controllers\Administrator\ServicesController::class, 'getDentalServices']);
+
+
+Route::get('/get-open-dentists', function () {
+    $dentists = User::where('role', 'DENTIST')
+        ->orderBy('lname', 'asc')->get();
+    return $dentists;
+});
+
+Route::get('/get-dentist-schedules/{id}', function ($id) {
+    $schedules = DentistSchedule::with(['user'])
+        ->whereHas('user', function($q) use ($id){
+            $q->where('user_id', $id);
+        })
+        ->get();
+    return $schedules;
+});
 
 
 Auth::routes([

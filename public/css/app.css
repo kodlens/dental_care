@@ -26689,6 +26689,11 @@ html body {
   fill: #dddddd !important;
 }
 
+.line {
+  height: 10px;
+  background-color: #3490dc;
+}
+
 /* Bulma Utilities */
 .pagination-previous,
 .pagination-next,
