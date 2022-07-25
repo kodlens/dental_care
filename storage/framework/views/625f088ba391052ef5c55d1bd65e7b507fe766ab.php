@@ -1,9 +1,13 @@
+
+
 <?php $__env->startSection('content'); ?>
     <welcome-page></welcome-page>
 
-    <booking-component></booking-component>
+    
 
     <?php if(auth()->guard()->check()): ?>
+        <booking-component></booking-component>
+
         <services-component></services-component>
     <?php endif; ?>
 

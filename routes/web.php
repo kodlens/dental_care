@@ -53,6 +53,17 @@ Route::get('/get-dentist-schedules/{id}', function ($id) {
 });
 
 
+Route::get('/get-dentist-available-schedules/{id}', function ($id) {
+    $schedules = DentistSchedule::with(['user'])
+        ->whereHas('user', function($q) use ($id){
+            $q->where('user_id', $id);
+        })
+        ->get();
+    return $schedules;
+});
+
+
+
 Auth::routes([
     'login' => 'false'
 ]);

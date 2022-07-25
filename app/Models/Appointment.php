@@ -12,6 +12,7 @@ class Appointment extends Model
     protected $table = 'appointments';
     protected $primaryKey = 'appointment_id';
 
-    protected $fillable = ['user_id', 'service_id', 'qr_code', 'appoint_date', 'appoint_time', 'dentist_id', 'appoint_status', 'is_notify'];
+    protected $fillable = ['user_id', 'service_id', 'qr_code', 'appoint_date', 'dentist_schedule_id',
+        'dentist_id', 'appoint_status', 'is_notify'];
 
 }

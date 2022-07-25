@@ -23,7 +23,14 @@ class CreateAppointmentsTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('qr_code')->nullable();
             $table->date('appoint_date')->nullable();
-            $table->time('appoint_time')->nullable();
+
+            //schedule of the dentist
+            $table->unsignedBigInteger('dentist_schedule_id');
+            $table->foreign('dentist_schedule_id')->references('dentist_schedule_id')->on('dentist_schedules')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+
+           // $table->time('appoint_time')->nullable();
             $table->unsignedBigInteger('dentist_id');
             $table->foreign('dentist_id')->references('user_id')->on('users');
             $table->tinyInteger('appoint_status')->default(0);

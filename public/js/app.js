@@ -10939,9 +10939,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+var d = new Date();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      minDate: new Date(d.setDate(d.getDate() - 1)),
       dentists: [],
       schedules: [],
       fields: {
@@ -10973,8 +10980,10 @@ __webpack_require__.r(__webpack_exports__);
         _this3.services = res.data;
       });
     },
-    bookNow: function bookNow() {
-      axios.post('/book-now').then(function (res) {});
+    submit: function submit() {
+      var ndate = new Date(this.fields.raw_date);
+      this.fields.booking_date = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+      axios.post('/book-now', this.fields).then(function (res) {});
     }
   },
   mounted: function mounted() {
@@ -36567,7 +36576,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47805,7 +47814,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "columns is-centered" }, [
         _c("div", { staticClass: "column is-6" }, [
-          _c("div", { staticClass: "panel" }, [
+          _c("div", { staticClass: "panel is-primary" }, [
             _c("div", { staticClass: "panel-heading" }, [
               _vm._v(
                 "\n                        DENTIST SCHEDULE\n                    "
@@ -47813,158 +47822,171 @@ var render = function () {
             ]),
             _vm._v(" "),
             _c(
-              "div",
-              { staticClass: "panel-body" },
+              "form",
+              {
+                on: {
+                  submit: function ($event) {
+                    $event.preventDefault()
+                    return _vm.submit.apply(null, arguments)
+                  },
+                },
+              },
               [
                 _c(
-                  "b-field",
-                  { attrs: { label: "Select Dentist", expanded: "" } },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        attrs: { expanded: "" },
-                        on: { input: _vm.showSchedule },
-                        model: {
-                          value: _vm.fields.dentist_id,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.fields, "dentist_id", $$v)
-                          },
-                          expression: "fields.dentist_id",
-                        },
-                      },
-                      _vm._l(_vm.dentists, function (item, index) {
-                        return _c(
-                          "option",
-                          { key: index, domProps: { value: item.user_id } },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(item.lname) +
-                                ", " +
-                                _vm._s(item.fname) +
-                                " " +
-                                _vm._s(item.mname) +
-                                "\n                                "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  { attrs: { label: "Select Services", expanded: "" } },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        attrs: { expanded: "" },
-                        model: {
-                          value: _vm.fields.service_id,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.fields, "service_id", $$v)
-                          },
-                          expression: "fields.service_id",
-                        },
-                      },
-                      _vm._l(_vm.services, function (item, index) {
-                        return _c(
-                          "option",
-                          { key: index, domProps: { value: item.service_id } },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(item.service) +
-                                " - Price: " +
-                                _vm._s(item.price) +
-                                "\n                                "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  { attrs: { label: "Select Date" } },
-                  [
-                    _c("b-datepicker", {
-                      model: {
-                        value: _vm.fields.booking_date,
-                        callback: function ($$v) {
-                          _vm.$set(_vm.fields, "booking_date", $$v)
-                        },
-                        expression: "fields.booking_date",
-                      },
-                    }),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-field",
-                  { attrs: { label: "Dentist Available Schedule" } },
-                  [
-                    _c(
-                      "b-select",
-                      {
-                        model: {
-                          value: _vm.fields.dentist_schedule_id,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.fields, "dentist_schedule_id", $$v)
-                          },
-                          expression: "fields.dentist_schedule_id",
-                        },
-                      },
-                      _vm._l(_vm.schedules, function (item, index) {
-                        return _c(
-                          "option",
-                          {
-                            key: index,
-                            staticClass: "schedule-list",
-                            domProps: { value: item.dentist_schedule_id },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(item.from) +
-                                " - " +
-                                _vm._s(item.to) +
-                                "\n                                "
-                            ),
-                          ]
-                        )
-                      }),
-                      0
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
                   "div",
-                  { staticClass: "buttons" },
+                  { staticClass: "panel-body" },
                   [
-                    _vm.fields.service_id && _vm.fields.dentist_id
-                      ? _c("b-button", {
-                          attrs: { type: "is-success", label: "BOOK NOW" },
-                          on: { click: _vm.bookNow },
-                        })
-                      : _vm._e(),
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Select Dentist", expanded: "" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { expanded: "" },
+                            on: { input: _vm.showSchedule },
+                            model: {
+                              value: _vm.fields.dentist_id,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "dentist_id", $$v)
+                              },
+                              expression: "fields.dentist_id",
+                            },
+                          },
+                          _vm._l(_vm.dentists, function (item, index) {
+                            return _c(
+                              "option",
+                              { key: index, domProps: { value: item.user_id } },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(item.lname) +
+                                    ", " +
+                                    _vm._s(item.fname) +
+                                    " " +
+                                    _vm._s(item.mname) +
+                                    "\n                                    "
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Select Services", expanded: "" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            attrs: { expanded: "" },
+                            model: {
+                              value: _vm.fields.service_id,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "service_id", $$v)
+                              },
+                              expression: "fields.service_id",
+                            },
+                          },
+                          _vm._l(_vm.services, function (item, index) {
+                            return _c(
+                              "option",
+                              {
+                                key: index,
+                                domProps: { value: item.service_id },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(item.service) +
+                                    " - Price: " +
+                                    _vm._s(item.price) +
+                                    "\n                                    "
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Select Date" } },
+                      [
+                        _c("b-datepicker", {
+                          attrs: { "min-date": _vm.minDate },
+                          model: {
+                            value: _vm.fields.raw_date,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.fields, "raw_date", $$v)
+                            },
+                            expression: "fields.raw_date",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-field",
+                      { attrs: { label: "Dentist Available Schedule" } },
+                      [
+                        _c(
+                          "b-select",
+                          {
+                            model: {
+                              value: _vm.fields.dentist_schedule_id,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.fields, "dentist_schedule_id", $$v)
+                              },
+                              expression: "fields.dentist_schedule_id",
+                            },
+                          },
+                          _vm._l(_vm.schedules, function (item, index) {
+                            return _c(
+                              "option",
+                              {
+                                key: index,
+                                staticClass: "schedule-list",
+                                domProps: { value: item.dentist_schedule_id },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(
+                                      new Date(
+                                        "2022-01-01 " + item.from
+                                      ).toLocaleTimeString()
+                                    ) +
+                                    " - " +
+                                    _vm._s(
+                                      new Date(
+                                        "2022-01-01 " + item.to
+                                      ).toLocaleTimeString()
+                                    ) +
+                                    "\n                                    "
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1),
                   ],
                   1
                 ),
-              ],
-              1
+              ]
             ),
           ]),
         ]),
@@ -47987,6 +48009,14 @@ var staticRenderFns = [
           ),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "buttons" }, [
+      _c("button", { staticClass: "button is-success" }, [_vm._v("BOOK NOW")]),
     ])
   },
 ]
