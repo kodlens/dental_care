@@ -26,8 +26,8 @@
                                 </b-select>
                             </b-field>
 
-                             <b-field label="Select Services" expanded>
-                                <b-select v-model="fields.service" expanded>
+                            <b-field label="Select Services" expanded>
+                                <b-select v-model="fields.service_id" expanded>
                                     <option v-for="(item, index) in services" :key="index" 
                                         :value="item.service_id">
                                         {{ item.service }} - Price: {{ item.price }}
@@ -35,13 +35,21 @@
                                 </b-select>
                             </b-field>
 
+                            <b-field label="Select Date">
+                                <b-datepicker v-model="fields.booking_date"></b-datepicker>
+                            </b-field>
+                            <b-field label="Dentist Available Schedule">
+                                <b-select v-model="fields.dentist_schedule_id">
+                                    <option class="schedule-list" v-for="(item, index) in schedules" :key="index" :value="item.dentist_schedule_id">
+                                        {{ item.from}} - {{ item.to }}
+                                    </option>
+                                </b-select>
+                            </b-field>
 
-                            <div class="schedules">
-                                <p class="subtitle">Schedules</p>
-                                <div class="schedule-list" v-for="(item, index) in schedules" :key="index">
-                                    {{ item.from}} - {{ item.to }}  
-                                    <b-button label="Book" class="is-small" type="is-success"></b-button>
-                                </div>
+
+
+                            <div class="buttons">
+                                <b-button v-if="fields.service_id && fields.dentist_id" type="is-success" label="BOOK NOW" @click="bookNow"></b-button>
                             </div>
                         </div>
                         
@@ -96,6 +104,12 @@ export default {
             axios.get('/get-dental-services').then(res=>{
                 this.services = res.data;
             });
+        },
+
+        bookNow(){
+            axios.post('/book-now').then(res=>{
+
+            })
         }
     },
 
@@ -113,11 +127,5 @@ export default {
         padding: 25px;
     }
 
-    .schedules{
-        padding: 25px;
-    }
 
-    .schedule-list{
-        margin: 0 0 10px 10px;
-    }
 </style>

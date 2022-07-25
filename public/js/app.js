@@ -10931,6 +10931,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -10964,6 +10972,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/get-dental-services').then(function (res) {
         _this3.services = res.data;
       });
+    },
+    bookNow: function bookNow() {
+      axios.post('/book-now').then(function (res) {});
     }
   },
   mounted: function mounted() {
@@ -36076,7 +36087,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.panel-body[data-v-ba51ade2]{\n    padding: 25px;\n}\n.schedules[data-v-ba51ade2]{\n    padding: 25px;\n}\n.schedule-list[data-v-ba51ade2]{\n    margin: 0 0 10px 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.panel-body[data-v-ba51ade2]{\n    padding: 25px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47854,11 +47865,11 @@ var render = function () {
                       {
                         attrs: { expanded: "" },
                         model: {
-                          value: _vm.fields.service,
+                          value: _vm.fields.service_id,
                           callback: function ($$v) {
-                            _vm.$set(_vm.fields, "service", $$v)
+                            _vm.$set(_vm.fields, "service_id", $$v)
                           },
-                          expression: "fields.service",
+                          expression: "fields.service_id",
                         },
                       },
                       _vm._l(_vm.services, function (item, index) {
@@ -47883,33 +47894,74 @@ var render = function () {
                 ),
                 _vm._v(" "),
                 _c(
-                  "div",
-                  { staticClass: "schedules" },
+                  "b-field",
+                  { attrs: { label: "Select Date" } },
                   [
-                    _c("p", { staticClass: "subtitle" }, [_vm._v("Schedules")]),
-                    _vm._v(" "),
-                    _vm._l(_vm.schedules, function (item, index) {
-                      return _c(
-                        "div",
-                        { key: index, staticClass: "schedule-list" },
-                        [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(item.from) +
-                              " - " +
-                              _vm._s(item.to) +
-                              "  \n                                "
-                          ),
-                          _c("b-button", {
-                            staticClass: "is-small",
-                            attrs: { label: "Book", type: "is-success" },
-                          }),
-                        ],
-                        1
-                      )
+                    _c("b-datepicker", {
+                      model: {
+                        value: _vm.fields.booking_date,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.fields, "booking_date", $$v)
+                        },
+                        expression: "fields.booking_date",
+                      },
                     }),
                   ],
-                  2
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-field",
+                  { attrs: { label: "Dentist Available Schedule" } },
+                  [
+                    _c(
+                      "b-select",
+                      {
+                        model: {
+                          value: _vm.fields.dentist_schedule_id,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.fields, "dentist_schedule_id", $$v)
+                          },
+                          expression: "fields.dentist_schedule_id",
+                        },
+                      },
+                      _vm._l(_vm.schedules, function (item, index) {
+                        return _c(
+                          "option",
+                          {
+                            key: index,
+                            staticClass: "schedule-list",
+                            domProps: { value: item.dentist_schedule_id },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(item.from) +
+                                " - " +
+                                _vm._s(item.to) +
+                                "\n                                "
+                            ),
+                          ]
+                        )
+                      }),
+                      0
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "buttons" },
+                  [
+                    _vm.fields.service_id && _vm.fields.dentist_id
+                      ? _c("b-button", {
+                          attrs: { type: "is-success", label: "BOOK NOW" },
+                          on: { click: _vm.bookNow },
+                        })
+                      : _vm._e(),
+                  ],
+                  1
                 ),
               ],
               1
