@@ -3,9 +3,11 @@
 @section('content')
     <welcome-page></welcome-page>
 
-    <booking-component></booking-component>
+    
 
     @auth
+        <booking-component></booking-component>
+
         <services-component></services-component>
     @endauth
 

@@ -33,7 +33,7 @@
                         <div class="price">{{ priceRounded(item.price) }}</div>
                     </div>
                     <footer class="card-footer">
-                        <a class="card-footer-item" @click="bookNow(item)">BOOK NOW</a>
+                        <!-- <a class="card-footer-item" @click="bookNow(item)">BOOK NOW</a> -->
                     </footer>
                 </div>
             </div>

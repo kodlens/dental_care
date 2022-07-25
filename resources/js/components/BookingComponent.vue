@@ -9,24 +9,47 @@
                 </div>
             </div>
 
-            <div class="columns">
-                <div class="column">
-                    <b-field label="Select Dentist">
-                        <b-select v-model="fields.dentist_id" @input="showSchedule">
-                            <option v-for="(item, index) in dentists" :key="index" 
-                                :value="item.user_id">
-                                {{ item.lname }}, {{ item.fname }} {{ item.mname }}
-                            </option>
-                        </b-select>
-                    </b-field>
-                </div>
+            <div class="columns is-centered">
+                <div class="column is-6">
 
-                <div class="column">
-                    <div class="subtitle">Dentist Schedule</div>
-                    <div>
+                    <div class="panel">
+                        <div class="panel-heading">
+                            DENTIST SCHEDULE
+                        </div>
+                        <div class="panel-body">
+                            <b-field label="Select Dentist" expanded>
+                                <b-select expanded v-model="fields.dentist_id" @input="showSchedule">
+                                    <option v-for="(item, index) in dentists" :key="index" 
+                                        :value="item.user_id">
+                                        {{ item.lname }}, {{ item.fname }} {{ item.mname }}
+                                    </option>
+                                </b-select>
+                            </b-field>
 
+                             <b-field label="Select Services" expanded>
+                                <b-select v-model="fields.service" expanded>
+                                    <option v-for="(item, index) in services" :key="index" 
+                                        :value="item.service_id">
+                                        {{ item.service }} - Price: {{ item.price }}
+                                    </option>
+                                </b-select>
+                            </b-field>
+
+
+                            <div class="schedules">
+                                <p class="subtitle">Schedules</p>
+                                <div class="schedule-list" v-for="(item, index) in schedules" :key="index">
+                                    {{ item.from}} - {{ item.to }}  
+                                    <b-button label="Book" class="is-small" type="is-success"></b-button>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
+                    
                 </div>
+
+                
             </div>
 
 
@@ -50,6 +73,9 @@ export default {
             },
             errors: {},
 
+            services: [],
+
+
         }
     },
 
@@ -64,12 +90,34 @@ export default {
             axios.get('/get-dentist-schedules/' + this.fields.dentist_id).then(res=>{
                 this.schedules = res.data;
             });
+        },
+
+        getServices(){
+            axios.get('/get-dental-services').then(res=>{
+                this.services = res.data;
+            });
         }
     },
 
     mounted() {
         this.initData();
+        this.getServices();
     },
 
 }
 </script>
+
+<style scoped>
+
+    .panel-body{
+        padding: 25px;
+    }
+
+    .schedules{
+        padding: 25px;
+    }
+
+    .schedule-list{
+        margin: 0 0 10px 10px;
+    }
+</style>
