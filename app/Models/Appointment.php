@@ -15,4 +15,24 @@ class Appointment extends Model
     protected $fillable = ['user_id', 'service_id', 'qr_code', 'appoint_date', 'dentist_schedule_id',
         'dentist_id', 'appoint_status', 'is_notify'];
 
+
+
+    public function user(){
+        return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
+
+
+    public function service(){
+        return $this->hasOne(Service::class, 'service_id', 'service_id');
+    }
+
+    public function dentist(){
+        return $this->hasOne(User::class, 'user_id', 'dentist_id');
+    }
+
+    public function dentist_schedule(){
+        return $this->hasOne(DentistSchedule::class, 'dentist_schedule_id', 'dentist_schedule_id');
+    }
+
+
 }

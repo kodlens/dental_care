@@ -25,24 +25,30 @@ class BookNowController extends Controller
         $user = Auth::user();
         
         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
-
         $date =  $req->booking_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
         //$ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
        // $txtTime = date("H:i A", strtotime($date));
+
+
+        //check if schedule exist
+        $isScheduled = Appointment::where('dentist_schedule_id', $req->dentist_schedule_id)
+            ->where('appoint_date', $ndate)
+            ->where('dentist_id', $req->dentist_id)
+            ->exists();
+
+        if($isScheduled){
+            return response()->json([
+                'status' => 'exist'
+            ], 422);
+        }
+
         $dentistSchedule = DentistSchedule::where('dentist_schedule_id', $req->dentist_schedule_id)
             ->first();
 
-        
+
         $nTimeFrom = $dentistSchedule->from;
         $txtTime = date("H:i A", strtotime(now() .' '. $nTimeFrom)); //fomrat time with AM/PM for txt message
-        
-        
-        
-        return $txtTime;
-
-        //return $nTimeFrom;
-
 
         $appointment = Appointment::create([
             'user_id' => $user->user_id,

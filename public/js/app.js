@@ -10959,6 +10959,11 @@ var d = new Date();
     };
   },
   methods: {
+    clearFields: function clearFields() {
+      this.fields = {
+        dentist_id: 0
+      };
+    },
     initData: function initData() {
       var _this = this;
 
@@ -10981,9 +10986,35 @@ var d = new Date();
       });
     },
     submit: function submit() {
+      var _this4 = this;
+
       var ndate = new Date(this.fields.raw_date);
       this.fields.booking_date = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
-      axios.post('/book-now', this.fields).then(function (res) {});
+      axios.post('/book-now', this.fields).then(function (res) {
+        if (res.data.status === 'saved') {
+          //if save
+          _this4.$buefy.dialog.alert({
+            title: 'SAVED!',
+            type: 'is-success',
+            message: 'Schedule successfully saved.',
+            confirmText: 'OK'
+          });
+
+          _this4.clearFields();
+        }
+      })["catch"](function (err) {
+        if (err.response.status === 422) {
+          if (err.response.data.status === 'exist') {
+            //if already scheduled
+            _this4.$buefy.dialog.alert({
+              title: 'EXISTED!',
+              type: 'is-warning',
+              message: 'Schedule already taken.',
+              confirmText: 'OK'
+            });
+          }
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -14714,6 +14745,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -54917,11 +54952,11 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.dentist_lname) +
+                                  _vm._s(props.row.dentist.lname) +
                                   ", " +
-                                  _vm._s(props.row.dentist_fname) +
+                                  _vm._s(props.row.dentist.fname) +
                                   " " +
-                                  _vm._s(props.row.dentist_mname) +
+                                  _vm._s(props.row.dentist.mname) +
                                   "\n                        "
                               ),
                             ]
@@ -54939,9 +54974,9 @@ var render = function () {
                             return [
                               _vm._v(
                                 "\n                            " +
-                                  _vm._s(props.row.service) +
+                                  _vm._s(props.row.service.service) +
                                   " (₱" +
-                                  _vm._s(props.row.price) +
+                                  _vm._s(props.row.service.price) +
                                   ")\n                        "
                               ),
                             ]
@@ -54965,7 +55000,15 @@ var render = function () {
                                   _vm._s(props.row.appoint_date) +
                                   " " +
                                   _vm._s(
-                                    _vm._f("formatTime")(props.row.appoint_time)
+                                    _vm._f("formatTime")(
+                                      props.row.dentist_schedule.from
+                                    )
+                                  ) +
+                                  " - " +
+                                  _vm._s(
+                                    _vm._f("formatTime")(
+                                      props.row.dentist_schedule.to
+                                    )
                                   ) +
                                   "\n                        "
                               ),
@@ -55179,6 +55222,15 @@ var render = function () {
                         "div",
                         { staticClass: "column" },
                         [
+                          _c("modal-browse-dentist", {
+                            attrs: { "prop-dentist": _vm.dentist_fullname },
+                            on: {
+                              browseDentist: function ($event) {
+                                return _vm.emitBrowseDentist($event)
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
                           _c(
                             "b-field",
                             { attrs: { label: "Service" } },
@@ -55246,15 +55298,6 @@ var render = function () {
                             ],
                             1
                           ),
-                          _vm._v(" "),
-                          _c("modal-browse-dentist", {
-                            attrs: { "prop-dentist": _vm.dentist_fullname },
-                            on: {
-                              browseDentist: function ($event) {
-                                return _vm.emitBrowseDentist($event)
-                              },
-                            },
-                          }),
                         ],
                         1
                       ),

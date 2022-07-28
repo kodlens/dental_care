@@ -51,15 +51,20 @@ class MyAppointmentController extends Controller
         $user = Auth::user();
 
 
-        $data = DB::table('appointments as a')
-            ->join('users as b', 'a.dentist_id', 'b.user_id')
-            ->join('services as d', 'a.service_id', 'd.service_id')
-            ->join('users as c', 'a.user_id', 'c.user_id')
-            ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',
-                'b.lname as dentist_lname', 'b.fname as dentist_fname', 'b.mname as dentist_mname', 'b.contact_no as dentist_contact_no',
-                'c.lname as user_lname', 'c.fname as user_fname', 'c.mname as user_mname', 'c.sex as user_sex', 'c.contact_no as user_contact_no',
-                'd.service_id', 'd.service', 'd.price')
-            ->where('a.user_id', $user->user_id)
+        // $data = DB::table('appointments as a')
+        //     ->join('users as b', 'a.dentist_id', 'b.user_id')
+        //     ->join('services as d', 'a.service_id', 'd.service_id')
+        //     ->join('users as c', 'a.user_id', 'c.user_id')
+        //     ->select('a.appointment_id', 'a.user_id', 'a.appoint_date', 'a.appoint_time', 'a.dentist_id', 'a.appoint_status',
+        //         'b.lname as dentist_lname', 'b.fname as dentist_fname', 'b.mname as dentist_mname', 'b.contact_no as dentist_contact_no',
+        //         'c.lname as user_lname', 'c.fname as user_fname', 'c.mname as user_mname', 'c.sex as user_sex', 'c.contact_no as user_contact_no',
+        //         'd.service_id', 'd.service', 'd.price')
+        //     ->where('a.user_id', $user->user_id)
+        //     ->orderBy($sort[0], $sort[1])
+        //     ->paginate($req->perpage);
+
+        $data = Appointment::with(['service', 'dentist', 'user', 'dentist_schedule'])
+            ->where('user_id', $user->user_id)
             ->orderBy($sort[0], $sort[1])
             ->paginate($req->perpage);
 

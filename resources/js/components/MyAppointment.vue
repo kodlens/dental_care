@@ -91,15 +91,15 @@
                             </b-table-column>
 
                             <b-table-column field="name" label="Dentist Name" v-slot="props">
-                                {{ props.row.dentist_lname }}, {{ props.row.dentist_fname }} {{ props.row.dentist_mname }}
+                                {{ props.row.dentist.lname }}, {{ props.row.dentist.fname }} {{ props.row.dentist.mname }}
                             </b-table-column>
 
                             <b-table-column field="service" label="Service" v-slot="props">
-                                {{ props.row.service }} (&#8369;{{ props.row.price}})
+                                {{ props.row.service.service }} (&#8369;{{ props.row.service.price}})
                             </b-table-column>
 
                             <b-table-column field="dateTime" label="Appointment DateTime" v-slot="props">
-                                {{ props.row.appoint_date }} {{ props.row.appoint_time | formatTime }}
+                                {{ props.row.appoint_date }} {{ props.row.dentist_schedule.from | formatTime }} - {{ props.row.dentist_schedule.to | formatTime }}
                             </b-table-column>
 
                             <b-table-column field="contact_no" label="Contact No." v-slot="props">
@@ -161,6 +161,12 @@
                         <div class="">
                             <div class="columns">
                                 <div class="column">
+
+                                    <modal-browse-dentist
+                                        :prop-dentist="dentist_fullname"
+                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
+
+                                        
                                     <b-field label="Service">
                                         <b-select required v-model="fields.service_id">
                                             <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
@@ -174,9 +180,7 @@
                                         </b-datetimepicker>
                                     </b-field>
 
-                                    <modal-browse-dentist
-                                        :prop-dentist="dentist_fullname"
-                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
+                                    
                                 </div>
                             </div>
 

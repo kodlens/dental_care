@@ -98,6 +98,12 @@ export default {
     },
 
     methods: {
+
+        clearFields(){
+            this.fields ={
+                dentist_id: 0,
+            };
+        },
         initData(){
             axios.get('/get-open-dentists').then(res=>{
                 this.dentists = res.data;
@@ -120,7 +126,30 @@ export default {
             let ndate = new Date(this.fields.raw_date);
             this.fields.booking_date = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
             axios.post('/book-now', this.fields).then(res=>{
+                if(res.data.status === 'saved'){
+                    //if save
+                    this.$buefy.dialog.alert({
+                        title: 'SAVED!',
+                        type: 'is-success',
+                        message: 'Schedule successfully saved.',
+                        confirmText: 'OK'
+                    });
 
+                    this.clearFields();
+                }
+            }).catch(err=>{
+                if(err.response.status === 422){
+                    if(err.response.data.status === 'exist'){
+                        //if already scheduled
+                        this.$buefy.dialog.alert({
+                            title: 'EXISTED!',
+                            type: 'is-warning',
+                            message: 'Schedule already taken.',
+                            confirmText: 'OK'
+                        });
+                    }
+                }
+                
             })
         }
     },
