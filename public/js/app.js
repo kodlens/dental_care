@@ -15011,6 +15011,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+var d = new Date();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices', 'propUser'],
   name: "AppointmentType",
@@ -15025,6 +15032,8 @@ __webpack_require__.r(__webpack_exports__);
       perPage: 5,
       defaultSortDirection: 'asc',
       user: {},
+      minDate: new Date(d.setDate(d.getDate() - 1)),
+      dentist_schedules: [],
       global_id: 0,
       search: {
         lname: ''
@@ -15123,11 +15132,19 @@ __webpack_require__.r(__webpack_exports__);
       this.global_id = data_id;
       this.modalBookNow = true;
       axios.get('/my-appointment/' + data_id).then(function (res) {
-        _this4.fields = res.data;
-        var ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
-        ndateTime = new Date(ndateTime);
-        _this4.fields.appointment_date = ndateTime;
-        _this4.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
+        _this4.fields = {}; //this.fields = res.data;
+        //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
+        //ndateTime = new Date(ndateTime);
+        //this.fields.appointment_date = ndateTime;
+
+        axios.get('/get-dentist-schedules/' + res.data.dentist_id).then(function (resSched) {
+          _this4.dentist_schedules = resSched.data;
+        });
+        _this4.dentist_fullname = res.data.dentist.lname + ", " + res.data.dentist.fname + " " + res.data.dentist.mname;
+        _this4.fields.dentist_id = res.data.dentist.user_id;
+        _this4.fields.appointment_date = new Date(res.data.appoint_date);
+        _this4.fields.service_id = res.data.service_id;
+        _this4.fields.dentist_schedule_id = res.data.dentist_schedule_id;
       });
     },
     clearFields: function clearFields() {
@@ -55277,9 +55294,10 @@ var render = function () {
                               },
                             },
                             [
-                              _c("b-datetimepicker", {
+                              _c("b-datepicker", {
                                 attrs: {
                                   editable: "",
+                                  "min-date": _vm.minDate,
                                   placeholder: "Appointment Date",
                                   required: "",
                                 },
@@ -55295,6 +55313,57 @@ var render = function () {
                                   expression: "fields.appointment_date",
                                 },
                               }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Dentist Schedule" } },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  attrs: { required: "" },
+                                  model: {
+                                    value: _vm.fields.dentist_schedule_id,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.fields,
+                                        "dentist_schedule_id",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "fields.dentist_schedule_id",
+                                  },
+                                },
+                                _vm._l(
+                                  _vm.dentist_schedules,
+                                  function (item, index) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: index,
+                                        domProps: {
+                                          value: item.dentist_schedule_id,
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm._f("formatTime")(item.from)
+                                          ) +
+                                            " - " +
+                                            _vm._s(
+                                              _vm._f("formatTime")(item.to)
+                                            )
+                                        ),
+                                      ]
+                                    )
+                                  }
+                                ),
+                                0
+                              ),
                             ],
                             1
                           ),

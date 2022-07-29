@@ -166,7 +166,7 @@
                                         :prop-dentist="dentist_fullname"
                                         @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
 
-                                        
+
                                     <b-field label="Service">
                                         <b-select required v-model="fields.service_id">
                                             <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
@@ -175,11 +175,17 @@
                                     <b-field label="Appointment Date"
                                              :type="this.errors.appointment_date ? 'is-danger':''"
                                              :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
-                                        <b-datetimepicker editable v-model="fields.appointment_date"
-                                                 placeholder="Appointment Date" required>
-                                        </b-datetimepicker>
+                                        <b-datepicker editable v-model="fields.appointment_date"
+                                            :min-date="minDate"
+                                            placeholder="Appointment Date" required>
+                                        </b-datepicker>
                                     </b-field>
 
+                                    <b-field label="Dentist Schedule">
+                                        <b-select required v-model="fields.dentist_schedule_id">
+                                            <option v-for="(item, index) in dentist_schedules" :key="index" :value="item.dentist_schedule_id">{{ item.from | formatTime }} - {{ item.to | formatTime}}</option>
+                                        </b-select>
+                                    </b-field>
                                     
                                 </div>
                             </div>
@@ -265,6 +271,8 @@
 </template>
 
 <script>
+const d = new Date();
+
 export default {
     props: ['propServices', 'propUser'],
 
@@ -281,7 +289,8 @@ export default {
             defaultSortDirection: 'asc',
 
             user: {},
-
+            minDate: new Date(d.setDate(d.getDate() - 1)),
+            dentist_schedules: [],
 
             global_id : 0,
 
@@ -390,12 +399,25 @@ export default {
             this.modalBookNow = true;
 
             axios.get('/my-appointment/' + data_id).then(res=>{
-                this.fields = res.data;
-                let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
-                ndateTime = new Date(ndateTime);
+                this.fields = {};
+                //this.fields = res.data;
+                //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
+                //ndateTime = new Date(ndateTime);
 
-                this.fields.appointment_date = ndateTime;
-                this.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
+                //this.fields.appointment_date = ndateTime;
+
+                axios.get('/get-dentist-schedules/' + res.data.dentist_id).then(resSched=>{
+                    this.dentist_schedules = resSched.data;
+                    
+                });
+
+                this.dentist_fullname = res.data.dentist.lname + ", " + res.data.dentist.fname + " " + res.data.dentist.mname;
+                this.fields.dentist_id = res.data.dentist.user_id;
+                this.fields.appointment_date = new Date(res.data.appoint_date);
+                this.fields.service_id = res.data.service_id;
+                this.fields.dentist_schedule_id = res.data.dentist_schedule_id;
+
+
             });
         },
 
