@@ -44,10 +44,12 @@ Route::get('/get-open-dentists', function () {
 });
 
 Route::get('/get-dentist-schedules/{id}', function ($id) {
+    $today = date("D");
     $schedules = DentistSchedule::with(['user'])
         ->whereHas('user', function($q) use ($id){
             $q->where('user_id', $id);
         })
+        ->where($today, '1')
         ->get();
     return $schedules;
 });

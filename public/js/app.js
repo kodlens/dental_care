@@ -15132,11 +15132,10 @@ var d = new Date();
       this.global_id = data_id;
       this.modalBookNow = true;
       axios.get('/my-appointment/' + data_id).then(function (res) {
-        _this4.fields = {}; //this.fields = res.data;
+        //this.fields = res.data;
         //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
         //ndateTime = new Date(ndateTime);
         //this.fields.appointment_date = ndateTime;
-
         axios.get('/get-dentist-schedules/' + res.data.dentist_id).then(function (resSched) {
           _this4.dentist_schedules = resSched.data;
         });
@@ -15148,10 +15147,16 @@ var d = new Date();
       });
     },
     clearFields: function clearFields() {
+      this.global_id = 0;
+      this.errors = {};
       this.fields = {};
+      this.dentist_fullname = null;
     },
     submit: function submit() {
       var _this5 = this;
+
+      var ndate = new Date(this.fields.appointment_date);
+      this.fields.appoint_date = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
 
       if (this.global_id > 0) {
         //update
@@ -15204,6 +15209,13 @@ var d = new Date();
 
           if (err.response.status === 422) {
             _this5.errors = err.response.data.errors;
+
+            if (_this5.errors.schedule) {
+              _this5.$buefy.toast.open({
+                message: _this5.errors.schedule[0],
+                type: 'is-danger'
+              });
+            }
           }
         });
       }
@@ -15237,10 +15249,12 @@ var d = new Date();
     },
     bookNow: function bookNow() {
       this.modalBookNow = true;
-      this.fields = {};
+      this.clearFields();
       this.errors = {};
     },
     emitBrowseDentist: function emitBrowseDentist(data) {
+      var _this8 = this;
+
       this.fields.dentist_id = data.user_id; //user id to dentist id
 
       this.fields.lname = data.lname;
@@ -15249,6 +15263,9 @@ var d = new Date();
       this.fields.suffix = data.suffix;
       this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
       this.fields.sex = data.sex;
+      axios.get('/get-dentist-schedules/' + data.user_id).then(function (resSched) {
+        _this8.dentist_schedules = resSched.data;
+      });
     },
     initData: function initData() {
       this.services = JSON.parse(this.propServices);
@@ -15261,23 +15278,23 @@ var d = new Date();
       this.errors = {};
     },
     changePassword: function changePassword() {
-      var _this8 = this;
+      var _this9 = this;
 
       axios.post('/change-password', this.fields).then(function (res) {
         if (res.data.status === 'changed') {
-          _this8.$buefy.dialog.alert({
+          _this9.$buefy.dialog.alert({
             title: 'PASSWORD CHANGED?',
             type: 'is-success',
             message: 'Password successfully changed.',
             confirmText: 'Ok',
             onConfirm: function onConfirm() {
-              _this8.modalChangePassword = false;
+              _this9.modalChangePassword = false;
             }
           });
         }
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this8.errors = err.response.data.errors;
+          _this9.errors = err.response.data.errors;
         }
 
         if (err.response.status === 406) {
@@ -50010,9 +50027,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.appointment_id) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -50032,13 +50049,13 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.user_lname) +
                                   ", " +
                                   _vm._s(props.row.user_fname) +
                                   " " +
                                   _vm._s(props.row.user_mname) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -50054,11 +50071,11 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.service) +
                                   " (₱" +
                                   _vm._s(props.row.price) +
-                                  ")\n                            "
+                                  ")\n                        "
                               ),
                             ]
                           },
@@ -50077,13 +50094,13 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.appoint_date) +
                                   " " +
                                   _vm._s(
                                     _vm._f("formatTime")(props.row.appoint_time)
                                   ) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -50099,9 +50116,9 @@ var render = function () {
                           fn: function (props) {
                             return [
                               _vm._v(
-                                "\n                                " +
+                                "\n                            " +
                                   _vm._s(props.row.user_contact_no) +
-                                  "\n                            "
+                                  "\n                        "
                               ),
                             ]
                           },
@@ -50174,6 +50191,21 @@ var render = function () {
                                       ),
                                     },
                                     [
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.approveAppointment(
+                                                props.row
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [_vm._v("Approve")]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "b-dropdown-item",

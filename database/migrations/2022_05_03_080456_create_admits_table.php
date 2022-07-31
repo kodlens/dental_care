@@ -25,7 +25,7 @@ class CreateAdmitsTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('qr_code')->nullable();
             $table->date('appoint_date')->nullable();
-            $table->time('appoint_time')->nullable();
+            // $table->time('appoint_time')->nullable();
             $table->unsignedBigInteger('dentist_id');
             $table->foreign('dentist_id')->references('user_id')->on('users');
             $table->tinyInteger('appoint_status')->default(0);

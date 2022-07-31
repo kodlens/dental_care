@@ -90,35 +90,54 @@ class MyAppointmentController extends Controller
 
 
     public function store(Request $req){
+        //return $req;
+        $date =  $req->appoint_date; //date and time
+        $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
+
         $req->validate([
             'appointment_date' => ['required']
         ]);
+
+        $isScheduled = Appointment::where('dentist_schedule_id', $req->dentist_schedule_id)
+            ->where('appoint_date', $ndate)
+            ->where('dentist_id', $req->dentist_id)
+            ->where('appoint_status', '!=', 2)
+            ->exists();
+        
+        if($isScheduled){
+            return response()->json([
+                'errors' => [
+                    'schedule' => [
+                        'Schedule unavailable. Please select another schedule'
+                    ]
+                ]
+            ], 422);
+        }
 
         $user = Auth::user();
 
         $qr_code = substr(md5(time() . $user->lname . $user->fname), -8);
 
-        $date =  $req->appointment_date; //date and time
+        $date =  $req->appoint_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
-        $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
-        $txtTime = date("H:i A", strtotime($date));
+       
 
         $appointment = Appointment::create([
             'user_id' => $user->user_id,
             'service_id' => $req->service_id,
             'qr_code' => $qr_code,
             'appoint_date' => $ndate,
-            'appoint_time' => $ntime,
+            'dentist_schedule_id' => $req->dentist_schedule_id,
             'dentist_id' => $req->dentist_id
         ]);
 
 
-        $msg = 'Dear '.$user->lname.', '. $user->fname .'. This is Dental Care Services. Thank you for booking with us! Your time and date Schedule:('.$ndate.', '. $txtTime . '). Reference No. :'. $appointment->qr_code;
-        try{ 
-            Http::withHeaders([
-                'Content-Type' => 'text/plain'
-            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
-        }catch(Exception $e){} //just hide the error
+        // $msg = 'Dear '.$user->lname.', '. $user->fname .'. This is Dental Care Services. Thank you for booking with us! Your time and date Schedule:('.$ndate.', '. $txtTime . '). Reference No. :'. $appointment->qr_code;
+        // try{ 
+        //     Http::withHeaders([
+        //         'Content-Type' => 'text/plain'
+        //     ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+        // }catch(Exception $e){} //just hide the error
 
 
         return response()->json([
@@ -128,18 +147,20 @@ class MyAppointmentController extends Controller
 
 
     public function update(Request $req, $id){
+
         $req->validate([
             'appointment_date' => ['required']
         ]);
-        $date =  $req->appointment_date; //date and time
+
+        $date =  $req->appoint_date; //date and time
         $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
-        $ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
+        //$ntime = date("H:i:s", strtotime($date)); //convert to date format UNIX
 
         $data = Appointment::find($id);
 
         $data->service_id = $req->service_id;
         $data->appoint_date = $ndate;
-        $data->appoint_time = $ntime;
+        $data->dentist_schedule_id = $req->dentist_schedule_id;
         $data->dentist_id = $req->dentist_id;
         $data->save();
 

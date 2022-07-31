@@ -89,7 +89,7 @@
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
                                     <!-- <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item> -->
-<!--                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>-->
+                                    <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
                                     <!-- <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item> -->
                                     <!-- <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/services-log?patient=${props.row.user_id}&appid=${props.row.appointment_id}`">Services Log</b-dropdown-item> -->

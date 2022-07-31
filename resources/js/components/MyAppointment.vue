@@ -399,7 +399,7 @@ export default {
             this.modalBookNow = true;
 
             axios.get('/my-appointment/' + data_id).then(res=>{
-                this.fields = {};
+               
                 //this.fields = res.data;
                 //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
                 //ndateTime = new Date(ndateTime);
@@ -422,13 +422,20 @@ export default {
         },
 
         clearFields(){
+            this.global_id = 0;
+            this.errors = {};
             this.fields = {};
+            this.dentist_fullname = null;
         },
 
 
         submit: function(){
+            let ndate = new Date(this.fields.appointment_date);
+            this.fields.appoint_date = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+
             if(this.global_id > 0){
                 //update
+            
                 axios.put('/my-appointment/' + this.global_id, this.fields).then(res => {
                     if(res.data.status === 'updated'){
                         this.$buefy.toast.open({
@@ -474,6 +481,13 @@ export default {
                     this.btnClass['is-loading'] = false;
                     if(err.response.status === 422){
                         this.errors = err.response.data.errors;
+
+                        if(this.errors.schedule){
+                            this.$buefy.toast.open({
+                                message: this.errors.schedule[0],
+                                type: 'is-danger'
+                            });
+                        }
                     }
                 });
             }
@@ -506,8 +520,11 @@ export default {
 
         bookNow(){
             this.modalBookNow = true;
-            this.fields = {};
+            this.clearFields();
             this.errors = {};
+
+
+            
         },
 
 
@@ -519,6 +536,11 @@ export default {
             this.fields.suffix = data.suffix;
             this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
             this.fields.sex = data.sex;
+
+            axios.get('/get-dentist-schedules/' + data.user_id).then(resSched=>{
+                this.dentist_schedules = resSched.data;
+            });
+
         },
 
         initData(){

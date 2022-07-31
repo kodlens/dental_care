@@ -54,6 +54,16 @@ class DentistAppointmentController extends Controller
         $data->appoint_status = 1;
         $data->save();
 
+        Admit::create([
+            'appointment_id' => $data->appointment_id,
+            'patient_id' => $data->user_id,
+            'service_id' => $data->service_id,
+            'qr_code' => $data->qr_code,
+            'appoint_data' => $data->appoint_date,
+            'dentist_id' => $data->dentist_id,
+            'appoint_status' => $data->appoint_status,
+        ]);
+
         return response()->json([
             'status' => 'approved'
         ],200);
@@ -67,12 +77,15 @@ class DentistAppointmentController extends Controller
 
         $user = User::find($data->user_id);
 
-        $msg = 'Dear '.$user->lname.', '. $user->fname .'. Your appointment with a ref no. '. $data->qr_code.' has been canceled. Thank you!';
-        try{ 
-            Http::withHeaders([
-                'Content-Type' => 'text/plain'
-            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
-        }catch(Exception $e){} //just hide the error
+        if(env('ENABLE_SMS') > 0){
+            $msg = 'Dear '.$user->lname.', '. $user->fname .'. Your appointment with a ref no. '. $data->qr_code.' has been canceled. Thank you!';
+            try{ 
+                Http::withHeaders([
+                    'Content-Type' => 'text/plain'
+                ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$user->contact_no.'&Slot=1', []);
+            }catch(Exception $e){} //just hide the error
+        }
+        
 
         return response()->json([
             'status' => 'cancelled'

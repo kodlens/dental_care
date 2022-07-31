@@ -14,6 +14,10 @@ class Admit extends Model
     protected $primaryKey = 'admit_id';
 
 
-    protected $fillable = ['appointment_id', 'patient_id', 'service_id', 'qr_code', 'dentist_id'];
+    protected $fillable = ['appointment_id', 
+        'patient_id', 'service_id', 
+        'qr_code', 'appoint_date', 'appoint_status',
+        'dentist_id'
+    ];
 
 }
