@@ -11461,6 +11461,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     gotoUrl: function gotoUrl(toothId, aId) {
       window.location = '/dentist/dentist-service-patient?toothid=' + toothId + '&admitid=' + aId;
+    },
+    teethMarking: function teethMarking(id) {
+      return '#FFFFFF';
     }
   }
 });
@@ -49424,7 +49427,7 @@ var render = function () {
             _c("polygon", {
               attrs: {
                 id: "Tooth1",
-                fill: "#FFFFFF",
+                fill: _vm.teethMarking(1),
                 "data-key": "1",
                 points:
                   "33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3\n                82,314.3 81.3,302 80.7,292.7 73.7,292 51.3,293.7 38.7,293.7 34,298 31.7,302.3 32,311",

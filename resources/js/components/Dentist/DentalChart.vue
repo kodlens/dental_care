@@ -141,7 +141,7 @@
                     l5-7.3l4-3.3l4.7-2.7l5.3,3.7l6.7,1.3c0,0,7.3,1.3,9.3,1.3s6.3,0.7,6.3,0.7L92.7,207.3z"/>
                 <polygon @click="gotoUrl(2, propAdmitId)" id="Tooth2"  fill="#FFFFFF" data-key="2" points="79.7,288.3 71.7,291 55,293 40.3,291.3 36,287 33,273.7 36.3,260 42,248.7 44.7,244.7
                     50.3,246.7 56,249 65.3,250.7 74,249.7 80.3,249.7 82.3,254 85.3,259.3 87,267.7 87.7,274.7 85.3,282.7 	"/>
-                <polygon id="Tooth1" @click="gotoUrl(1, propAdmitId)" fill="#FFFFFF" data-key="1" points="33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3
+                <polygon id="Tooth1" @click="gotoUrl(1, propAdmitId)" :fill="teethMarking(1)" data-key="1" points="33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3
                     82,314.3 81.3,302 80.7,292.7 73.7,292 51.3,293.7 38.7,293.7 34,298 31.7,302.3 32,311"/>
             </g>
 
@@ -374,6 +374,10 @@ export default {
     methods: {
         gotoUrl(toothId, aId){
             window.location = '/dentist/dentist-service-patient?toothid=' + toothId + '&admitid=' + aId;
+        },
+
+        teethMarking(id){
+            return '#FFFFFF';
         }
     }
 }
