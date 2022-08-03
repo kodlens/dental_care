@@ -174,6 +174,9 @@ Route::post('/change-password', [App\Http\Controllers\MyAppointmentController::c
 Route::get('/get-admit-id/{appid}', [App\Http\Controllers\MyAppointmentController::class, 'getAdmitId']);
 
 
+Route::get('/my-history-dental-chart/{admitid}', [App\Http\Controllers\MyHistoryDentalChart::class, 'index']);
+
+
 
 //ITEM
 Route::resource('/items', App\Http\Controllers\Administrator\ItemController::class);

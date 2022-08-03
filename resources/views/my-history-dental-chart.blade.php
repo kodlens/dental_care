@@ -3,7 +3,7 @@
 @section('content')
     
     @auth
-        <my-history-dental-chart prop-admit_id="{{ $admit_id }}"></my-history-dental-chart>
+        <my-history-dental-chart prop-admit_id="{{ $admitid }}"></my-history-dental-chart>
     @endauth
 
 @endsection
