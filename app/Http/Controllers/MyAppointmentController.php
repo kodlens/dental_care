@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 
+use App\Models\Admit;
+
 class MyAppointmentController extends Controller
 {
     //
@@ -49,6 +51,12 @@ class MyAppointmentController extends Controller
 
         return $data;
     }
+
+    public function getAdmitId($appid){
+        return Admit::where('appointment_id', $appid)
+            ->first();
+    }
+
 
     public function getMyAppointments(Request $req){
         $sort = explode('.', $req->sort_by);

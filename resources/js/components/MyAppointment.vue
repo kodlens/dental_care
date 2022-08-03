@@ -103,7 +103,7 @@
                             </b-table-column>
 
                             <b-table-column field="contact_no" label="Contact No." v-slot="props">
-                                {{ props.row.dentist_contact_no }}
+                                {{ props.row.dentist.contact_no }}
                             </b-table-column>
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
@@ -114,6 +114,10 @@
 
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
+                                    <b-tooltip label="My History" type="is-primary" v-if="props.row.appoint_status == 1">
+                                        <b-button class="button is-small mr-1" tag="a" icon-right="info" @click="patientHistory(props.row.appointment_id)">History</b-button>
+                                    </b-tooltip>
+
                                     <b-tooltip label="Edit" type="is-warning" v-if="props.row.appoint_status == 0">
                                         <b-button class="button is-small mr-1" tag="a" icon-right="pencil" @click="getData(props.row.appointment_id)"></b-button>
                                     </b-tooltip>
@@ -522,9 +526,6 @@ export default {
             this.modalBookNow = true;
             this.clearFields();
             this.errors = {};
-
-
-            
         },
 
 
@@ -576,6 +577,14 @@ export default {
                     alert('Invalid password');
                 }
             })
+        },
+
+        patientHistory(appointmentId){
+            //console.log(appointmentId);
+            axios.get('/get-admit-id/' + appointmentId).then(res=>{
+                //console.log(res.data.admit_id);
+                window.location = '/my-history-dental-chart/' + res.data.admit_id;
+            });
         }
 
 

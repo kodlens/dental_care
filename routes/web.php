@@ -170,6 +170,9 @@ Route::resource('/my-appointment', App\Http\Controllers\MyAppointmentController:
 Route::get('/get-my-appointments', [App\Http\Controllers\MyAppointmentController::class, 'getMyAppointments']);
 Route::post('/cancel-my-appointment/{id}', [App\Http\Controllers\MyAppointmentController::class, 'cancelMyAppointment']);
 Route::post('/change-password', [App\Http\Controllers\MyAppointmentController::class, 'changePassword']);
+//get admit id
+Route::get('/get-admit-id/{appid}', [App\Http\Controllers\MyAppointmentController::class, 'getAdmitId']);
+
 
 
 //ITEM

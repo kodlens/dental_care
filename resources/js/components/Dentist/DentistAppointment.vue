@@ -57,20 +57,20 @@
                                 {{ props.row.appointment_id }}
                             </b-table-column>
 
-                            <b-table-column field="user_lname" label="Patient Name" sortable v-slot="props">
-                                {{ props.row.user_lname }}, {{ props.row.user_fname }} {{ props.row.user_mname }}
+                            <b-table-column field="user" label="Patient Name" sortable v-slot="props">
+                                {{ props.row.user.lname }}, {{ props.row.user.fname }} {{ props.row.user.mname }}
                             </b-table-column>
 
                             <b-table-column field="service" label="Service" v-slot="props">
-                                {{ props.row.service }} (&#8369;{{ props.row.price}})
+                                {{ props.row.service.service }} (&#8369;{{ props.row.service.price}})
                             </b-table-column>
 
                             <b-table-column field="dateTime" label="Appointment DateTime" v-slot="props">
-                                {{ props.row.appoint_date }} {{ props.row.appoint_time | formatTime }}
+                                {{ props.row.appoint_date }} {{ props.row.dentist_schedule.from | formatTime }}
                             </b-table-column>
 
                             <b-table-column field="contact_no" label="Contact No." v-slot="props">
-                                {{ props.row.user_contact_no }}
+                                {{ props.row.user.contact_no }}
                             </b-table-column>
 
                             <b-table-column field="appoint_status" centered label="Status" v-slot="props">
