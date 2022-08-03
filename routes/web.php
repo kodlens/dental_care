@@ -226,6 +226,7 @@ Route::get('/dentist/get-dentist-schedules', [App\Http\Controllers\Dentist\Denti
 //patient dentist dashboard
 //during admit
 Route::resource('/dentist/dentist-dashboard-patients', App\Http\Controllers\Dentist\DentistDashboardPatientController::class);
+Route::get('/dentist/check-admit-history', [App\Http\Controllers\Dentist\DentistDashboardPatientController::class, 'checkAdmitHistory']);
 
 Route::resource('/dentist/dentist-service-patient', App\Http\Controllers\Dentist\DentistServicePatientController::class);
 

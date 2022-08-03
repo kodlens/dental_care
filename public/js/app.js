@@ -11086,6 +11086,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -11456,15 +11458,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['propAdmitId'],
+  props: {
+    propAdmitId: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      teeth: [],
+      admitId: 0
+    };
+  },
   methods: {
     gotoUrl: function gotoUrl(toothId, aId) {
       window.location = '/dentist/dentist-service-patient?toothid=' + toothId + '&admitid=' + aId;
     },
-    teethMarking: function teethMarking(id) {
-      return '#FFFFFF';
+    teethMarking: function teethMarking() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/dentist/check-admit-history?admitid=' + this.propAdmitId).then(function (res) {
+        _this.teeth = res.data;
+        console.log(_this.teeth); //let poly = document.getElementsByTagName('polygon');
+        //console.log(poly);
+
+        _this.teeth.forEach(function (el) {
+          var b = document.getElementById('Tooth' + el.tooth_id);
+          console.log(b.style.fill);
+          b.style.fill = 'red';
+        });
+      });
+      return '#ffc04d';
     }
+  },
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      this.teethMarking();
+    });
   }
 });
 
@@ -13861,7 +13895,8 @@ __webpack_require__.r(__webpack_exports__);
       this.fields.qty = 0;
     },
     goBack: function goBack() {
-      history.back();
+      //history.back();
+      window.location = '/dentist/dentist-dashboard-patients?admitid=' + this.propAdmitId;
     },
     //SERVICE INVENTORY
     submitInventory: function submitInventory() {
@@ -49427,7 +49462,7 @@ var render = function () {
             _c("polygon", {
               attrs: {
                 id: "Tooth1",
-                fill: _vm.teethMarking(1),
+                fill: "#FFFFFF",
                 "data-key": "1",
                 points:
                   "33,314.3 38,325.7 45.7,335.7 55.7,341.7 64.7,343 73.3,340 77.7,335.7 81.3,326.3\n                82,314.3 81.3,302 80.7,292.7 73.7,292 51.3,293.7 38.7,293.7 34,298 31.7,302.3 32,311",
@@ -50544,9 +50579,11 @@ var render = function () {
                     "div",
                     { staticClass: "dental-chart" },
                     [
-                      _c("dental-chart", {
-                        attrs: { "prop-admit-id": _vm.admit.admit_id },
-                      }),
+                      _vm.admit.admit_id
+                        ? _c("dental-chart", {
+                            attrs: { "prop-admit-id": _vm.admit.admit_id },
+                          })
+                        : _vm._e(),
                     ],
                     1
                   ),
@@ -51372,7 +51409,7 @@ var render = function () {
                                         props.row.admit_id,
                                     },
                                   },
-                                  [_vm._v("Go")]
+                                  [_vm._v("Dental Chart")]
                                 ),
                               ],
                               1

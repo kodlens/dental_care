@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Admit;
+use App\Models\AdmitService;
 
 
 class DentistDashboardPatientController extends Controller
@@ -34,7 +35,16 @@ class DentistDashboardPatientController extends Controller
         
     }
 
-  
+    public function checkAdmitHistory(Request $req){
+        $admitId = $req->admitid;
+        //$toothId = $req->toothid;
+
+        $data = AdmitService::where('admit_id', $admitId)
+            //->where('tooth_id', $toothId)
+            ->get();
+
+        return $data;
+    }
 
 
     public function store(Request $req){

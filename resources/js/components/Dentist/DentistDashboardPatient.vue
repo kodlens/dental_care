@@ -29,7 +29,7 @@
                             <div class="w-row">
                                 <div>
                                     <div class="dental-chart">
-                                        <dental-chart :prop-admit-id=admit.admit_id></dental-chart>
+                                        <dental-chart v-if="admit.admit_id" :prop-admit-id=admit.admit_id></dental-chart>
                                     </div>
                                 </div>
                             </div>

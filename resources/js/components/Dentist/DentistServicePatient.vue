@@ -306,7 +306,8 @@ export default {
         },
 
         goBack(){
-            history.back();
+            //history.back();
+            window.location = '/dentist/dentist-dashboard-patients?admitid=' + this.propAdmitId;
         },
 
 
