@@ -29,7 +29,7 @@ Route::get('/', function () {
     //     return view('welcome')
     //         ->with('user', $user->only(['lname', 'fname', 'mname', 'suffix', 'role', 'remark', 'office_id']));
     // }
-    
+
     return view('welcome');
 });
 
@@ -106,8 +106,6 @@ Route::post('/book-now', [App\Http\Controllers\BookNowController::class, 'store'
 Route::get('/dental-chart', [App\Http\Controllers\DentalChartController::class, 'index']);
 
 
-
-
 //ADDRESS
 Route::get('/load-provinces', [App\Http\Controllers\AddressController::class, 'loadProvinces']);
 Route::get('/load-cities', [App\Http\Controllers\AddressController::class, 'loadCities']);
@@ -175,6 +173,7 @@ Route::get('/get-admit-id/{appid}', [App\Http\Controllers\MyAppointmentControlle
 
 
 Route::get('/my-history-dental-chart/{admitid}', [App\Http\Controllers\MyHistoryDentalChart::class, 'index']);
+Route::get('/get-admit-service-history', [App\Http\Controllers\MyHistoryDentalChart::class, 'getAdmitServiceHistory']);
 
 
 
