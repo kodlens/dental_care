@@ -5,7 +5,7 @@
         <div class="columns is-centered">
             <div class="column is-6">
 
-                <div class="tooth-chart">
+                <div class="tooth-chart debug">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 450 700" enable-background="new 0 0 450 700" xml:space="preserve">
                     <g id="toothLabels">
@@ -371,13 +371,15 @@
 
 
             <div class="column">
-                <div>
+                <div class="title">
                     Services
                 </div>
+                <div class="services">
+                    <ul>
+                        <li v-for="(item, index) in data" :key="index">{{ item.services.service }}</li>
+                    </ul>
+                </div>
 
-                <ul>
-                    <li v-for="(item, index) in data" :key="index">{{ item.service.service }}</li>
-                </ul>
             </div>
         </div><!--cols-->
     </div><!--root div -->
@@ -458,7 +460,18 @@ export default {
 
 <style scoped>
 
+.tooth-chart{
+    margin: auto;
+}
 
+.services{
+    margin-left: 20px;
+    font-size: 1.4em;
 
+}
+
+ul{
+    list-style-type: circle;
+}
 
 </style>
