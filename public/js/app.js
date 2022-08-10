@@ -10944,6 +10944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var d = new Date();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -10974,7 +10975,9 @@ var d = new Date();
     showSchedule: function showSchedule() {
       var _this2 = this;
 
-      axios.get('/get-dentist-schedules/' + this.fields.dentist_id).then(function (res) {
+      var ndate = new Date(this.fields.raw_date);
+      var tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+      axios.get('/get-dentist-schedules/' + this.fields.dentist_id + '/' + tempDate).then(function (res) {
         _this2.schedules = res.data;
       });
     },
@@ -15059,6 +15062,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var d = new Date();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices', 'propUser'],
@@ -15178,7 +15185,9 @@ var d = new Date();
         //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
         //ndateTime = new Date(ndateTime);
         //this.fields.appointment_date = ndateTime;
-        axios.get('/get-dentist-schedules/' + res.data.dentist_id).then(function (resSched) {
+        var ndate = new Date(_this4.fields.appointment_date);
+        var tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+        axios.get('/get-dentist-schedules/' + res.data.dentist_id + '/' + tempDate).then(function (resSched) {
           _this4.dentist_schedules = resSched.data;
         });
         _this4.dentist_fullname = res.data.dentist.lname + ", " + res.data.dentist.fname + " " + res.data.dentist.mname;
@@ -15295,8 +15304,6 @@ var d = new Date();
       this.errors = {};
     },
     emitBrowseDentist: function emitBrowseDentist(data) {
-      var _this8 = this;
-
       this.fields.dentist_id = data.user_id; //user id to dentist id
 
       this.fields.lname = data.lname;
@@ -15305,7 +15312,13 @@ var d = new Date();
       this.fields.suffix = data.suffix;
       this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
       this.fields.sex = data.sex;
-      axios.get('/get-dentist-schedules/' + data.user_id).then(function (resSched) {
+    },
+    browseDentistSchedules: function browseDentistSchedules() {
+      var _this8 = this;
+
+      var ndate = new Date(this.fields.appointment_date);
+      var tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+      axios.get('/get-dentist-schedules/' + this.fields.dentist_id + '/' + tempDate).then(function (resSched) {
         _this8.dentist_schedules = resSched.data;
       });
     },
@@ -48557,7 +48570,6 @@ var render = function () {
                           "b-select",
                           {
                             attrs: { expanded: "" },
-                            on: { input: _vm.showSchedule },
                             model: {
                               value: _vm.fields.dentist_id,
                               callback: function ($$v) {
@@ -48635,6 +48647,7 @@ var render = function () {
                       [
                         _c("b-datepicker", {
                           attrs: { "min-date": _vm.minDate },
+                          on: { input: _vm.showSchedule },
                           model: {
                             value: _vm.fields.raw_date,
                             callback: function ($$v) {
@@ -55777,30 +55790,50 @@ var render = function () {
                                         "b-tooltip",
                                         {
                                           attrs: {
-                                            label: "My History",
+                                            label: "Dental Chart",
                                             type: "is-primary",
                                           },
                                         },
                                         [
-                                          _c(
-                                            "b-button",
-                                            {
-                                              staticClass:
-                                                "button is-small mr-1",
-                                              attrs: {
-                                                tag: "a",
-                                                "icon-right": "info",
-                                              },
-                                              on: {
-                                                click: function ($event) {
-                                                  return _vm.patientHistory(
-                                                    props.row.appointment_id
-                                                  )
-                                                },
+                                          _c("b-button", {
+                                            staticClass: "button is-small mr-1",
+                                            attrs: {
+                                              tag: "a",
+                                              "icon-right": "tooth",
+                                            },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.patientHistory(
+                                                  props.row.appointment_id
+                                                )
                                               },
                                             },
-                                            [_vm._v("History")]
-                                          ),
+                                          }),
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  props.row.appoint_status == 1
+                                    ? _c(
+                                        "b-tooltip",
+                                        {
+                                          attrs: {
+                                            label: "Print Medical Record",
+                                            type: "is-primary",
+                                          },
+                                        },
+                                        [
+                                          _c("b-button", {
+                                            staticClass: "button is-small mr-1",
+                                            attrs: {
+                                              "icon-right": "printer",
+                                              tag: "a",
+                                              href:
+                                                "/medical-record/" +
+                                                props.row.appointment_id,
+                                            },
+                                          }),
                                         ],
                                         1
                                       )
@@ -56015,6 +56048,7 @@ var render = function () {
                                   placeholder: "Appointment Date",
                                   required: "",
                                 },
+                                on: { input: _vm.browseDentistSchedules },
                                 model: {
                                   value: _vm.fields.appointment_date,
                                   callback: function ($$v) {

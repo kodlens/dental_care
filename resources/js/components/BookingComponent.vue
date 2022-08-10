@@ -19,8 +19,8 @@
                         <form @submit.prevent="submit">
                             <div class="panel-body">
                                 <b-field label="Select Dentist" expanded>
-                                    <b-select expanded v-model="fields.dentist_id" @input="showSchedule">
-                                        <option v-for="(item, index) in dentists" :key="index" 
+                                    <b-select expanded v-model="fields.dentist_id">
+                                        <option v-for="(item, index) in dentists" :key="index"
                                             :value="item.user_id">
                                             {{ item.lname }}, {{ item.fname }} {{ item.mname }}
                                         </option>
@@ -29,7 +29,7 @@
 
                                 <b-field label="Select Services" expanded>
                                     <b-select v-model="fields.service_id" expanded>
-                                        <option v-for="(item, index) in services" :key="index" 
+                                        <option v-for="(item, index) in services" :key="index"
                                             :value="item.service_id">
                                             {{ item.service }} - Price: {{ item.price }}
                                         </option>
@@ -38,9 +38,10 @@
 
                                 <b-field label="Select Date">
                                     <b-datepicker
-                                        :min-date="minDate"
+                                        :min-date="minDate" @input="showSchedule"
                                         v-model="fields.raw_date"></b-datepicker>
                                 </b-field>
+
                                 <b-field label="Dentist Available Schedule">
                                     <b-select v-model="fields.dentist_schedule_id">
                                         <option class="schedule-list" v-for="(item, index) in schedules" :key="index" :value="item.dentist_schedule_id">
@@ -57,12 +58,12 @@
                             </div>
                         </form>
 
-                        
+
                     </div>
-                    
+
                 </div>
 
-                
+
             </div>
 
 
@@ -85,7 +86,7 @@ export default {
             minDate: new Date(d.setDate(d.getDate() - 1)),
             dentists: [],
             schedules: [],
-            
+
             fields: {
                 dentist_id: 0,
             },
@@ -111,7 +112,10 @@ export default {
         },
 
         showSchedule(){
-            axios.get('/get-dentist-schedules/' + this.fields.dentist_id).then(res=>{
+            let ndate = new Date(this.fields.raw_date);
+            let tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+
+            axios.get('/get-dentist-schedules/' + this.fields.dentist_id + '/' + tempDate).then(res=>{
                 this.schedules = res.data;
             });
         },
@@ -149,7 +153,7 @@ export default {
                         });
                     }
                 }
-                
+
             })
         }
     },

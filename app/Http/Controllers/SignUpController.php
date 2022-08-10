@@ -30,9 +30,9 @@ class SignUpController extends Controller
             'barangay' => ['required', 'string'],
         ]);
 
-        $msg = 'Hi '.$req->lname . ', ' . $req->fname . '. Welcome to Dental Clinic Services. You have successfully created an account.';
 
-        
+
+
 
         $qr_code = substr(md5(time() . $req->lname . $req->fname), -8);
 
@@ -54,11 +54,15 @@ class SignUpController extends Controller
             'street' => strtoupper($req->street)
         ]);
 
-        try{
-            Http::withHeaders([
-                'Content-Type' => 'text/plain'
-            ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$req->contact_no.'&Slot=1', []);
-        }catch(Exception $e){} //just hide the error
+        if(env('ENABLE_SMS') > 0){
+            $msg = 'Hi '.$req->lname . ', ' . $req->fname . '. Welcome to Dental Clinic Services. You have successfully created an account.';
+            try{
+                Http::withHeaders([
+                    'Content-Type' => 'text/plain'
+                ])->post('http://'. env('IP_SMS_GATEWAY') .'/services/api/messaging?Message='.$msg.'&To='.$req->contact_no.'&Slot=1', []);
+            }catch(Exception $e){} //just hide the error
+        }
+
 
         return response()->json([
             'status' => 'saved'

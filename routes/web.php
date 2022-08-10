@@ -43,13 +43,18 @@ Route::get('/get-open-dentists', function () {
     return $dentists;
 });
 
-Route::get('/get-dentist-schedules/{id}', function ($id) {
-    $today = date("D");
+Route::get('/get-dentist-schedules/{id}/{appdate}', function ($id, $ndate) {
+    $date =  $ndate; //date and time
+    $ndate = date("D", strtotime($date)); //convert to date format UNIX
+
+
+    //$today = date("D");
+
     $schedules = DentistSchedule::with(['user'])
         ->whereHas('user', function($q) use ($id){
             $q->where('user_id', $id);
         })
-        ->where($today, '1')
+        ->where($ndate, '1')
         ->get();
     return $schedules;
 });
@@ -277,6 +282,10 @@ Route::get('/dentist/get-items', [App\Http\Controllers\Dentist\ItemController::c
 Route::get('/dentist/get-browse-items', [App\Http\Controllers\Dentist\ItemController::class, 'getBrowseItems']);
 
 
+
+
+///PRINT MEDICAL RECORD
+Route::get('/medical-record/{appid}', [App\Http\Controllers\PrintMedicalController::class, 'medicalRecord']);
 
 
 

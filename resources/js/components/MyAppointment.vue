@@ -114,8 +114,12 @@
 
                             <b-table-column label="Action" v-slot="props">
                                 <div class="is-flex">
-                                    <b-tooltip label="My History" type="is-primary" v-if="props.row.appoint_status == 1">
-                                        <b-button class="button is-small mr-1" tag="a" icon-right="info" @click="patientHistory(props.row.appointment_id)">History</b-button>
+                                    <b-tooltip label="Dental Chart" type="is-primary" v-if="props.row.appoint_status == 1">
+                                        <b-button class="button is-small mr-1" tag="a" icon-right="tooth" @click="patientHistory(props.row.appointment_id)"></b-button>
+                                    </b-tooltip>
+
+                                    <b-tooltip label="Print Medical Record" type="is-primary" v-if="props.row.appoint_status == 1">
+                                        <b-button class="button is-small mr-1" icon-right="printer" tag="a" :href="`/medical-record/${props.row.appointment_id}`"></b-button>
                                     </b-tooltip>
 
                                     <b-tooltip label="Edit" type="is-warning" v-if="props.row.appoint_status == 0">
@@ -180,7 +184,7 @@
                                              :type="this.errors.appointment_date ? 'is-danger':''"
                                              :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
                                         <b-datepicker editable v-model="fields.appointment_date"
-                                            :min-date="minDate"
+                                            :min-date="minDate" @input="browseDentistSchedules"
                                             placeholder="Appointment Date" required>
                                         </b-datepicker>
                                     </b-field>
@@ -190,7 +194,7 @@
                                             <option v-for="(item, index) in dentist_schedules" :key="index" :value="item.dentist_schedule_id">{{ item.from | formatTime }} - {{ item.to | formatTime}}</option>
                                         </b-select>
                                     </b-field>
-                                    
+
                                 </div>
                             </div>
 
@@ -236,15 +240,15 @@
                             <div class="columns">
                                 <div class="column">
                                      <b-field label="Old Password">
-                                        <b-input type="password" required placeholder="Password" v-model="fields.old_password"> 
+                                        <b-input type="password" required placeholder="Password" v-model="fields.old_password">
                                         </b-input>
                                     </b-field>
                                     <b-field label="New Password">
-                                        <b-input type="password" required placeholder="Password" v-model="fields.password"> 
+                                        <b-input type="password" required placeholder="Password" v-model="fields.password">
                                         </b-input>
                                     </b-field>
                                     <b-field label="Retype Password">
-                                        <b-input type="password" required placeholder="Password" v-model="fields.password_confirmation"> 
+                                        <b-input type="password" required placeholder="Password" v-model="fields.password_confirmation">
                                         </b-input>
                                     </b-field>
                                 </div>
@@ -403,16 +407,18 @@ export default {
             this.modalBookNow = true;
 
             axios.get('/my-appointment/' + data_id).then(res=>{
-               
+
                 //this.fields = res.data;
                 //let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
                 //ndateTime = new Date(ndateTime);
 
                 //this.fields.appointment_date = ndateTime;
 
-                axios.get('/get-dentist-schedules/' + res.data.dentist_id).then(resSched=>{
+                let ndate = new Date(this.fields.appointment_date);
+                let tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+
+                axios.get('/get-dentist-schedules/' + res.data.dentist_id + '/' + tempDate).then(resSched=>{
                     this.dentist_schedules = resSched.data;
-                    
                 });
 
                 this.dentist_fullname = res.data.dentist.lname + ", " + res.data.dentist.fname + " " + res.data.dentist.mname;
@@ -439,7 +445,7 @@ export default {
 
             if(this.global_id > 0){
                 //update
-            
+
                 axios.put('/my-appointment/' + this.global_id, this.fields).then(res => {
                     if(res.data.status === 'updated'){
                         this.$buefy.toast.open({
@@ -537,11 +543,14 @@ export default {
             this.fields.suffix = data.suffix;
             this.dentist_fullname = data.lname + ', ' + data.fname + ' ' + data.mname;
             this.fields.sex = data.sex;
+        },
 
-            axios.get('/get-dentist-schedules/' + data.user_id).then(resSched=>{
+        browseDentistSchedules(){
+            let ndate = new Date(this.fields.appointment_date);
+            let tempDate = ndate.getFullYear() + '-' + (ndate.getMonth() + 1) + '-' + ndate.getDate();
+            axios.get('/get-dentist-schedules/' + this.fields.dentist_id + '/' + tempDate).then(resSched=>{
                 this.dentist_schedules = resSched.data;
             });
-
         },
 
         initData(){
