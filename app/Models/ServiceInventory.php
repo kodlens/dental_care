@@ -15,6 +15,14 @@ class ServiceInventory extends Model
     //tobe continue
     protected $fillable = ['admit_service_id', 'item_id', 'tooth_id', 'use_qty', 'remarks'];
 
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
 
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
 
 }

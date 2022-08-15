@@ -217,6 +217,9 @@ Route::post('/dentist/admit-appointment/{id}', [App\Http\Controllers\Dentist\Den
 Route::resource('/dentist/my-patients', App\Http\Controllers\Dentist\DentistMyPatientController::class);
 Route::get('/dentist/get-admits-patients', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmitsPatients']);
 Route::get('/dentist/get-admit/{id}', [App\Http\Controllers\Dentist\DentistMyPatientController::class, 'getAdmit']);
+Route::get('/dentist/medical-record-patients/{admitId}', [App\Http\Controllers\PrintMedicalController::class, 'medicalRecordInDentist']);
+
+
 
 //My Dentist Profile
 Route::resource('/dentist/my-profile', App\Http\Controllers\Dentist\DentistMyProfileController::class);

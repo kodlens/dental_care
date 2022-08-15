@@ -21,6 +21,10 @@
     <link href="{{ asset('css/print.css') }}" rel="stylesheet">
 
 
+    @yield('extracss')
+
+
+
 </head>
 <body>
 <div id="app">

@@ -35,27 +35,27 @@
 
         <table style="border: 1px solid rgb(172, 172, 172);">
             <tr style="border-bottom: 1px solid rgb(172, 172, 172);">
-                <td><span class="attribute-title">LASTNAME:</span> {{ $appointmentData->user->lname }}</td>
+                <td><span class="attribute-title">LASTNAME:</span> {{ $admitData->patient->lname }}</td>
 
-                <td><span class="attribute-title">FIRSTNAME:</span> {{ $appointmentData->user->fname }}</td>
+                <td><span class="attribute-title">FIRSTNAME:</span> {{ $admitData->patient->fname }}</td>
 
-                <td><span class="attribute-title">MIDDLENAME:</span> {{ $appointmentData->user->mname }}</td>
+                <td><span class="attribute-title">MIDDLENAME:</span> {{ $admitData->patient->mname }}</td>
             </tr>
 
             <tr style="border-bottom: 1px solid rgb(172, 172, 172);">
-                <td><span class="attribute-title">PROVINCE:</span> {{ $appointmentData->user->province }}</td>
+                <td><span class="attribute-title">PROVINCE:</span> {{ $admitData->patient->province }}</td>
 
-                <td><span class="attribute-title">CITY:</span> {{ $appointmentData->user->city }}</td>
+                <td><span class="attribute-title">CITY:</span> {{ $admitData->patient->city }}</td>
 
-                <td><span class="attribute-title">BARANGAY:</span> {{ $appointmentData->user->barangay }}</td>
+                <td><span class="attribute-title">BARANGAY:</span> {{ $admitData->patient->barangay }}</td>
             </tr>
 
             <tr>
-                <td><span class="attribute-title">EMAIL:</span> {{ $appointmentData->user->email }}</td>
+                <td><span class="attribute-title">EMAIL:</span> {{ $admitData->patient->email }}</td>
 
-                <td><span class="attribute-title">MOBILE #:</span> {{ $appointmentData->user->contact_no }}</td>
+                <td><span class="attribute-title">MOBILE #:</span> {{ $admitData->patient->contact_no }}</td>
 
-                <td><span class="attribute-title">SEX:</span> {{ $appointmentData->user->sex }}</td>
+                <td><span class="attribute-title">SEX:</span> {{ $admitData->patient->sex }}</td>
             </tr>
 
         </table>
@@ -70,7 +70,7 @@
                 <th>ITEM(S) USED</th>
             </thead>
 
-            @foreach($admitServices as $item)
+            @foreach($admitData->admit_services as $item)
                 <tr>
                     <td>{{ $item->admit_service_id }}</td>
                     <td>{{ $item->services->service }}</td>

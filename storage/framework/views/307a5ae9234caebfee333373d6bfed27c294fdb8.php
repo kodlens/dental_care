@@ -21,6 +21,10 @@
     <link href="<?php echo e(asset('css/print.css')); ?>" rel="stylesheet">
 
 
+    <?php echo $__env->yieldContent('extracss'); ?>
+
+
+
 </head>
 <body>
 <div id="app">

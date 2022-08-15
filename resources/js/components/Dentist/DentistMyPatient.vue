@@ -74,6 +74,8 @@
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
                                     <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/dentist-dashboard-patients?admitid=${props.row.admit_id}`">Dental Chart</b-dropdown-item>
+                                    <b-dropdown-item aria-role="listitem" tag="a" :href="`/dentist/medical-record-patients/${props.row.admit_id}`">Medical Record</b-dropdown-item>
+
                                 </b-dropdown>
 
                             </b-table-column>

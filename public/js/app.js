@@ -12593,6 +12593,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // props: ['propServices'],
   name: "AppointmentType",
@@ -52031,6 +52033,20 @@ var render = function () {
                                     },
                                   },
                                   [_vm._v("Dental Chart")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "b-dropdown-item",
+                                  {
+                                    attrs: {
+                                      "aria-role": "listitem",
+                                      tag: "a",
+                                      href:
+                                        "/dentist/medical-record-patients/" +
+                                        props.row.admit_id,
+                                    },
+                                  },
+                                  [_vm._v("Medical Record")]
                                 ),
                               ],
                               1

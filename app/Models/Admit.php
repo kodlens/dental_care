@@ -28,4 +28,27 @@ class Admit extends Model
         return $this->hasOne(User::class, 'user_id', 'dentist_id');
     }
 
+
+    public function admit_services(){
+        return $this->hasMany(AdmitService::class, 'admit_id', 'admit_id')
+            //->join('services', 'services.service_id', 'admit_services.service_id')
+            ->with(['services' => function($q){
+                //$q->join('service_inventories.admit_service_id', 'admit_services.admit_service_id')
+                $q->get();
+            }])
+            
+            ->with(['service_inventories' => function($q){
+                //$q->join('service_inventories.admit_service_id', 'admit_services.admit_service_id')
+                $q->get();
+            }]);
+    }
+
+
+    public function patient(){
+        return $this->hasOne(User::class, 'user_id', 'patient_id');
+    }
+
+
+
+
 }
