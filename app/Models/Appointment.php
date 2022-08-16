@@ -18,7 +18,10 @@ class Appointment extends Model
 
 
     public function user(){
-        return $this->hasOne(User::class, 'user_id', 'user_id');
+        return $this->hasOne(User::class, 'user_id', 'user_id')
+        ->leftJoin('provinces', 'users.province', 'provinces.provCode')
+        ->leftJoin('cities', 'users.city', 'cities.citymunCode')
+        ->leftJoin('barangays', 'users.barangay', 'barangays.brgyCode');
     }
 
 

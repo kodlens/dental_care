@@ -45,7 +45,10 @@ class Admit extends Model
 
 
     public function patient(){
-        return $this->hasOne(User::class, 'user_id', 'patient_id');
+        return $this->hasOne(User::class, 'user_id', 'patient_id')
+            ->leftJoin('provinces', 'users.province', 'provinces.provCode')
+            ->leftJoin('cities', 'users.city', 'cities.citymunCode')
+            ->leftJoin('barangays', 'users.barangay', 'barangays.brgyCode');
     }
 
 

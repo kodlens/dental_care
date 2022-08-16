@@ -43,11 +43,11 @@
             </tr>
 
             <tr style="border-bottom: 1px solid rgb(172, 172, 172);">
-                <td><span class="attribute-title">PROVINCE:</span> {{ $admitData->patient->province }}</td>
+                <td><span class="attribute-title">PROVINCE:</span> {{ $admitData->patient->provDesc }}</td>
 
-                <td><span class="attribute-title">CITY:</span> {{ $admitData->patient->city }}</td>
+                <td><span class="attribute-title">CITY:</span> {{ $admitData->patient->citymunDesc }}</td>
 
-                <td><span class="attribute-title">BARANGAY:</span> {{ $admitData->patient->barangay }}</td>
+                <td><span class="attribute-title">BARANGAY:</span> {{ $admitData->patient->brgyDesc }}</td>
             </tr>
 
             <tr>

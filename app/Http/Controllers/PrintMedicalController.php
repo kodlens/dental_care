@@ -17,8 +17,7 @@ class PrintMedicalController extends Controller
 
         $appointmentData = Appointment::with(['dentist_schedule', 'dentist', 'service', 'user'])
             ->where('appointment_id', $id)->first();
-
-
+        
         // $admitServices = \DB::table('admit_services as a')
         //     ->join('admits as b', 'a.admit_id', 'b.admit_id')
         //     ->join('appointments as c', 'b.appointment_id', 'c.appointment_id')
@@ -55,6 +54,7 @@ class PrintMedicalController extends Controller
         $admitData = Admit::with(['service', 'dentist', 'admit_services', 'patient'])
             ->where('admit_id', $admitId)->first();
         
+            //return $admitData;
             //return $admitData;
 
         // $admitServices = \DB::table('admit_services as a')
