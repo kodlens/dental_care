@@ -151,7 +151,9 @@
 
                                     <b-field label="Select Time">
                                         <b-select v-model="fields.dentist_schedule_id">
-                                            <option v-for="(item, index) in dentist_schedules" :key="index">{{ item.from | formatTime}} - {{ item.to | formatTime }}</option>
+                                            <option v-for="(item, index) in dentist_schedules" :key="index" :value="item.dentist_schedule_id">
+                                                {{ item.from | formatTime}} - {{ item.to | formatTime }}
+                                            </option>
                                         </b-select>
                                     </b-field>
 
@@ -308,11 +310,14 @@ export default {
 
             axios.get('/my-appointment/' + nData.appointment_id).then(res=>{
                 this.fields = res.data;
+                this.fields.appointment_date = new Date(res.data.appoint_date);
+                this.browseDentistSchedule();
+                this.fields.dentist_schedule_id = res.data.dentist_schedule_id;
             });
         },
 
         browseDentistSchedule(){
-            let nDate = new Date(this.fields.appoint_date);
+            let nDate = new Date(this.fields.appointment_date);
             console.log(nDate);
             nDate = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
 
@@ -328,9 +333,12 @@ export default {
 
 
         submit: function(){
+            let nDate = new Date(this.fields.appointment_date);
+            this.fields.appoint_date = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
+
             if(this.global_id > 0){
                 //update
-                axios.put('/my-appointment/' + this.global_id, this.fields).then(res => {
+                axios.put('/dentist/appointments/' + this.global_id, this.fields).then(res => {
                     if(res.data.status === 'updated'){
                         this.$buefy.toast.open({
                             message: 'Appointment saved.!',
@@ -352,32 +360,32 @@ export default {
                         this.errors = err.response.data.errors;
                     }
                 });
-            }else{
-                //INSERT HERE
-                this.btnClass['is-loading'] = true;
-                axios.post('/my-appointment', this.fields).then(res => {
-                    if(res.data.status === 'saved'){
-                        this.$buefy.toast.open({
-                            message: 'Appointment saved.!',
-                            type: 'is-success'
-                        });
+             }//else{
+            //     //INSERT HERE
+            //     this.btnClass['is-loading'] = true;
+            //     axios.post('/appointments', this.fields).then(res => {
+            //         if(res.data.status === 'saved'){
+            //             this.$buefy.toast.open({
+            //                 message: 'Appointment saved.!',
+            //                 type: 'is-success'
+            //             });
 
-                        this.fields = {};
-                        this.errors = {};
-                        this.global_id = 0;
-                        this.dentist_fullname = '';
-                        this.modalBookNow = false;
+            //             this.fields = {};
+            //             this.errors = {};
+            //             this.global_id = 0;
+            //             this.dentist_fullname = '';
+            //             this.modalBookNow = false;
 
-                        this.loadAsyncData();
-                    }
-                    this.btnClass['is-loading'] = false;
-                }).catch(err=>{
-                    this.btnClass['is-loading'] = false;
-                    if(err.response.status === 422){
-                        this.errors = err.response.data.errors;
-                    }
-                });
-            }
+            //             this.loadAsyncData();
+            //         }
+            //         this.btnClass['is-loading'] = false;
+            //     }).catch(err=>{
+            //         this.btnClass['is-loading'] = false;
+            //         if(err.response.status === 422){
+            //             this.errors = err.response.data.errors;
+            //         }
+            //     });
+            //}
         },
 
 

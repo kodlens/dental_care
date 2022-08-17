@@ -11697,6 +11697,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices'],
   name: "AppointmentType",
@@ -11812,12 +11814,17 @@ __webpack_require__.r(__webpack_exports__);
       console.log(nData);
       axios.get('/my-appointment/' + nData.appointment_id).then(function (res) {
         _this4.fields = res.data;
+        _this4.fields.appointment_date = new Date(res.data.appoint_date);
+
+        _this4.browseDentistSchedule();
+
+        _this4.fields.dentist_schedule_id = res.data.dentist_schedule_id;
       });
     },
     browseDentistSchedule: function browseDentistSchedule() {
       var _this5 = this;
 
-      var nDate = new Date(this.fields.appoint_date);
+      var nDate = new Date(this.fields.appointment_date);
       console.log(nDate);
       nDate = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
       axios.get('/get-dentist-schedules/' + this.dentist_id + '/' + nDate).then(function (nRes) {
@@ -11831,9 +11838,12 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this6 = this;
 
+      var nDate = new Date(this.fields.appointment_date);
+      this.fields.appoint_date = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
+
       if (this.global_id > 0) {
         //update
-        axios.put('/my-appointment/' + this.global_id, this.fields).then(function (res) {
+        axios.put('/dentist/appointments/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
             _this6.$buefy.toast.open({
               message: 'Appointment saved.!',
@@ -11857,34 +11867,31 @@ __webpack_require__.r(__webpack_exports__);
             _this6.errors = err.response.data.errors;
           }
         });
-      } else {
-        //INSERT HERE
-        this.btnClass['is-loading'] = true;
-        axios.post('/my-appointment', this.fields).then(function (res) {
-          if (res.data.status === 'saved') {
-            _this6.$buefy.toast.open({
-              message: 'Appointment saved.!',
-              type: 'is-success'
-            });
+      } //else{
+      //     //INSERT HERE
+      //     this.btnClass['is-loading'] = true;
+      //     axios.post('/appointments', this.fields).then(res => {
+      //         if(res.data.status === 'saved'){
+      //             this.$buefy.toast.open({
+      //                 message: 'Appointment saved.!',
+      //                 type: 'is-success'
+      //             });
+      //             this.fields = {};
+      //             this.errors = {};
+      //             this.global_id = 0;
+      //             this.dentist_fullname = '';
+      //             this.modalBookNow = false;
+      //             this.loadAsyncData();
+      //         }
+      //         this.btnClass['is-loading'] = false;
+      //     }).catch(err=>{
+      //         this.btnClass['is-loading'] = false;
+      //         if(err.response.status === 422){
+      //             this.errors = err.response.data.errors;
+      //         }
+      //     });
+      //}
 
-            _this6.fields = {};
-            _this6.errors = {};
-            _this6.global_id = 0;
-            _this6.dentist_fullname = '';
-            _this6.modalBookNow = false;
-
-            _this6.loadAsyncData();
-          }
-
-          _this6.btnClass['is-loading'] = false;
-        })["catch"](function (err) {
-          _this6.btnClass['is-loading'] = false;
-
-          if (err.response.status === 422) {
-            _this6.errors = err.response.data.errors;
-          }
-        });
-      }
     },
     approveAppointment: function approveAppointment(row) {
       var _this7 = this;
@@ -37069,7 +37076,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\n    margin-left: 20px;\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\n    list-style-type: circle;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\r\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\r\n    margin-left: 20px;\r\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\r\n    list-style-type: circle;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37213,7 +37220,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51087,15 +51094,28 @@ var render = function () {
                                 _vm._l(
                                   _vm.dentist_schedules,
                                   function (item, index) {
-                                    return _c("option", { key: index }, [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm._f("formatTime")(item.from)
-                                        ) +
-                                          " - " +
-                                          _vm._s(_vm._f("formatTime")(item.to))
-                                      ),
-                                    ])
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: index,
+                                        domProps: {
+                                          value: item.dentist_schedule_id,
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                            " +
+                                            _vm._s(
+                                              _vm._f("formatTime")(item.from)
+                                            ) +
+                                            " - " +
+                                            _vm._s(
+                                              _vm._f("formatTime")(item.to)
+                                            ) +
+                                            "\n                                        "
+                                        ),
+                                      ]
+                                    )
                                   }
                                 ),
                                 0

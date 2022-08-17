@@ -46,8 +46,7 @@ Route::get('/get-open-dentists', function () {
 Route::get('/get-dentist-schedules/{id}/{appdate}', function ($id, $ndate) {
     $date =  $ndate; //date and time
     $ndate = date("D", strtotime($date)); //convert to date format UNIX
-
-
+   
     //$today = date("D");
 
     $schedules = DentistSchedule::with(['user'])

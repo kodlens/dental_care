@@ -145,7 +145,24 @@ class DentistAppointmentController extends Controller
         return $data;
     }
 
+    public function update(Request $req, $id){
 
+        $date =  $req->appoint_date; //date and time
+        $ndate = date("Y-m-d", strtotime($date)); //convert to date format UNIX
+
+        //return $req->service['service_id'];
+
+        //return $req->dentist_schedule_id;
+        $data = Appointment::find($id);
+        $data->service_id = $req->service_id;
+        $data->appoint_date = $req->appoint_date;
+        $data->dentist_schedule_id = $req->dentist_schedule_id;
+        $data->save();
+
+        return response()->json([
+            'status' => 'updated'
+        ]);
+    }
 
 
 
