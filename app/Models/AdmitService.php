@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
+
 class AdmitService extends Model
 {
     use HasFactory;
@@ -26,7 +29,8 @@ class AdmitService extends Model
         //     'id' // Local key on the environments table...
         // );
         return $this->hasMany(ServiceInventory::class, 'admit_service_id', 'admit_service_id')
-            ->join('items', 'service_inventories.item_id', 'items.item_id');
+            ->leftJoin('items', 'service_inventories.item_id', 'items.item_id')
+            ->select('items.item_name', 'items.item_type', 'service_inventories.*');
         //return $this->relation()->with(ServiceInventory::class, 'admit_service_id', 'admit_service_id');
     }
 
@@ -42,6 +46,11 @@ class AdmitService extends Model
         return $this->belongsTo(Admit::class, 'admit_id', 'admit_id');
     }
 
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d H:i:s');
+    }
 
 
 

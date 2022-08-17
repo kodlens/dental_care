@@ -376,7 +376,14 @@
                 </div>
                 <div class="services">
                     <ul>
-                        <li v-for="(item, index) in data" :key="index">{{ item.services.service }}</li>
+                        <li v-for="(item, index) in data" :key="index">{{ item.services.service }}
+                             <ul style="margin-left: 30px;">
+                                <li v-for="(i, ix) in item.service_inventories" :key="ix">
+                                    <div><span style="font-weight: bold;">Item used: </span> {{ i.item_name }}</div>
+                                    <div><span style="font-weight: bold;">Date: </span> {{ i.created_at | formatDate }}</div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
@@ -417,6 +424,7 @@ export default {
 
             axios.get(`/get-admit-service-history?${params}`).then(res=>{
                 this.data = res.data;
+                console.log(this.data);
             });
 
 

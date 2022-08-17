@@ -19,7 +19,7 @@ class MyHistoryDentalChart extends Controller
 
     public function getAdmitServiceHistory(Request $req){
 
-        return AdmitService::with('services')
+        return AdmitService::with('services', 'service_inventories')
             ->where('admit_id', $req->aid)
             ->where('tooth_id', $req->toothid)
             ->get();

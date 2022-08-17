@@ -88,7 +88,7 @@
                                             type="is-primary is-small"
                                             :icon-right="active ? 'menu-up' : 'menu-down'" />
                                     </template>
-                                    <!-- <b-dropdown-item aria-role="listitem" @click="getData(props.row.appointment_id)">Update</b-dropdown-item> -->
+                                    <b-dropdown-item aria-role="listitem" @click="getData(props.row)">Update</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="approveAppointment(props.row)">Approve</b-dropdown-item>
                                     <b-dropdown-item aria-role="listitem" @click="cancelAppointment(props.row)">Cancel</b-dropdown-item>
                                     <!-- <b-dropdown-item aria-role="listitem" @click="pendingAppointment(props.row)">Pending</b-dropdown-item> -->
@@ -140,17 +140,21 @@
                                             <option v-for="(item, index) in services" :key="index" :value="item.service_id">{{ item.service }}</option>
                                         </b-select>
                                     </b-field>
-                                    <b-field label="Appointment Date"
+                                    <b-field label="Select Date"
                                              :type="this.errors.appointment_date ? 'is-danger':''"
                                              :message="this.errors.appointment_date ? this.errors.appointment_date[0] : ''">
-                                        <b-datetimepicker editable v-model="fields.appointment_date"
-                                                 placeholder="Appointment Date" required>
-                                        </b-datetimepicker>
+                                        <b-datepicker editable v-model="fields.appointment_date"
+                                            @input="browseDentistSchedule"
+                                                 placeholder="Select Date" required>
+                                        </b-datepicker>
                                     </b-field>
 
-                                    <modal-browse-dentist
-                                        :prop-dentist="dentist_fullname"
-                                        @browseDentist="emitBrowseDentist($event)"></modal-browse-dentist>
+                                    <b-field label="Select Time">
+                                        <b-select v-model="fields.dentist_schedule_id">
+                                            <option v-for="(item, index) in dentist_schedules" :key="index">{{ item.from | formatTime}} - {{ item.to | formatTime }}</option>
+                                        </b-select>
+                                    </b-field>
+
                                 </div>
                             </div>
 
@@ -191,6 +195,7 @@ export default {
 
 
             global_id : 0,
+            dentist_id: 0,
 
             search: {
                 lname: '',
@@ -198,6 +203,8 @@ export default {
 
             modalBookNow: false,
             dentist_fullname: '',
+            dentist_schedules: [],
+
 
             fields: {},
             errors: {},
@@ -289,19 +296,30 @@ export default {
         },
 
         //update code here
-        getData: function(data_id){
+        getData: function(nData){
+
             this.clearFields();
-            this.global_id = data_id;
+            this.global_id = nData.appointment_id;
             this.modalBookNow = true;
+            this.dentist_id = nData.dentist_id;
 
-            axios.get('/my-appointment/' + data_id).then(res=>{
+            console.log(nData);
+
+
+            axios.get('/my-appointment/' + nData.appointment_id).then(res=>{
                 this.fields = res.data;
-                let ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
-                ndateTime = new Date(ndateTime);
-
-                this.fields.appointment_date = ndateTime;
-                this.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
             });
+        },
+
+        browseDentistSchedule(){
+            let nDate = new Date(this.fields.appoint_date);
+            console.log(nDate);
+            nDate = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
+
+            axios.get('/get-dentist-schedules/' + this.dentist_id + '/' + nDate).then(nRes=>{
+                this.dentist_schedules = nRes.data;
+                console.log(this.dentist_schedules);
+            })
         },
 
         clearFields(){

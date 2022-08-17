@@ -69,6 +69,11 @@ Vue.filter('formatTime', function(value) {
     return timeString;
 });
 
+Vue.filter('formatDate', function(value) {
+    
+    return new Date(value).toDateString();
+});
+
 
 const app = new Vue({
     el: '#app',

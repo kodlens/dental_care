@@ -11693,6 +11693,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['propServices'],
   name: "AppointmentType",
@@ -11707,11 +11711,13 @@ __webpack_require__.r(__webpack_exports__);
       perPage: 5,
       defaultSortDirection: 'asc',
       global_id: 0,
+      dentist_id: 0,
       search: {
         lname: ''
       },
       modalBookNow: false,
       dentist_fullname: '',
+      dentist_schedules: [],
       fields: {},
       errors: {},
       btnClass: {
@@ -11796,50 +11802,59 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     //update code here
-    getData: function getData(data_id) {
+    getData: function getData(nData) {
       var _this4 = this;
 
       this.clearFields();
-      this.global_id = data_id;
+      this.global_id = nData.appointment_id;
       this.modalBookNow = true;
-      axios.get('/my-appointment/' + data_id).then(function (res) {
+      this.dentist_id = nData.dentist_id;
+      console.log(nData);
+      axios.get('/my-appointment/' + nData.appointment_id).then(function (res) {
         _this4.fields = res.data;
-        var ndateTime = new Date(res.data.appoint_date + " " + res.data.appoint_time);
-        ndateTime = new Date(ndateTime);
-        _this4.fields.appointment_date = ndateTime;
-        _this4.dentist_fullname = res.data.dentist_lname + ", " + res.data.dentist_fname + " " + res.data.dentist_mname;
+      });
+    },
+    browseDentistSchedule: function browseDentistSchedule() {
+      var _this5 = this;
+
+      var nDate = new Date(this.fields.appoint_date);
+      console.log(nDate);
+      nDate = nDate.getFullYear() + "-" + (nDate.getMonth() + 1) + "-" + nDate.getDate();
+      axios.get('/get-dentist-schedules/' + this.dentist_id + '/' + nDate).then(function (nRes) {
+        _this5.dentist_schedules = nRes.data;
+        console.log(_this5.dentist_schedules);
       });
     },
     clearFields: function clearFields() {
       this.fields = {};
     },
     submit: function submit() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.global_id > 0) {
         //update
         axios.put('/my-appointment/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
-            _this5.$buefy.toast.open({
+            _this6.$buefy.toast.open({
               message: 'Appointment saved.!',
               type: 'is-success'
             });
 
-            _this5.fields = {};
-            _this5.errors = {};
-            _this5.dentist_fullname = '';
-            _this5.modalBookNow = false;
-            _this5.global_id = 0;
+            _this6.fields = {};
+            _this6.errors = {};
+            _this6.dentist_fullname = '';
+            _this6.modalBookNow = false;
+            _this6.global_id = 0;
 
-            _this5.loadAsyncData();
+            _this6.loadAsyncData();
           }
 
-          _this5.btnClass['is-loading'] = false;
+          _this6.btnClass['is-loading'] = false;
         })["catch"](function (err) {
-          _this5.btnClass['is-loading'] = false;
+          _this6.btnClass['is-loading'] = false;
 
           if (err.response.status === 422) {
-            _this5.errors = err.response.data.errors;
+            _this6.errors = err.response.data.errors;
           }
         });
       } else {
@@ -11847,32 +11862,32 @@ __webpack_require__.r(__webpack_exports__);
         this.btnClass['is-loading'] = true;
         axios.post('/my-appointment', this.fields).then(function (res) {
           if (res.data.status === 'saved') {
-            _this5.$buefy.toast.open({
+            _this6.$buefy.toast.open({
               message: 'Appointment saved.!',
               type: 'is-success'
             });
 
-            _this5.fields = {};
-            _this5.errors = {};
-            _this5.global_id = 0;
-            _this5.dentist_fullname = '';
-            _this5.modalBookNow = false;
+            _this6.fields = {};
+            _this6.errors = {};
+            _this6.global_id = 0;
+            _this6.dentist_fullname = '';
+            _this6.modalBookNow = false;
 
-            _this5.loadAsyncData();
+            _this6.loadAsyncData();
           }
 
-          _this5.btnClass['is-loading'] = false;
+          _this6.btnClass['is-loading'] = false;
         })["catch"](function (err) {
-          _this5.btnClass['is-loading'] = false;
+          _this6.btnClass['is-loading'] = false;
 
           if (err.response.status === 422) {
-            _this5.errors = err.response.data.errors;
+            _this6.errors = err.response.data.errors;
           }
         });
       }
     },
     approveAppointment: function approveAppointment(row) {
-      var _this6 = this;
+      var _this7 = this;
 
       this.$buefy.dialog.confirm({
         title: 'APPROVE?',
@@ -11881,23 +11896,23 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Close',
         confirmText: 'Approve',
         onConfirm: function onConfirm() {
-          return _this6.approveSubmit(row.appointment_id);
+          return _this7.approveSubmit(row.appointment_id);
         }
       });
     },
     approveSubmit: function approveSubmit(dataId) {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.post('/dentist/approve-appointment/' + dataId).then(function (res) {
-        _this7.loadAsyncData();
+        _this8.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this7.errors = err.response.data.errors;
+          _this8.errors = err.response.data.errors;
         }
       });
     },
     pendingAppointment: function pendingAppointment(row) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$buefy.dialog.confirm({
         title: 'PENDING?',
@@ -11906,24 +11921,24 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Close',
         confirmText: 'OK',
         onConfirm: function onConfirm() {
-          return _this8.pendingSubmit(row.appointment_id);
+          return _this9.pendingSubmit(row.appointment_id);
         }
       });
     },
     pendingSubmit: function pendingSubmit(dataId) {
-      var _this9 = this;
+      var _this10 = this;
 
       axios.post('/dentist/pending-appointment/' + dataId).then(function (res) {
-        _this9.loadAsyncData();
+        _this10.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this9.errors = err.response.data.errors;
+          _this10.errors = err.response.data.errors;
         }
       });
     },
     //alert box ask for deletion
     cancelAppointment: function cancelAppointment(row) {
-      var _this10 = this;
+      var _this11 = this;
 
       this.$buefy.dialog.confirm({
         title: 'CANCEL?',
@@ -11932,19 +11947,19 @@ __webpack_require__.r(__webpack_exports__);
         cancelText: 'Close',
         confirmText: 'Cancel',
         onConfirm: function onConfirm() {
-          return _this10.cancelSubmit(row.appointment_id);
+          return _this11.cancelSubmit(row.appointment_id);
         }
       });
     },
     //execute delete after confirming
     cancelSubmit: function cancelSubmit(dataId) {
-      var _this11 = this;
+      var _this12 = this;
 
       axios.post('/dentist/cancel-appointment/' + dataId).then(function (res) {
-        _this11.loadAsyncData();
+        _this12.loadAsyncData();
       })["catch"](function (err) {
         if (err.response.status === 422) {
-          _this11.errors = err.response.data.errors;
+          _this12.errors = err.response.data.errors;
         }
       });
     },
@@ -11968,7 +11983,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //admit patient
     admitPatient: function admitPatient(row) {
-      var _this12 = this;
+      var _this13 = this;
 
       if (row.appoint_status === 1) {
         this.$buefy.toast.open({
@@ -11980,13 +11995,13 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/dentist/admit-appointment/' + row.appointment_id).then(function (res) {
         if (res.data.status === 'saved') {
-          _this12.$buefy.toast.open({
+          _this13.$buefy.toast.open({
             message: 'Admitted successfully!',
             type: 'is-success'
           });
         }
 
-        _this12.loadAsyncData();
+        _this13.loadAsyncData();
       });
     }
   },
@@ -15776,6 +15791,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -15799,6 +15821,7 @@ __webpack_require__.r(__webpack_exports__);
       var params = ["toothid=".concat(toothId), "aid=".concat(aId)].join('&');
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/get-admit-service-history?".concat(params)).then(function (res) {
         _this.data = res.data;
+        console.log(_this.data);
       }); //window.location = '/dentist/dentist-service-patient?toothid=' + toothId + '&admitid=' + aId;
     },
     teethMarking: function teethMarking() {
@@ -18330,6 +18353,9 @@ Vue.filter('formatTime', function (value) {
   var ampm = H < 12 ? " AM" : " PM";
   timeString = h + timeString.substr(2, 3) + ampm;
   return timeString;
+});
+Vue.filter('formatDate', function (value) {
+  return new Date(value).toDateString();
 });
 var app = new Vue({
   el: '#app'
@@ -50859,6 +50885,19 @@ var render = function () {
                                           attrs: { "aria-role": "listitem" },
                                           on: {
                                             click: function ($event) {
+                                              return _vm.getData(props.row)
+                                            },
+                                          },
+                                        },
+                                        [_vm._v("Update")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "b-dropdown-item",
+                                        {
+                                          attrs: { "aria-role": "listitem" },
+                                          on: {
+                                            click: function ($event) {
                                               return _vm.approveAppointment(
                                                 props.row
                                               )
@@ -50993,7 +51032,7 @@ var render = function () {
                             "b-field",
                             {
                               attrs: {
-                                label: "Appointment Date",
+                                label: "Select Date",
                                 type: this.errors.appointment_date
                                   ? "is-danger"
                                   : "",
@@ -51003,12 +51042,13 @@ var render = function () {
                               },
                             },
                             [
-                              _c("b-datetimepicker", {
+                              _c("b-datepicker", {
                                 attrs: {
                                   editable: "",
-                                  placeholder: "Appointment Date",
+                                  placeholder: "Select Date",
                                   required: "",
                                 },
+                                on: { input: _vm.browseDentistSchedule },
                                 model: {
                                   value: _vm.fields.appointment_date,
                                   callback: function ($$v) {
@@ -51025,14 +51065,44 @@ var render = function () {
                             1
                           ),
                           _vm._v(" "),
-                          _c("modal-browse-dentist", {
-                            attrs: { "prop-dentist": _vm.dentist_fullname },
-                            on: {
-                              browseDentist: function ($event) {
-                                return _vm.emitBrowseDentist($event)
-                              },
-                            },
-                          }),
+                          _c(
+                            "b-field",
+                            { attrs: { label: "Select Time" } },
+                            [
+                              _c(
+                                "b-select",
+                                {
+                                  model: {
+                                    value: _vm.fields.dentist_schedule_id,
+                                    callback: function ($$v) {
+                                      _vm.$set(
+                                        _vm.fields,
+                                        "dentist_schedule_id",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "fields.dentist_schedule_id",
+                                  },
+                                },
+                                _vm._l(
+                                  _vm.dentist_schedules,
+                                  function (item, index) {
+                                    return _c("option", { key: index }, [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm._f("formatTime")(item.from)
+                                        ) +
+                                          " - " +
+                                          _vm._s(_vm._f("formatTime")(item.to))
+                                      ),
+                                    ])
+                                  }
+                                ),
+                                0
+                              ),
+                            ],
+                            1
+                          ),
                         ],
                         1
                       ),
@@ -57972,7 +58042,33 @@ var render = function () {
             "ul",
             _vm._l(_vm.data, function (item, index) {
               return _c("li", { key: index }, [
-                _vm._v(_vm._s(item.services.service)),
+                _vm._v(
+                  _vm._s(item.services.service) + "\n                         "
+                ),
+                _c(
+                  "ul",
+                  { staticStyle: { "margin-left": "30px" } },
+                  _vm._l(item.service_inventories, function (i, ix) {
+                    return _c("li", { key: ix }, [
+                      _c("div", [
+                        _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                          _vm._v("Item used: "),
+                        ]),
+                        _vm._v(" " + _vm._s(i.item_name)),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                          _vm._v("Date: "),
+                        ]),
+                        _vm._v(
+                          " " + _vm._s(_vm._f("formatDate")(i.created_at))
+                        ),
+                      ]),
+                    ])
+                  }),
+                  0
+                ),
               ])
             }),
             0
