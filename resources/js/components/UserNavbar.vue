@@ -21,6 +21,11 @@
             <b-navbar-item href="/my-appointment" v-if="currentLogin">
                 MY APPOINTMENT
             </b-navbar-item>
+
+            <b-navbar-item href="/my-profile" v-if="currentLogin">
+                MY PROFILE
+            </b-navbar-item>
+            
             <b-navbar-item tag="div">
                 <div v-if="!currentLogin" class="buttons">
                     <a class="button is-primary" href="/sign-up">
