@@ -15913,6 +15913,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var d = new Date();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -15927,7 +15978,8 @@ var d = new Date();
       },
       provinces: [],
       cities: [],
-      barangays: []
+      barangays: [],
+      global_id: 0
     };
   },
   methods: {
@@ -15935,10 +15987,22 @@ var d = new Date();
       var _this = this;
 
       axios.get('/get-user').then(function (res) {
-        _this.user = res.data;
+        _this.fields = res.data;
+        _this.global_id = res.data.user_id;
+        console.log(_this.global_id);
+        var tempData = res.data; //load city first
+
+        axios.get('/load-cities?prov=' + _this.fields.province).then(function (res) {
+          //load barangay
+          _this.cities = res.data;
+          axios.get('/load-barangays?prov=' + _this.fields.province + '&city_code=' + _this.fields.city).then(function (res) {
+            _this.barangays = res.data;
+            _this.fields = tempData;
+          });
+        });
       });
     },
-    submit: function submit() {
+    saveChanges: function saveChanges() {
       var _this2 = this;
 
       var ndate = new Date(this.fields.appointment_date);
@@ -15946,20 +16010,18 @@ var d = new Date();
 
       if (this.global_id > 0) {
         //update
-        axios.put('/my-appointment/' + this.global_id, this.fields).then(function (res) {
+        axios.put('/my-profile/' + this.global_id, this.fields).then(function (res) {
           if (res.data.status === 'updated') {
             _this2.$buefy.toast.open({
-              message: 'Appointment saved.!',
+              message: 'User account updated.',
               type: 'is-success'
-            });
+            }); //this.fields = {};
 
-            _this2.fields = {};
+
             _this2.errors = {};
-            _this2.dentist_fullname = '';
-            _this2.modalBookNow = false;
             _this2.global_id = 0;
 
-            _this2.loadAsyncData();
+            _this2.getUser();
           }
 
           _this2.btnClass['is-loading'] = false;
@@ -15968,46 +16030,52 @@ var d = new Date();
 
           if (err.response.status === 422) {
             _this2.errors = err.response.data.errors;
-          }
-        });
-      } else {
-        //INSERT HERE
-        this.btnClass['is-loading'] = true;
-        axios.post('/my-appointment', this.fields).then(function (res) {
-          if (res.data.status === 'saved') {
-            _this2.$buefy.toast.open({
-              message: 'Appointment saved.!',
-              type: 'is-success'
-            });
-
-            _this2.fields = {};
-            _this2.errors = {};
-            _this2.global_id = 0;
-            _this2.dentist_fullname = '';
-            _this2.modalBookNow = false;
-
-            _this2.loadAsyncData();
-          }
-
-          _this2.btnClass['is-loading'] = false;
-        })["catch"](function (err) {
-          _this2.btnClass['is-loading'] = false;
-
-          if (err.response.status === 422) {
-            _this2.errors = err.response.data.errors;
-
-            if (_this2.errors.schedule) {
-              _this2.$buefy.toast.open({
-                message: _this2.errors.schedule[0],
-                type: 'is-danger'
-              });
-            }
           }
         });
       }
+    },
+    loadProvince: function loadProvince() {
+      var _this3 = this;
+
+      axios.get('/load-provinces').then(function (res) {
+        _this3.provinces = res.data;
+      });
+    },
+    loadCity: function loadCity() {
+      var _this4 = this;
+
+      axios.get('/load-cities?prov=' + this.fields.province).then(function (res) {
+        _this4.cities = res.data;
+      });
+    },
+    loadBarangay: function loadBarangay() {
+      var _this5 = this;
+
+      axios.get('/load-barangays?prov=' + this.fields.province + '&city_code=' + this.fields.city).then(function (res) {
+        _this5.barangays = res.data;
+      });
+    },
+    clearFields: function clearFields() {
+      this.fields = {
+        username: '',
+        lname: '',
+        fname: '',
+        mname: '',
+        password: '',
+        password_confirmation: '',
+        sex: '',
+        role: '',
+        email: '',
+        contact_no: '',
+        province: '',
+        city: '',
+        barangay: '',
+        street: ''
+      };
     }
   },
   mounted: function mounted() {
+    this.loadProvince();
     this.getUser();
   }
 });
@@ -37236,7 +37304,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\r\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\r\n    margin-left: 20px;\r\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\r\n    list-style-type: circle;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\n    margin-left: 20px;\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\n    list-style-type: circle;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37404,7 +37472,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n\r\n\r\n\r\n/*    dere lang kubia ang panel color*/\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*    dere lang kubia ang panel color*/\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58455,11 +58523,11 @@ var render = function () {
                       _c("b-input", {
                         attrs: { readonly: "" },
                         model: {
-                          value: _vm.user.lname,
+                          value: _vm.fields.lname,
                           callback: function ($$v) {
-                            _vm.$set(_vm.user, "lname", $$v)
+                            _vm.$set(_vm.fields, "lname", $$v)
                           },
-                          expression: "user.lname",
+                          expression: "fields.lname",
                         },
                       }),
                     ],
@@ -58478,11 +58546,11 @@ var render = function () {
                       _c("b-input", {
                         attrs: { readonly: "" },
                         model: {
-                          value: _vm.user.fname,
+                          value: _vm.fields.fname,
                           callback: function ($$v) {
-                            _vm.$set(_vm.user, "fname", $$v)
+                            _vm.$set(_vm.fields, "fname", $$v)
                           },
-                          expression: "user.fname",
+                          expression: "fields.fname",
                         },
                       }),
                     ],
@@ -58501,11 +58569,31 @@ var render = function () {
                       _c("b-input", {
                         attrs: { readonly: "" },
                         model: {
-                          value: _vm.user.mname,
+                          value: _vm.fields.mname,
                           callback: function ($$v) {
-                            _vm.$set(_vm.user, "mname", $$v)
+                            _vm.$set(_vm.fields, "mname", $$v)
                           },
-                          expression: "user.mname",
+                          expression: "fields.mname",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    {
+                      attrs: { label: "Suffix", "label-position": "on-border" },
+                    },
+                    [
+                      _c("b-input", {
+                        attrs: { readonly: "" },
+                        model: {
+                          value: _vm.fields.suffix,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.fields, "suffix", $$v)
+                          },
+                          expression: "fields.suffix",
                         },
                       }),
                     ],
@@ -58519,11 +58607,11 @@ var render = function () {
                       _c("b-input", {
                         attrs: { readonly: "" },
                         model: {
-                          value: _vm.user.sex,
+                          value: _vm.fields.sex,
                           callback: function ($$v) {
-                            _vm.$set(_vm.user, "sex", $$v)
+                            _vm.$set(_vm.fields, "sex", $$v)
                           },
-                          expression: "user.sex",
+                          expression: "fields.sex",
                         },
                       }),
                     ],
@@ -58542,11 +58630,169 @@ var render = function () {
                       _c("b-input", {
                         attrs: { readonly: "" },
                         model: {
-                          value: _vm.user.contact_no,
+                          value: _vm.fields.contact_no,
                           callback: function ($$v) {
-                            _vm.$set(_vm.user, "contact_no", $$v)
+                            _vm.$set(_vm.fields, "contact_no", $$v)
                           },
-                          expression: "user.contact_no",
+                          expression: "fields.contact_no",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    { attrs: { label: "Emai", "label-position": "on-border" } },
+                    [
+                      _c("b-input", {
+                        attrs: { readonly: "" },
+                        model: {
+                          value: _vm.fields.email,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.fields, "email", $$v)
+                          },
+                          expression: "fields.email",
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    {
+                      attrs: {
+                        label: "Province",
+                        "label-position": "on-border",
+                        expanded: "",
+                        type: this.errors.province ? "is-danger" : "",
+                        message: this.errors.province
+                          ? this.errors.province[0]
+                          : "",
+                      },
+                    },
+                    [
+                      _c(
+                        "b-select",
+                        {
+                          attrs: { expanded: "" },
+                          on: { input: _vm.loadCity },
+                          model: {
+                            value: _vm.fields.province,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.fields, "province", $$v)
+                            },
+                            expression: "fields.province",
+                          },
+                        },
+                        _vm._l(_vm.provinces, function (item, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: item.provCode } },
+                            [_vm._v(_vm._s(item.provDesc))]
+                          )
+                        }),
+                        0
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    {
+                      attrs: {
+                        label: "City",
+                        "label-position": "on-border",
+                        expanded: "",
+                        type: this.errors.city ? "is-danger" : "",
+                        message: this.errors.city ? this.errors.city[0] : "",
+                      },
+                    },
+                    [
+                      _c(
+                        "b-select",
+                        {
+                          attrs: { expanded: "" },
+                          on: { input: _vm.loadBarangay },
+                          model: {
+                            value: _vm.fields.city,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.fields, "city", $$v)
+                            },
+                            expression: "fields.city",
+                          },
+                        },
+                        _vm._l(_vm.cities, function (item, index) {
+                          return _c(
+                            "option",
+                            {
+                              key: index,
+                              domProps: { value: item.citymunCode },
+                            },
+                            [_vm._v(_vm._s(item.citymunDesc))]
+                          )
+                        }),
+                        0
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    {
+                      attrs: {
+                        label: "Barangay",
+                        "label-position": "on-border",
+                        expanded: "",
+                        type: this.errors.barangay ? "is-danger" : "",
+                        message: this.errors.barangay
+                          ? this.errors.barangay[0]
+                          : "",
+                      },
+                    },
+                    [
+                      _c(
+                        "b-select",
+                        {
+                          attrs: { expanded: "" },
+                          model: {
+                            value: _vm.fields.barangay,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.fields, "barangay", $$v)
+                            },
+                            expression: "fields.barangay",
+                          },
+                        },
+                        _vm._l(_vm.barangays, function (item, index) {
+                          return _c(
+                            "option",
+                            { key: index, domProps: { value: item.brgyCode } },
+                            [_vm._v(_vm._s(item.brgyDesc))]
+                          )
+                        }),
+                        0
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-field",
+                    {
+                      attrs: { label: "Street", "label-position": "on-border" },
+                    },
+                    [
+                      _c("b-input", {
+                        attrs: { placeholder: "Street" },
+                        model: {
+                          value: _vm.fields.street,
+                          callback: function ($$v) {
+                            _vm.$set(_vm.fields, "street", $$v)
+                          },
+                          expression: "fields.street",
                         },
                       }),
                     ],
@@ -58554,6 +58800,8 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
                 ],
                 1
               ),
@@ -58577,11 +58825,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "column" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "buttons" }, [
-      _c("button", {
-        staticClass: "button is-info",
-        attrs: { label: "Save Changes", "icon-left": "lock" },
-      }),
+      _c(
+        "button",
+        { staticClass: "button is-info", attrs: { "icon-left": "lock" } },
+        [_vm._v("Save Changes")]
+      ),
     ])
   },
 ]
