@@ -15,7 +15,7 @@ class DentistSchedule extends Model
 
 
     protected $fillable = ['user_id', 'from', 'to',
-        'mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun'
+        'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'
     ];
 
 
