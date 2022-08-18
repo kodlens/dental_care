@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +47,7 @@ Route::get('/get-open-dentists', function () {
 Route::get('/get-dentist-schedules/{id}/{appdate}', function ($id, $ndate) {
     $date =  $ndate; //date and time
     $ndate = date("D", strtotime($date)); //convert to date format UNIX
-   
+
     //$today = date("D");
 
     $schedules = DentistSchedule::with(['user'])
@@ -336,6 +337,10 @@ Route::get('/collect', function(){
     return $collection = collect([1, 2, 3]);
 });
 
+Route::get('/weekly', function(){
+    $data = App\Models\Appointment::where('appoint_date', '>=',  Carbon::now()->format('Y-m-d'))->get();
+    return $data;
+});
 
 Route::get('/applogout', function(Request $req){
     \Auth::logout();
