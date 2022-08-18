@@ -15805,19 +15805,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propAdmitId: {
       type: String,
       required: false
+    },
+    propData: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
     return {
       teeth: [],
       admitId: 0,
-      data: []
+      data: [],
+      userData: []
     };
   },
   methods: {
@@ -15846,6 +15857,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
       return '#ffc04d';
+    },
+    init: function init() {
+      this.userData = JSON.parse(this.propData);
+      console.log(this.userData);
     }
   },
   mounted: function mounted() {
@@ -15853,6 +15868,7 @@ __webpack_require__.r(__webpack_exports__);
       // Code that will run only after the
       // entire view has been rendered
       this.teethMarking();
+      this.init();
     });
   }
 });
@@ -56825,6 +56841,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "columns is-centered" }, [
       _c("div", { staticClass: "column is-6" }, [
         _c("div", { staticClass: "tooth-chart debug" }, [
@@ -58467,7 +58485,16 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "columns" }, [
+      _c("div", { staticClass: "column" }),
+    ])
+  },
+]
 render._withStripped = true
 
 

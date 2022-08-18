@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AdmitService;
 use Illuminate\Http\Request;
 
+use App\Models\Admit;
+
+
 class MyHistoryDentalChart extends Controller
 {
     //
@@ -12,8 +15,11 @@ class MyHistoryDentalChart extends Controller
 
 
     public function index($admitid){
+
+        $data = Admit::with(['patient'])->first();
         return view('my-history-dental-chart')
-            ->with('admitid', $admitid);
+            ->with('admitid', $admitid)
+            ->with('data', $data);
     }
 
 

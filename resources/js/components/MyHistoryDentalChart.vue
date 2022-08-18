@@ -2,6 +2,12 @@
 
     <div>
 
+        <div class="columns">
+            <div class="column">
+                
+            </div>
+        </div>
+
         <div class="columns is-centered">
             <div class="column is-6">
 
@@ -401,6 +407,10 @@ export default {
         propAdmitId: {
             type: String,
             required: false
+        },
+        propData: {
+            type: String,
+            required: true
         }
     },
 
@@ -411,6 +421,8 @@ export default {
             admitId: 0,
 
             data : [],
+
+            userData: [],
         }
     },
     methods: {
@@ -448,6 +460,11 @@ export default {
             })
 
             return '#ffc04d';
+        },
+
+        init(){
+            this.userData = JSON.parse(this.propData);
+            console.log(this.userData);
         }
     },
 
@@ -456,6 +473,7 @@ export default {
             // Code that will run only after the
             // entire view has been rendered
             this.teethMarking();
+            this.init();
         })
 
     },
