@@ -36,11 +36,15 @@ class Admit extends Model
                 //$q->join('service_inventories.admit_service_id', 'admit_services.admit_service_id')
                 $q->get();
             }])
-            
+
             ->with(['service_inventories' => function($q){
                 //$q->join('service_inventories.admit_service_id', 'admit_services.admit_service_id')
                 $q->get();
             }]);
+    }
+
+    public function appointment(){
+        $this->belongsTo(Appointment::class, 'apponintment_id', 'appointment_id');
     }
 
 

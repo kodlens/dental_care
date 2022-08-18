@@ -15811,6 +15811,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -15828,7 +15844,9 @@ __webpack_require__.r(__webpack_exports__);
       teeth: [],
       admitId: 0,
       data: [],
-      userData: []
+      userData: {
+        patient: {}
+      }
     };
   },
   methods: {
@@ -37320,7 +37338,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\n    margin-left: 20px;\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\n    list-style-type: circle;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tooth-chart[data-v-1dc90f0f]{\n    margin: auto;\n}\n.services[data-v-1dc90f0f]{\n    margin-left: 20px;\n    font-size: 1.4em;\n}\nul[data-v-1dc90f0f]{\n    list-style-type: circle;\n}\n.title-attribute[data-v-1dc90f0f]{\n    font-weight: bold;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56841,7 +56859,58 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "columns is-centered" }, [
+      _c("div", { staticClass: "column is-6" }, [
+        _c("div", { staticClass: "box" }, [
+          _c("div", [
+            _c("span", { staticClass: "title-attribute" }, [_vm._v("Name:")]),
+            _vm._v(
+              " " +
+                _vm._s(_vm.userData.patient.lname) +
+                ", " +
+                _vm._s(_vm.userData.patient.fname) +
+                " " +
+                _vm._s(_vm.userData.patient.mname) +
+                "\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("span", { staticClass: "title-attribute" }, [_vm._v("Sex:")]),
+            _vm._v(
+              " " + _vm._s(_vm.userData.patient.sex) + "\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("span", { staticClass: "title-attribute" }, [
+              _vm._v("Province:"),
+            ]),
+            _vm._v(
+              " " + _vm._s(_vm.userData.patient.provDesc) + "\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("span", { staticClass: "title-attribute" }, [_vm._v("City:")]),
+            _vm._v(
+              " " +
+                _vm._s(_vm.userData.patient.citymunDesc) +
+                "\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c("span", { staticClass: "title-attribute" }, [
+              _vm._v("Barangay:"),
+            ]),
+            _vm._v(
+              " " + _vm._s(_vm.userData.patient.brgyDesc) + "\n                "
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-centered" }, [
       _c("div", { staticClass: "column is-6" }, [
@@ -58485,16 +58554,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "columns" }, [
-      _c("div", { staticClass: "column" }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

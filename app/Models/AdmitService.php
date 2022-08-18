@@ -43,14 +43,15 @@ class AdmitService extends Model
     }
 
     public function admit(){
-        return $this->belongsTo(Admit::class, 'admit_id', 'admit_id');
+        return $this->belongsTo(Admit::class, 'admit_id', 'admit_id')
+            ->join('appointments', 'appointments.appointment_id', 'admits.appointment_id');
     }
 
 
-    public function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->format('Y-m-d H:i:s');
-    }
+//    public function getCreatedAtAttribute($value)
+//    {
+//        return Carbon::parse($value)->format('Y-m-d H:i:s');
+//    }
 
 
 

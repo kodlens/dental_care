@@ -17,6 +17,9 @@ class CreateAdmitsTable extends Migration
 
             $table->id('admit_id');
             $table->unsignedBigInteger('appointment_id')->default(0);
+            $table->foreign('appointment_id')->references('appointment_id')->on('appointments')
+                ->onUpdate('cascade')->onDelete('cascade');
+
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('user_id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

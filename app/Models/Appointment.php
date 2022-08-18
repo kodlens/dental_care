@@ -37,5 +37,9 @@ class Appointment extends Model
         return $this->hasOne(DentistSchedule::class, 'dentist_schedule_id', 'dentist_schedule_id');
     }
 
+    public function admit(){
+        return $this->hasOne(Admit::class, 'appointment_id', 'appointment_id');
+    }
+
 
 }

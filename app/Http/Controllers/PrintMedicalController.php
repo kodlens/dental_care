@@ -14,10 +14,11 @@ class PrintMedicalController extends Controller
     //
 
     public function medicalRecord($id){
+        $appointment_id = $id;
 
         $appointmentData = Appointment::with(['dentist_schedule', 'dentist', 'service', 'user'])
             ->where('appointment_id', $id)->first();
-        
+
         // $admitServices = \DB::table('admit_services as a')
         //     ->join('admits as b', 'a.admit_id', 'b.admit_id')
         //     ->join('appointments as c', 'b.appointment_id', 'c.appointment_id')
@@ -31,12 +32,13 @@ class PrintMedicalController extends Controller
         //     ->select('a.*', 'b.dentist_id', 'c.appointment_id', 'd.service')
         //     ->get();
 
-        $admitServices = AdmitService::with(['services', 'admit' =>
-            function($q) use ($id){
-                $q->where('appointment_id', $id)->get();
-            }    
-        , 'service_inventories'])
+        $admitServices = AdmitService::with(['admit', 'services','service_inventories'])
+            ->whereHas('admit', function ($q) use ($id){
+                $q->where('appointment_id', $id);
+            })
             ->get();
+
+        //return $admitServices;
 
         //return $admitServices;
 
@@ -53,7 +55,7 @@ class PrintMedicalController extends Controller
 
         $admitData = Admit::with(['service', 'dentist', 'admit_services', 'patient'])
             ->where('admit_id', $admitId)->first();
-        
+
             //return $admitData;
             //return $admitData;
 
@@ -73,7 +75,7 @@ class PrintMedicalController extends Controller
         // $admitServices = Admit::with(['admit_services', 'admit' =>
         //     function($q) use ($id){
         //         $q->where('appointment_id', $id)->get();
-        //     }    
+        //     }
         // , 'service_inventories'])
         //     ->get();
 

@@ -2,9 +2,25 @@
 
     <div>
 
-        <div class="columns">
-            <div class="column">
-                
+        <div class="columns is-centered">
+            <div class="column is-6">
+                <div class="box">
+                    <div>
+                        <span class="title-attribute">Name:</span> {{ userData.patient.lname }}, {{ userData.patient.fname }} {{ userData.patient.mname }}
+                    </div>
+                    <div>
+                        <span class="title-attribute">Sex:</span> {{ userData.patient.sex }}
+                    </div>
+                    <div>
+                        <span class="title-attribute">Province:</span> {{ userData.patient.provDesc }}
+                    </div>
+                    <div>
+                        <span class="title-attribute">City:</span> {{ userData.patient.citymunDesc }}
+                    </div>
+                    <div>
+                        <span class="title-attribute">Barangay:</span> {{ userData.patient.brgyDesc }}
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -422,7 +438,11 @@ export default {
 
             data : [],
 
-            userData: [],
+            userData: {
+                patient: {
+                 
+                }
+            },
         }
     },
     methods: {
@@ -500,4 +520,7 @@ ul{
     list-style-type: circle;
 }
 
+.title-attribute{
+    font-weight: bold;
+}
 </style>
