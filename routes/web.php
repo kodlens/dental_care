@@ -156,7 +156,6 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportContro
 
 /*     ADMINSITRATOR          */
 
-
 //USER
 //dentist
 //Route::resource('/dentist', App\Http\Controllers\Administrator\DentistController::class);
@@ -164,7 +163,6 @@ Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportContro
 
 
 Route::get('/get-browse-dentist', [App\Http\Controllers\Administrator\DentistController::class, 'getBrowseDentist']);
-
 
 
 

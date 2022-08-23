@@ -8634,7 +8634,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppointmentType",
   data: function data() {
@@ -13813,6 +13812,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     propData: {
@@ -13847,7 +13851,9 @@ __webpack_require__.r(__webpack_exports__);
       itemname: '',
       admit: {},
       admitServices: [],
-      services: {}
+      services: {},
+      maxQty: 0,
+      numberInputDisable: false
     };
   },
   methods: {
@@ -13917,9 +13923,23 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     browseItem: function browseItem(nData) {
+      console.log(nData);
+
+      if (nData.item_type === 'ASSET') {
+        this.numberInputDisable = true;
+      } else {
+        this.numberInputDisable = false;
+      }
+
+      this.maxQty = nData.qty;
       this.itemname = nData.item_name;
       this.fields.item_id = nData.item_id;
       this.fields.qty = 0;
+    },
+    filterQtyInput: function filterQtyInput() {
+      if (this.fields.qty < 1) {
+        this.fields.qty = 0;
+      }
     },
     goBack: function goBack() {
       //history.back();
@@ -54490,8 +54510,12 @@ var render = function () {
                               _c("b-numberinput", {
                                 attrs: {
                                   expanded: "",
+                                  min: "0",
+                                  max: _vm.maxQty,
+                                  disabled: _vm.numberInputDisable,
                                   placeholder: "Quantity",
                                 },
+                                on: { input: _vm.filterQtyInput },
                                 model: {
                                   value: _vm.fields.qty,
                                   callback: function ($$v) {
@@ -55085,7 +55109,7 @@ var render = function () {
         [
           _c("div", { staticClass: "box" }, [
             _c("div", { staticClass: "title is-4" }, [
-              _vm._v("\n                    SECURITY CHECK\n                "),
+              _vm._v("\n                    LOG IN\n                "),
             ]),
             _vm._v(" "),
             _c("hr"),

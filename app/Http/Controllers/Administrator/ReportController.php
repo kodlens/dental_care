@@ -64,11 +64,13 @@ class ReportController extends Controller
             ->join('users as b', 'a.dentist_id', 'b.user_id')
             ->join('services as c', 'a.service_id', 'c.service_id')
             ->join('users as d', 'a.user_id', 'd.user_id')
+            ->join('dentist_schedules as e' , 'a.dentist_schedule_id', 'e.dentist_schedule_id')
             ->select('a.*', 'b.lname as dentist_lname', 'b.fname as dentist_fname',
-                'b.mname as dentist_mname',
+                'b.mname as dentist_mname', 'e.from', 'e.to',
                 'c.*', 'd.lname as user_lname', 'd.fname as user_fname', 'd.mname as user_mname')
             ->whereBetween('appoint_date', [$from, $to])
             ->get();
+
         return view('administrator.report.print.print-appointment')
             ->with('data', $data);
     }

@@ -157,7 +157,12 @@
                                     </b-field>
 
                                     <b-field expanded>
-                                        <b-numberinput expanded v-model="fields.qty" placeholder="Quantity" />
+                                        <b-numberinput expanded v-model="fields.qty" 
+                                            min="0" 
+                                            @input="filterQtyInput"
+                                            :max="maxQty" 
+                                            :disabled="numberInputDisable"
+                                            placeholder="Quantity" />
                                     </b-field>
 
                                     <b-field>
@@ -231,6 +236,9 @@ export default {
             admitServices: [],
             services: {},
 
+            maxQty: 0,
+            numberInputDisable: false,
+
 
         }
     },
@@ -300,9 +308,21 @@ export default {
         },
 
         browseItem(nData){
+            console.log(nData);
+
+            if(nData.item_type === 'ASSET'){
+                this.numberInputDisable = true;
+            }else{ this.numberInputDisable = false; }
+            this.maxQty = nData.qty;
             this.itemname = nData.item_name;
             this.fields.item_id = nData.item_id;
             this.fields.qty = 0;
+        },
+
+        filterQtyInput(){
+            if(this.fields.qty < 1){
+                this.fields.qty = 0;
+            }
         },
 
         goBack(){

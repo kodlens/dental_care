@@ -84,7 +84,6 @@
                                     </b-tooltip>
                                 </div>
                             </b-table-column>
-
                         </b-table>
 
                         <div class="buttons mt-3">
