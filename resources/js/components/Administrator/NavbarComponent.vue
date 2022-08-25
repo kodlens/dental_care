@@ -44,6 +44,8 @@
                                 </template>
                                 <b-menu-item icon="text-box-outline" label="Inventory" tag="a" href="/report/inventory"></b-menu-item>
                                 <b-menu-item icon="text-box-outline" label="Appointment" tag="a" href="/report/appointment"></b-menu-item>
+                                <b-menu-item icon="text-box-outline" label="Users" tag="a" href="/report/users"></b-menu-item>
+
 
 <!--                                <b-menu-item icon="cash-multiple" label="Payments" disabled></b-menu-item>-->
                             </b-menu-item>

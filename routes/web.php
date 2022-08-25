@@ -148,6 +148,7 @@ Route::get('/report/get-inventory', [App\Http\Controllers\Administrator\ReportCo
 Route::get('/report/appointment', [App\Http\Controllers\Administrator\ReportController::class, 'reportAppointment']);
 Route::get('/report/get-appointment', [App\Http\Controllers\Administrator\ReportController::class, 'getReportAppointment']);
 Route::get('/report/print-appointment', [App\Http\Controllers\Administrator\ReportController::class, 'printAppointment']);
+Route::get('/report/users', [App\Http\Controllers\Administrator\ReportUserListController::class, 'index']);
 
 
 Route::get('/get-report-track', [App\Http\Controllers\Administrator\ReportController::class, 'getReportTrack']);

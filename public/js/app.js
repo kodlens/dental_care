@@ -8899,6 +8899,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -45785,6 +45787,15 @@ var render = function () {
                               label: "Appointment",
                               tag: "a",
                               href: "/report/appointment",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("b-menu-item", {
+                            attrs: {
+                              icon: "text-box-outline",
+                              label: "Users",
+                              tag: "a",
+                              href: "/report/users",
                             },
                           }),
                         ],
