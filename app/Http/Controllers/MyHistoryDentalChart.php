@@ -16,7 +16,11 @@ class MyHistoryDentalChart extends Controller
 
     public function index($admitid){
 
-        $data = Admit::with(['patient'])->first();
+        $data = Admit::with(['patient'])
+            ->where('admit_id', $admitid)
+            ->first();
+
+
         return view('my-history-dental-chart')
             ->with('admitid', $admitid)
             ->with('data', $data);
